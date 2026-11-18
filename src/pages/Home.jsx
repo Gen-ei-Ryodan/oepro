@@ -5,12 +5,13 @@ import ProductCard from '../components/ProductCard';
 import SizeChartModal from '../components/SizeChartModal';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { createWhatsAppGeneralLink } from '../utils/whatsapp';
-import productsData from '../data/products.json';
+import { useProducts } from '../context/ProductContext';
 import categoriesData from '../data/categories.json';
 import reviewsData from '../data/reviews.json';
 import storeInfo from '../data/store_info.json';
 
 export default function Home() {
+  const { products: productsData, categories: categoriesData } = useProducts();
   const [selectedCat, setSelectedCat] = useState('all');
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(12);

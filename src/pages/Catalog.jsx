@@ -9,11 +9,12 @@ import {
   Heart,
 } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import productsData from '../data/products.json';
+import { useProducts } from '../context/ProductContext';
 import categoriesData from '../data/categories.json';
 import { useWishlist } from '../context/WishlistContext';
 
 export default function Catalog() {
+  const { products: productsData, categories: categoriesData } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
   const { wishlist } = useWishlist();
 

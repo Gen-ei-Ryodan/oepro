@@ -15,11 +15,12 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import SizeChartModal from '../components/SizeChartModal';
 import ProductCard from '../components/ProductCard';
-import productsData from '../data/products.json';
+import { useProducts } from '../context/ProductContext';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { createWhatsAppProductLink } from '../utils/whatsapp';
 
 export default function ProductDetail() {
+  const { products: productsData } = useProducts();
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart, setIsCartOpen, totalItems } = useCart();
