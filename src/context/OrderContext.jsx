@@ -45,7 +45,7 @@ const initialSampleOrders = [
           id: 'oepro-polo-mineral-green',
           name: 'Kaos Polo Premium Lacoste Pique - Mineral Green',
           price: 129000,
-          images: ['assets/products/polo/mineral-green/mineral-green-total.webp'],
+          images: ['assets/products/polo/mineral-green/mineral-green-oepro.webp'],
         },
         color: { name: 'Mineral Green', hex: '#4A6B5D' },
         size: 'XL',
