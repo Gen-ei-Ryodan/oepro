@@ -136,6 +136,7 @@ export default function ProductCard({ product }) {
         {/* Price & Rating */}
         <div className="mt-auto pt-1 flex items-baseline justify-between gap-1">
           <div>
+            <span className="text-[10px] text-neutral-400 block -mb-0.5 font-medium">Mulai</span>
             <span className="text-xs sm:text-sm font-bold text-neutral-950 font-mono">
               {formatRupiah(product.price)}
             </span>

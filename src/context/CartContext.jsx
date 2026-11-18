@@ -1,3 +1,4 @@
+import { getProductPriceBySize } from '../utils/pricing';
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
@@ -59,11 +60,15 @@ export const CartProvider = ({ children }) => {
     }, 3500);
   };
 
-  const addToCart = (product, selectedColor, selectedSize, quantity = 1) => {
+  const addToCart = (product, selectedColor, selectedSize, quantity = 1, customPrice = null) => {
     if (!selectedColor || !selectedSize) {
       showToast('Silakan pilih warna dan ukuran terlebih dahulu', 'error');
       return false;
     }
+
+    const itemPrice = customPrice !== null && customPrice !== undefined
+      ? customPrice
+      : getProductPriceBySize(product, selectedSize);
 
     const cartItemId = `${product.id}-${selectedColor.name || selectedColor}-${selectedSize}`;
 
@@ -76,6 +81,7 @@ export const CartProvider = ({ children }) => {
         updated[existingIndex] = {
           ...updated[existingIndex],
           quantity: newQty,
+          price: itemPrice,
         };
         return updated;
       } else {
@@ -87,7 +93,7 @@ export const CartProvider = ({ children }) => {
             color: selectedColor,
             size: selectedSize,
             quantity,
-            price: product.price,
+            price: itemPrice,
             addedAt: new Date().toISOString(),
           },
         ];

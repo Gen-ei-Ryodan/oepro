@@ -4,8 +4,8 @@ import initialCategoriesData from '../data/categories.json';
 
 const ProductContext = createContext(null);
 
-const STORAGE_KEY = 'oepro_dynamic_products';
-const CATEGORIES_KEY = 'oepro_dynamic_categories';
+const STORAGE_KEY = 'oepro_dynamic_products_v2';
+const CATEGORIES_KEY = 'oepro_dynamic_categories_v2';
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {

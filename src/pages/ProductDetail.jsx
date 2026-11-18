@@ -18,6 +18,7 @@ import ProductCard from '../components/ProductCard';
 import { useProducts } from '../context/ProductContext';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { createWhatsAppProductLink } from '../utils/whatsapp';
+import { getProductPriceBySize, getProductOriginalPriceBySize } from '../utils/pricing';
 
 export default function ProductDetail() {
   const { products: productsData } = useProducts();
@@ -80,16 +81,19 @@ export default function ProductDetail() {
     ? product.images.map((img) => `/${img.replace(/^\//, '')}`)
     : ['/assets/brand/oepro-logo.webp'];
 
+  const currentPrice = getProductPriceBySize(product, selectedSize);
+  const currentOriginalPrice = getProductOriginalPriceBySize(product, selectedSize);
+
   const handleAddToCart = () => {
-    const success = addToCart(product, selectedColor, selectedSize, quantity);
+    const success = addToCart(product, selectedColor, selectedSize, quantity, currentPrice);
     if (success) {
       setIsCartOpen(true);
     }
   };
 
   const handleBuyNow = () => {
-    addToCart(product, selectedColor, selectedSize, quantity);
-    const waUrl = createWhatsAppProductLink(product, selectedColor, selectedSize, quantity);
+    addToCart(product, selectedColor, selectedSize, quantity, currentPrice);
+    const waUrl = createWhatsAppProductLink(product, selectedColor, selectedSize, quantity, currentPrice);
     window.open(waUrl, '_blank');
   };
 
@@ -276,15 +280,18 @@ export default function ProductDetail() {
             </div>
 
             {/* Price Display */}
-            <div className="mt-3 sm:mt-4 flex items-baseline gap-3">
+            <div className="mt-3 sm:mt-4 flex items-baseline gap-3 flex-wrap">
               <span className="text-2xl sm:text-3xl font-bold text-neutral-950 font-mono">
-                {formatRupiah(product.price)}
+                {formatRupiah(currentPrice)}
               </span>
-              {product.original_price > product.price && (
+              {currentOriginalPrice > currentPrice && (
                 <span className="text-sm sm:text-base text-neutral-400 line-through font-mono">
-                  {formatRupiah(product.original_price)}
+                  {formatRupiah(currentOriginalPrice)}
                 </span>
               )}
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200">
+                Size {selectedSize}
+              </span>
             </div>
           </div>
 
@@ -340,21 +347,28 @@ export default function ProductDetail() {
               </button>
             </div>
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
-              {product.sizes && product.sizes.map((sz) => (
-                <button
-                  key={sz}
-                  type="button"
-                  onClick={() => setSelectedSize(sz)}
-                  className={`py-2 text-xs font-mono font-bold rounded-xl border transition flex items-center justify-center min-h-[42px] ${
-                    selectedSize === sz
-                      ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
-                      : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
-                  }`}
-                >
-                  {sz}
-                </button>
-              ))}
+            <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 gap-2">
+              {product.sizes && product.sizes.map((sz) => {
+                const szPrice = getProductPriceBySize(product, sz);
+                const isSelected = selectedSize === sz;
+                return (
+                  <button
+                    key={sz}
+                    type="button"
+                    onClick={() => setSelectedSize(sz)}
+                    className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
+                      isSelected
+                        ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
+                        : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
+                    }`}
+                  >
+                    <span className="font-bold">{sz}</span>
+                    <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                      {formatRupiah(szPrice)}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 

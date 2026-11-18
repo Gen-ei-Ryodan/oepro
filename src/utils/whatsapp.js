@@ -1,3 +1,5 @@
+import { getProductPriceBySize } from './pricing';
+
 export const STORE_WA_NUMBER = '628113458177';
 
 export const formatRupiah = (num) => {
@@ -15,10 +17,12 @@ export const createWhatsAppOrderLink = (items, totalAmount, customNote = '') => 
   items.forEach((item, index) => {
     const colorName = item.color?.name || item.color || '-';
     const size = item.size || '-';
-    const subtotalItem = (item.price || 0) * (item.quantity || 1);
+    const unitPrice = item.price || getProductPriceBySize(item.product, size);
+    const subtotalItem = unitPrice * (item.quantity || 1);
+
     text += `${index + 1}. *${item.product?.name || 'Produk OEPRO'}*\n`;
     text += `   - Warna: ${colorName}\n`;
-    text += `   - Ukuran: ${size}\n`;
+    text += `   - Ukuran: ${size} (${formatRupiah(unitPrice)}/pcs)\n`;
     text += `   - Jumlah: ${item.quantity} pcs\n`;
     text += `   - Subtotal: ${formatRupiah(subtotalItem)}\n\n`;
   });
@@ -42,23 +46,27 @@ export const createWhatsAppOrderLink = (items, totalAmount, customNote = '') => 
   return `https://wa.me/${STORE_WA_NUMBER}?text=${encodeURIComponent(text)}`;
 };
 
-export const createWhatsAppProductLink = (product, color, size, qty = 1) => {
+export const createWhatsAppProductLink = (product, color, size, qty = 1, customPrice = null) => {
   const colorName = color?.name || color || '-';
   const sizeText = size || '-';
-  const priceFormatted = formatRupiah((product.price || 0) * qty);
+  const unitPrice = customPrice !== null && customPrice !== undefined 
+    ? customPrice 
+    : getProductPriceBySize(product, sizeText);
+  const priceFormatted = formatRupiah(unitPrice * qty);
 
   let text = `Halo Admin OEPRO, saya ingin memesan:\n\n`;
   text += `*${product.name}*\n`;
   text += `- Warna: ${colorName}\n`;
   text += `- Ukuran: ${sizeText}\n`;
   text += `- Jumlah: ${qty} pcs\n`;
-  text += `- Estimasi Harga: ${priceFormatted}\n\n`;
+  text += `- Harga: ${formatRupiah(unitPrice)} / pcs\n`;
+  text += `- Total: ${priceFormatted}\n\n`;
   text += `Apakah varian ini ready stok? Mohon info kelanjutan pemesanannya. Terima kasih!`;
 
   return `https://wa.me/${STORE_WA_NUMBER}?text=${encodeURIComponent(text)}`;
 };
 
 export const createWhatsAppGeneralLink = () => {
-  const text = `Halo Admin OEPRO, saya ingin konsultasi seputar produk katun murni OEPRO (Polo Pique, Combed 24s, & Longsleeve).`;
+  const text = `Halo Admin OEPRO, saya ingin konsultasi seputar produk katun murni OEPRO COTTON BASIC (Kaos Polos 24s, Polo Pique, & Longsleeve).`;
   return `https://wa.me/${STORE_WA_NUMBER}?text=${encodeURIComponent(text)}`;
 };
