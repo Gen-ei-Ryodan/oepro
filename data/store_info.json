@@ -1,0 +1,46 @@
+{
+  "brand_name": "OEPRO",
+  "legal_name": "Oepro Cotton Basic & Apparel",
+  "tagline": "Pure Cotton Essentials & Premium Lacoste Pique",
+  "established": 2018,
+  "location": {
+    "address": "Jl. Karah Tama Asri II No. 24, Karah, Kec. Jambangan",
+    "city": "Surabaya",
+    "province": "Jawa Timur",
+    "postal_code": "60232",
+    "country": "Indonesia"
+  },
+  "contact": {
+    "whatsapp": "+62 811-3458-177",
+    "email": "hello@oepro.store",
+    "instagram": "@oepro.store",
+    "shopee": "https://shopee.co.id/oepro",
+    "tokopedia": "https://www.tokopedia.com/oepro"
+  },
+  "features": [
+    {
+      "title": "100% Full Cotton Pique",
+      "desc": "Material katun berpori hexagon lembut, menyerap keringat, dan adem"
+    },
+    {
+      "title": "Jahitan Presisi Ganda",
+      "desc": "Jahitan rantai standar distro premium dan kerah tebal anti-melipat"
+    },
+    {
+      "title": "Inklusif Size (XS - 8XL)",
+      "desc": "Tersedia ukuran reguler hingga big size jumbo yang nyaman"
+    },
+    {
+      "title": "Garansi Tukar Ukuran",
+      "desc": "Jaminan retur 7 hari jika ukuran tidak pas"
+    }
+  ],
+  "brand_colors": {
+    "primary": "#1E293B",
+    "secondary": "#4A6B5D",
+    "accent": "#3B82F6",
+    "neutral_dark": "#0F172A",
+    "neutral_light": "#F8FAFC",
+    "surface": "#FFFFFF"
+  }
+}

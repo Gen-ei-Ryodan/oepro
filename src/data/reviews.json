@@ -1,0 +1,46 @@
+[
+  {
+    "id": "rev-01",
+    "user": "Budi Prasetyo",
+    "city": "Surabaya",
+    "product_id": "oepro-polo-mineral-green",
+    "product_name": "Kaos Polo Premium Lacoste Pique - Mineral Green",
+    "rating": 5,
+    "date": "2026-11-10",
+    "comment": "Bahan katun pique-nya beneran adem pol! Kerah tegak rapi nggak letoy walau udah dicuci 3 kali. Warna mineral green-nya mewah banget. Ukuran XXL pas di badan saya yang 88kg.",
+    "verified_purchase": true
+  },
+  {
+    "id": "rev-02",
+    "user": "Reza Hendrawan",
+    "city": "Jakarta Selatan",
+    "product_id": "oepro-tshirt-sage-green",
+    "product_name": "Kaos Polos Premium 100% Katun Combed 24s - Sage Green",
+    "rating": 5,
+    "date": "2026-11-08",
+    "comment": "Kaos combed 24s terbaik di harga 70-ribuan. Nggak nerawang sama sekali, jahitan leher tebal rapi. Pengiriman cepat dari Surabaya ke Jakarta.",
+    "verified_purchase": true
+  },
+  {
+    "id": "rev-03",
+    "user": "Dimas Anggara",
+    "city": "Bandung",
+    "product_id": "oepro-polo-snow-white",
+    "product_name": "Kaos Polo Premium Lacoste Pique - Snow White",
+    "rating": 5,
+    "date": "2026-11-05",
+    "comment": "Polo putihnya nggak transparan, tebalnya pas banget buat dipake ke kantor casual Friday. Sangat recommended buat yang nyari polo katun tanpa poliester.",
+    "verified_purchase": true
+  },
+  {
+    "id": "rev-04",
+    "user": "Fajar Nugroho",
+    "city": "Semarang",
+    "product_id": "oepro-harrington-khaki",
+    "product_name": "Jaket Harrington Classic Cotton Drill - Khaki Beige",
+    "rating": 5,
+    "date": "2026-11-02",
+    "comment": "Jaket Harrington-nya juara! Lining tartan-nya lembut nggak gerah, resleting lancar jaya. Desain timeless banget dipaduin sama polo OEPRO.",
+    "verified_purchase": true
+  }
+]

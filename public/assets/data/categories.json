@@ -1,0 +1,29 @@
+[
+  {
+    "id": "cat-polo",
+    "slug": "polo-shirt",
+    "name": "Kaos Polo Premium",
+    "subtitle": "Lacoste Pique Full Cotton 100%",
+    "description": "Koleksi kaos berkerah unisex dengan tekstur pique hexagon premium, adem dan elegan untuk gaya kasual formal.",
+    "image": "assets/products/polo/black-stone/black-stone-oepro.webp",
+    "item_count": 31
+  },
+  {
+    "id": "cat-tshirt",
+    "slug": "basic-tshirt",
+    "name": "Basic T-Shirt 24s",
+    "subtitle": "100% Cotton Combed Soft Touch",
+    "description": "Kaos polos oblong harian dengan gramasi katun combed 24s tebal, halus, dan tidak menerawang.",
+    "image": "assets/products/tshirt/black-stone/black-stone-oepro.webp",
+    "item_count": 36
+  },
+  {
+    "id": "cat-longsleeve",
+    "slug": "basic-longsleeve",
+    "name": "Basic Longsleeve",
+    "subtitle": "Cotton Combed dengan Rib Wrist",
+    "description": "Kaos polos lengan panjang elastis dengan rib manset di pergelangan tangan, cocok untuk cuaca sejuk maupun layer harian.",
+    "image": "assets/products/longsleeve/black-stone/black-stone-oepro.webp",
+    "item_count": 32
+  }
+]
