@@ -16,7 +16,7 @@ export default function Home() {
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(12);
 
-  const heroImage = '/assets/products/polo/black-stone/black-stone-worxt.webp';
+  const heroImage = '/assets/products/polo/black-stone/black-stone-oepro.webp';
   const fabricCombedImage = '/assets/products/tshirt/black-stone/black-stone-detail-1.webp';
   const fabricPiqueImage = '/assets/products/polo/black-stone/black-stone-detail-1.webp';
 

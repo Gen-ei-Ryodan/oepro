@@ -67,6 +67,6 @@ export const createWhatsAppProductLink = (product, color, size, qty = 1, customP
 };
 
 export const createWhatsAppGeneralLink = () => {
-  const text = `Halo Admin OEPRO, saya ingin konsultasi seputar produk katun murni OEPRO COTTON BASIC (Kaos Polos 24s, Polo Pique, & Longsleeve).`;
+  const text = `Halo Admin OEPRO, saya ingin konsultasi seputar produk katun murni COTTON BASIC (Kaos Polos 24s, Polo Pique, & Longsleeve).`;
   return `https://wa.me/${STORE_WA_NUMBER}?text=${encodeURIComponent(text)}`;
 };

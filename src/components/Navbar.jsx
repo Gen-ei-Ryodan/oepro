@@ -72,7 +72,7 @@ export default function Navbar() {
                   OEPRO
                 </span>
                 <span className="text-[9px] sm:text-[10px] tracking-[0.2em] font-semibold text-neutral-400 uppercase mt-0.5">
-                  OEPRO COTTON BASIC
+                  COTTON BASIC
                 </span>
               </div>
             </Link>

@@ -35,8 +35,6 @@
     ],
     "images": [
       "assets/products/polo/black-stone/black-stone-oepro.webp",
-      "assets/products/polo/black-stone/black-stone-total.webp",
-      "assets/products/polo/black-stone/black-stone-worxt.webp",
       "assets/products/polo/black-stone/black-stone-detail-1.webp",
       "assets/products/polo/black-stone/black-stone-detail-2.webp",
       "assets/products/polo/black-stone/black-stone-detail-3.webp",
@@ -255,8 +253,6 @@
     ],
     "images": [
       "assets/products/polo/blue-mountain/blue-mountain-oepro.webp",
-      "assets/products/polo/blue-mountain/blue-mountain-total.webp",
-      "assets/products/polo/blue-mountain/blue-mountain-worxt.webp",
       "assets/products/polo/blue-mountain/blue-mountain-detail-1.webp",
       "assets/products/polo/blue-mountain/blue-mountain-detail-2.webp",
       "assets/products/polo/blue-mountain/blue-mountain-detail-3.webp",
@@ -475,8 +471,6 @@
     ],
     "images": [
       "assets/products/polo/blue-ocean/blue-ocean-oepro.webp",
-      "assets/products/polo/blue-ocean/blue-ocean-total.webp",
-      "assets/products/polo/blue-ocean/blue-ocean-worxt.webp",
       "assets/products/polo/blue-ocean/blue-ocean-detail-1.webp",
       "assets/products/polo/blue-ocean/blue-ocean-detail-2.webp",
       "assets/products/polo/blue-ocean/blue-ocean-detail-3.webp",
@@ -695,8 +689,6 @@
     ],
     "images": [
       "assets/products/polo/brooklyn-mustard/brooklyn-mustard-oepro.webp",
-      "assets/products/polo/brooklyn-mustard/brooklyn-mustard-total.webp",
-      "assets/products/polo/brooklyn-mustard/brooklyn-mustard-worxt.webp",
       "assets/products/polo/brooklyn-mustard/brooklyn-mustard-detail-1.webp",
       "assets/products/polo/brooklyn-mustard/brooklyn-mustard-detail-2.webp",
       "assets/products/polo/brooklyn-mustard/brooklyn-mustard-detail-3.webp",
@@ -915,8 +907,6 @@
     ],
     "images": [
       "assets/products/polo/brown-berlin/brown-berlin-detail-oepro.webp",
-      "assets/products/polo/brown-berlin/brown-berlin-detail-total.webp",
-      "assets/products/polo/brown-berlin/brown-berlin-detail-worxt.webp",
       "assets/products/polo/brown-berlin/brown-berlin-detail-1.webp",
       "assets/products/polo/brown-berlin/brown-berlin-detail-2.webp",
       "assets/products/polo/brown-berlin/brown-berlin-detail-3.webp",
@@ -1134,8 +1124,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/dusty-pink/dusty-rose-total.webp",
-      "assets/products/polo/dusty-pink/dusty-rose-worxt.webp",
       "assets/products/polo/dusty-pink/dusty-pink-detail-1.webp",
       "assets/products/polo/dusty-pink/dusty-rose-detail-2.webp",
       "assets/products/polo/dusty-pink/dusty-rose-detail-3.webp",
@@ -1354,8 +1342,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/fuchsia/fuchsia-total.webp",
-      "assets/products/polo/fuchsia/fuchsia-worxt.webp",
       "assets/products/polo/fuchsia/fuchsia-detail-1.webp",
       "assets/products/polo/fuchsia/fuchsia-detail-2.webp",
       "assets/products/polo/fuchsia/fuchsia-detail-3.webp",
@@ -1575,8 +1561,6 @@
     ],
     "images": [
       "assets/products/polo/gray-sand/gray-sand-oepro.webp",
-      "assets/products/polo/gray-sand/gray-sand-total.webp",
-      "assets/products/polo/gray-sand/gray-sand-worxt.webp",
       "assets/products/polo/gray-sand/gray-sand-detail-1.webp",
       "assets/products/polo/gray-sand/gray-sand-detail-2.webp",
       "assets/products/polo/gray-sand/gray-sand-detail-3.webp",
@@ -1795,7 +1779,6 @@
     ],
     "images": [
       "assets/products/polo/gray-scale/gray-scale-oepro.webp",
-      "assets/products/polo/gray-scale/gray-scale-worxt.webp",
       "assets/products/polo/gray-scale/gray-scale-1.webp",
       "assets/products/polo/gray-scale/gray-scale-2.webp",
       "assets/products/polo/gray-scale/gray-scale-3.webp",
@@ -2014,8 +1997,6 @@
     ],
     "images": [
       "assets/products/polo/green-barret/green-barret-oepro.webp",
-      "assets/products/polo/green-barret/green-barret-total.webp",
-      "assets/products/polo/green-barret/green-barret-worxt.webp",
       "assets/products/polo/green-barret/green-barret-detail-1.webp",
       "assets/products/polo/green-barret/green-barret-detail-2.webp",
       "assets/products/polo/green-barret/green-barret-detail-3.webp",
@@ -2234,8 +2215,6 @@
     ],
     "images": [
       "assets/products/polo/green-bottle/green-bottle-oepro.webp",
-      "assets/products/polo/green-bottle/green-bottle-total.webp",
-      "assets/products/polo/green-bottle/green-bottle-worxt.webp",
       "assets/products/polo/green-bottle/green-bottle-detail-1.webp",
       "assets/products/polo/green-bottle/green-bottle-detail-2.webp",
       "assets/products/polo/green-bottle/green-bottle-detail-3.webp",
@@ -2454,8 +2433,6 @@
     ],
     "images": [
       "assets/products/polo/lemon-tree/lemon-tree-oepro.webp",
-      "assets/products/polo/lemon-tree/lemon-tree-total.webp",
-      "assets/products/polo/lemon-tree/lemon-tree-worxt.webp",
       "assets/products/polo/lemon-tree/lemon-tree-detail-1.webp",
       "assets/products/polo/lemon-tree/lemon-tree-detail-2.webp",
       "assets/products/polo/lemon-tree/lemon-tree-detail-3.webp",
@@ -2674,8 +2651,6 @@
     ],
     "images": [
       "assets/products/polo/light-gray/light-gray-oepro.webp",
-      "assets/products/polo/light-gray/light-gray-total.webp",
-      "assets/products/polo/light-gray/light-gray-worxt.webp",
       "assets/products/polo/light-gray/light-gray-detail-1.webp",
       "assets/products/polo/light-gray/light-gray-detail-2.webp",
       "assets/products/polo/light-gray/light-gray-detail-3.webp",
@@ -2894,8 +2869,6 @@
     ],
     "images": [
       "assets/products/polo/light-sky/light-sky-oepro.webp",
-      "assets/products/polo/light-sky/light-sky-total.webp",
-      "assets/products/polo/light-sky/light-sky-worxt.webp",
       "assets/products/polo/light-sky/light-sky-detail-1.webp",
       "assets/products/polo/light-sky/light-sky-detail-2.webp",
       "assets/products/polo/light-sky/light-sky-detail-3.webp",
@@ -3113,8 +3086,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/mineral-green/mineral-green-total.webp",
-      "assets/products/polo/mineral-green/mineral-green-worxt.webp",
       "assets/products/polo/mineral-green/mineral-green-detail-1.webp",
       "assets/products/polo/mineral-green/mineral-green-detail-2.webp",
       "assets/products/polo/mineral-green/mineral-green-detail-3.webp",
@@ -3334,7 +3305,6 @@
     ],
     "images": [
       "assets/products/polo/misty-clue/misty-clue-oepro.webp",
-      "assets/products/polo/misty-clue/misty-clue-worxt.webp",
       "assets/products/polo/misty-clue/misty-clue-1.webp",
       "assets/products/polo/misty-clue/misty-clue-2.webp",
       "assets/products/polo/misty-clue/misty-clue-3.webp"
@@ -3552,8 +3522,6 @@
     ],
     "images": [
       "assets/products/polo/mocca-brown/mocca-brown-oepro.webp",
-      "assets/products/polo/mocca-brown/mocca-brown-total.webp",
-      "assets/products/polo/mocca-brown/mocca-brown-worxt.webp",
       "assets/products/polo/mocca-brown/mocca-brown-detail-1.webp",
       "assets/products/polo/mocca-brown/mocca-brown-detail-2.webp",
       "assets/products/polo/mocca-brown/mocca-brown-detail-3.webp",
@@ -3771,8 +3739,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/mustard-maryland/mustard-maryland-total.webp",
-      "assets/products/polo/mustard-maryland/mustard-maryland-worxt.webp",
       "assets/products/polo/mustard-maryland/mustard-maryland-detail-1.webp",
       "assets/products/polo/mustard-maryland/mustard-maryland-detail-2.webp",
       "assets/products/polo/mustard-maryland/mustard-maryland-detail-3.webp",
@@ -3992,8 +3958,6 @@
     ],
     "images": [
       "assets/products/polo/ocean-brick/ocean-brick-oepro.webp",
-      "assets/products/polo/ocean-brick/ocean-brick-total.webp",
-      "assets/products/polo/ocean-brick/ocean-brick-worxt.webp",
       "assets/products/polo/ocean-brick/ocean-brick-detail-1.webp",
       "assets/products/polo/ocean-brick/ocean-brick-detail-2.webp",
       "assets/products/polo/ocean-brick/ocean-brick-detail-3.webp",
@@ -4211,8 +4175,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/olive-green/olive-green-total.webp",
-      "assets/products/polo/olive-green/olive-green-worxt.webp",
       "assets/products/polo/olive-green/olive-green-detail-1.webp",
       "assets/products/polo/olive-green/olive-green-detail-2.webp",
       "assets/products/polo/olive-green/olive-green-detail-3.webp",
@@ -4432,8 +4394,6 @@
     ],
     "images": [
       "assets/products/polo/orange-spirit/orange-spirit-oepro.webp",
-      "assets/products/polo/orange-spirit/orange-spirit-total.webp",
-      "assets/products/polo/orange-spirit/orange-spirit-worxt.webp",
       "assets/products/polo/orange-spirit/orange-spirit-detail-1.webp",
       "assets/products/polo/orange-spirit/orange-spirit-detail-2.webp",
       "assets/products/polo/orange-spirit/orange-spirit-detail-3.webp",
@@ -4652,8 +4612,6 @@
     ],
     "images": [
       "assets/products/polo/red-chili/red-chili-oepro.webp",
-      "assets/products/polo/red-chili/red-chili-total.webp",
-      "assets/products/polo/red-chili/red-chili-worxt.webp",
       "assets/products/polo/red-chili/red-chili-detail-1.webp",
       "assets/products/polo/red-chili/red-chili-detail-2.webp",
       "assets/products/polo/red-chili/red-chili-detail-3.webp",
@@ -4872,8 +4830,6 @@
     ],
     "images": [
       "assets/products/polo/red-dream/red-dream-oepro.webp",
-      "assets/products/polo/red-dream/red-dream-total.webp",
-      "assets/products/polo/red-dream/red-dream-worxt.webp",
       "assets/products/polo/red-dream/red-dream-detail-1.webp",
       "assets/products/polo/red-dream/red-dream-detail-2.webp",
       "assets/products/polo/red-dream/red-dream-detail-3.webp",
@@ -5092,8 +5048,6 @@
     ],
     "images": [
       "assets/products/polo/royal-navy/royal-navy-oepro.webp",
-      "assets/products/polo/royal-navy/royal-navy-total.webp",
-      "assets/products/polo/royal-navy/royal-navy-worxt.webp",
       "assets/products/polo/royal-navy/royal-navy-detail-1.webp",
       "assets/products/polo/royal-navy/royal-navy-detail-2.webp",
       "assets/products/polo/royal-navy/royal-navy-detail-3.webp",
@@ -5312,8 +5266,6 @@
     ],
     "images": [
       "assets/products/polo/ruby-red/ruby-red-oepro.webp",
-      "assets/products/polo/ruby-red/ruby-red-total.webp",
-      "assets/products/polo/ruby-red/ruby-red-worxt.webp",
       "assets/products/polo/ruby-red/ruby-red-detail-1.webp",
       "assets/products/polo/ruby-red/ruby-red-detail-2.webp",
       "assets/products/polo/ruby-red/ruby-red-detail-3.webp",
@@ -5532,7 +5484,6 @@
     ],
     "images": [
       "assets/products/polo/soft-blue/soft-blue-oepro.webp",
-      "assets/products/polo/soft-blue/soft-blue-worxt.webp",
       "assets/products/polo/soft-blue/soft-blue-2.webp",
       "assets/products/polo/soft-blue/soft-blue-3.webp",
       "assets/products/polo/soft-blue/soft-blue-4.webp"
@@ -5749,8 +5700,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/steel-blue/steel-blue-total.webp",
-      "assets/products/polo/steel-blue/steel-blue-worxt.webp",
       "assets/products/polo/steel-blue/steel-blue-detail-1.webp",
       "assets/products/polo/steel-blue/steel-blue-detail-2.webp",
       "assets/products/polo/steel-blue/steel-blue-detail-3.webp",
@@ -5970,8 +5919,6 @@
     ],
     "images": [
       "assets/products/polo/tosca-america/tosca-america-oepro.webp",
-      "assets/products/polo/tosca-america/tosca-america-total.webp",
-      "assets/products/polo/tosca-america/tosca-america-worxt.webp",
       "assets/products/polo/tosca-america/tosca-america-detail-1.webp",
       "assets/products/polo/tosca-america/tosca-america-detail-2.webp",
       "assets/products/polo/tosca-america/tosca-america-detail-3.webp",
@@ -6189,8 +6136,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/polo/turkis-blue/turkis-tua-total.webp",
-      "assets/products/polo/turkis-blue/turkis-tua-worxt.webp",
       "assets/products/polo/turkis-blue/turkis-tua-detail-1.webp",
       "assets/products/polo/turkis-blue/turkis-tua-detail-2.webp",
       "assets/products/polo/turkis-blue/turkis-tua-detail-3.webp",
@@ -6410,8 +6355,6 @@
     ],
     "images": [
       "assets/products/polo/turkis-scandinavia/turkis-scandinavia-oepro.webp",
-      "assets/products/polo/turkis-scandinavia/turkis-scandinavia-total.webp",
-      "assets/products/polo/turkis-scandinavia/turkis-scandinavia-worxt.webp",
       "assets/products/polo/turkis-scandinavia/turkis-scandinavia-detail-1.webp",
       "assets/products/polo/turkis-scandinavia/turkis-scandinavia-detail-2.webp",
       "assets/products/polo/turkis-scandinavia/turkis-scandinavia-detail-3.webp",
@@ -6630,8 +6573,6 @@
     ],
     "images": [
       "assets/products/polo/white-army/white-army-oepro.webp",
-      "assets/products/polo/white-army/white-army-total.webp",
-      "assets/products/polo/white-army/white-army-worxt.webp",
       "assets/products/polo/white-army/white-army-detail-1.webp",
       "assets/products/polo/white-army/white-army-detail-2.webp",
       "assets/products/polo/white-army/white-army-detail-3.webp",
@@ -6850,8 +6791,6 @@
     ],
     "images": [
       "assets/products/tshirt/black-stone/black-stone-oepro.webp",
-      "assets/products/tshirt/black-stone/black-stone-total.webp",
-      "assets/products/tshirt/black-stone/black-stone-worxt.webp",
       "assets/products/tshirt/black-stone/black-stone-detail-1.webp",
       "assets/products/tshirt/black-stone/black-stone-detail-2.webp",
       "assets/products/tshirt/black-stone/black-stone-detail-3.webp",
@@ -7095,8 +7034,6 @@
     ],
     "images": [
       "assets/products/tshirt/blue-mountain/blue-mountain-oepro.webp",
-      "assets/products/tshirt/blue-mountain/blue-mountain-total.webp",
-      "assets/products/tshirt/blue-mountain/blue-mountain-worxt.webp",
       "assets/products/tshirt/blue-mountain/blue-mountain-detail-1.webp",
       "assets/products/tshirt/blue-mountain/blue-mountain-detail-2.webp",
       "assets/products/tshirt/blue-mountain/blue-mountain-detail-3.webp",
@@ -7340,8 +7277,6 @@
     ],
     "images": [
       "assets/products/tshirt/blue-ocean/blue-ocean-oepro.webp",
-      "assets/products/tshirt/blue-ocean/blue-ocean-total.webp",
-      "assets/products/tshirt/blue-ocean/blue-ocean-worxt.webp",
       "assets/products/tshirt/blue-ocean/blue-ocean-detail-1.webp",
       "assets/products/tshirt/blue-ocean/blue-ocean-detail-2.webp",
       "assets/products/tshirt/blue-ocean/blue-ocean-detail-3.webp",
@@ -7585,8 +7520,6 @@
     ],
     "images": [
       "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-oepro.webp",
-      "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-total.webp",
-      "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-worxt.webp",
       "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-detail-1.webp",
       "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-detail-2.webp",
       "assets/products/tshirt/brooklyn-mustard/brooklyn-mustard-detail-3.webp",
@@ -7830,8 +7763,6 @@
     ],
     "images": [
       "assets/products/tshirt/brown-berlin/brown-berlin-oepro.webp",
-      "assets/products/tshirt/brown-berlin/brown-berlin-total.webp",
-      "assets/products/tshirt/brown-berlin/brown-berlin-worxt.webp",
       "assets/products/tshirt/brown-berlin/brown-berlin-detail-1.webp",
       "assets/products/tshirt/brown-berlin/brown-berlin-detail-2.webp",
       "assets/products/tshirt/brown-berlin/brown-berlin-detail-3.webp",
@@ -8075,8 +8006,6 @@
     ],
     "images": [
       "assets/products/tshirt/diamond-brown/diamond-brown-detail-oepro.webp",
-      "assets/products/tshirt/diamond-brown/diamond-brown-detail-total.webp",
-      "assets/products/tshirt/diamond-brown/diamond-brown-detail-worxt.webp",
       "assets/products/tshirt/diamond-brown/diamond-brown-detail-1.webp",
       "assets/products/tshirt/diamond-brown/diamond-brown-detail-2.webp",
       "assets/products/tshirt/diamond-brown/diamond-brown-detail-3.webp",
@@ -8319,8 +8248,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/dusty-blue/dusty-blue-total.webp",
-      "assets/products/tshirt/dusty-blue/dusty-blue-worxt.webp",
       "assets/products/tshirt/dusty-blue/dusty-blue-detail-1.webp",
       "assets/products/tshirt/dusty-blue/dusty-blue-detail-2.webp",
       "assets/products/tshirt/dusty-blue/dusty-blue-detail-3.webp",
@@ -8565,8 +8492,6 @@
     ],
     "images": [
       "assets/products/tshirt/dusty-pink/dusty-pink-oepro.webp",
-      "assets/products/tshirt/dusty-pink/dusty-pink-total.webp",
-      "assets/products/tshirt/dusty-pink/dusty-pink-worxt.webp",
       "assets/products/tshirt/dusty-pink/dusty-pink-detail-1.webp",
       "assets/products/tshirt/dusty-pink/dusty-pink-detail-2.webp",
       "assets/products/tshirt/dusty-pink/dusty-pink-detail-3.webp",
@@ -8810,8 +8735,6 @@
     ],
     "images": [
       "assets/products/tshirt/fruit-peach/fruit-peach-oepro.webp",
-      "assets/products/tshirt/fruit-peach/fruit-peach-total.webp",
-      "assets/products/tshirt/fruit-peach/fruit-peach-worxt.webp",
       "assets/products/tshirt/fruit-peach/fruit-peach-detail-1.webp",
       "assets/products/tshirt/fruit-peach/fruit-peach-detail-2.webp",
       "assets/products/tshirt/fruit-peach/fruit-peach-detail-3.webp",
@@ -9054,8 +8977,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/fuchsia/fuchsia-total.webp",
-      "assets/products/tshirt/fuchsia/fuchsia-worxt.webp",
       "assets/products/tshirt/fuchsia/fuchsia-detail-1.webp",
       "assets/products/tshirt/fuchsia/fuchsia-detail-2.webp",
       "assets/products/tshirt/fuchsia/fuchsia-detail-3.webp",
@@ -9300,8 +9221,6 @@
     ],
     "images": [
       "assets/products/tshirt/green-barret/green-barret-oepro.webp",
-      "assets/products/tshirt/green-barret/green-barret-total.webp",
-      "assets/products/tshirt/green-barret/green-barret-worxt.webp",
       "assets/products/tshirt/green-barret/green-barret-detail-1.webp",
       "assets/products/tshirt/green-barret/green-barret-detail-2.webp",
       "assets/products/tshirt/green-barret/green-barret-detail-3.webp",
@@ -9545,8 +9464,6 @@
     ],
     "images": [
       "assets/products/tshirt/green-bottle/green-bottle-oepro.webp",
-      "assets/products/tshirt/green-bottle/green-bottle-total.webp",
-      "assets/products/tshirt/green-bottle/green-bottle-worxt.webp",
       "assets/products/tshirt/green-bottle/green-bottle-detail-1.webp",
       "assets/products/tshirt/green-bottle/green-bottle-detail-2.webp",
       "assets/products/tshirt/green-bottle/green-bottle-detail-3.webp",
@@ -9790,8 +9707,6 @@
     ],
     "images": [
       "assets/products/tshirt/green-chicago/green-chicago-oepro.webp",
-      "assets/products/tshirt/green-chicago/green-chicago-total.webp",
-      "assets/products/tshirt/green-chicago/green-chicago-worxt.webp",
       "assets/products/tshirt/green-chicago/green-chicago-detail-1.webp",
       "assets/products/tshirt/green-chicago/green-chicago-detail-2.webp",
       "assets/products/tshirt/green-chicago/green-chicago-detail-3.webp",
@@ -10035,8 +9950,6 @@
     ],
     "images": [
       "assets/products/tshirt/latte-brown/latte-brown-oepro.webp",
-      "assets/products/tshirt/latte-brown/latte-brown-total.webp",
-      "assets/products/tshirt/latte-brown/latte-brown-worxt.webp",
       "assets/products/tshirt/latte-brown/latte-brown-detail-1.webp",
       "assets/products/tshirt/latte-brown/latte-brown-detail-2.webp",
       "assets/products/tshirt/latte-brown/latte-brown-detail-3.webp",
@@ -10280,8 +10193,6 @@
     ],
     "images": [
       "assets/products/tshirt/lemon-tree/lemon-tree-oepro.webp",
-      "assets/products/tshirt/lemon-tree/lemon-tree-total.webp",
-      "assets/products/tshirt/lemon-tree/lemon-tree-worxt.webp",
       "assets/products/tshirt/lemon-tree/lemon-tree-detail-1.webp",
       "assets/products/tshirt/lemon-tree/lemon-tree-detail-2.webp",
       "assets/products/tshirt/lemon-tree/lemon-tree-detail-3.webp",
@@ -10524,8 +10435,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/light-gray/light-gray-total.webp",
-      "assets/products/tshirt/light-gray/light-gray-worxt.webp",
       "assets/products/tshirt/light-gray/detail-light-gray-2.webp",
       "assets/products/tshirt/light-gray/detail-light-gray-3.webp",
       "assets/products/tshirt/light-gray/detail-light-gray-4.webp",
@@ -10770,8 +10679,6 @@
     ],
     "images": [
       "assets/products/tshirt/light-green/light-green-oepro.webp",
-      "assets/products/tshirt/light-green/light-green-total.webp",
-      "assets/products/tshirt/light-green/light-green-worxt.webp",
       "assets/products/tshirt/light-green/light-green-detail-1.webp",
       "assets/products/tshirt/light-green/light-green-detail-2.webp",
       "assets/products/tshirt/light-green/light-green-detail-3.webp",
@@ -11014,8 +10921,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/light-sky/biru-muda-total.webp",
-      "assets/products/tshirt/light-sky/biru-muda-worxt.webp",
       "assets/products/tshirt/light-sky/biru-muda-detail-2.webp",
       "assets/products/tshirt/light-sky/biru-muda-detail-3.webp",
       "assets/products/tshirt/light-sky/biru-muda-detail-4.webp",
@@ -11260,8 +11165,6 @@
     ],
     "images": [
       "assets/products/tshirt/lilac-lima/lilac-lima-oepro.webp",
-      "assets/products/tshirt/lilac-lima/lilac-lima-total.webp",
-      "assets/products/tshirt/lilac-lima/lilac-lima-worxt.webp",
       "assets/products/tshirt/lilac-lima/lilac-lima-detail-1.webp",
       "assets/products/tshirt/lilac-lima/lilac-lima-detail-2.webp",
       "assets/products/tshirt/lilac-lima/lilac-lima-detail-3.webp",
@@ -11504,8 +11407,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/mineral-green/mineral-green-fiks-total.webp",
-      "assets/products/tshirt/mineral-green/mineral-green-fiks-worxt.webp",
       "assets/products/tshirt/mineral-green/detail-mineral-green-1.webp",
       "assets/products/tshirt/mineral-green/detail-mineral-green-2.webp",
       "assets/products/tshirt/mineral-green/detail-mineral-green-3.webp",
@@ -11750,7 +11651,6 @@
     ],
     "images": [
       "assets/products/tshirt/misty-clue/misty-clue-oepro.webp",
-      "assets/products/tshirt/misty-clue/misty-clue-worxt.webp",
       "assets/products/tshirt/misty-clue/misty-clue-1.webp",
       "assets/products/tshirt/misty-clue/misty-clue-2.webp"
     ],
@@ -11991,8 +11891,6 @@
     ],
     "images": [
       "assets/products/tshirt/mocca-brown/mocca-brown-oepro.webp",
-      "assets/products/tshirt/mocca-brown/mocca-brown-total.webp",
-      "assets/products/tshirt/mocca-brown/mocca-brown-worxt.webp",
       "assets/products/tshirt/mocca-brown/mocca-brown-detail-1.webp",
       "assets/products/tshirt/mocca-brown/mocca-brown-detail-2.webp",
       "assets/products/tshirt/mocca-brown/mocca-brown-detail-3.webp",
@@ -12235,8 +12133,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/mustard-maryland/mustard-maryland-total.webp",
-      "assets/products/tshirt/mustard-maryland/mustard-maryland-worxt.webp",
       "assets/products/tshirt/mustard-maryland/mustard-maryland-detail-1.webp",
       "assets/products/tshirt/mustard-maryland/mustard-maryland-detail-2.webp",
       "assets/products/tshirt/mustard-maryland/mustard-maryland-detail-3.webp",
@@ -12481,8 +12377,6 @@
     ],
     "images": [
       "assets/products/tshirt/ocean-brick/ocean-brick-oepro.webp",
-      "assets/products/tshirt/ocean-brick/ocean-brick-total.webp",
-      "assets/products/tshirt/ocean-brick/ocean-brick-worxt.webp",
       "assets/products/tshirt/ocean-brick/ocean-brick-detail-1.webp",
       "assets/products/tshirt/ocean-brick/ocean-brick-detail-2.webp",
       "assets/products/tshirt/ocean-brick/ocean-brick-detail-3.webp",
@@ -12726,8 +12620,6 @@
     ],
     "images": [
       "assets/products/tshirt/olive-green/olive-green-oepro.webp",
-      "assets/products/tshirt/olive-green/olive-green-total.webp",
-      "assets/products/tshirt/olive-green/olive-green-worxt.webp",
       "assets/products/tshirt/olive-green/olive-green-detail-1.webp",
       "assets/products/tshirt/olive-green/olive-green-detail-2.webp",
       "assets/products/tshirt/olive-green/olive-green-detail-3.webp",
@@ -12971,8 +12863,6 @@
     ],
     "images": [
       "assets/products/tshirt/red-chili/red-chili-oepro.webp",
-      "assets/products/tshirt/red-chili/red-chili-total.webp",
-      "assets/products/tshirt/red-chili/red-chili-worxt.webp",
       "assets/products/tshirt/red-chili/red-chili-detail-1.webp",
       "assets/products/tshirt/red-chili/red-chili-detail-2.webp",
       "assets/products/tshirt/red-chili/red-chili-detail-3.webp",
@@ -13216,8 +13106,6 @@
     ],
     "images": [
       "assets/products/tshirt/red-dream/red-dream-oepro.webp",
-      "assets/products/tshirt/red-dream/red-dream-total.webp",
-      "assets/products/tshirt/red-dream/red-dream-worxt.webp",
       "assets/products/tshirt/red-dream/red-dream-detail-1.webp",
       "assets/products/tshirt/red-dream/red-dream-detail-2.webp",
       "assets/products/tshirt/red-dream/red-dream-detail-3.webp",
@@ -13461,8 +13349,6 @@
     ],
     "images": [
       "assets/products/tshirt/red-guava/red-guava-oepro.webp",
-      "assets/products/tshirt/red-guava/red-guava-total.webp",
-      "assets/products/tshirt/red-guava/red-guava-worxt.webp",
       "assets/products/tshirt/red-guava/red-guava-detail-1.webp",
       "assets/products/tshirt/red-guava/red-guava-detail-2.webp",
       "assets/products/tshirt/red-guava/red-guava-detail-3.webp",
@@ -13706,8 +13592,6 @@
     ],
     "images": [
       "assets/products/tshirt/royal-navy/royal-navy-oepro.webp",
-      "assets/products/tshirt/royal-navy/royal-navy-total.webp",
-      "assets/products/tshirt/royal-navy/royal-navy-worxt.webp",
       "assets/products/tshirt/royal-navy/royal-navy-detail-1.webp",
       "assets/products/tshirt/royal-navy/royal-navy-detail-2.webp",
       "assets/products/tshirt/royal-navy/royal-navy-detail-3.webp",
@@ -13950,8 +13834,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/sage/sage-total.webp",
-      "assets/products/tshirt/sage/sage-worxt.webp",
       "assets/products/tshirt/sage/sage-detail-1.webp",
       "assets/products/tshirt/sage/sage-detail-2.webp",
       "assets/products/tshirt/sage/sage-detail-3.webp",
@@ -14195,8 +14077,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/steel-blue/steel-blue-total.webp",
-      "assets/products/tshirt/steel-blue/steel-blue-worxt.webp",
       "assets/products/tshirt/steel-blue/steel-blue-detail-1.webp",
       "assets/products/tshirt/steel-blue/steel-blue-detail-2.webp",
       "assets/products/tshirt/steel-blue/steel-blue-detail-3.webp",
@@ -14440,8 +14320,6 @@
     ],
     "images": [
       "assets/products/tshirt/tosca-opera/tosca-opera-oepro.webp",
-      "assets/products/tshirt/tosca-opera/tosca-opera-total.webp",
-      "assets/products/tshirt/tosca-opera/tosca-opera-worxt.webp",
       "assets/products/tshirt/tosca-opera/tosca-opera-detail-1.webp",
       "assets/products/tshirt/tosca-opera/tosca-opera-detail-2.webp",
       "assets/products/tshirt/tosca-opera/tosca-opera-detail-3.webp",
@@ -14684,8 +14562,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/tshirt/turkis-blue/turkis-tua-total.webp",
-      "assets/products/tshirt/turkis-blue/turkis-tua-worxt.webp",
       "assets/products/tshirt/turkis-blue/detail-turkis-tua-1.webp",
       "assets/products/tshirt/turkis-blue/detail-turkis-tua-2.webp",
       "assets/products/tshirt/turkis-blue/detail-turkis-tua-3.webp",
@@ -14930,8 +14806,6 @@
     ],
     "images": [
       "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-oepro.webp",
-      "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-total.webp",
-      "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-worxt.webp",
       "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-detail-1.webp",
       "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-detail-2.webp",
       "assets/products/tshirt/turkis-scandinavia/turkis-scandinavia-detail-3.webp",
@@ -15175,8 +15049,6 @@
     ],
     "images": [
       "assets/products/tshirt/white-army/white-army-oepro.webp",
-      "assets/products/tshirt/white-army/white-army-total.webp",
-      "assets/products/tshirt/white-army/white-army-worxt.webp",
       "assets/products/tshirt/white-army/white-army-detail-1.webp",
       "assets/products/tshirt/white-army/white-army-detail-2.webp",
       "assets/products/tshirt/white-army/white-army-detail-3.webp",
@@ -15419,8 +15291,6 @@
     ],
     "images": [
       "assets/products/tshirt/yellow-submarine/yellow-submarine-oepro.webp",
-      "assets/products/tshirt/yellow-submarine/yellow-submarine-total.webp",
-      "assets/products/tshirt/yellow-submarine/yellow-submarine-worxt.webp",
       "assets/products/tshirt/yellow-submarine/yellow-submarine-detail-1.webp",
       "assets/products/tshirt/yellow-submarine/yellow-submarine-detail-2.webp",
       "assets/products/tshirt/yellow-submarine/yellow-submarine-detail-3.webp",
@@ -15664,8 +15534,6 @@
     ],
     "images": [
       "assets/products/longsleeve/black-stone/black-stone-oepro.webp",
-      "assets/products/longsleeve/black-stone/black-stone-total.webp",
-      "assets/products/longsleeve/black-stone/black-stone-worxt.webp",
       "assets/products/longsleeve/black-stone/black-stone-detail-1.webp",
       "assets/products/longsleeve/black-stone/black-stone-detail-2.webp",
       "assets/products/longsleeve/black-stone/black-stone-detail-3.webp"
@@ -15887,8 +15755,6 @@
     ],
     "images": [
       "assets/products/longsleeve/blue-mountain/blue-mountain-oepro.webp",
-      "assets/products/longsleeve/blue-mountain/blue-mountain-total.webp",
-      "assets/products/longsleeve/blue-mountain/blue-mountain-worxt.webp",
       "assets/products/longsleeve/blue-mountain/blue-mountain-detail-2.webp",
       "assets/products/longsleeve/blue-mountain/blue-mountain-detail-3.webp",
       "assets/products/longsleeve/blue-mountain/blue-mountain-detail.webp"
@@ -16110,8 +15976,6 @@
     ],
     "images": [
       "assets/products/longsleeve/blue-ocean/blue-ocean-oepro.webp",
-      "assets/products/longsleeve/blue-ocean/blue-ocean-total.webp",
-      "assets/products/longsleeve/blue-ocean/blue-ocean-worxt.webp",
       "assets/products/longsleeve/blue-ocean/blue-ocean-detail-1.webp",
       "assets/products/longsleeve/blue-ocean/blue-ocean-detail-2.webp",
       "assets/products/longsleeve/blue-ocean/blue-ocean-detail-3.webp"
@@ -16333,8 +16197,6 @@
     ],
     "images": [
       "assets/products/longsleeve/brooklyn-mustard/brooklyn-mustard-oepro.webp",
-      "assets/products/longsleeve/brooklyn-mustard/brooklyn-mustard-total.webp",
-      "assets/products/longsleeve/brooklyn-mustard/brooklyn-mustard-worxt.webp",
       "assets/products/longsleeve/brooklyn-mustard/detail-1-brooklyn-mustard.webp",
       "assets/products/longsleeve/brooklyn-mustard/detail-2-brooklyn-mustard.webp",
       "assets/products/longsleeve/brooklyn-mustard/detail-3-brooklyn-mustard.webp"
@@ -16555,8 +16417,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/dusty-blue/dusty-blue-total.webp",
-      "assets/products/longsleeve/dusty-blue/dusty-blue-worxt.webp",
       "assets/products/longsleeve/dusty-blue/dusty-blue-detail-1.webp",
       "assets/products/longsleeve/dusty-blue/dusty-blue-detail-2.webp",
       "assets/products/longsleeve/dusty-blue/dusty-blue-detail-3.webp",
@@ -16779,8 +16639,6 @@
     ],
     "images": [
       "assets/products/longsleeve/dusty-pink/dusty-pink-oepro.webp",
-      "assets/products/longsleeve/dusty-pink/dusty-pink-total.webp",
-      "assets/products/longsleeve/dusty-pink/dusty-pink-worxt.webp",
       "assets/products/longsleeve/dusty-pink/dusty-pink-detail-1.webp",
       "assets/products/longsleeve/dusty-pink/dusty-pink-detail-2.webp",
       "assets/products/longsleeve/dusty-pink/dusty-pink-detail-3.webp"
@@ -17002,8 +16860,6 @@
     ],
     "images": [
       "assets/products/longsleeve/fruit-peach/fruit-peach-oepro.webp",
-      "assets/products/longsleeve/fruit-peach/fruit-peach-total.webp",
-      "assets/products/longsleeve/fruit-peach/fruit-peach-worxt.webp",
       "assets/products/longsleeve/fruit-peach/fruit-peach-detail-1.webp",
       "assets/products/longsleeve/fruit-peach/fruit-peach-detail-2.webp",
       "assets/products/longsleeve/fruit-peach/fruit-peach-detail-3.webp"
@@ -17224,8 +17080,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/fuchsia/fuchsia-total.webp",
-      "assets/products/longsleeve/fuchsia/fuchsia-worxt.webp",
       "assets/products/longsleeve/fuchsia/fuchsia-detail-1.webp",
       "assets/products/longsleeve/fuchsia/fuchsia-detail-2.webp",
       "assets/products/longsleeve/fuchsia/fuchsia-detail-3.webp",
@@ -17448,8 +17302,6 @@
     ],
     "images": [
       "assets/products/longsleeve/green-barret/green-barret-oepro.webp",
-      "assets/products/longsleeve/green-barret/green-barret-total.webp",
-      "assets/products/longsleeve/green-barret/green-barret-worxt.webp",
       "assets/products/longsleeve/green-barret/green-barret-detail-1.webp",
       "assets/products/longsleeve/green-barret/green-barret-detail-2.webp",
       "assets/products/longsleeve/green-barret/green-barret-detail-3.webp"
@@ -17671,8 +17523,6 @@
     ],
     "images": [
       "assets/products/longsleeve/green-bottle/green-bottle-oepro.webp",
-      "assets/products/longsleeve/green-bottle/green-bottle-total.webp",
-      "assets/products/longsleeve/green-bottle/green-bottle-worxt.webp",
       "assets/products/longsleeve/green-bottle/green-bottle-detail-1.webp",
       "assets/products/longsleeve/green-bottle/green-bottle-detail-2.webp",
       "assets/products/longsleeve/green-bottle/green-bottle-detail-3.webp"
@@ -17894,8 +17744,6 @@
     ],
     "images": [
       "assets/products/longsleeve/green-chicago/green-chicago-oepro.webp",
-      "assets/products/longsleeve/green-chicago/green-chicago-total.webp",
-      "assets/products/longsleeve/green-chicago/green-chicago-worxt.webp",
       "assets/products/longsleeve/green-chicago/green-chicago-detail-1.webp",
       "assets/products/longsleeve/green-chicago/green-chicago-detail-2.webp",
       "assets/products/longsleeve/green-chicago/green-chicago-detail-3.webp"
@@ -18117,8 +17965,6 @@
     ],
     "images": [
       "assets/products/longsleeve/latte-brown/latte-brown-oepro.webp",
-      "assets/products/longsleeve/latte-brown/latte-brown-total.webp",
-      "assets/products/longsleeve/latte-brown/latte-brown-worxt.webp",
       "assets/products/longsleeve/latte-brown/latte-brown-detail-1.webp",
       "assets/products/longsleeve/latte-brown/latte-brown-detail-2.webp",
       "assets/products/longsleeve/latte-brown/latte-brown-detail-3.webp"
@@ -18340,8 +18186,6 @@
     ],
     "images": [
       "assets/products/longsleeve/lemon-tree/lemon-tree-oepro.webp",
-      "assets/products/longsleeve/lemon-tree/lemon-tree-total.webp",
-      "assets/products/longsleeve/lemon-tree/lemon-tree-worxt.webp",
       "assets/products/longsleeve/lemon-tree/lemon-tree-detail-1.webp",
       "assets/products/longsleeve/lemon-tree/lemon-tree-detail-2.webp",
       "assets/products/longsleeve/lemon-tree/lemon-tree-detail-3.webp"
@@ -18562,8 +18406,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/light-gray/light-gray-total.webp",
-      "assets/products/longsleeve/light-gray/light-gray-worxt.webp",
       "assets/products/longsleeve/light-gray/detail-light-gray-1.webp",
       "assets/products/longsleeve/light-gray/detail-light-gray-2.webp",
       "assets/products/longsleeve/light-gray/detail-light-gray-3.webp",
@@ -18785,8 +18627,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/light-sky/light-blue-total.webp",
-      "assets/products/longsleeve/light-sky/light-blue-worxt.webp",
       "assets/products/longsleeve/light-sky/light-blue-detail-1.webp",
       "assets/products/longsleeve/light-sky/light-blue-detail-2.webp",
       "assets/products/longsleeve/light-sky/light-blue-detail-3.webp",
@@ -19009,8 +18849,6 @@
     ],
     "images": [
       "assets/products/longsleeve/lilac-lima/lilac-lima-oepro.webp",
-      "assets/products/longsleeve/lilac-lima/lilac-lima-total.webp",
-      "assets/products/longsleeve/lilac-lima/lilac-lima-worxt.webp",
       "assets/products/longsleeve/lilac-lima/lilac-lima-detail-1.webp",
       "assets/products/longsleeve/lilac-lima/lilac-lima-detail-2.webp",
       "assets/products/longsleeve/lilac-lima/lilac-lima-detail-3.webp"
@@ -19231,8 +19069,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/mineral-green/mineral-green-total.webp",
-      "assets/products/longsleeve/mineral-green/mineral-green-worxt.webp",
       "assets/products/longsleeve/mineral-green/mineral-green-detail-2.webp",
       "assets/products/longsleeve/mineral-green/mineral-green-detail-3.webp",
       "assets/products/longsleeve/mineral-green/mineral-green-detail.webp",
@@ -19455,7 +19291,6 @@
     ],
     "images": [
       "assets/products/longsleeve/misty-clue/misty-clue-oepro.webp",
-      "assets/products/longsleeve/misty-clue/misty-clue-worxt.webp",
       "assets/products/longsleeve/misty-clue/misty-clue-1.webp",
       "assets/products/longsleeve/misty-clue/misty-clue-2.webp"
     ],
@@ -19676,8 +19511,6 @@
     ],
     "images": [
       "assets/products/longsleeve/mocca-brown/mocca-brown-oepro.webp",
-      "assets/products/longsleeve/mocca-brown/mocca-brown-total.webp",
-      "assets/products/longsleeve/mocca-brown/mocca-brown-worxt.webp",
       "assets/products/longsleeve/mocca-brown/mocca-brown-detail-1.webp",
       "assets/products/longsleeve/mocca-brown/mocca-brown-detail-2.webp",
       "assets/products/longsleeve/mocca-brown/mocca-brown-detail-3.webp"
@@ -19898,8 +19731,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/mustard-maryland/mustard-maryland-total.webp",
-      "assets/products/longsleeve/mustard-maryland/mustard-maryland-worxt.webp",
       "assets/products/longsleeve/mustard-maryland/mustard-maryland-detail-1.webp",
       "assets/products/longsleeve/mustard-maryland/mustard-maryland-detail-2.webp",
       "assets/products/longsleeve/mustard-maryland/mustard-maryland-detail-3.webp",
@@ -20122,8 +19953,6 @@
     ],
     "images": [
       "assets/products/longsleeve/ocean-brick/ocean-brick-oepro.webp",
-      "assets/products/longsleeve/ocean-brick/ocean-brick-total.webp",
-      "assets/products/longsleeve/ocean-brick/ocean-brick-worxt.webp",
       "assets/products/longsleeve/ocean-brick/ocean-brick-detail-1.webp",
       "assets/products/longsleeve/ocean-brick/ocean-brick-detail-2.webp",
       "assets/products/longsleeve/ocean-brick/ocean-brick-detail-3.webp"
@@ -20344,8 +20173,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/olive-green/olive-green-total.webp",
-      "assets/products/longsleeve/olive-green/olive-green-worxt.webp",
       "assets/products/longsleeve/olive-green/olive-green-detail-1.webp",
       "assets/products/longsleeve/olive-green/olive-green-detail-2.webp",
       "assets/products/longsleeve/olive-green/olive-green-detail-3.webp",
@@ -20568,8 +20395,6 @@
     ],
     "images": [
       "assets/products/longsleeve/red-chili/red-chili-oepro.webp",
-      "assets/products/longsleeve/red-chili/red-chili-total.webp",
-      "assets/products/longsleeve/red-chili/red-chili-worxt.webp",
       "assets/products/longsleeve/red-chili/red-chili-detail-1.webp",
       "assets/products/longsleeve/red-chili/red-chili-detail-2.webp",
       "assets/products/longsleeve/red-chili/red-chili-detail-3.webp"
@@ -20791,8 +20616,6 @@
     ],
     "images": [
       "assets/products/longsleeve/red-dream/red-dream-oepro.webp",
-      "assets/products/longsleeve/red-dream/red-dream-total.webp",
-      "assets/products/longsleeve/red-dream/red-dream-worxt.webp",
       "assets/products/longsleeve/red-dream/red-dream-detail-1.webp",
       "assets/products/longsleeve/red-dream/red-dream-detail-2.webp",
       "assets/products/longsleeve/red-dream/red-dream-detail-3.webp"
@@ -21013,8 +20836,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/red-guava/blush-red-total.webp",
-      "assets/products/longsleeve/red-guava/blush-red-worxt.webp",
       "assets/products/longsleeve/red-guava/blush-red-detail-1.webp",
       "assets/products/longsleeve/red-guava/blush-red-detail-2.webp",
       "assets/products/longsleeve/red-guava/blush-red-detail-3.webp",
@@ -21237,8 +21058,6 @@
     ],
     "images": [
       "assets/products/longsleeve/royal-navy/royal-navy-oepro.webp",
-      "assets/products/longsleeve/royal-navy/royal-navy-total.webp",
-      "assets/products/longsleeve/royal-navy/royal-navy-worxt.webp",
       "assets/products/longsleeve/royal-navy/royal-navy-detail-1.webp",
       "assets/products/longsleeve/royal-navy/royal-navy-detail-2.webp",
       "assets/products/longsleeve/royal-navy/royal-navy-detail-3.webp"
@@ -21460,8 +21279,6 @@
     ],
     "images": [
       "assets/products/longsleeve/sage/sage-oepro.webp",
-      "assets/products/longsleeve/sage/sage-total.webp",
-      "assets/products/longsleeve/sage/sage-worxt.webp",
       "assets/products/longsleeve/sage/sage-detail-1.webp",
       "assets/products/longsleeve/sage/sage-detail-2.webp",
       "assets/products/longsleeve/sage/sage-detail-3.webp"
@@ -21682,8 +21499,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/steel-blue/steel-blue-total.webp",
-      "assets/products/longsleeve/steel-blue/steel-blue-worxt.webp",
       "assets/products/longsleeve/steel-blue/steel-blue-detail-1.webp",
       "assets/products/longsleeve/steel-blue/steel-blue-detail-2.webp",
       "assets/products/longsleeve/steel-blue/steel-blue-detail-3.webp",
@@ -21906,8 +21721,6 @@
     ],
     "images": [
       "assets/products/longsleeve/tosca-athena/tosca-atena-oepro.webp",
-      "assets/products/longsleeve/tosca-athena/tosca-atena-total.webp",
-      "assets/products/longsleeve/tosca-athena/tosca-atena-worxt.webp",
       "assets/products/longsleeve/tosca-athena/tosca-atena-detail-1.webp",
       "assets/products/longsleeve/tosca-athena/tosca-atena-detail-2.webp",
       "assets/products/longsleeve/tosca-athena/tosca-atena-detail-3.webp"
@@ -22128,8 +21941,6 @@
       "8XL"
     ],
     "images": [
-      "assets/products/longsleeve/turkis-blue/turkis-tua-total.webp",
-      "assets/products/longsleeve/turkis-blue/turkis-tua-worxt.webp",
       "assets/products/longsleeve/turkis-blue/detail-turkis-tua-1.webp",
       "assets/products/longsleeve/turkis-blue/detail-turkis-tua-2.webp",
       "assets/products/longsleeve/turkis-blue/detail-turkis-tua-3.webp",
@@ -22352,8 +22163,6 @@
     ],
     "images": [
       "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-oepro.webp",
-      "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-total.webp",
-      "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-worxt.webp",
       "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-detail-1.webp",
       "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-detail-2.webp",
       "assets/products/longsleeve/turkis-scandinavia/turkis-scandinavia-detail-3.webp"
@@ -22575,8 +22384,6 @@
     ],
     "images": [
       "assets/products/longsleeve/white-army/white-army-oepro.webp",
-      "assets/products/longsleeve/white-army/white-army-total.webp",
-      "assets/products/longsleeve/white-army/white-army-worxt.webp",
       "assets/products/longsleeve/white-army/white-army-detail-1.webp",
       "assets/products/longsleeve/white-army/white-army-detail-2.webp",
       "assets/products/longsleeve/white-army/white-army-detail-3.webp"

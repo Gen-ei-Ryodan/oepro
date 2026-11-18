@@ -4,8 +4,18 @@ import initialCategoriesData from '../data/categories.json';
 
 const ProductContext = createContext(null);
 
-const STORAGE_KEY = 'oepro_dynamic_products_v2';
-const CATEGORIES_KEY = 'oepro_dynamic_categories_v2';
+const STORAGE_KEY = 'oepro_dynamic_products_v3';
+const CATEGORIES_KEY = 'oepro_dynamic_categories_v3';
+
+const cleanProductImages = (items) => {
+  if (!Array.isArray(items)) return [];
+  return items.map((p) => ({
+    ...p,
+    images: Array.isArray(p.images)
+      ? p.images.filter((img) => !img.toLowerCase().includes('total') && !img.toLowerCase().includes('worxt'))
+      : []
+  }));
+};
 
 export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {
@@ -14,13 +24,13 @@ export function ProductProvider({ children }) {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
+          return cleanProductImages(parsed);
         }
       }
     } catch (e) {
       console.warn('Failed to parse saved products, falling back to initial data', e);
     }
-    return initialProductsData;
+    return cleanProductImages(initialProductsData);
   });
 
   const [categories, setCategories] = useState(() => {
