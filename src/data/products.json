@@ -12,7 +12,7 @@
     "rating": 4.9,
     "review_count": 150,
     "sold_count": 500,
-    "stock": 60,
+    "stock": 186,
     "is_best_seller": true,
     "is_featured": true,
     "is_new_arrival": true,
@@ -214,6 +214,105 @@
         "name": "White Army",
         "hex": "#F8F8F8",
         "productId": "oepro-polo-white-army"
+      }
+    ],
+    "has_variants": true,
+    "variant_level1_name": "Warna",
+    "variant_level2_name": "Ukuran",
+    "variants": [
+      {
+        "id": "var1-black-stone",
+        "name": "Black Stone",
+        "hex": "#1D1D1D",
+        "options": [
+          {
+            "id": "var2-bs-s",
+            "name": "S",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 20,
+            "sku": "OEP-POLO-BS-S"
+          },
+          {
+            "id": "var2-bs-m",
+            "name": "M",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 25,
+            "sku": "OEP-POLO-BS-M"
+          },
+          {
+            "id": "var2-bs-l",
+            "name": "L",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 30,
+            "sku": "OEP-POLO-BS-L"
+          },
+          {
+            "id": "var2-bs-xl",
+            "name": "XL",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 15,
+            "sku": "OEP-POLO-BS-XL"
+          },
+          {
+            "id": "var2-bs-2xl",
+            "name": "2XL",
+            "price": 100000,
+            "original_price": 129000,
+            "stock": 10,
+            "sku": "OEP-POLO-BS-2XL"
+          }
+        ]
+      },
+      {
+        "id": "var1-ruby-red",
+        "name": "Ruby Red",
+        "hex": "#C21807",
+        "options": [
+          {
+            "id": "var2-rr-s",
+            "name": "S",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 15,
+            "sku": "OEP-POLO-RR-S"
+          },
+          {
+            "id": "var2-rr-m",
+            "name": "M",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 20,
+            "sku": "OEP-POLO-RR-M"
+          },
+          {
+            "id": "var2-rr-l",
+            "name": "L",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 25,
+            "sku": "OEP-POLO-RR-L"
+          },
+          {
+            "id": "var2-rr-xl",
+            "name": "XL",
+            "price": 92000,
+            "original_price": 119000,
+            "stock": 18,
+            "sku": "OEP-POLO-RR-XL"
+          },
+          {
+            "id": "var2-rr-2xl",
+            "name": "2XL",
+            "price": 100000,
+            "original_price": 129000,
+            "stock": 8,
+            "sku": "OEP-POLO-RR-2XL"
+          }
+        ]
       }
     ]
   },

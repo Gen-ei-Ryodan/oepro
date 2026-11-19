@@ -38,11 +38,19 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (product) {
-      if (product.colors && product.colors.length > 0) {
-        setSelectedColor(product.colors[0]);
-      }
-      if (product.sizes && product.sizes.length > 0) {
-        setSelectedSize(product.sizes[0]);
+      if (Array.isArray(product.variants) && product.variants.length > 0) {
+        const firstV1 = product.variants[0];
+        setSelectedColor({ name: firstV1.name, hex: firstV1.hex });
+        if (firstV1.options && firstV1.options.length > 0) {
+          setSelectedSize(firstV1.options[0].name);
+        }
+      } else {
+        if (product.colors && product.colors.length > 0) {
+          setSelectedColor(product.colors[0]);
+        }
+        if (product.sizes && product.sizes.length > 0) {
+          setSelectedSize(product.sizes[0]);
+        }
       }
       setSelectedImageIndex(0);
       setQuantity(1);
@@ -81,8 +89,25 @@ export default function ProductDetail() {
     ? product.images.map((img) => `/${img.replace(/^\//, '')}`)
     : ['/assets/brand/oepro-logo.webp'];
 
-  const currentPrice = getProductPriceBySize(product, selectedSize);
-  const currentOriginalPrice = getProductOriginalPriceBySize(product, selectedSize);
+  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
+  const activeLevel1 = hasVariants
+    ? product.variants.find((v) => v.name === (selectedColor?.name || selectedColor)) || product.variants[0]
+    : null;
+  const activeLevel2 = (activeLevel1 && Array.isArray(activeLevel1.options))
+    ? activeLevel1.options.find((o) => o.name === selectedSize) || activeLevel1.options[0]
+    : null;
+
+  const currentPrice = (hasVariants && activeLevel2 && activeLevel2.price)
+    ? activeLevel2.price
+    : getProductPriceBySize(product, selectedSize);
+
+  const currentOriginalPrice = (hasVariants && activeLevel2 && activeLevel2.original_price)
+    ? activeLevel2.original_price
+    : getProductOriginalPriceBySize(product, selectedSize);
+
+  const currentStock = (hasVariants && activeLevel2 && activeLevel2.stock !== undefined)
+    ? activeLevel2.stock
+    : (product.stock || 50);
 
   const handleAddToCart = () => {
     const success = addToCart(product, selectedColor, selectedSize, quantity, currentPrice);
@@ -258,7 +283,7 @@ export default function ProductDetail() {
             {/* Material Badge */}
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-800 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2">
               <Check className="w-3 h-3 text-emerald-600" />
-              <span>{product.category_slug === 'polo-shirt' ? '100% Lacoste Pique Cotton' : '100% Cotton Combed 24s'}</span>
+              <span>{product.category_slug === 'polo-shirt' ? 'pique hexagon premium' : '100% Cotton Combed 24s'}</span>
             </div>
 
             {/* Product Title */}
@@ -305,28 +330,57 @@ export default function ProductDetail() {
             </div>
 
             <div className="flex flex-wrap gap-2 pt-0.5">
-              {product.colors && product.colors.map((c, i) => {
-                const colorName = c.name || c;
-                const isSelected = selectedColor && (selectedColor.name || selectedColor) === colorName;
-                return (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => handleColorChange(c)}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition border ${
-                      isSelected
-                        ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
-                        : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400'
-                    }`}
-                  >
-                    <span
-                      className="w-3 h-3 rounded-full border border-neutral-300"
-                      style={{ backgroundColor: c.hex }}
-                    />
-                    <span className="text-[11px] font-medium">{colorName}</span>
-                  </button>
-                );
-              })}
+              {hasVariants ? (
+                product.variants.map((v1, i) => {
+                  const isSelected = selectedColor && (selectedColor.name || selectedColor) === v1.name;
+                  return (
+                    <button
+                      key={v1.id || i}
+                      type="button"
+                      onClick={() => {
+                        setSelectedColor({ name: v1.name, hex: v1.hex });
+                        if (v1.options && v1.options.length > 0 && !v1.options.some((o) => o.name === selectedSize)) {
+                          setSelectedSize(v1.options[0].name);
+                        }
+                      }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition border ${
+                        isSelected
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
+                          : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <span
+                        className="w-3 h-3 rounded-full border border-neutral-300"
+                        style={{ backgroundColor: v1.hex }}
+                      />
+                      <span className="text-[11px] font-medium">{v1.name}</span>
+                    </button>
+                  );
+                })
+              ) : (
+                product.colors && product.colors.map((c, i) => {
+                  const colorName = c.name || c;
+                  const isSelected = selectedColor && (selectedColor.name || selectedColor) === colorName;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => handleColorChange(c)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition border ${
+                        isSelected
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
+                          : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400'
+                      }`}
+                    >
+                      <span
+                        className="w-3 h-3 rounded-full border border-neutral-300"
+                        style={{ backgroundColor: c.hex }}
+                      />
+                      <span className="text-[11px] font-medium">{colorName}</span>
+                    </button>
+                  );
+                })
+              )}
             </div>
           </div>
 
@@ -348,27 +402,50 @@ export default function ProductDetail() {
             </div>
 
             <div className="grid grid-cols-3 xs:grid-cols-4 sm:grid-cols-6 gap-2">
-              {product.sizes && product.sizes.map((sz) => {
-                const szPrice = getProductPriceBySize(product, sz);
-                const isSelected = selectedSize === sz;
-                return (
-                  <button
-                    key={sz}
-                    type="button"
-                    onClick={() => setSelectedSize(sz)}
-                    className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
-                      isSelected
-                        ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
-                        : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
-                    }`}
-                  >
-                    <span className="font-bold">{sz}</span>
-                    <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
-                      {formatRupiah(szPrice)}
-                    </span>
-                  </button>
-                );
-              })}
+              {hasVariants && activeLevel1 ? (
+                activeLevel1.options.map((v2) => {
+                  const isSelected = selectedSize === v2.name;
+                  return (
+                    <button
+                      key={v2.id || v2.name}
+                      type="button"
+                      onClick={() => setSelectedSize(v2.name)}
+                      className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
+                        isSelected
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
+                          : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
+                      }`}
+                    >
+                      <span className="font-bold">{v2.name}</span>
+                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                        {formatRupiah(v2.price || currentPrice)}
+                      </span>
+                    </button>
+                  );
+                })
+              ) : (
+                product.sizes && product.sizes.map((sz) => {
+                  const szPrice = getProductPriceBySize(product, sz);
+                  const isSelected = selectedSize === sz;
+                  return (
+                    <button
+                      key={sz}
+                      type="button"
+                      onClick={() => setSelectedSize(sz)}
+                      className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
+                        isSelected
+                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
+                          : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
+                      }`}
+                    >
+                      <span className="font-bold">{sz}</span>
+                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                        {formatRupiah(szPrice)}
+                      </span>
+                    </button>
+                  );
+                })
+              )}
             </div>
           </div>
 
@@ -377,7 +454,7 @@ export default function ProductDetail() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-neutral-900">Jumlah:</span>
               <span className="text-xs text-neutral-500 font-normal">
-                Stok Ready: <strong className="text-neutral-900 font-medium">{product.stock || 50} pcs</strong>
+                Stok Ready: <strong className="text-neutral-900 font-medium">{currentStock} pcs</strong>
               </span>
             </div>
 
@@ -395,7 +472,7 @@ export default function ProductDetail() {
                 </span>
                 <button
                   type="button"
-                  onClick={() => setQuantity(Math.min(product.stock || 50, quantity + 1))}
+                  onClick={() => setQuantity(Math.min(currentStock || 50, quantity + 1))}
                   className="px-3.5 py-2 hover:bg-neutral-100 text-neutral-700 font-bold transition text-sm min-h-[40px] min-w-[40px] flex items-center justify-center"
                 >
                   +

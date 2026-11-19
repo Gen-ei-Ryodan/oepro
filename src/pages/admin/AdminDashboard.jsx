@@ -15,13 +15,35 @@ import {
   RotateCcw,
   Tag,
   ArrowUpDown,
+  Menu,
+  Image as ImageIcon,
+  Store,
+  ChevronRight,
 } from 'lucide-react';
 import { useProducts } from '../../context/ProductContext';
 import ProductFormModal from '../../components/admin/ProductFormModal';
+import AdminSidebar from '../../components/admin/AdminSidebar';
+import CategoryManager from '../../components/admin/CategoryManager';
+import BannerManager from '../../components/admin/BannerManager';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
-  const { products, categories, addProduct, updateProduct, deleteProduct, resetToDefault } = useProducts();
+  const {
+    products,
+    categories,
+    banners,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+    addCategory,
+    updateCategory,
+    deleteCategory,
+    addBanner,
+    updateBanner,
+    deleteBanner,
+    toggleBannerStatus,
+    resetToDefault,
+  } = useProducts();
 
   // Auth Guard
   useEffect(() => {
@@ -37,6 +59,8 @@ export default function AdminDashboard() {
   };
 
   // State
+  const [activeTab, setActiveTab] = useState('products'); // 'products' | 'categories' | 'banners'
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('ALL');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,10 +89,10 @@ export default function AdminDashboard() {
 
   // Metrics
   const totalProducts = products.length;
-  const activeCategoriesCount = new Set(products.map((p) => p.category)).size;
+  const activeCategoriesCount = categories.length;
   const lowStockCount = products.filter((p) => (p.stock || 0) < 15).length;
 
-  // Handlers
+  // Handlers for Products
   const handleOpenAdd = () => {
     setEditingProduct(null);
     setIsModalOpen(true);
@@ -97,408 +121,494 @@ export default function AdminDashboard() {
   };
 
   const handleResetData = () => {
-    if (window.confirm('Kembalikan seluruh produk ke database master awal? Perubahan kustom akan direset.')) {
+    if (
+      window.confirm(
+        'Kembalikan seluruh produk, kategori, dan banner ke database master awal? Perubahan kustom akan direset.'
+      )
+    ) {
       resetToDefault();
       showToast('Database katalog berhasil direset ke data master.');
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#FBFBFA] text-[#171717] pb-16 selection:bg-neutral-900 selection:text-white">
+    <div className="min-h-screen bg-[#FBFBFA] text-[#171717] flex selection:bg-neutral-900 selection:text-white">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 right-5 z-50 bg-neutral-950 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 border border-white/10 text-xs font-semibold animate-fade-in">
+        <div className="fixed top-5 right-5 z-50 bg-[#3A3732] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 border border-white/10 text-xs font-semibold animate-fade-in">
           <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Admin Navbar */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E5E5E0] px-4 sm:px-8 py-3.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link to="/" className="flex items-center gap-2">
-              <span className="font-extrabold text-lg sm:text-xl tracking-tight text-neutral-950 font-sans">
-                OEPRO
+      {/* 1. ADMIN SIDEBAR (Responsive drawer on mobile, sticky on desktop) */}
+      <AdminSidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isMobileOpen={isMobileSidebarOpen}
+        setIsMobileOpen={setIsMobileSidebarOpen}
+        onLogout={handleLogout}
+        counts={{
+          products: totalProducts,
+          categories: activeCategoriesCount,
+          banners: (banners || []).length,
+        }}
+      />
+
+      {/* 2. MAIN CONTENT AREA */}
+      <div className="flex-1 flex flex-col min-w-0">
+        
+        {/* Top Header Bar */}
+        <header className="sticky top-0 z-20 bg-white/95 backdrop-blur-md border-b border-[#E5E5E0] px-4 sm:px-8 py-3.5 flex items-center justify-between">
+          <div className="flex items-center gap-3 min-w-0">
+            {/* Mobile Hamburger Menu Button */}
+            <button
+              type="button"
+              onClick={() => setIsMobileSidebarOpen(true)}
+              className="lg:hidden p-2 rounded-xl text-neutral-700 hover:bg-neutral-100 transition shrink-0"
+              aria-label="Buka Menu Sidebar"
+            >
+              <Menu className="w-5 h-5" />
+            </button>
+
+            {/* Breadcrumb Title */}
+            <div className="flex items-center gap-2 min-w-0 text-xs sm:text-sm font-bold text-neutral-900">
+              <span className="text-[#979188] hidden sm:inline">Admin OEPRO</span>
+              <ChevronRight className="w-3.5 h-3.5 text-neutral-400 hidden sm:inline" />
+              <span className="truncate">
+                {activeTab === 'products'
+                  ? 'Katalog Produk & Varian'
+                  : activeTab === 'categories'
+                  ? 'Master Kategori Produk'
+                  : 'Manajemen Banner Depan'}
               </span>
-            </Link>
-            <span className="text-[10px] font-bold uppercase tracking-wider bg-neutral-950 text-white px-2 py-0.5 rounded-md">
-              ADMIN CMS
-            </span>
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-xs text-neutral-500 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              Live Sync
-            </span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          {/* Quick Header Actions */}
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={handleResetData}
+              className="px-2.5 sm:px-3 py-1.5 text-[11px] font-semibold text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-xl transition flex items-center gap-1.5 border border-neutral-200"
+              title="Reset ke Master"
+            >
+              <RotateCcw className="w-3 h-3 text-neutral-500" />
+              <span className="hidden sm:inline">Reset Master</span>
+            </button>
+
             <Link
               to="/"
               target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 sm:px-3 sm:py-1.5 text-xs font-medium text-neutral-600 hover:text-neutral-950 hover:bg-neutral-100 rounded-xl transition flex items-center gap-1.5"
+              className="px-2.5 sm:px-3 py-1.5 text-[11px] font-semibold text-[#075E54] bg-[#075E54]/10 hover:bg-[#075E54]/20 rounded-xl transition flex items-center gap-1.5"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Lihat Web Buyer</span>
+              <Store className="w-3 h-3" />
+              <span className="hidden sm:inline">Lihat Web</span>
             </Link>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="p-2 sm:px-3 sm:py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-xl transition flex items-center gap-1.5 cursor-pointer"
-              title="Keluar"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Logout</span>
-            </button>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-8 pt-8 space-y-6">
-        {/* Title & Quick Stats */}
-        <div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-950 tracking-tight">
-                Manajemen Produk OEPRO
-              </h1>
-              <p className="text-xs sm:text-sm text-neutral-500 mt-1">
-                Atur nama produk, foto gambar, harga diskon, varian ukuran (XS–8XL), dan stok katalog pembeli.
-              </p>
-            </div>
-            <div className="flex items-center gap-2.5">
-              <button
-                type="button"
-                onClick={handleResetData}
-                className="px-3.5 py-2.5 bg-white border border-[#E5E5E0] hover:bg-neutral-100 text-neutral-600 text-xs font-semibold rounded-xl transition flex items-center gap-1.5 cursor-pointer"
-                title="Reset ke data master"
-              >
-                <RotateCcw className="w-3.5 h-3.5 text-neutral-400" />
-                <span className="hidden md:inline">Reset Master</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleOpenAdd}
-                className="px-5 py-2.5 bg-neutral-950 hover:bg-neutral-800 text-white text-xs font-semibold rounded-xl transition shadow-md shadow-neutral-950/15 flex items-center gap-2 cursor-pointer"
-              >
-                <Plus className="w-4 h-4 text-amber-400" />
-                <span>Tambah Produk Baru</span>
-              </button>
-            </div>
-          </div>
+        {/* Tab Content Body */}
+        <main className="p-4 sm:p-8 space-y-6 flex-1 max-w-7xl w-full mx-auto">
+          
+          {/* TAB 1: PRODUK & VARIAN */}
+          {activeTab === 'products' && (
+            <div className="space-y-6">
+              
+              {/* Metrics Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5E5E0] shadow-2xs flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-neutral-950 text-white flex items-center justify-center shrink-0">
+                    <Package className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] sm:text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+                      Total Produk
+                    </span>
+                    <span className="text-xl sm:text-2xl font-bold text-neutral-950 font-mono">
+                      {totalProducts}
+                    </span>
+                  </div>
+                </div>
 
-          {/* 3 Metric Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="bg-white border border-[#E5E5E0] rounded-2xl p-4.5 flex items-center justify-between shadow-xs">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
-                  Total SKU Produk
-                </span>
-                <p className="text-2xl font-black text-neutral-950 mt-1">{totalProducts}</p>
+                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5E5E0] shadow-2xs flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-[#E7E2CE] text-[#3A3732] flex items-center justify-center shrink-0">
+                    <Tag className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] sm:text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+                      Kategori Aktif
+                    </span>
+                    <span className="text-xl sm:text-2xl font-bold text-neutral-950 font-mono">
+                      {activeCategoriesCount}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5E5E0] shadow-2xs flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center shrink-0">
+                    <AlertTriangle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] sm:text-xs font-semibold text-neutral-500 uppercase tracking-wider block">
+                      Perlu Restock (&lt;15 pcs)
+                    </span>
+                    <span className="text-xl sm:text-2xl font-bold text-red-600 font-mono">
+                      {lowStockCount}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-800">
-                <Package className="w-5 h-5" />
+
+              {/* Action Bar (Search, Category Filter, Add Button) */}
+              <div className="p-4 sm:p-5 bg-white border border-[#E5E5E0] rounded-2xl shadow-2xs space-y-3">
+                <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+                  
+                  {/* Search Bar */}
+                  <div className="relative flex-1 max-w-md">
+                    <input
+                      type="text"
+                      placeholder="Cari SKU, nama produk, warna..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2 text-xs bg-neutral-100/80 border border-neutral-200 rounded-xl text-neutral-900 placeholder:text-neutral-500 focus:bg-white focus:border-neutral-900 focus:outline-hidden transition"
+                    />
+                    <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-3 pointer-events-none" />
+                  </div>
+
+                  {/* Add Product Button */}
+                  <button
+                    type="button"
+                    onClick={handleOpenAdd}
+                    className="px-4 py-2.5 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
+                  >
+                    <Plus className="w-4 h-4" />
+                    <span>Tambah Produk Baru</span>
+                  </button>
+                </div>
+
+                {/* Category Pills Filter */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400 mr-1 shrink-0">
+                    Kategori:
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedCategory('ALL')}
+                    className={`px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap transition ${
+                      selectedCategory === 'ALL'
+                        ? 'bg-neutral-900 text-white'
+                        : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                    }`}
+                  >
+                    Semua ({products.length})
+                  </button>
+                  {categories.map((c) => {
+                    const count = products.filter(
+                      (p) => p.category === c.name || p.category_slug === c.slug
+                    ).length;
+                    return (
+                      <button
+                        key={c.id || c.slug}
+                        type="button"
+                        onClick={() => setSelectedCategory(c.name)}
+                        className={`px-3 py-1 text-xs font-semibold rounded-full whitespace-nowrap transition ${
+                          selectedCategory === c.name || selectedCategory === c.slug
+                            ? 'bg-neutral-900 text-white'
+                            : 'bg-neutral-100 text-neutral-600 hover:bg-neutral-200'
+                        }`}
+                      >
+                        {c.name} ({count})
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
 
-            <div className="bg-white border border-[#E5E5E0] rounded-2xl p-4.5 flex items-center justify-between shadow-xs">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
-                  Kategori Aktif
-                </span>
-                <p className="text-2xl font-black text-neutral-950 mt-1">{activeCategoriesCount}</p>
-              </div>
-              <div className="w-10 h-10 rounded-xl bg-neutral-100 flex items-center justify-center text-neutral-800">
-                <Layers className="w-5 h-5" />
-              </div>
-            </div>
+              {/* Products Table */}
+              <div className="bg-white border border-[#E5E5E0] rounded-2xl shadow-2xs overflow-hidden">
+                <div className="p-4 border-b border-[#E5E5E0] flex items-center justify-between">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-neutral-700">
+                    Daftar Katalog Produk ({filteredProducts.length})
+                  </h3>
+                </div>
 
-            <div className="bg-white border border-[#E5E5E0] rounded-2xl p-4.5 flex items-center justify-between shadow-xs">
-              <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-neutral-500">
-                  Stok Terbatas (&lt; 15 pcs)
-                </span>
-                <p className="text-2xl font-black text-amber-600 mt-1">{lowStockCount}</p>
-              </div>
-              <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-700">
-                <AlertTriangle className="w-5 h-5" />
-              </div>
-            </div>
-          </div>
-        </div>
+                {filteredProducts.length === 0 ? (
+                  <div className="p-12 text-center text-neutral-400">
+                    <p className="text-xs">Tidak ada produk yang cocok dengan pencarian.</p>
+                  </div>
+                ) : (
+                  <>
+                    {/* Desktop Table */}
+                    <div className="hidden md:block overflow-x-auto">
+                      <table className="w-full text-left border-collapse text-xs">
+                        <thead>
+                          <tr className="bg-[#FBFBFA] border-b border-[#E5E5E0] text-[10px] font-bold uppercase tracking-wider text-neutral-500">
+                            <th className="py-3 px-4">Produk &amp; Varian</th>
+                            <th className="py-3 px-4">Kategori</th>
+                            <th className="py-3 px-4">Harga</th>
+                            <th className="py-3 px-4">Varian Bertingkat</th>
+                            <th className="py-3 px-4">Stok</th>
+                            <th className="py-3 px-4">Status</th>
+                            <th className="py-3 px-4 text-right">Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[#E5E5E0]">
+                          {filteredProducts.map((prod) => {
+                            const thumb =
+                              prod.images && prod.images.length > 0
+                                ? prod.images[0]
+                                : 'assets/products/polo/black-stone/black-stone-oepro.webp';
 
-        {/* Filter & Search Action Bar */}
-        <div className="bg-white border border-[#E5E5E0] rounded-2xl p-4 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between shadow-xs">
-          {/* Search */}
-          <div className="relative flex-1">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Cari berdasarkan nama produk, SKU, atau deskripsi..."
-              className="w-full pl-10 pr-4 py-2 text-xs bg-[#FBFBFA] border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden transition"
-            />
-          </div>
+                            const has2LevelVariants =
+                              Array.isArray(prod.variants) && prod.variants.length > 0;
+                            const totalCombinations = has2LevelVariants
+                              ? prod.variants.reduce((acc, v) => acc + (v.options || []).length, 0)
+                              : (prod.sizes || []).length;
 
-          {/* Category Filter */}
-          <div className="flex items-center gap-2">
-            <Filter className="w-3.5 h-3.5 text-neutral-400 shrink-0" />
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="px-3 py-2 text-xs bg-[#FBFBFA] border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden font-medium"
-            >
-              <option value="ALL">Semua Kategori ({totalProducts})</option>
-              {categories.map((c) => (
-                <option key={c.id || c.name} value={c.name}>
-                  {c.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+                            return (
+                              <tr key={prod.id} className="hover:bg-neutral-50/80 transition">
+                                {/* Thumbnail & Info */}
+                                <td className="py-3 px-4">
+                                  <div className="flex items-center gap-3">
+                                    <img
+                                      src={thumb}
+                                      alt={prod.name}
+                                      className="w-12 h-14 object-cover rounded-lg bg-[#F5F5F3] border border-neutral-200 shrink-0"
+                                    />
+                                    <div className="min-w-0 max-w-xs">
+                                      <h4 className="font-bold text-neutral-950 truncate text-xs">
+                                        {prod.name}
+                                      </h4>
+                                      <span className="font-mono text-[10px] text-neutral-400 block uppercase">
+                                        {prod.sku || '-'}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </td>
 
-        {/* Product Table (Desktop) & Card Stack (Mobile) */}
-        <div className="bg-white border border-[#E5E5E0] rounded-2xl overflow-hidden shadow-xs">
-          {filteredProducts.length === 0 ? (
-            <div className="p-12 text-center">
-              <Package className="w-10 h-10 text-neutral-300 mx-auto mb-3" />
-              <h3 className="text-sm font-bold text-neutral-800">Tidak ada produk yang cocok</h3>
-              <p className="text-xs text-neutral-400 mt-1">
-                Coba ubah kata kunci pencarian atau filter kategori.
-              </p>
-            </div>
-          ) : (
-            <>
-              {/* Desktop Table View */}
-              <div className="hidden md:block overflow-x-auto">
-                <table className="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr className="border-b border-[#E5E5E0] bg-[#F5F5F3] text-neutral-600 uppercase tracking-wider text-[10px] font-bold">
-                      <th className="py-3 px-4">Produk</th>
-                      <th className="py-3 px-4">Kategori</th>
-                      <th className="py-3 px-4">Harga &amp; Diskon</th>
-                      <th className="py-3 px-4">Varian Ukuran</th>
-                      <th className="py-3 px-4">Stok</th>
-                      <th className="py-3 px-4">Status</th>
-                      <th className="py-3 px-4 text-right">Aksi</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#E5E5E0]">
-                    {filteredProducts.map((prod) => {
-                      const thumb =
-                        prod.images && prod.images.length > 0
-                          ? prod.images[0]
-                          : 'assets/products/polo/black-stone/black-stone-oepro.webp';
+                                {/* Kategori */}
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span className="text-[11px] font-medium text-neutral-700 bg-neutral-100 px-2 py-0.5 rounded-md">
+                                    {prod.category}
+                                  </span>
+                                </td>
 
-                      return (
-                        <tr key={prod.id} className="hover:bg-neutral-50/80 transition">
-                          {/* Nama & Thumbnail */}
-                          <td className="py-3 px-4">
-                            <div className="flex items-center gap-3">
-                              <img
-                                src={thumb}
-                                alt={prod.name}
-                                className="w-12 h-14 object-cover rounded-lg bg-[#F5F5F3] border border-neutral-200 shrink-0"
-                              />
-                              <div>
-                                <h4 className="font-bold text-neutral-950 text-xs line-clamp-1">
+                                {/* Harga */}
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className="flex flex-col">
+                                    <span className="font-bold text-neutral-950 font-mono">
+                                      Rp{(prod.price || 0).toLocaleString('id-ID')}
+                                    </span>
+                                    {prod.original_price && prod.original_price > prod.price && (
+                                      <span className="text-[10px] text-neutral-400 line-through font-mono">
+                                        Rp{prod.original_price.toLocaleString('id-ID')}
+                                      </span>
+                                    )}
+                                  </div>
+                                </td>
+
+                                {/* Varian 2-Level */}
+                                <td className="py-3 px-4">
+                                  {has2LevelVariants ? (
+                                    <div className="space-y-1">
+                                      <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#E7E2CE] text-[#3A3732] px-2 py-0.5 rounded-md">
+                                        <Layers className="w-3 h-3 text-[#075E54]" />
+                                        <span>2-Level ({prod.variants.length} {prod.variant_level1_name || 'Warna'})</span>
+                                      </span>
+                                      <div className="text-[10px] text-neutral-500">
+                                        {totalCombinations} kombinasi harga &amp; stok
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div className="flex flex-wrap gap-1 max-w-[160px]">
+                                      {(prod.sizes || []).slice(0, 4).map((sz) => (
+                                        <span
+                                          key={sz}
+                                          className="text-[9px] font-mono font-semibold px-1.5 py-0.2 bg-neutral-100 text-neutral-700 rounded-sm"
+                                        >
+                                          {sz}
+                                        </span>
+                                      ))}
+                                      {(prod.sizes || []).length > 4 && (
+                                        <span className="text-[10px] text-neutral-400 font-semibold">
+                                          +{(prod.sizes || []).length - 4}
+                                        </span>
+                                      )}
+                                    </div>
+                                  )}
+                                </td>
+
+                                {/* Stok */}
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <span
+                                    className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                                      (prod.stock || 0) < 15
+                                        ? 'bg-red-100 text-red-700'
+                                        : 'bg-emerald-100 text-emerald-800'
+                                    }`}
+                                  >
+                                    {prod.stock || 0} pcs
+                                  </span>
+                                </td>
+
+                                {/* Status Badges */}
+                                <td className="py-3 px-4 whitespace-nowrap">
+                                  <div className="flex flex-col gap-1">
+                                    {prod.is_best_seller && (
+                                      <span className="text-[9px] font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded-sm w-fit">
+                                        BEST SELLER
+                                      </span>
+                                    )}
+                                    {prod.is_featured && (
+                                      <span className="text-[9px] font-bold text-emerald-900 bg-emerald-100 px-1.5 py-0.5 rounded-sm w-fit">
+                                        FEATURED
+                                      </span>
+                                    )}
+                                  </div>
+                                </td>
+
+                                {/* Actions */}
+                                <td className="py-3 px-4 text-right whitespace-nowrap">
+                                  <div className="flex items-center justify-end gap-1.5">
+                                    <Link
+                                      to={`/product/${prod.id}`}
+                                      target="_blank"
+                                      className="p-1.5 text-neutral-400 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition"
+                                      title="Lihat di Web"
+                                    >
+                                      <ExternalLink className="w-3.5 h-3.5" />
+                                    </Link>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleOpenEdit(prod)}
+                                      className="p-1.5 text-neutral-600 hover:text-neutral-950 rounded-lg hover:bg-neutral-100 transition"
+                                      title="Edit Produk"
+                                    >
+                                      <Edit2 className="w-3.5 h-3.5" />
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => handleDelete(prod.id, prod.name)}
+                                      className="p-1.5 text-neutral-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition"
+                                      title="Hapus Produk"
+                                    >
+                                      <Trash2 className="w-3.5 h-3.5" />
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* Mobile Card Stack */}
+                    <div className="md:hidden divide-y divide-[#E5E5E0]">
+                      {filteredProducts.map((prod) => {
+                        const thumb =
+                          prod.images && prod.images.length > 0
+                            ? prod.images[0]
+                            : 'assets/products/polo/black-stone/black-stone-oepro.webp';
+
+                        return (
+                          <div key={prod.id} className="p-4 flex gap-3 items-start">
+                            <img
+                              src={thumb}
+                              alt={prod.name}
+                              className="w-16 h-20 object-cover rounded-xl bg-[#F5F5F3] border border-neutral-200 shrink-0"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-start justify-between gap-1">
+                                <h4 className="font-bold text-neutral-950 text-xs line-clamp-2">
                                   {prod.name}
                                 </h4>
-                                <span className="font-mono text-[10px] text-neutral-400 uppercase">
-                                  {prod.sku || '-'}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-
-                          {/* Kategori */}
-                          <td className="py-3 px-4 text-neutral-600 font-medium whitespace-nowrap">
-                            {prod.category}
-                          </td>
-
-                          {/* Harga */}
-                          <td className="py-3 px-4 whitespace-nowrap">
-                            <div className="font-bold text-neutral-950 text-xs">
-                              Rp{(prod.price || 0).toLocaleString('id-ID')}
-                            </div>
-                            {prod.original_price && prod.original_price > prod.price && (
-                              <div className="flex items-center gap-1.5 text-[10px]">
-                                <span className="text-neutral-400 line-through">
-                                  Rp{prod.original_price.toLocaleString('id-ID')}
-                                </span>
-                                <span className="text-amber-700 font-bold bg-amber-100 px-1 py-0.2 rounded-xs">
-                                  -{prod.discount_percent}%
-                                </span>
-                              </div>
-                            )}
-                          </td>
-
-                          {/* Ukuran */}
-                          <td className="py-3 px-4">
-                            <div className="flex flex-wrap gap-1 max-w-[180px]">
-                              {(prod.sizes || []).slice(0, 4).map((sz) => (
                                 <span
-                                  key={sz}
-                                  className="px-1.5 py-0.5 bg-neutral-100 text-neutral-700 text-[9px] font-semibold rounded-sm"
+                                  className={`shrink-0 px-1.5 py-0.5 rounded-full text-[9px] font-bold ${
+                                    (prod.stock || 0) < 15
+                                      ? 'bg-red-100 text-red-700'
+                                      : 'bg-emerald-100 text-emerald-800'
+                                  }`}
                                 >
-                                  {sz}
+                                  {prod.stock || 0} pcs
                                 </span>
-                              ))}
-                              {(prod.sizes || []).length > 4 && (
-                                <span className="text-[10px] text-neutral-400 font-semibold">
-                                  +{(prod.sizes || []).length - 4}
+                              </div>
+                              <span className="font-mono text-[9px] text-neutral-400 uppercase">
+                                {prod.sku || '-'} &bull; {prod.category}
+                              </span>
+
+                              <div className="mt-1 flex items-baseline gap-2">
+                                <span className="font-bold text-neutral-950 text-xs">
+                                  Rp{(prod.price || 0).toLocaleString('id-ID')}
                                 </span>
-                              )}
+                              </div>
+
+                              {/* Mobile Actions */}
+                              <div className="mt-2.5 flex items-center justify-between border-t border-neutral-100 pt-2">
+                                <div className="text-[9px] font-semibold text-neutral-500">
+                                  {Array.isArray(prod.variants) && prod.variants.length > 0
+                                    ? `2-Level Varian (${prod.variants.length} ${prod.variant_level1_name || 'Warna'})`
+                                    : `${(prod.sizes || []).length} Ukuran`}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <button
+                                    type="button"
+                                    onClick={() => handleOpenEdit(prod)}
+                                    className="px-2.5 py-1 bg-neutral-100 text-neutral-800 hover:bg-neutral-200 text-xs font-semibold rounded-lg flex items-center gap-1"
+                                  >
+                                    <Edit2 className="w-3 h-3" />
+                                    <span>Edit</span>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => handleDelete(prod.id, prod.name)}
+                                    className="p-1 text-neutral-400 hover:text-red-600 rounded-lg"
+                                  >
+                                    <Trash2 className="w-3.5 h-3.5" />
+                                  </button>
+                                </div>
+                              </div>
                             </div>
-                          </td>
-
-                          {/* Stok */}
-                          <td className="py-3 px-4 whitespace-nowrap">
-                            <span
-                              className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                                (prod.stock || 0) < 15
-                                  ? 'bg-red-100 text-red-700'
-                                  : 'bg-emerald-100 text-emerald-800'
-                              }`}
-                            >
-                              {prod.stock || 0} pcs
-                            </span>
-                          </td>
-
-                          {/* Status */}
-                          <td className="py-3 px-4 whitespace-nowrap">
-                            <div className="flex flex-col gap-1">
-                              {prod.is_best_seller && (
-                                <span className="text-[9px] font-bold text-amber-900 bg-amber-200/80 px-1.5 py-0.5 rounded-sm w-fit">
-                                  BEST SELLER
-                                </span>
-                              )}
-                              {prod.is_featured && (
-                                <span className="text-[9px] font-bold text-emerald-900 bg-emerald-100 px-1.5 py-0.5 rounded-sm w-fit">
-                                  FEATURED
-                                </span>
-                              )}
-                            </div>
-                          </td>
-
-                          {/* Aksi */}
-                          <td className="py-3 px-4 text-right whitespace-nowrap">
-                            <div className="flex items-center justify-end gap-1.5">
-                              <Link
-                                to={`/product/${prod.id}`}
-                                target="_blank"
-                                className="p-1.5 text-neutral-400 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition"
-                                title="Lihat di Web"
-                              >
-                                <ExternalLink className="w-3.5 h-3.5" />
-                              </Link>
-                              <button
-                                type="button"
-                                onClick={() => handleOpenEdit(prod)}
-                                className="p-1.5 text-neutral-600 hover:text-neutral-950 rounded-lg hover:bg-neutral-100 transition"
-                                title="Edit Produk"
-                              >
-                                <Edit2 className="w-3.5 h-3.5" />
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => handleDelete(prod.id, prod.name)}
-                                className="p-1.5 text-neutral-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition"
-                                title="Hapus Produk"
-                              >
-                                <Trash2 className="w-3.5 h-3.5" />
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Mobile Card Stack */}
-              <div className="md:hidden divide-y divide-[#E5E5E0]">
-                {filteredProducts.map((prod) => {
-                  const thumb =
-                    prod.images && prod.images.length > 0
-                      ? prod.images[0]
-                      : 'assets/products/polo/black-stone/black-stone-oepro.webp';
-
-                  return (
-                    <div key={prod.id} className="p-4 flex gap-3 items-start">
-                      <img
-                        src={thumb}
-                        alt={prod.name}
-                        className="w-16 h-20 object-cover rounded-xl bg-[#F5F5F3] border border-neutral-200 shrink-0"
-                      />
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-1">
-                          <h4 className="font-bold text-neutral-950 text-xs line-clamp-2">
-                            {prod.name}
-                          </h4>
-                          <span
-                            className={`shrink-0 px-1.5 py-0.5 rounded-full text-[9px] font-bold ${
-                              (prod.stock || 0) < 15
-                                ? 'bg-red-100 text-red-700'
-                                : 'bg-emerald-100 text-emerald-800'
-                            }`}
-                          >
-                            {prod.stock || 0} pcs
-                          </span>
-                        </div>
-                        <span className="font-mono text-[9px] text-neutral-400 uppercase">
-                          {prod.sku || '-'} &bull; {prod.category}
-                        </span>
-
-                        <div className="mt-1 flex items-baseline gap-2">
-                          <span className="font-bold text-neutral-950 text-xs">
-                            Rp{(prod.price || 0).toLocaleString('id-ID')}
-                          </span>
-                          {prod.original_price && prod.original_price > prod.price && (
-                            <span className="text-[10px] text-neutral-400 line-through">
-                              Rp{prod.original_price.toLocaleString('id-ID')}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Mobile Actions */}
-                        <div className="mt-2.5 flex items-center justify-between border-t border-neutral-100 pt-2">
-                          <div className="flex gap-1 text-[9px] font-semibold text-neutral-500">
-                            <span>{(prod.sizes || []).length} Ukuran</span>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => handleOpenEdit(prod)}
-                              className="px-2.5 py-1 bg-neutral-100 text-neutral-800 hover:bg-neutral-200 text-xs font-semibold rounded-lg flex items-center gap-1"
-                            >
-                              <Edit2 className="w-3 h-3" />
-                              <span>Edit</span>
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleDelete(prod.id, prod.name)}
-                              className="p-1 text-neutral-400 hover:text-red-600 rounded-lg"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+                        );
+                      })}
                     </div>
-                  );
-                })}
+                  </>
+                )}
               </div>
-            </>
-          )}
-        </div>
-      </main>
 
-      {/* Product Form Modal */}
+            </div>
+          )}
+
+          {/* TAB 2: MASTER KATEGORI */}
+          {activeTab === 'categories' && (
+            <CategoryManager
+              categories={categories}
+              products={products}
+              onAddCategory={addCategory}
+              onUpdateCategory={updateCategory}
+              onDeleteCategory={deleteCategory}
+              showToast={showToast}
+            />
+          )}
+
+          {/* TAB 3: BANNER DEPAN */}
+          {activeTab === 'banners' && (
+            <BannerManager
+              banners={banners}
+              onAddBanner={addBanner}
+              onUpdateBanner={updateBanner}
+              onDeleteBanner={deleteBanner}
+              onToggleStatus={toggleBannerStatus}
+              showToast={showToast}
+            />
+          )}
+
+        </main>
+      </div>
+
+      {/* Product Form Modal (with 2-level variants) */}
       <ProductFormModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

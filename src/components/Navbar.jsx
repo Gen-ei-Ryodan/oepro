@@ -123,8 +123,8 @@ export default function Navbar() {
                 <span className="text-base sm:text-xl font-bold tracking-tight text-neutral-950 group-hover:text-neutral-800 transition leading-none">
                   OEPRO
                 </span>
-                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] font-semibold text-neutral-400 uppercase mt-0.5">
-                  COTTON BASIC
+                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] font-medium text-neutral-400 lowercase mt-0.5">
+                  cotton basic
                 </span>
               </div>
             </Link>

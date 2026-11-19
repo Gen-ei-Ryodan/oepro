@@ -18,7 +18,29 @@ export default {
           border: '#E5E5E0',       // 1px hairline border
           crimson: '#991B1B',      // Refined discount/sale tag
           emerald: '#166534',      // Refined trust/guarantee green
-        }
+          // OEPRO Theme Color Palette
+          warmIvory: '#F0EDDF',
+          softSand: '#E7E2CE',
+          taupeGray: '#655F58',
+          stoneGray: '#979188',
+          charcoalBrown: '#3A3732',
+          oliveGray: '#7B7C74',
+          deepTeal: '#075E54',
+          mutedTeal: '#668280',
+          coolLightGray: '#D0D5D5',
+          pureWhite: '#FFFFFF',
+        },
+        // Direct root color utility aliases
+        warmIvory: '#F0EDDF',
+        softSand: '#E7E2CE',
+        taupeGray: '#655F58',
+        stoneGray: '#979188',
+        charcoalBrown: '#3A3732',
+        oliveGray: '#7B7C74',
+        deepTeal: '#075E54',
+        mutedTeal: '#668280',
+        coolLightGray: '#D0D5D5',
+        pureWhite: '#FFFFFF',
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],

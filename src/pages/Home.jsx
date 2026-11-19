@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Check, Star, ShieldCheck, Ruler } from 'lucide-react';
+import { ArrowRight, Sparkles, Check, Star, ShieldCheck, Ruler, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 import SizeChartModal from '../components/SizeChartModal';
 import WhatsAppIcon from '../components/WhatsAppIcon';
@@ -11,12 +11,36 @@ import reviewsData from '../data/reviews.json';
 import storeInfo from '../data/store_info.json';
 
 export default function Home() {
-  const { products: productsData, categories: categoriesData } = useProducts();
+  const { products: productsData, categories: categoriesData, banners: bannersData } = useProducts();
   const [selectedCat, setSelectedCat] = useState('all');
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(12);
+  const [currentBannerIdx, setCurrentBannerIdx] = useState(0);
 
-  const heroImage = '/assets/products/polo/black-stone/black-stone-oepro.webp';
+  const activeBanners = (bannersData && bannersData.length > 0)
+    ? bannersData.filter((b) => b.isActive !== false)
+    : [
+        {
+          id: 'banner-1',
+          headline: 'Nyaman Dipakai, Mudah Dipadukan.',
+          subheadline: 'Kaos berbahan Cotton Combed 24s, 100% katun dengan potongan regular fit yang nyaman untuk semua.',
+          tag: 'Koleksi Katun 100%',
+          ctaText: 'Belanja',
+          ctaLink: '/catalog',
+          image: '/assets/products/polo/black-stone/black-stone-oepro.webp',
+        }
+      ];
+
+  useEffect(() => {
+    if (activeBanners.length <= 1) return;
+    const timer = setInterval(() => {
+      setCurrentBannerIdx((prev) => (prev + 1) % activeBanners.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [activeBanners.length]);
+
+  const currentBanner = activeBanners[currentBannerIdx] || activeBanners[0];
+  const heroImage = currentBanner.image || '/assets/products/polo/black-stone/black-stone-oepro.webp';
   const fabricCombedImage = '/assets/products/tshirt/black-stone/black-stone-detail-1.webp';
   const fabricPiqueImage = '/assets/products/polo/black-stone/black-stone-detail-1.webp';
 
@@ -29,9 +53,9 @@ export default function Home() {
   return (
     <div className="space-y-6 sm:space-y-12 pb-24 sm:pb-16 bg-[#FBFBFA]">
       
-      {/* 1. COMPACT HERO SECTION (STRICTLY LANDSCAPE ON MOBILE & DESKTOP) */}
+      {/* 1. COMPACT HERO SECTION (MULTIPLE BANNER SUPPORT) */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6">
-        <div className="relative rounded-2xl sm:rounded-3xl bg-neutral-950 text-white overflow-hidden border border-neutral-800 shadow-md h-[155px] xs:h-[170px] sm:h-auto sm:min-h-[250px]">
+        <div className="relative rounded-2xl sm:rounded-3xl bg-neutral-950 text-white overflow-hidden border border-neutral-800 shadow-md h-[155px] xs:h-[170px] sm:h-auto sm:min-h-[250px] group/banner">
           
           <div className="grid grid-cols-12 items-center h-full">
             
@@ -39,24 +63,23 @@ export default function Home() {
             <div className="col-span-7 sm:col-span-7 p-3 xs:p-4 sm:p-8 lg:p-12 space-y-1 xs:space-y-1.5 sm:space-y-4 z-10 flex flex-col justify-center h-full">
               <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 border border-white/20 text-neutral-200 text-[8px] xs:text-[9px] sm:text-xs tracking-wider uppercase font-medium w-fit">
                 <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-amber-300" />
-                <span>Koleksi Katun 100%</span>
+                <span>{currentBanner.tag || 'Koleksi Katun 100%'}</span>
               </div>
 
               <h1 className="text-xs xs:text-sm sm:text-3xl lg:text-4xl font-bold tracking-tight text-white leading-snug line-clamp-2 sm:line-clamp-none">
-                Pakaian Harian Nyaman, <br className="hidden sm:inline" />
-                Katun Murni Esensial.
+                {currentBanner.headline || 'Nyaman Dipakai, Mudah Dipadukan.'}
               </h1>
 
               <p className="hidden sm:block text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed max-w-lg">
-                Polo rajut pique berpori halus dan kaos combed 24s sejuk tanpa campuran poliester gerah.
+                {currentBanner.subheadline || 'Kaos berbahan Cotton Combed 24s, 100% katun dengan potongan regular fit yang nyaman untuk semua.'}
               </p>
 
               <div className="flex items-center gap-1.5 sm:gap-2.5 pt-0.5 sm:pt-1">
                 <Link
-                  to="/catalog"
+                  to={currentBanner.ctaLink || '/catalog'}
                   className="px-2.5 py-1 xs:px-3 xs:py-1.5 sm:px-6 sm:py-2.5 bg-white text-neutral-950 font-bold text-[9px] xs:text-[10px] sm:text-sm rounded-full hover:bg-neutral-100 transition shadow-sm flex items-center gap-1 sm:gap-2 group whitespace-nowrap"
                 >
-                  <span>Belanja</span>
+                  <span>{currentBanner.ctaText || 'Belanja'}</span>
                   <ArrowRight className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 transition-transform group-hover:translate-x-1" />
                 </Link>
 
@@ -87,13 +110,59 @@ export default function Home() {
             {/* Right Hero Image (5 cols) */}
             <div className="col-span-5 sm:col-span-5 h-full relative flex items-center justify-center p-1.5 xs:p-2 sm:p-4 bg-gradient-to-l from-neutral-900/80 via-transparent to-transparent overflow-hidden">
               <img
+                key={heroImage}
                 src={heroImage}
-                alt="OEPRO Model"
-                className="h-[135px] xs:h-[150px] sm:h-auto sm:max-h-72 lg:max-h-80 w-auto object-contain rounded-lg drop-shadow-md"
+                alt={currentBanner.headline || 'OEPRO Model'}
+                className="h-[135px] xs:h-[150px] sm:h-auto sm:max-h-72 lg:max-h-80 w-auto object-contain rounded-lg drop-shadow-md transition-opacity duration-500"
               />
             </div>
 
           </div>
+
+          {/* Multiple Banners Navigation & Dots */}
+          {activeBanners.length > 1 && (
+            <>
+              {/* Previous / Next Arrows */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentBannerIdx((prev) => (prev - 1 + activeBanners.length) % activeBanners.length);
+                }}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xs text-white flex items-center justify-center opacity-0 group-hover/banner:opacity-100 transition z-20"
+                aria-label="Banner Sebelumnya"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentBannerIdx((prev) => (prev + 1) % activeBanners.length);
+                }}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xs text-white flex items-center justify-center opacity-0 group-hover/banner:opacity-100 transition z-20"
+                aria-label="Banner Selanjutnya"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              {/* Indicator Dots */}
+              <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-20">
+                {activeBanners.map((_, dotIdx) => (
+                  <button
+                    key={dotIdx}
+                    type="button"
+                    onClick={() => setCurrentBannerIdx(dotIdx)}
+                    className={`h-1.5 rounded-full transition-all ${
+                      currentBannerIdx === dotIdx ? 'w-5 bg-white' : 'w-1.5 bg-white/40 hover:bg-white/70'
+                    }`}
+                    aria-label={`Ke Banner ${dotIdx + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
         </div>
       </div>
 
