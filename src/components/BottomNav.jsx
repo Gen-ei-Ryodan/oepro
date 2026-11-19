@@ -23,13 +23,13 @@ export default function BottomNav() {
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[#3A3732]/95 backdrop-blur-md text-[#F0EDDF] rounded-full px-6 py-2.5 shadow-2xl flex items-center gap-8 border border-[#655F58]/40"
+      className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[#133129]/95 backdrop-blur-md text-[#081F1C] rounded-full px-6 py-2.5 shadow-2xl flex items-center gap-8 border border-[#AABBB3]/40"
     >
       {/* 1. Beranda */}
       <Link
         to="/"
         className={`flex flex-col items-center justify-center transition-all p-1.5 rounded-full ${
-          isHome ? 'text-[#E7E2CE] scale-110' : 'text-[#D0D5D5] hover:text-white'
+          isHome ? 'text-[#133129] scale-110' : 'text-[#24443B] hover:text-white'
         }`}
         title="Beranda"
         aria-label="Beranda"
@@ -41,7 +41,7 @@ export default function BottomNav() {
       <Link
         to="/catalog"
         className={`flex flex-col items-center justify-center transition-all p-1.5 rounded-full ${
-          isCatalog ? 'text-[#E7E2CE] scale-110' : 'text-[#D0D5D5] hover:text-white'
+          isCatalog ? 'text-[#133129] scale-110' : 'text-[#24443B] hover:text-white'
         }`}
         title="Katalog Produk"
         aria-label="Katalog"
@@ -53,13 +53,13 @@ export default function BottomNav() {
       <button
         type="button"
         onClick={() => setIsCartOpen(true)}
-        className="relative flex flex-col items-center justify-center transition-all p-1.5 rounded-full text-[#D0D5D5] hover:text-white"
+        className="relative flex flex-col items-center justify-center transition-all p-1.5 rounded-full text-[#24443B] hover:text-white"
         title="Keranjang Belanja"
         aria-label="Keranjang"
       >
         <ShoppingBag className="w-5 h-5" />
         {totalItems > 0 && (
-          <span className="absolute -top-1 -right-1 bg-[#075E54] text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+          <span className="absolute -top-1 -right-1 bg-[#A8C4B5] text-[#081F1C] text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
             {totalItems}
           </span>
         )}

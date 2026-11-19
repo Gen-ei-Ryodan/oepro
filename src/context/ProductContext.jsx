@@ -18,6 +18,7 @@ export const initialBannersData = [
     ctaText: 'Belanja Sekarang',
     ctaLink: '/catalog',
     image: '/assets/products/polo/black-stone/black-stone-oepro.webp',
+    imageLayout: 'contained',
     isActive: true,
     order: 1,
   },
@@ -29,6 +30,7 @@ export const initialBannersData = [
     ctaText: 'Lihat Katalog Polo',
     ctaLink: '/catalog?cat=polo-shirt',
     image: '/assets/products/polo/ruby-red/ruby-red-oepro.webp',
+    imageLayout: 'contained',
     isActive: true,
     order: 2,
   },
@@ -193,6 +195,7 @@ export function ProductProvider({ children }) {
       ...newBanner,
       id: newBanner.id || `banner-${Date.now()}`,
       order: newBanner.order || banners.length + 1,
+      imageLayout: newBanner.imageLayout || 'contained',
       isActive: newBanner.isActive !== undefined ? newBanner.isActive : true,
     };
     setBanners((prev) => [...prev, bannerWithId]);

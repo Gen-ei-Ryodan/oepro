@@ -133,7 +133,7 @@ export default function CategoryManager({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-[#E5E5E0] shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#075E54]/10 text-[#075E54] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#A8C4B5]/10 text-[#A8C4B5] flex items-center justify-center">
               <Tag className="w-4 h-4" />
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight">
@@ -148,7 +148,7 @@ export default function CategoryManager({
         <button
           type="button"
           onClick={handleOpenAdd}
-          className="px-4 py-2.5 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
+          className="px-4 py-2.5 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Tambah Kategori Baru</span>
@@ -182,7 +182,7 @@ export default function CategoryManager({
                       <h3 className="font-bold text-sm text-neutral-950 truncate">
                         {cat.name}
                       </h3>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E7E2CE] text-[#3A3732] shrink-0">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#133129] text-[#DCE5E0] shrink-0">
                         {count} Produk
                       </span>
                     </div>
@@ -190,7 +190,7 @@ export default function CategoryManager({
                       /{cat.slug}
                     </span>
                     {cat.subtitle && (
-                      <p className="text-[11px] text-[#655F58] font-medium mt-1 truncate">
+                      <p className="text-[11px] text-[#AABBB3] font-medium mt-1 truncate">
                         {cat.subtitle}
                       </p>
                     )}
@@ -210,7 +210,7 @@ export default function CategoryManager({
                   href={`/catalog?cat=${cat.slug}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[11px] font-semibold text-[#075E54] hover:underline flex items-center gap-1"
+                  className="text-[11px] font-semibold text-[#A8C4B5] hover:underline flex items-center gap-1"
                 >
                   <span>Lihat di Katalog</span>
                   <ExternalLink className="w-3 h-3" />
@@ -246,7 +246,7 @@ export default function CategoryManager({
           <div className="bg-white rounded-2xl max-w-lg w-full border border-neutral-200 shadow-2xl overflow-hidden animate-scale-up">
             <div className="p-5 border-b border-neutral-200 flex items-center justify-between bg-[#FBFBFA]">
               <div className="flex items-center gap-2">
-                <Tag className="w-4 h-4 text-[#075E54]" />
+                <Tag className="w-4 h-4 text-[#A8C4B5]" />
                 <h3 className="font-bold text-sm text-neutral-900">
                   {editingCategory ? 'Edit Master Kategori' : 'Tambah Kategori Baru'}
                 </h3>
@@ -271,7 +271,7 @@ export default function CategoryManager({
                   placeholder="Contoh: Kaos Polo Premium, Kaos Oversize 24s"
                   value={formData.name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -285,7 +285,7 @@ export default function CategoryManager({
                   placeholder="contoh: polo-shirt"
                   value={formData.slug}
                   onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs font-mono bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs font-mono bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -298,7 +298,7 @@ export default function CategoryManager({
                   placeholder="Contoh: 100% Cotton Pique Hexagon"
                   value={formData.subtitle}
                   onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -311,7 +311,7 @@ export default function CategoryManager({
                   placeholder="Deskripsi keunggulan kategori untuk SEO dan customer..."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -368,7 +368,7 @@ export default function CategoryManager({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-xs transition"
+                  className="px-5 py-2 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-xs transition"
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>{editingCategory ? 'Simpan Perubahan' : 'Buat Kategori'}</span>

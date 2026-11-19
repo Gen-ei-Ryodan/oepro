@@ -666,7 +666,7 @@ export default function ProductFormModal({
         {/* Modal Header */}
         <div className="px-6 py-4 border-b border-[#E5E5E0] bg-[#FBFBFA] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#075E54]/10 text-[#075E54] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#A8C4B5]/10 text-[#A8C4B5] flex items-center justify-center">
               <Layers className="w-4 h-4" />
             </div>
             <div>
@@ -705,7 +705,7 @@ export default function ProductFormModal({
                   placeholder="Contoh: Kaos Polo Premium - Black Stone"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -729,7 +729,7 @@ export default function ProductFormModal({
                         features: !isEditing ? catDef.features : prev.features,
                       }));
                     }}
-                    className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                    className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                   >
                     {categories.map((c) => (
                       <option key={c.id || c.name} value={c.name}>
@@ -747,7 +747,7 @@ export default function ProductFormModal({
                     type="text"
                     value={formData.sku}
                     onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                    className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl font-mono focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                    className="w-full px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl font-mono focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                   />
                 </div>
               </div>
@@ -780,7 +780,7 @@ export default function ProductFormModal({
 
             {/* Right: Badges & Summary */}
             <div className="md:col-span-4 space-y-3 bg-[#FBFBFA] p-4 rounded-2xl border border-[#E5E5E0]">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-[#3A3732] block">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#DCE5E0] block">
                 Ringkasan Harga &amp; Stok Produk
               </span>
 
@@ -826,7 +826,7 @@ export default function ProductFormModal({
                     type="checkbox"
                     checked={formData.is_best_seller}
                     onChange={(e) => setFormData({ ...formData, is_best_seller: e.target.checked })}
-                    className="w-3.5 h-3.5 rounded-sm text-[#075E54] focus:ring-[#075E54]"
+                    className="w-3.5 h-3.5 rounded-sm text-[#A8C4B5] focus:ring-[#A8C4B5]"
                   />
                   <span>Tandai <strong>Best Seller</strong></span>
                 </label>
@@ -835,7 +835,7 @@ export default function ProductFormModal({
                     type="checkbox"
                     checked={formData.is_featured}
                     onChange={(e) => setFormData({ ...formData, is_featured: e.target.checked })}
-                    className="w-3.5 h-3.5 rounded-sm text-[#075E54] focus:ring-[#075E54]"
+                    className="w-3.5 h-3.5 rounded-sm text-[#A8C4B5] focus:ring-[#A8C4B5]"
                   />
                   <span>Tampilkan di <strong>Koleksi Pilihan</strong></span>
                 </label>
@@ -844,7 +844,7 @@ export default function ProductFormModal({
                     type="checkbox"
                     checked={formData.is_new_arrival}
                     onChange={(e) => setFormData({ ...formData, is_new_arrival: e.target.checked })}
-                    className="w-3.5 h-3.5 rounded-sm text-[#075E54] focus:ring-[#075E54]"
+                    className="w-3.5 h-3.5 rounded-sm text-[#A8C4B5] focus:ring-[#A8C4B5]"
                   />
                   <span>Badge <strong>New Arrival</strong></span>
                 </label>
@@ -859,7 +859,7 @@ export default function ProductFormModal({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-neutral-200 pb-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#075E54]" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#A8C4B5]" />
                   <h3 className="font-bold text-xs sm:text-sm text-neutral-900 uppercase tracking-wider">
                     {isFlatVariants ? 'Varian 1-Tingkat: Ukuran Langsung' : 'Struktur Varian 2-Tingkat (Level 1: Opsi Utama → Level 2: Sub-Opsi Transaksi)'}
                   </h3>
@@ -900,13 +900,13 @@ export default function ProductFormModal({
               <div className="lg:col-span-12 p-3 bg-white rounded-xl border border-neutral-200 space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-semibold text-neutral-800 flex items-center gap-1.5">
-                    <Grid className="w-3.5 h-3.5 text-[#075E54]" />
+                    <Grid className="w-3.5 h-3.5 text-[#A8C4B5]" />
                     <span>Generator Matriks Kombinasi Otomatis (Level 1 &times; Level 2):</span>
                   </span>
                   <button
                     type="button"
                     onClick={() => setShowMatrixGen(!showMatrixGen)}
-                    className="text-[11px] text-[#075E54] hover:underline font-semibold"
+                    className="text-[11px] text-[#A8C4B5] hover:underline font-semibold"
                   >
                     {showMatrixGen ? 'Sembunyikan Generator' : 'Buka Generator Matriks'}
                   </button>
@@ -943,7 +943,7 @@ export default function ProductFormModal({
                     <button
                       type="button"
                       onClick={handleGenerateMatrix}
-                      className="px-3 py-1.5 bg-[#075E54] hover:bg-[#064e46] text-white text-xs font-semibold rounded-lg transition flex items-center gap-1.5"
+                      className="px-3 py-1.5 bg-[#A8C4B5] hover:bg-[#97b5a5] text-[#081F1C] text-xs font-semibold rounded-lg transition flex items-center gap-1.5"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>Generate Matriks Cartesian Sekarang</span>
@@ -955,7 +955,7 @@ export default function ProductFormModal({
               {/* Tool B: Quick Bulk Batch Tool */}
               <div className="lg:col-span-12 p-3 bg-white rounded-xl border border-neutral-200 flex flex-wrap items-center gap-2 justify-between">
                 <span className="text-xs font-semibold text-neutral-700 flex items-center gap-1.5">
-                  <Sliders className="w-3.5 h-3.5 text-[#075E54]" />
+                  <Sliders className="w-3.5 h-3.5 text-[#A8C4B5]" />
                   <span>Atur Serentak Semua Kombinasi:</span>
                 </span>
                 <div className="flex items-center gap-2 flex-wrap">
@@ -1004,7 +1004,7 @@ export default function ProductFormModal({
                       <h4 className="text-xs font-bold text-neutral-900">Varian Ukuran 1-Tingkat</h4>
                       <p className="text-[10px] text-neutral-500">Harga dan stok diatur langsung untuk setiap ukuran.</p>
                     </div>
-                    <button type="button" onClick={() => setShowMatrixGen(true)} className="text-[10px] font-semibold text-[#075E54] hover:underline">
+                    <button type="button" onClick={() => setShowMatrixGen(true)} className="text-[10px] font-semibold text-[#A8C4B5] hover:underline">
                       Buat matriks 2-level
                     </button>
                   </div>
@@ -1070,7 +1070,7 @@ export default function ProductFormModal({
                           value={v1.name}
                           onChange={(e) => updateLevel1Field(v1Idx, 'name', e.target.value)}
                           placeholder="Nama Varian Level 1"
-                          className="px-2.5 py-1 text-xs font-bold bg-white border border-neutral-300 rounded-lg flex-1 max-w-xs focus:border-[#075E54] focus:outline-hidden"
+                          className="px-2.5 py-1 text-xs font-bold bg-white border border-neutral-300 rounded-lg flex-1 max-w-xs focus:border-[#A8C4B5] focus:outline-hidden"
                         />
 
                         {/* Level 1 Foto Thumbnail */}
@@ -1103,7 +1103,7 @@ export default function ProductFormModal({
                         <button
                           type="button"
                           onClick={() => applyStandardSizesToV1(v1Idx)}
-                          className="text-[10px] font-semibold text-[#075E54] bg-[#075E54]/10 hover:bg-[#075E54]/20 px-2 py-1 rounded-lg transition"
+                          className="text-[10px] font-semibold text-[#A8C4B5] bg-[#A8C4B5]/10 hover:bg-[#A8C4B5]/20 px-2 py-1 rounded-lg transition"
                           title="Isi otomatis ukuran S, M, L, XL, 2XL"
                         >
                           + S–2XL
@@ -1136,7 +1136,7 @@ export default function ProductFormModal({
                           <button
                             type="button"
                             onClick={() => addLevel2Option(v1Idx, 'XL')}
-                            className="text-[11px] font-semibold text-[#075E54] hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-[11px] font-semibold text-[#A8C4B5] hover:underline flex items-center gap-1 cursor-pointer"
                           >
                             <Plus className="w-3 h-3" />
                             <span>Tambah {formData.variant_level2_name} Baru</span>
@@ -1167,7 +1167,7 @@ export default function ProductFormModal({
                                       {v1.name}
                                     </span>
                                     +
-                                    <span className="px-1.5 py-0.5 rounded-sm bg-[#E7E2CE] text-[#3A3732] font-bold text-[10px] ml-1">
+                                    <span className="px-1.5 py-0.5 rounded-sm bg-[#133129] text-[#DCE5E0] font-bold text-[10px] ml-1">
                                       {v2.name}
                                     </span>
                                   </td>
@@ -1292,7 +1292,7 @@ export default function ProductFormModal({
               onClick={addLevel1Variant}
               className="w-full py-2.5 bg-white border border-dashed border-neutral-400 hover:border-neutral-800 rounded-xl text-xs font-semibold text-neutral-800 flex items-center justify-center gap-2 transition cursor-pointer"
             >
-              <Plus className="w-4 h-4 text-[#075E54]" />
+              <Plus className="w-4 h-4 text-[#A8C4B5]" />
               <span>Tambah Varian {formData.variant_level1_name} Baru (Level 1)</span>
             </button>
           )}
@@ -1372,7 +1372,7 @@ export default function ProductFormModal({
           <button
             type="submit"
             form="product-form"
-            className="px-6 py-2.5 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer"
+            className="px-6 py-2.5 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl transition shadow-md flex items-center gap-2 cursor-pointer"
           >
             <Check className="w-4 h-4 text-white" />
             <span>{isEditing ? 'Simpan Perubahan' : 'Terbitkan Produk'}</span>

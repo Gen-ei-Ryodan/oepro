@@ -8,38 +8,50 @@ export default {
     extend: {
       colors: {
         oepro: {
-          obsidian: '#171717',     // Pure deep luxury black
-          charcoal: '#262626',     // High-contrast secondary
-          muted: '#737373',        // WCAG AA body caption
-          subtle: '#A3A3A3',       // Hairline annotations
-          pine: '#2D4A3E',         // Subtle brand cotton signature (Mineral Green)
-          warm: '#FBFBFA',         // Warm ecru background
-          card: '#F5F5F3',         // Architectural neutral card backdrop
-          border: '#E5E5E0',       // 1px hairline border
-          crimson: '#991B1B',      // Refined discount/sale tag
-          emerald: '#166534',      // Refined trust/guarantee green
-          // OEPRO Theme Color Palette
-          warmIvory: '#F0EDDF',
-          softSand: '#E7E2CE',
-          taupeGray: '#655F58',
-          stoneGray: '#979188',
-          charcoalBrown: '#3A3732',
-          oliveGray: '#7B7C74',
-          deepTeal: '#075E54',
-          mutedTeal: '#668280',
-          coolLightGray: '#D0D5D5',
+          obsidian: '#081F1C',
+          charcoal: '#133129',
+          muted: '#AABBB3',
+          subtle: '#24443B',
+          pine: '#A8C4B5',
+          warm: '#081F1C',
+          card: '#24443B',
+          border: '#133129',
+          crimson: '#991B1B',
+          emerald: '#A8C4B5',
+          primaryBg: '#081F1C',
+          secondaryBg: '#133129',
+          surface: '#24443B',
+          accent: '#A8C4B5',
+          heading: '#FFFFFF',
+          bodyText: '#DCE5E0',
+          mutedText: '#AABBB3',
+          warmIvory: '#081F1C',
+          softSand: '#133129',
+          taupeGray: '#AABBB3',
+          stoneGray: '#AABBB3',
+          charcoalBrown: '#FFFFFF',
+          oliveGray: '#DCE5E0',
+          deepTeal: '#A8C4B5',
+          mutedTeal: '#24443B',
+          coolLightGray: '#133129',
           pureWhite: '#FFFFFF',
         },
-        // Direct root color utility aliases
-        warmIvory: '#F0EDDF',
-        softSand: '#E7E2CE',
-        taupeGray: '#655F58',
-        stoneGray: '#979188',
-        charcoalBrown: '#3A3732',
-        oliveGray: '#7B7C74',
-        deepTeal: '#075E54',
-        mutedTeal: '#668280',
-        coolLightGray: '#D0D5D5',
+        primaryBg: '#081F1C',
+        secondaryBg: '#133129',
+        surface: '#24443B',
+        accent: '#A8C4B5',
+        heading: '#FFFFFF',
+        bodyText: '#DCE5E0',
+        mutedText: '#AABBB3',
+        warmIvory: '#081F1C',
+        softSand: '#133129',
+        taupeGray: '#AABBB3',
+        stoneGray: '#AABBB3',
+        charcoalBrown: '#FFFFFF',
+        oliveGray: '#DCE5E0',
+        deepTeal: '#A8C4B5',
+        mutedTeal: '#24443B',
+        coolLightGray: '#133129',
         pureWhite: '#FFFFFF',
       },
       fontFamily: {

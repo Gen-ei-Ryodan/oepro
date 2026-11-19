@@ -32,8 +32,6 @@ export default function AdminDashboard() {
     products,
     categories,
     banners,
-    bannerLayout,
-    setBannerLayout,
     addProduct,
     updateProduct,
     deleteProduct,
@@ -137,7 +135,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-[#FBFBFA] text-[#171717] flex selection:bg-neutral-900 selection:text-white">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 right-5 z-50 bg-[#3A3732] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 border border-white/10 text-xs font-semibold animate-fade-in">
+        <div className="fixed top-5 right-5 z-50 bg-[#133129] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 border border-white/10 text-xs font-semibold animate-fade-in">
           <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
           <span>{toastMessage}</span>
         </div>
@@ -175,7 +173,7 @@ export default function AdminDashboard() {
 
             {/* Breadcrumb Title */}
             <div className="flex items-center gap-2 min-w-0 text-xs sm:text-sm font-bold text-neutral-900">
-              <span className="text-[#979188] hidden sm:inline">Admin OEPRO</span>
+              <span className="text-[#AABBB3] hidden sm:inline">Admin OEPRO</span>
               <ChevronRight className="w-3.5 h-3.5 text-neutral-400 hidden sm:inline" />
               <span className="truncate">
                 {activeTab === 'products'
@@ -202,7 +200,7 @@ export default function AdminDashboard() {
             <Link
               to="/"
               target="_blank"
-              className="px-2.5 sm:px-3 py-1.5 text-[11px] font-semibold text-[#075E54] bg-[#075E54]/10 hover:bg-[#075E54]/20 rounded-xl transition flex items-center gap-1.5"
+              className="px-2.5 sm:px-3 py-1.5 text-[11px] font-semibold text-[#A8C4B5] bg-[#A8C4B5]/10 hover:bg-[#A8C4B5]/20 rounded-xl transition flex items-center gap-1.5"
             >
               <Store className="w-3 h-3" />
               <span className="hidden sm:inline">Lihat Web</span>
@@ -234,7 +232,7 @@ export default function AdminDashboard() {
                 </div>
 
                 <div className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E5E5E0] shadow-2xs flex items-center gap-3.5">
-                  <div className="w-10 h-10 rounded-xl bg-[#E7E2CE] text-[#3A3732] flex items-center justify-center shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#133129] text-[#DCE5E0] flex items-center justify-center shrink-0">
                     <Tag className="w-5 h-5" />
                   </div>
                   <div>
@@ -282,7 +280,7 @@ export default function AdminDashboard() {
                   <button
                     type="button"
                     onClick={handleOpenAdd}
-                    className="px-4 py-2.5 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
+                    className="px-4 py-2.5 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Tambah Produk Baru</span>
@@ -419,8 +417,8 @@ export default function AdminDashboard() {
                                 <td className="py-3 px-4">
                                   {has2LevelVariants ? (
                                     <div className="space-y-1">
-                                      <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#E7E2CE] text-[#3A3732] px-2 py-0.5 rounded-md">
-                                        <Layers className="w-3 h-3 text-[#075E54]" />
+                                      <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#133129] text-[#DCE5E0] px-2 py-0.5 rounded-md">
+                                        <Layers className="w-3 h-3 text-[#A8C4B5]" />
                                         <span>2-Level ({prod.variants.length} {prod.variant_level1_name || 'Warna'})</span>
                                       </span>
                                       <div className="text-[10px] text-neutral-500">
@@ -429,7 +427,7 @@ export default function AdminDashboard() {
                                     </div>
                                   ) : hasFlatVariants ? (
                                     <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">
-                                      <Layers className="w-3 h-3 text-[#075E54]" />
+                                      <Layers className="w-3 h-3 text-[#A8C4B5]" />
                                       <span>
                                         1-Level ({flatVariantSizes.length} Ukuran
                                         {flatVariantSizes.length > 0 && `: ${flatVariantSizes[0]} - ${flatVariantSizes[flatVariantSizes.length - 1]}`})
@@ -614,8 +612,6 @@ export default function AdminDashboard() {
           {activeTab === 'banners' && (
             <BannerManager
               banners={banners}
-              bannerLayout={bannerLayout}
-              onUpdateBannerLayout={setBannerLayout}
               onAddBanner={addBanner}
               onUpdateBanner={updateBanner}
               onDeleteBanner={deleteBanner}

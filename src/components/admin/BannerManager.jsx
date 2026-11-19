@@ -16,13 +16,10 @@ import {
   MoveDown,
   LayoutGrid,
   Maximize2,
-  Sliders,
 } from 'lucide-react';
 
 export default function BannerManager({
   banners,
-  bannerLayout = 'boxed',
-  onUpdateBannerLayout,
   onAddBanner,
   onUpdateBanner,
   onDeleteBanner,
@@ -39,6 +36,7 @@ export default function BannerManager({
     ctaText: 'Belanja',
     ctaLink: '/catalog',
     image: '/assets/products/polo/black-stone/black-stone-oepro.webp',
+    imageLayout: 'contained',
     isActive: true,
   });
 
@@ -51,6 +49,7 @@ export default function BannerManager({
       ctaText: 'Belanja',
       ctaLink: '/catalog',
       image: '/assets/products/polo/black-stone/black-stone-oepro.webp',
+      imageLayout: 'contained',
       isActive: true,
     });
     setIsModalOpen(true);
@@ -65,6 +64,7 @@ export default function BannerManager({
       ctaText: banner.ctaText || 'Belanja',
       ctaLink: banner.ctaLink || '/catalog',
       image: banner.image || '',
+      imageLayout: banner.imageLayout || (banner.layout === 'full' ? 'full' : 'contained'),
       isActive: banner.isActive !== undefined ? banner.isActive : true,
     });
     setIsModalOpen(true);
@@ -121,7 +121,7 @@ export default function BannerManager({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 sm:p-6 rounded-2xl border border-[#E5E5E0] shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-[#075E54]/10 text-[#075E54] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#A8C4B5]/10 text-[#A8C4B5] flex items-center justify-center">
               <ImageIcon className="w-4 h-4" />
             </div>
             <h2 className="text-lg sm:text-xl font-bold text-neutral-900 tracking-tight">
@@ -136,59 +136,11 @@ export default function BannerManager({
         <button
           type="button"
           onClick={handleOpenAdd}
-          className="px-4 py-2.5 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
+          className="px-4 py-2.5 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl flex items-center justify-center gap-2 shadow-xs transition shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Tambah Banner Baru</span>
         </button>
-      </div>
-
-      {/* Banner Layout Switcher (Full Width vs Contained/Boxed) */}
-      <div className="bg-white rounded-2xl border border-[#E7E2CE] p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <Sliders className="w-4 h-4 text-[#075E54]" />
-            <h3 className="text-xs sm:text-sm font-bold text-[#3A3732] uppercase tracking-wide">
-              Tata Letak Tampilan Banner di Beranda
-            </h3>
-          </div>
-          <p className="text-xs text-[#655F58]">
-            Pilih mode rendering hero banner: <strong>Contained / Boxed</strong> (lebar berbatas seperti saat ini) atau <strong>Full Width</strong> (layar penuh edge-to-edge).
-          </p>
-        </div>
-
-        <div className="inline-flex p-1 bg-[#F0EDDF] rounded-xl border border-[#E7E2CE] shrink-0 self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => {
-              if (onUpdateBannerLayout) onUpdateBannerLayout('boxed');
-              if (showToast) showToast('Tata letak banner diatur ke Contained / Boxed', 'success');
-            }}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
-              bannerLayout !== 'full'
-                ? 'bg-[#075E54] text-white shadow-xs'
-                : 'text-[#3A3732] hover:text-[#075E54]'
-            }`}
-          >
-            <LayoutGrid className="w-3.5 h-3.5" />
-            <span>Contained / Boxed</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              if (onUpdateBannerLayout) onUpdateBannerLayout('full');
-              if (showToast) showToast('Tata letak banner diatur ke Full Width (Layar Penuh)', 'success');
-            }}
-            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
-              bannerLayout === 'full'
-                ? 'bg-[#075E54] text-white shadow-xs'
-                : 'text-[#3A3732] hover:text-[#075E54]'
-            }`}
-          >
-            <Maximize2 className="w-3.5 h-3.5" />
-            <span>Full Width</span>
-          </button>
-        </div>
       </div>
 
       {/* Banners List */}
@@ -197,6 +149,7 @@ export default function BannerManager({
           const imgSrc = banner.image
             ? (banner.image.startsWith('http') || banner.image.startsWith('data:') ? banner.image : `/${banner.image.replace(/^\//, '')}`)
             : '/assets/products/polo/black-stone/black-stone-oepro.webp';
+          const layoutMode = banner.imageLayout || (banner.layout === 'full' ? 'full' : 'contained');
 
           return (
             <div
@@ -225,7 +178,7 @@ export default function BannerManager({
 
                   <div className="flex-1 min-w-0 space-y-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#E7E2CE] text-[#3A3732] uppercase tracking-wider">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#133129] text-[#DCE5E0] uppercase tracking-wider">
                         {banner.tag || 'Koleksi Katun 100%'}
                       </span>
                       {banner.isActive !== false ? (
@@ -238,6 +191,9 @@ export default function BannerManager({
                           Nonaktif
                         </span>
                       )}
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#A8C4B5]/10 text-[#A8C4B5]">
+                        {layoutMode === 'full' ? 'Layout: Full' : 'Layout: Kecil'}
+                      </span>
                     </div>
 
                     <h3 className="font-bold text-sm sm:text-base text-neutral-900 leading-snug">
@@ -302,7 +258,7 @@ export default function BannerManager({
           <div className="bg-white rounded-2xl max-w-xl w-full border border-neutral-200 shadow-2xl overflow-hidden animate-scale-up">
             <div className="p-5 border-b border-neutral-200 flex items-center justify-between bg-[#FBFBFA]">
               <div className="flex items-center gap-2">
-                <ImageIcon className="w-4 h-4 text-[#075E54]" />
+                <ImageIcon className="w-4 h-4 text-[#A8C4B5]" />
                 <h3 className="font-bold text-sm text-neutral-900">
                   {editingBanner ? 'Edit Banner Depan' : 'Tambah Banner Depan'}
                 </h3>
@@ -362,7 +318,7 @@ export default function BannerManager({
                   placeholder="Contoh: Koleksi Katun 100%, Edisi Terbatas"
                   value={formData.tag}
                   onChange={(e) => setFormData({ ...formData, tag: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -377,7 +333,7 @@ export default function BannerManager({
                   placeholder="Contoh: Nyaman Dipakai, Mudah Dipadukan."
                   value={formData.headline}
                   onChange={(e) => setFormData({ ...formData, headline: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs font-semibold bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs font-semibold bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -391,7 +347,7 @@ export default function BannerManager({
                   placeholder="Contoh: Kaos berbahan Cotton Combed 24s, 100% katun dengan potongan regular fit yang nyaman untuk semua."
                   value={formData.subheadline}
                   onChange={(e) => setFormData({ ...formData, subheadline: e.target.value })}
-                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#075E54] focus:outline-hidden"
+                  className="w-full px-3.5 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden"
                 />
               </div>
 
@@ -418,6 +374,39 @@ export default function BannerManager({
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                     className="flex-1 px-3 py-2 text-xs bg-neutral-50 border border-neutral-300 rounded-xl"
                   />
+                </div>
+              </div>
+
+              {/* Image Layout (Contained vs Full) */}
+              <div>
+                <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
+                  Tata Letak Gambar Banner
+                </label>
+                <div className="inline-flex p-1 bg-[#081F1C] rounded-xl border border-[#133129]">
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, imageLayout: 'contained' })}
+                    className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                      formData.imageLayout !== 'full'
+                        ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
+                        : 'text-[#DCE5E0] hover:text-[#A8C4B5]'
+                    }`}
+                  >
+                    <LayoutGrid className="w-3.5 h-3.5" />
+                    <span>Gambar Kecil / Contained</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, imageLayout: 'full' })}
+                    className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                      formData.imageLayout === 'full'
+                        ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
+                        : 'text-[#DCE5E0] hover:text-[#A8C4B5]'
+                    }`}
+                  >
+                    <Maximize2 className="w-3.5 h-3.5" />
+                    <span>Gambar Full / Penuh</span>
+                  </button>
                 </div>
               </div>
 
@@ -456,7 +445,7 @@ export default function BannerManager({
                     type="checkbox"
                     checked={formData.isActive}
                     onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    className="w-4 h-4 rounded-sm text-[#075E54] focus:ring-[#075E54]"
+                    className="w-4 h-4 rounded-sm text-[#A8C4B5] focus:ring-[#A8C4B5]"
                   />
                   <span>Tampilkan banner ini di beranda depan (Aktif)</span>
                 </label>
@@ -473,7 +462,7 @@ export default function BannerManager({
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-[#075E54] hover:bg-[#075E54]/90 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-xs transition"
+                  className="px-5 py-2 bg-[#A8C4B5] hover:bg-[#A8C4B5]/90 text-[#081F1C] text-xs font-semibold rounded-xl flex items-center gap-1.5 shadow-xs transition"
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>{editingBanner ? 'Simpan Perubahan' : 'Terbitkan Banner'}</span>

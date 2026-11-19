@@ -13,7 +13,7 @@ export default function Footer() {
       desc: 'Bahan katun alami bernapas halus tanpa campuran poliester licin.',
     },
     {
-      icon: <ShieldCheck className="w-5 h-5 text-[#E7E2CE]" />,
+      icon: <ShieldCheck className="w-5 h-5 text-[#133129]" />,
       title: 'Jahitan Rantai Standar Distro',
       desc: 'Kerah rajut 4 lapis anti-letoy dan jahitan obras rapi tahan lama.',
     },
@@ -23,25 +23,25 @@ export default function Footer() {
       desc: 'Salah pilih ukuran? Tukar mudah tanpa ribet dalam 7 hari.',
     },
     {
-      icon: <Truck className="w-5 h-5 text-[#D0D5D5]" />,
+      icon: <Truck className="w-5 h-5 text-[#24443B]" />,
       title: 'Pengiriman Cepat Seluruh RI',
       desc: 'Dukungan ekspedisi JNE, SiCepat, J&T, hingga GoSend instan.',
     },
   ];
 
   return (
-    <footer className="bg-[#3A3732] text-[#D0D5D5] pt-16 pb-24 lg:pb-12 border-t border-[#655F58]/30">
+    <footer className="bg-[#133129] text-[#24443B] pt-16 pb-24 lg:pb-12 border-t border-[#AABBB3]/30">
       {/* Value Propositions Strip */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 rounded-2xl bg-[#2E2B27] border border-[#655F58]/40">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-6 rounded-2xl bg-[#2E2B27] border border-[#AABBB3]/40">
           {valueProps.map((item, idx) => (
             <div key={idx} className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded-xl bg-[#3A3732] border border-[#655F58]/50 flex-shrink-0">
+              <div className="p-2.5 rounded-xl bg-[#133129] border border-[#AABBB3]/50 flex-shrink-0">
                 {item.icon}
               </div>
               <div>
-                <h4 className="text-sm font-bold text-[#F0EDDF] mb-0.5">{item.title}</h4>
-                <p className="text-xs text-[#D0D5D5] leading-relaxed">{item.desc}</p>
+                <h4 className="text-sm font-bold text-[#081F1C] mb-0.5">{item.title}</h4>
+                <p className="text-xs text-[#24443B] leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -49,20 +49,20 @@ export default function Footer() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#655F58]/30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#AABBB3]/30">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
               <img
                 src="/assets/brand/oepro-logo.webp"
                 alt="OEPRO Brand"
-                className="h-9 w-9 rounded-lg object-contain bg-[#F0EDDF] p-0.5 border border-[#655F58]/50 shadow-xs flex-shrink-0"
+                className="h-9 w-9 rounded-lg object-contain bg-[#081F1C] p-0.5 border border-[#AABBB3]/50 shadow-xs flex-shrink-0"
               />
-              <span className="font-extrabold text-2xl tracking-tight text-[#F0EDDF]">
-                OEPRO<span className="text-[#075E54]">.</span>
+              <span className="font-extrabold text-2xl tracking-tight text-[#081F1C]">
+                OEPRO<span className="text-[#A8C4B5]">.</span>
               </span>
             </div>
-            <p className="text-sm text-[#D0D5D5] max-w-sm leading-relaxed">
+            <p className="text-sm text-[#24443B] max-w-sm leading-relaxed">
               {storeInfo.tagline}. Menghadirkan pakaian esensial kasual berkelas dengan standar katun terbaik untuk kenyamanan aktivitas harian Anda sejak {storeInfo.established}.
             </p>
             <div className="pt-2 flex items-center gap-3">
@@ -70,7 +70,7 @@ export default function Footer() {
                 href={`https://instagram.com/${storeInfo.contact.instagram.replace('@', '')}`}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#D0D5D5] hover:text-white hover:bg-white/10 transition"
+                className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#24443B] hover:text-white hover:bg-white/10 transition"
                 aria-label="Instagram OEPRO"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function Footer() {
                 href={storeInfo.contact.tokopedia}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#075E54]/30 text-[#E7E2CE] hover:bg-[#075E54]/50 transition flex items-center gap-1 border border-[#075E54]/40"
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#A8C4B5]/30 text-[#133129] hover:bg-[#A8C4B5]/50 transition flex items-center gap-1 border border-[#A8C4B5]/40"
               >
                 <span>Tokopedia</span>
                 <ExternalLink className="w-3 h-3" />
@@ -100,7 +100,7 @@ export default function Footer() {
 
           {/* Nav Categories */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#F0EDDF] mb-4">Kategori Produk</h4>
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#081F1C] mb-4">Kategori Produk</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link to="/catalog?cat=polo-shirt" className="hover:text-white transition">
@@ -118,7 +118,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/catalog" className="text-[#E7E2CE] hover:text-white font-semibold transition">
+                <Link to="/catalog" className="text-[#133129] hover:text-white font-semibold transition">
                   Semua Koleksi &rarr;
                 </Link>
               </li>
@@ -127,7 +127,7 @@ export default function Footer() {
 
           {/* Customer Service */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#F0EDDF] mb-4">Bantuan &amp; Layanan</h4>
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#081F1C] mb-4">Bantuan &amp; Layanan</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <a
@@ -140,23 +140,23 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-[#D0D5D5]">Garansi &amp; Retur Ukuran</span>
+                <span className="text-[#24443B]">Garansi &amp; Retur Ukuran</span>
               </li>
               <li>
-                <span className="text-[#D0D5D5]">Panduan Ukuran (Size Guide)</span>
+                <span className="text-[#24443B]">Panduan Ukuran (Size Guide)</span>
               </li>
               <li>
-                <span className="text-[#D0D5D5]">Syarat &amp; Ketentuan</span>
+                <span className="text-[#24443B]">Syarat &amp; Ketentuan</span>
               </li>
             </ul>
           </div>
 
           {/* Store Info */}
           <div>
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#F0EDDF] mb-4">Studio &amp; Workshop</h4>
-            <div className="space-y-2.5 text-xs text-[#D0D5D5]">
+            <h4 className="text-xs uppercase tracking-wider font-bold text-[#081F1C] mb-4">Studio &amp; Workshop</h4>
+            <div className="space-y-2.5 text-xs text-[#24443B]">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#979188] mt-0.5 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-[#AABBB3] mt-0.5 flex-shrink-0" />
                 <span>
                   {storeInfo.location.address}, {storeInfo.location.city}, {storeInfo.location.province} {storeInfo.location.postal_code}
                 </span>
@@ -166,35 +166,35 @@ export default function Footer() {
                   href={createWhatsAppGeneralLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-[#E7E2CE] hover:text-white transition font-medium"
+                  className="flex items-center gap-2 text-[#133129] hover:text-white transition font-medium"
                 >
-                  <WhatsAppIcon className="w-4 h-4 fill-current text-[#E7E2CE] flex-shrink-0" />
+                  <WhatsAppIcon className="w-4 h-4 fill-current text-[#133129] flex-shrink-0" />
                   <span>{storeInfo.contact.whatsapp} (Chat WhatsApp)</span>
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#979188] flex-shrink-0" />
+                <Mail className="w-4 h-4 text-[#AABBB3] flex-shrink-0" />
                 <span>{storeInfo.contact.email}</span>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-[#655F58]/30">
-              <span className="text-[11px] font-semibold text-[#D0D5D5] uppercase tracking-wider block mb-2">
+            <div className="mt-5 pt-4 border-t border-[#AABBB3]/30">
+              <span className="text-[11px] font-semibold text-[#24443B] uppercase tracking-wider block mb-2">
                 Metode Pembayaran
               </span>
-              <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-[#D0D5D5] font-semibold">
-                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#655F58]/50">QRIS</span>
-                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#655F58]/50">BCA VA</span>
-                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#655F58]/50">MANDIRI</span>
-                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#655F58]/50">GOPAY</span>
-                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#655F58]/50">COD</span>
+              <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-[#24443B] font-semibold">
+                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#AABBB3]/50">QRIS</span>
+                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#AABBB3]/50">BCA VA</span>
+                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#AABBB3]/50">MANDIRI</span>
+                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#AABBB3]/50">GOPAY</span>
+                <span className="px-2 py-1 bg-[#2E2B27] rounded border border-[#AABBB3]/50">COD</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#979188] gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#AABBB3] gap-4">
           <p>&copy; {new Date().getFullYear()} {storeInfo.legal_name}. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             <span>Dirancang khusus untuk pengalaman belanja nyaman &amp; minimalis</span>

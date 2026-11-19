@@ -53,7 +53,7 @@ export default function AdminSidebar({
   };
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-[#3A3732] text-[#F0EDDF] select-none border-r border-[#655F58]/30">
+    <div className="flex flex-col h-full bg-[#133129] text-[#081F1C] select-none border-r border-[#AABBB3]/30">
       {/* Brand & Admin Title */}
       <div className="p-5 border-b border-white/10 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
@@ -64,14 +64,14 @@ export default function AdminSidebar({
           />
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-bold text-base tracking-tight text-white group-hover:text-[#E7E2CE] transition">
+              <span className="font-bold text-base tracking-tight text-white group-hover:text-[#133129] transition">
                 OEPRO
               </span>
-              <span className="text-[9px] font-bold px-1.5 py-0.5 bg-[#075E54] text-white rounded-md tracking-wider uppercase">
+              <span className="text-[9px] font-bold px-1.5 py-0.5 bg-[#A8C4B5] text-[#081F1C] rounded-md tracking-wider uppercase">
                 Admin
               </span>
             </div>
-            <p className="text-[10px] text-[#D0D5D5] font-medium tracking-wide">
+            <p className="text-[10px] text-[#24443B] font-medium tracking-wide">
               Management Portal
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function AdminSidebar({
 
       {/* Navigation Menu */}
       <div className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto">
-        <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-[#979188]">
+        <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-[#AABBB3]">
           Menu Utama
         </div>
 
@@ -106,8 +106,8 @@ export default function AdminSidebar({
               onClick={() => handleSelectTab(item.id)}
               className={`w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-left transition-all group ${
                 isActive
-                  ? 'bg-[#075E54] text-white shadow-md font-semibold'
-                  : 'text-[#D0D5D5] hover:bg-white/5 hover:text-white'
+                  ? 'bg-[#A8C4B5] text-[#081F1C] shadow-md font-semibold'
+                  : 'text-[#24443B] hover:bg-white/5 hover:text-white'
               }`}
             >
               <div className="flex items-center gap-3 min-w-0">
@@ -115,7 +115,7 @@ export default function AdminSidebar({
                   className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition ${
                     isActive
                       ? 'bg-white/20 text-white'
-                      : 'bg-white/5 text-[#D0D5D5] group-hover:bg-white/10 group-hover:text-white'
+                      : 'bg-white/5 text-[#24443B] group-hover:bg-white/10 group-hover:text-white'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function AdminSidebar({
                   <div className="text-xs truncate">{item.label}</div>
                   <div
                     className={`text-[10px] truncate ${
-                      isActive ? 'text-white/80' : 'text-[#979188]'
+                      isActive ? 'text-white/80' : 'text-[#AABBB3]'
                     }`}
                   >
                     {item.description}
@@ -137,7 +137,7 @@ export default function AdminSidebar({
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
                     isActive
                       ? 'bg-white/20 text-white'
-                      : 'bg-white/10 text-[#D0D5D5]'
+                      : 'bg-white/10 text-[#24443B]'
                   }`}
                 >
                   {item.count}
@@ -153,16 +153,16 @@ export default function AdminSidebar({
         <Link
           to="/"
           target="_blank"
-          className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs text-[#D0D5D5] hover:bg-white/5 hover:text-white transition"
+          className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs text-[#24443B] hover:bg-white/5 hover:text-white transition"
         >
           <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
-            <Store className="w-3.5 h-3.5 text-[#E7E2CE]" />
+            <Store className="w-3.5 h-3.5 text-[#133129]" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="truncate font-medium">Buka Toko Live</div>
-            <div className="text-[10px] text-[#979188] truncate">oepro.id</div>
+            <div className="text-[10px] text-[#AABBB3] truncate">oepro.id</div>
           </div>
-          <ExternalLink className="w-3.5 h-3.5 text-[#979188]" />
+          <ExternalLink className="w-3.5 h-3.5 text-[#AABBB3]" />
         </Link>
 
         <button

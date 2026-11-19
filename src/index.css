@@ -3,15 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --color-warm-ivory: #F0EDDF;
-  --color-soft-sand: #E7E2CE;
-  --color-taupe-gray: #655F58;
-  --color-stone-gray: #979188;
-  --color-charcoal-brown: #3A3732;
-  --color-olive-gray: #7B7C74;
-  --color-deep-teal: #075E54;
-  --color-muted-teal: #668280;
-  --color-cool-light-gray: #D0D5D5;
+  --color-primary-bg: #081F1C;
+  --color-secondary-bg: #133129;
+  --color-surface: #24443B;
+  --color-accent: #A8C4B5;
+  --color-heading: #FFFFFF;
+  --color-body: #DCE5E0;
+  --color-muted: #AABBB3;
+  --color-warm-ivory: #081F1C;
+  --color-soft-sand: #133129;
+  --color-taupe-gray: #AABBB3;
+  --color-stone-gray: #AABBB3;
+  --color-charcoal-brown: #DCE5E0;
+  --color-olive-gray: #DCE5E0;
+  --color-deep-teal: #A8C4B5;
+  --color-muted-teal: #24443B;
+  --color-cool-light-gray: #133129;
   --color-pure-white: #FFFFFF;
 }
 
@@ -20,31 +27,30 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #F0EDDF;
-    color: #3A3732;
+    background-color: #081F1C;
+    color: #DCE5E0;
   }
 
   body {
-    background-color: #F0EDDF;
-    color: #3A3732;
+    background-color: #081F1C;
+    color: #DCE5E0;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
   }
 }
 
-/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #E7E2CE;
+  background: #133129;
 }
 ::-webkit-scrollbar-thumb {
-  background: #979188;
+  background: #24443B;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #655F58;
+  background: #A8C4B5;
 }
 
 /* Continuous Smooth Marquee Ticker */
