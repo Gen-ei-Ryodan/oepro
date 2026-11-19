@@ -28,6 +28,8 @@ export default function ProductDetail() {
   const { toggleWishlist, isInWishlist } = useWishlist();
 
   const product = productsData.find((p) => p.id === id);
+  const hasVariants = Array.isArray(product?.variants) && product.variants.length > 0;
+  const has2LevelVariants = hasVariants && product.variants.some((variant) => Array.isArray(variant.options) && variant.options.length > 0);
 
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState('L');
@@ -39,17 +41,19 @@ export default function ProductDetail() {
 
   useEffect(() => {
     if (product) {
-      if (Array.isArray(product.variants) && product.variants.length > 0) {
+      if (has2LevelVariants) {
         const firstV1 = product.variants[0];
         setSelectedColor({ name: firstV1.name, hex: firstV1.hex });
-        if (firstV1.options && firstV1.options.length > 0) {
+        if (firstV1.options?.length > 0) {
           setSelectedSize(firstV1.options[0].name);
         }
       } else {
         if (product.colors && product.colors.length > 0) {
           setSelectedColor(product.colors[0]);
         }
-        if (product.sizes && product.sizes.length > 0) {
+        if (hasVariants) {
+          setSelectedSize(product.variants[0].name);
+        } else if (product.sizes && product.sizes.length > 0) {
           setSelectedSize(product.sizes[0]);
         }
       }
@@ -57,7 +61,7 @@ export default function ProductDetail() {
       setQuantity(1);
       window.scrollTo(0, 0);
     }
-  }, [product, id]);
+  }, [product, id, has2LevelVariants, hasVariants]);
 
   if (!product) {
     return (
@@ -90,25 +94,34 @@ export default function ProductDetail() {
     ? product.images.map((img) => `/${img.replace(/^\//, '')}`)
     : ['/assets/brand/oepro-logo.webp'];
 
-  const hasVariants = Array.isArray(product.variants) && product.variants.length > 0;
-  const activeLevel1 = hasVariants
+  const activeLevel1 = has2LevelVariants
     ? product.variants.find((v) => v.name === (selectedColor?.name || selectedColor)) || product.variants[0]
     : null;
   const activeLevel2 = (activeLevel1 && Array.isArray(activeLevel1.options))
     ? activeLevel1.options.find((o) => o.name === selectedSize) || activeLevel1.options[0]
     : null;
 
-  const currentPrice = (hasVariants && activeLevel2 && activeLevel2.price)
+  const activeFlatVariant = hasVariants && !has2LevelVariants
+    ? product.variants.find((variant) => variant.name === selectedSize) || product.variants[0]
+    : null;
+
+  const currentPrice = (activeLevel2 && activeLevel2.price !== undefined)
     ? activeLevel2.price
+    : (activeFlatVariant && activeFlatVariant.price !== undefined)
+      ? activeFlatVariant.price
     : getProductPriceBySize(product, selectedSize);
 
-  const currentOriginalPrice = (hasVariants && activeLevel2 && activeLevel2.original_price)
+  const currentOriginalPrice = (activeLevel2 && activeLevel2.original_price !== undefined)
     ? activeLevel2.original_price
-    : getProductOriginalPriceBySize(product, selectedSize);
+    : (activeFlatVariant && activeFlatVariant.original_price !== undefined)
+      ? activeFlatVariant.original_price
+      : getProductOriginalPriceBySize(product, selectedSize);
 
-  const currentStock = (hasVariants && activeLevel2 && activeLevel2.stock !== undefined)
+  const currentStock = (activeLevel2 && activeLevel2.stock !== undefined)
     ? activeLevel2.stock
-    : (product.stock || 50);
+    : (activeFlatVariant && activeFlatVariant.stock !== undefined)
+      ? activeFlatVariant.stock
+      : (product.stock || 50);
 
   const isOutOfStock = currentStock <= 0;
 
@@ -116,9 +129,11 @@ export default function ProductDetail() {
     ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
     : 0;
 
-  const activeVariantImage = (hasVariants && activeLevel2 && activeLevel2.image)
+  const activeVariantImage = (activeLevel2 && activeLevel2.image)
     ? (activeLevel2.image.startsWith("http") || activeLevel2.image.startsWith("data:") ? activeLevel2.image : `/${activeLevel2.image.replace(/^\//, "")}`)
-    : (hasVariants && activeLevel1 && activeLevel1.image)
+    : (activeFlatVariant && activeFlatVariant.image)
+      ? (activeFlatVariant.image.startsWith("http") || activeFlatVariant.image.startsWith("data:") ? activeFlatVariant.image : `/${activeFlatVariant.image.replace(/^\//, "")}`)
+    : (activeLevel1 && activeLevel1.image)
       ? (activeLevel1.image.startsWith("http") || activeLevel1.image.startsWith("data:") ? activeLevel1.image : `/${activeLevel1.image.replace(/^\//, "")}`)
       : null;
 
@@ -364,7 +379,7 @@ export default function ProductDetail() {
             </div>
 
             <div className="flex flex-wrap gap-2 pt-0.5">
-              {hasVariants ? (
+              {has2LevelVariants ? (
                 product.variants.map((v1, i) => {
                   const isSelected = selectedColor && (selectedColor.name || selectedColor) === v1.name;
                   return (
@@ -459,14 +474,15 @@ export default function ProductDetail() {
                   );
                 })
               ) : (
-                product.sizes && product.sizes.map((sz) => {
-                  const szPrice = getProductPriceBySize(product, sz);
+                (activeFlatVariant ? product.variants.map((variant) => variant.name) : product.sizes || []).map((sz) => {
+                  const variant = activeFlatVariant && product.variants.find((item) => item.name === sz);
+                  const szPrice = variant?.price ?? getProductPriceBySize(product, sz);
                   const isSelected = selectedSize === sz;
                   return (
                     <button
                       key={sz}
                       type="button"
-                      onClick={() => setSelectedSize(sz)}
+                      onClick={() => { setSelectedSize(sz); setUserSelectedThumb(null); }}
                       className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
                         isSelected
                           ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'

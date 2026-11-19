@@ -363,10 +363,15 @@ export default function AdminDashboard() {
                                 : 'assets/products/polo/black-stone/black-stone-oepro.webp';
 
                             const has2LevelVariants =
-                              Array.isArray(prod.variants) && prod.variants.length > 0;
+                              Array.isArray(prod.variants) &&
+                              prod.variants.some((variant) => Array.isArray(variant.options) && variant.options.length > 0);
+                            const hasFlatVariants = Array.isArray(prod.variants) && prod.variants.length > 0;
+                            const flatVariantSizes = hasFlatVariants
+                              ? prod.variants.map((variant) => variant.name).filter(Boolean)
+                              : [];
                             const totalCombinations = has2LevelVariants
                               ? prod.variants.reduce((acc, v) => acc + (v.options || []).length, 0)
-                              : (prod.sizes || []).length;
+                              : flatVariantSizes.length || (prod.sizes || []).length;
 
                             return (
                               <tr key={prod.id} className="hover:bg-neutral-50/80 transition">
@@ -422,6 +427,14 @@ export default function AdminDashboard() {
                                         {totalCombinations} kombinasi harga &amp; stok
                                       </div>
                                     </div>
+                                  ) : hasFlatVariants ? (
+                                    <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md">
+                                      <Layers className="w-3 h-3 text-[#075E54]" />
+                                      <span>
+                                        1-Level ({flatVariantSizes.length} Ukuran
+                                        {flatVariantSizes.length > 0 && `: ${flatVariantSizes[0]} - ${flatVariantSizes[flatVariantSizes.length - 1]}`})
+                                      </span>
+                                    </span>
                                   ) : (
                                     <div className="flex flex-wrap gap-1 max-w-[160px]">
                                       {(prod.sizes || []).slice(0, 4).map((sz) => (
@@ -549,8 +562,10 @@ export default function AdminDashboard() {
                               {/* Mobile Actions */}
                               <div className="mt-2.5 flex items-center justify-between border-t border-neutral-100 pt-2">
                                 <div className="text-[9px] font-semibold text-neutral-500">
-                                  {Array.isArray(prod.variants) && prod.variants.length > 0
+                                  {Array.isArray(prod.variants) && prod.variants.some((variant) => Array.isArray(variant.options) && variant.options.length > 0)
                                     ? `2-Level Varian (${prod.variants.length} ${prod.variant_level1_name || 'Warna'})`
+                                    : Array.isArray(prod.variants) && prod.variants.length > 0
+                                    ? `1-Level (${prod.variants.length} Ukuran: ${prod.variants[0].name} - ${prod.variants[prod.variants.length - 1].name})`
                                     : `${(prod.sizes || []).length} Ukuran`}
                                 </div>
                                 <div className="flex items-center gap-2">

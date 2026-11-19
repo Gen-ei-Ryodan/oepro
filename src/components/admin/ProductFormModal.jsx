@@ -120,6 +120,7 @@ export default function ProductFormModal({
     variant_level2_name: 'Ukuran',
     variants: [],
   });
+  const isFlatVariants = formData.variants.length > 0 && formData.variants.every((variant) => !Array.isArray(variant.options));
 
   const [newImageUrl, setNewImageUrl] = useState('');
   const [bulkOriginalPrice, setBulkOriginalPrice] = useState('');
@@ -142,23 +143,39 @@ export default function ProductFormModal({
 
       let initialVariants = [];
       if (Array.isArray(product.variants) && product.variants.length > 0) {
-        initialVariants = product.variants.map((v1, v1Idx) => ({
-          ...v1,
-          id: v1.id || `var1-${v1Idx + 1}`,
-          image: v1.image || (product.images && product.images[0]) || '',
-          options: (v1.options || []).map((v2, v2Idx) => {
-            const tiered = getTieredSizePrice(curCat, v2.name, prodPrice, prodOrigPrice);
+        const hasNestedOptions = product.variants.some((variant) => Array.isArray(variant.options) && variant.options.length > 0);
+        initialVariants = product.variants.map((variant, variantIdx) => {
+          if (!hasNestedOptions) {
+            const tiered = getTieredSizePrice(curCat, variant.name, prodPrice, prodOrigPrice);
             return {
-              ...v2,
-              id: v2.id || `var2-${v1Idx + 1}-${v2Idx + 1}`,
-              price: v2.price !== undefined ? v2.price : tiered.price,
-              original_price: v2.original_price !== undefined ? v2.original_price : tiered.original_price,
-              stock: v2.stock !== undefined ? v2.stock : 25,
-              image: v2.image || v1.image || (product.images && product.images[0]) || '',
-              sku: v2.sku || `${product.sku || 'OEP'}-${(v1.name || 'CLR').slice(0, 3).toUpperCase()}-${v2.name}`,
+              ...variant,
+              id: variant.id || `var-${variantIdx + 1}`,
+              price: variant.price !== undefined ? variant.price : tiered.price,
+              original_price: variant.original_price !== undefined ? variant.original_price : tiered.original_price,
+              stock: variant.stock !== undefined ? variant.stock : 25,
+              image: variant.image || (product.images && product.images[0]) || '',
+              sku: variant.sku || `${product.sku || 'OEP'}-${variant.name}`,
             };
-          }),
-        }));
+          }
+
+          return {
+            ...variant,
+            id: variant.id || `var1-${variantIdx + 1}`,
+            image: variant.image || (product.images && product.images[0]) || '',
+            options: (variant.options || []).map((option, optionIdx) => {
+              const tiered = getTieredSizePrice(curCat, option.name, prodPrice, prodOrigPrice);
+              return {
+                ...option,
+                id: option.id || `var2-${variantIdx + 1}-${optionIdx + 1}`,
+                price: option.price !== undefined ? option.price : tiered.price,
+                original_price: option.original_price !== undefined ? option.original_price : tiered.original_price,
+                stock: option.stock !== undefined ? option.stock : 25,
+                image: option.image || variant.image || (product.images && product.images[0]) || '',
+                sku: option.sku || `${product.sku || 'OEP'}-${(variant.name || 'CLR').slice(0, 3).toUpperCase()}-${option.name}`,
+              };
+            }),
+          };
+        });
       } else if (Array.isArray(product.colors) && product.colors.length > 0) {
         const sizesToUse = (product.sizes && product.sizes.length > 0) ? product.sizes.slice(0, 5) : STANDARD_SIZES;
         initialVariants = product.colors.slice(0, 3).map((c, idx) => ({
@@ -290,12 +307,12 @@ export default function ProductFormModal({
     let minOriginalPrice = 0;
 
     variants.forEach((v1) => {
-      (v1.options || []).forEach((v2) => {
-        totalStock += parseInt(v2.stock, 10) || 0;
-        const p = parseInt(v2.price, 10);
+      (Array.isArray(v1.options) ? v1.options : [v1]).forEach((variant) => {
+        totalStock += parseInt(variant.stock, 10) || 0;
+        const p = parseInt(variant.price, 10);
         if (p && p < minPrice) {
           minPrice = p;
-          minOriginalPrice = parseInt(v2.original_price, 10) || Math.round(p * 1.25 / 1000) * 1000;
+          minOriginalPrice = parseInt(variant.original_price, 10) || Math.round(p * 1.25 / 1000) * 1000;
         }
       });
     });
@@ -428,6 +445,17 @@ export default function ProductFormModal({
     }));
   };
 
+  const updateFlatVariant = (variantIdx, field, value) => {
+    const nextVariants = [...formData.variants];
+    nextVariants[variantIdx] = {
+      ...nextVariants[variantIdx],
+      [field]: ['price', 'stock', 'original_price'].includes(field)
+        ? Math.max(0, parseInt(value, 10) || 0)
+        : value,
+    };
+    setFormData((prev) => ({ ...prev, ...syncFromVariants(nextVariants) }));
+  };
+
   // Quick S-XL fill
   const applyStandardSizesToV1 = (v1Idx) => {
     const nextVariants = [...formData.variants];
@@ -463,15 +491,17 @@ export default function ProductFormModal({
       return;
     }
 
-    const nextVariants = formData.variants.map((v1) => ({
-      ...v1,
-      options: (v1.options || []).map((v2) => ({
-        ...v2,
+    const nextVariants = formData.variants.map((v1) => {
+      const applyValues = (variant) => ({
+        ...variant,
         ...(origP !== null ? { original_price: origP } : {}),
         ...(p !== null ? { price: p } : {}),
         ...(s !== null ? { stock: s } : {}),
-      })),
-    }));
+      });
+      return Array.isArray(v1.options)
+        ? { ...v1, options: v1.options.map(applyValues) }
+        : applyValues(v1);
+    });
 
     setFormData((prev) => ({
       ...prev,
@@ -602,14 +632,14 @@ export default function ProductFormModal({
       return;
     }
 
-    const generatedColors = formData.variants.map((v1) => ({
+    const generatedColors = formData.variants.filter((v1) => Array.isArray(v1.options)).map((v1) => ({
       name: v1.name,
       hex: v1.hex || '#1D1D1D',
     }));
 
     const allSizesSet = new Set();
     formData.variants.forEach((v1) => {
-      (v1.options || []).forEach((v2) => allSizesSet.add(v2.name));
+      (Array.isArray(v1.options) ? v1.options : [v1]).forEach((variant) => allSizesSet.add(variant.name));
     });
     const generatedSizes = Array.from(allSizesSet);
 
@@ -621,7 +651,7 @@ export default function ProductFormModal({
     const productPayload = {
       ...formData,
       category_slug,
-      colors: generatedColors,
+      colors: isFlatVariants ? (product?.colors || []) : generatedColors,
       sizes: generatedSizes.length > 0 ? generatedSizes : formData.sizes,
     };
 
@@ -644,7 +674,7 @@ export default function ProductFormModal({
                 {isEditing ? `Edit Produk: ${formData.name || 'Produk OEPRO'}` : 'Tambah Produk & Matriks Varian 2-Tingkat'}
               </h2>
               <p className="text-[11px] text-neutral-500">
-                Atur informasi produk, spesifikasi bahan, dan matriks varian (Level 1: Warna &times; Level 2: Ukuran &rarr; Harga Normal, Harga Diskon, Stok &amp; Foto).
+                Atur informasi produk, spesifikasi bahan, dan harga serta stok per ukuran atau kombinasi matriks 2-level.
               </p>
             </div>
           </div>
@@ -782,7 +812,9 @@ export default function ProductFormModal({
                 <div className="flex justify-between items-center text-xs">
                   <span className="text-neutral-500">Kombinasi Matriks:</span>
                   <strong className="text-neutral-700">
-                    {(formData.variants || []).reduce((acc, v) => acc + (v.options || []).length, 0)} Varian
+                    {isFlatVariants
+                      ? formData.variants.length
+                      : (formData.variants || []).reduce((acc, v) => acc + (v.options || []).length, 0)} Varian
                   </strong>
                 </div>
               </div>
@@ -829,11 +861,13 @@ export default function ProductFormModal({
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#075E54]" />
                   <h3 className="font-bold text-xs sm:text-sm text-neutral-900 uppercase tracking-wider">
-                    Struktur Varian 2-Tingkat (Level 1: Opsi Utama &rarr; Level 2: Sub-Opsi Transaksi)
+                    {isFlatVariants ? 'Varian 1-Tingkat: Ukuran Langsung' : 'Struktur Varian 2-Tingkat (Level 1: Opsi Utama → Level 2: Sub-Opsi Transaksi)'}
                   </h3>
                 </div>
                 <p className="text-[11px] text-neutral-500 mt-0.5">
-                  Penentuan data transaksi (Harga Normal, Harga Diskon, Stok &amp; Foto) selalu berada di ujung varian (Level 2).
+                  {isFlatVariants
+                    ? 'Harga normal, harga diskon, dan stok dapat diatur untuk setiap ukuran.'
+                    : 'Penentuan data transaksi (Harga Normal, Harga Diskon, Stok & Foto) berada di ujung varian (Level 2).'}
                 </p>
               </div>
 
@@ -963,7 +997,46 @@ export default function ProductFormModal({
 
             {/* List of Level 1 Variants & their Level 2 combinations table */}
             <div className="space-y-3">
-              {(formData.variants || []).map((v1, v1Idx) => {
+              {isFlatVariants && (
+                <div className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-2xs">
+                  <div className="px-3.5 py-3 bg-[#FBFBFA] border-b border-neutral-200 flex items-center justify-between gap-2">
+                    <div>
+                      <h4 className="text-xs font-bold text-neutral-900">Varian Ukuran 1-Tingkat</h4>
+                      <p className="text-[10px] text-neutral-500">Harga dan stok diatur langsung untuk setiap ukuran.</p>
+                    </div>
+                    <button type="button" onClick={() => setShowMatrixGen(true)} className="text-[10px] font-semibold text-[#075E54] hover:underline">
+                      Buat matriks 2-level
+                    </button>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-neutral-100 text-neutral-600 text-[10px] uppercase font-bold border-b border-neutral-200">
+                          <th className="py-2 px-2.5">Ukuran</th>
+                          <th className="py-2 px-2">Harga Normal (Rp)</th>
+                          <th className="py-2 px-2">Harga Diskon (Rp)</th>
+                          <th className="py-2 px-2">Stok (Pcs)</th>
+                          <th className="py-2 px-2">SKU</th>
+                          <th className="py-2 px-2 text-right">Aksi</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-neutral-100">
+                        {formData.variants.map((variant, variantIdx) => (
+                          <tr key={variant.id || variantIdx} className="hover:bg-neutral-50/80">
+                            <td className="py-2 px-2.5"><input type="text" value={variant.name || ''} onChange={(e) => updateFlatVariant(variantIdx, 'name', e.target.value)} className="w-16 px-2 py-1 text-xs font-bold text-center border border-neutral-300 rounded-lg bg-white" aria-label={`Ukuran varian ${variantIdx + 1}`} /></td>
+                            <td className="py-2 px-2"><input type="number" min="0" step="1000" value={variant.original_price ?? ''} onChange={(e) => updateFlatVariant(variantIdx, 'original_price', e.target.value)} className="w-24 px-2 py-1 text-xs font-mono text-neutral-500 border border-neutral-300 rounded-lg bg-white" aria-label={`Harga normal ukuran ${variant.name}`} /></td>
+                            <td className="py-2 px-2"><input type="number" min="0" step="1000" value={variant.price ?? ''} onChange={(e) => updateFlatVariant(variantIdx, 'price', e.target.value)} className="w-24 px-2 py-1 text-xs font-mono font-bold text-neutral-900 border border-neutral-300 rounded-lg bg-white" aria-label={`Harga diskon ukuran ${variant.name}`} /></td>
+                            <td className="py-2 px-2"><input type="number" min="0" value={variant.stock ?? ''} onChange={(e) => updateFlatVariant(variantIdx, 'stock', e.target.value)} className="w-16 px-2 py-1 text-xs font-mono font-bold text-emerald-800 border border-neutral-300 rounded-lg bg-white text-center" aria-label={`Stok ukuran ${variant.name}`} /></td>
+                            <td className="py-2 px-2"><input type="text" value={variant.sku || ''} onChange={(e) => updateFlatVariant(variantIdx, 'sku', e.target.value)} className="w-28 px-2 py-1 text-[11px] font-mono border border-neutral-300 rounded-lg bg-white" aria-label={`SKU ukuran ${variant.name}`} /></td>
+                            <td className="py-2 px-2 text-right"><button type="button" onClick={() => { const nextVariants = formData.variants.filter((_, idx) => idx !== variantIdx); setFormData((prev) => ({ ...prev, ...syncFromVariants(nextVariants) })); }} className="p-1 text-neutral-400 hover:text-red-600 rounded-md" title={`Hapus ukuran ${variant.name}`} aria-label={`Hapus ukuran ${variant.name}`}><Trash2 className="w-3.5 h-3.5" /></button></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+              {!isFlatVariants && (formData.variants || []).map((v1, v1Idx) => {
                 const isExpanded = expandedVariantIdx === v1Idx;
                 const totalV1Stock = (v1.options || []).reduce(
                   (acc, opt) => acc + (parseInt(opt.stock, 10) || 0),
@@ -1213,6 +1286,7 @@ export default function ProductFormModal({
             </div>
 
             {/* Button to add new Level 1 Variant */}
+          {!isFlatVariants && (
             <button
               type="button"
               onClick={addLevel1Variant}
@@ -1221,6 +1295,7 @@ export default function ProductFormModal({
               <Plus className="w-4 h-4 text-[#075E54]" />
               <span>Tambah Varian {formData.variant_level1_name} Baru (Level 1)</span>
             </button>
+          )}
           </div>
 
           {/* 3. GALERI FOTO PRODUK */}
