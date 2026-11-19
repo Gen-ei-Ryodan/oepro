@@ -14,10 +14,15 @@ import {
   ArrowRight,
   MoveUp,
   MoveDown,
+  LayoutGrid,
+  Maximize2,
+  Sliders,
 } from 'lucide-react';
 
 export default function BannerManager({
   banners,
+  bannerLayout = 'boxed',
+  onUpdateBannerLayout,
   onAddBanner,
   onUpdateBanner,
   onDeleteBanner,
@@ -136,6 +141,54 @@ export default function BannerManager({
           <Plus className="w-4 h-4" />
           <span>Tambah Banner Baru</span>
         </button>
+      </div>
+
+      {/* Banner Layout Switcher (Full Width vs Contained/Boxed) */}
+      <div className="bg-white rounded-2xl border border-[#E7E2CE] p-4 sm:p-5 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-[#075E54]" />
+            <h3 className="text-xs sm:text-sm font-bold text-[#3A3732] uppercase tracking-wide">
+              Tata Letak Tampilan Banner di Beranda
+            </h3>
+          </div>
+          <p className="text-xs text-[#655F58]">
+            Pilih mode rendering hero banner: <strong>Contained / Boxed</strong> (lebar berbatas seperti saat ini) atau <strong>Full Width</strong> (layar penuh edge-to-edge).
+          </p>
+        </div>
+
+        <div className="inline-flex p-1 bg-[#F0EDDF] rounded-xl border border-[#E7E2CE] shrink-0 self-start sm:self-auto">
+          <button
+            type="button"
+            onClick={() => {
+              if (onUpdateBannerLayout) onUpdateBannerLayout('boxed');
+              if (showToast) showToast('Tata letak banner diatur ke Contained / Boxed', 'success');
+            }}
+            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+              bannerLayout !== 'full'
+                ? 'bg-[#075E54] text-white shadow-xs'
+                : 'text-[#3A3732] hover:text-[#075E54]'
+            }`}
+          >
+            <LayoutGrid className="w-3.5 h-3.5" />
+            <span>Contained / Boxed</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              if (onUpdateBannerLayout) onUpdateBannerLayout('full');
+              if (showToast) showToast('Tata letak banner diatur ke Full Width (Layar Penuh)', 'success');
+            }}
+            className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+              bannerLayout === 'full'
+                ? 'bg-[#075E54] text-white shadow-xs'
+                : 'text-[#3A3732] hover:text-[#075E54]'
+            }`}
+          >
+            <Maximize2 className="w-3.5 h-3.5" />
+            <span>Full Width</span>
+          </button>
+        </div>
       </div>
 
       {/* Banners List */}

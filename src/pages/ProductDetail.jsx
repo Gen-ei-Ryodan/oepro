@@ -33,6 +33,7 @@ export default function ProductDetail() {
   const [selectedSize, setSelectedSize] = useState('L');
   const [quantity, setQuantity] = useState(1);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [userSelectedThumb, setUserSelectedThumb] = useState(null);
   const [activeTab, setActiveTab] = useState('desc');
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
 
@@ -124,6 +125,7 @@ export default function ProductDetail() {
 
   const handleColorChange = (c) => {
     setSelectedColor(c);
+    setUserSelectedThumb(null);
     if (c.productId && c.productId !== product.id) {
       navigate(`/product/${c.productId}`);
     }
@@ -216,7 +218,7 @@ export default function ProductDetail() {
           {/* Main Large Image */}
           <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#F8F8F7] border border-neutral-200/70 shadow-2xs p-4 sm:p-8 flex items-center justify-center">
             <img
-              src={images[selectedImageIndex] || images[0]}
+              src={currentDisplayImage}
               alt={product.name}
               className="w-full h-full object-contain object-center transition-all duration-300"
               onError={(e) => {
@@ -261,7 +263,7 @@ export default function ProductDetail() {
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => setSelectedImageIndex(idx)}
+                  onClick={() => { setSelectedImageIndex(idx); setUserSelectedThumb(images[idx]); }}
                   className={`w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden border transition-all flex-shrink-0 bg-[#F8F8F7] relative p-1 flex items-center justify-center ${
                     selectedImageIndex === idx
                       ? 'border-neutral-900 ring-2 ring-neutral-900'
@@ -314,9 +316,19 @@ export default function ProductDetail() {
                   {formatRupiah(currentOriginalPrice)}
                 </span>
               )}
+              {currentDiscountPercent > 0 && (
+                <span className="px-2 py-0.5 rounded-md bg-red-600 text-white text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-xs">
+                  -{currentDiscountPercent}%
+                </span>
+              )}
               <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200">
                 Size {selectedSize}
               </span>
+              {isOutOfStock && (
+                <span className="px-2.5 py-0.5 rounded-md bg-neutral-900 text-white text-[10px] font-bold uppercase tracking-wider">
+                  Habis
+                </span>
+              )}
             </div>
           </div>
 
@@ -339,6 +351,7 @@ export default function ProductDetail() {
                       type="button"
                       onClick={() => {
                         setSelectedColor({ name: v1.name, hex: v1.hex });
+                        setUserSelectedThumb(null);
                         if (v1.options && v1.options.length > 0 && !v1.options.some((o) => o.name === selectedSize)) {
                           setSelectedSize(v1.options[0].name);
                         }
@@ -409,7 +422,7 @@ export default function ProductDetail() {
                     <button
                       key={v2.id || v2.name}
                       type="button"
-                      onClick={() => setSelectedSize(v2.name)}
+                      onClick={() => { setSelectedSize(v2.name); setUserSelectedThumb(null); }}
                       className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
                         isSelected
                           ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
@@ -454,7 +467,11 @@ export default function ProductDetail() {
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-neutral-900">Jumlah:</span>
               <span className="text-xs text-neutral-500 font-normal">
-                Stok Ready: <strong className="text-neutral-900 font-medium">{currentStock} pcs</strong>
+                Stok Ready: {isOutOfStock ? (
+                  <strong className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded-md border border-red-200">Stok Habis (0 pcs)</strong>
+                ) : (
+                  <strong className="text-neutral-900 font-medium">{currentStock} pcs</strong>
+                )}
               </span>
             </div>
 
@@ -483,19 +500,29 @@ export default function ProductDetail() {
               <div className="hidden sm:grid grid-cols-2 gap-2.5 flex-1">
                 <button
                   type="button"
+                  disabled={isOutOfStock}
                   onClick={handleAddToCart}
-                  className="py-3 px-4 bg-white border border-neutral-900 hover:bg-neutral-50 text-neutral-950 font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-2 min-h-[44px]"
+                  className={`py-3 px-4 text-xs sm:text-sm font-bold rounded-xl transition flex items-center justify-center gap-2 min-h-[44px] ${
+                    isOutOfStock
+                      ? "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
+                      : "bg-white border border-neutral-900 hover:bg-neutral-50 text-neutral-950 cursor-pointer shadow-xs"
+                  }`}
                 >
                   <ShoppingBag className="w-4 h-4" />
-                  <span>+ Keranjang</span>
+                  <span>{isOutOfStock ? "Stok Habis" : "+ Keranjang"}</span>
                 </button>
                 <button
                   type="button"
+                  disabled={isOutOfStock}
                   onClick={handleBuyNow}
-                  className="py-3 px-4 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.99] text-white font-bold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-2 min-h-[44px] shadow-sm"
+                  className={`py-3 px-4 text-xs sm:text-sm font-bold rounded-xl transition flex items-center justify-center gap-2 min-h-[44px] shadow-sm ${
+                    isOutOfStock
+                      ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+                      : "bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.99] text-white cursor-pointer"
+                  }`}
                 >
                   <WhatsAppIcon className="w-4 h-4 fill-current" />
-                  <span>Pesan via WhatsApp</span>
+                  <span>{isOutOfStock ? "Stok Habis" : "Pesan via WhatsApp"}</span>
                 </button>
               </div>
             </div>
@@ -612,20 +639,30 @@ export default function ProductDetail() {
 
         <button
           type="button"
+          disabled={isOutOfStock}
           onClick={handleAddToCart}
-          className="flex-1 h-12 bg-white border border-neutral-900 text-neutral-950 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-2xs hover:bg-neutral-50 active:scale-[0.98] transition"
+          className={`flex-1 h-12 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition ${
+            isOutOfStock
+              ? "bg-neutral-200 text-neutral-400 border border-neutral-300 cursor-not-allowed"
+              : "bg-white border border-neutral-900 text-neutral-950 shadow-2xs hover:bg-neutral-50 active:scale-[0.98]"
+          }`}
         >
           <ShoppingBag className="w-4 h-4" />
-          <span>+ Keranjang</span>
+          <span>{isOutOfStock ? "Stok Habis" : "+ Keranjang"}</span>
         </button>
 
         <button
           type="button"
+          disabled={isOutOfStock}
           onClick={handleBuyNow}
-          className="flex-1 h-12 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition"
+          className={`flex-1 h-12 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition ${
+            isOutOfStock
+              ? "bg-neutral-300 text-neutral-500 cursor-not-allowed"
+              : "bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-white shadow-md"
+          }`}
         >
           <WhatsAppIcon className="w-4 h-4 fill-current" />
-          <span>Pesan WA</span>
+          <span>{isOutOfStock ? "Stok Habis" : "Pesan WA"}</span>
         </button>
       </div>
 

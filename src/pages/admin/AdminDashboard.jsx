@@ -32,6 +32,8 @@ export default function AdminDashboard() {
     products,
     categories,
     banners,
+    bannerLayout,
+    setBannerLayout,
     addProduct,
     updateProduct,
     deleteProduct,
@@ -597,6 +599,8 @@ export default function AdminDashboard() {
           {activeTab === 'banners' && (
             <BannerManager
               banners={banners}
+              bannerLayout={bannerLayout}
+              onUpdateBannerLayout={setBannerLayout}
               onAddBanner={addBanner}
               onUpdateBanner={updateBanner}
               onDeleteBanner={deleteBanner}

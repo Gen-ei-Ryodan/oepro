@@ -4,9 +4,10 @@ import initialCategoriesData from '../data/categories.json';
 
 const ProductContext = createContext(null);
 
-const STORAGE_KEY = 'oepro_dynamic_products_v3';
-const CATEGORIES_KEY = 'oepro_dynamic_categories_v3';
-const BANNERS_KEY = 'oepro_dynamic_banners_v3';
+const STORAGE_KEY = 'oepro_dynamic_products_v4';
+const CATEGORIES_KEY = 'oepro_dynamic_categories_v4';
+const BANNERS_KEY = 'oepro_dynamic_banners_v4';
+const BANNER_LAYOUT_KEY = 'oepro_banner_layout_v4';
 
 export const initialBannersData = [
   {
@@ -92,6 +93,19 @@ export function ProductProvider({ children }) {
     return initialBannersData;
   });
 
+  // 4. BANNER LAYOUT STATE ('boxed' | 'full')
+  const [bannerLayout, setBannerLayout] = useState(() => {
+    try {
+      const saved = localStorage.getItem(BANNER_LAYOUT_KEY);
+      if (saved === 'full' || saved === 'boxed') {
+        return saved;
+      }
+    } catch (e) {
+      console.warn('Failed to parse saved banner layout', e);
+    }
+    return 'boxed';
+  });
+
   // Sync state to localStorage whenever products change
   useEffect(() => {
     try {
@@ -118,6 +132,15 @@ export function ProductProvider({ children }) {
       console.error('Error saving banners to localStorage', e);
     }
   }, [banners]);
+
+  // Sync banner layout to localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(BANNER_LAYOUT_KEY, bannerLayout);
+    } catch (e) {
+      console.error('Error saving banner layout to localStorage', e);
+    }
+  }, [bannerLayout]);
 
   // --- PRODUCT ACTIONS ---
   const addProduct = (newProduct) => {
@@ -196,9 +219,11 @@ export function ProductProvider({ children }) {
     setProducts(initialProductsData);
     setCategories(initialCategoriesData);
     setBanners(initialBannersData);
+    setBannerLayout('boxed');
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(CATEGORIES_KEY);
     localStorage.removeItem(BANNERS_KEY);
+    localStorage.removeItem(BANNER_LAYOUT_KEY);
   };
 
   return (
@@ -207,6 +232,8 @@ export function ProductProvider({ children }) {
         products,
         categories,
         banners,
+        bannerLayout,
+        setBannerLayout,
         addProduct,
         updateProduct,
         deleteProduct,

@@ -10,7 +10,7 @@ import reviewsData from '../data/reviews.json';
 import storeInfo from '../data/store_info.json';
 
 export default function Home() {
-  const { products: productsData, categories: categoriesData, banners: bannersData } = useProducts();
+  const { products: productsData, categories: categoriesData, banners: bannersData, bannerLayout } = useProducts();
   const [selectedCat, setSelectedCat] = useState('all');
   const [sizeChartOpen, setSizeChartOpen] = useState(false);
   const [displayCount, setDisplayCount] = useState(12);
@@ -52,11 +52,11 @@ export default function Home() {
   return (
     <div className="space-y-6 sm:space-y-12 pb-24 sm:pb-16 bg-[#F0EDDF]">
       
-      {/* 1. COMPACT HERO SECTION (MULTIPLE BANNER SUPPORT) */}
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6">
-        <div className="relative rounded-2xl sm:rounded-3xl bg-[#3A3732] text-[#F0EDDF] overflow-hidden border border-[#655F58]/30 shadow-md h-[155px] xs:h-[170px] sm:h-auto sm:min-h-[250px] group/banner">
+      {/* 1. COMPACT HERO SECTION (MULTIPLE BANNER SUPPORT - FULL WIDTH / CONTAINED) */}
+      <div className={bannerLayout === 'full' ? "w-full pt-0" : "max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6"}>
+        <div className={`relative ${bannerLayout === 'full' ? 'w-full rounded-none border-y sm:min-h-[280px]' : 'rounded-2xl sm:rounded-3xl border sm:min-h-[250px]'} bg-[#3A3732] text-[#F0EDDF] overflow-hidden border-[#655F58]/30 shadow-md h-[160px] xs:h-[180px] sm:h-auto group/banner`}>
           
-          <div className="grid grid-cols-12 items-center h-full">
+          <div className={bannerLayout === 'full' ? "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 items-center h-full" : "grid grid-cols-12 items-center h-full"}>
             
             {/* Left Content (7 cols on mobile, 7 on desktop) */}
             <div className="col-span-7 sm:col-span-7 p-3 xs:p-4 sm:p-8 lg:p-12 space-y-1 xs:space-y-1.5 sm:space-y-4 z-10 flex flex-col justify-center h-full">
