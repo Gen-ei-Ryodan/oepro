@@ -130,7 +130,7 @@ export default function Catalog() {
     (wishlistOnly ? 1 : 0);
 
   return (
-    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-8 pb-32 sm:pb-16 bg-[#FBFBFA]">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-8 pb-32 sm:pb-16 bg-[#F0EDDF]">
       
       {/* 1. TOP HEADER & BREADCRUMB */}
       <div className="mb-4 sm:mb-6">

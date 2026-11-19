@@ -67,7 +67,7 @@ export default function AdminSidebar({
               <span className="font-bold text-base tracking-tight text-white group-hover:text-[#E7E2CE] transition">
                 OEPRO
               </span>
-              <span className="text-[9px] font-bold px-1.5 py-0.2 bg-[#075E54] text-white rounded-md tracking-wider uppercase">
+              <span className="text-[9px] font-bold px-1.5 py-0.5 bg-[#075E54] text-white rounded-md tracking-wider uppercase">
                 Admin
               </span>
             </div>
