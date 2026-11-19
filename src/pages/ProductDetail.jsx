@@ -110,7 +110,25 @@ export default function ProductDetail() {
     ? activeLevel2.stock
     : (product.stock || 50);
 
+  const isOutOfStock = currentStock <= 0;
+
+  const currentDiscountPercent = currentOriginalPrice > currentPrice
+    ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
+    : 0;
+
+  const activeVariantImage = (hasVariants && activeLevel2 && activeLevel2.image)
+    ? (activeLevel2.image.startsWith("http") || activeLevel2.image.startsWith("data:") ? activeLevel2.image : `/${activeLevel2.image.replace(/^\//, "")}`)
+    : (hasVariants && activeLevel1 && activeLevel1.image)
+      ? (activeLevel1.image.startsWith("http") || activeLevel1.image.startsWith("data:") ? activeLevel1.image : `/${activeLevel1.image.replace(/^\//, "")}`)
+      : null;
+
+  const currentDisplayImage = userSelectedThumb || activeVariantImage || images[selectedImageIndex] || images[0];
+
   const handleAddToCart = () => {
+    if (isOutOfStock) {
+      alert("Maaf, stok varian kombinasi ini sedang habis.");
+      return;
+    }
     const success = addToCart(product, selectedColor, selectedSize, quantity, currentPrice);
     if (success) {
       setIsCartOpen(true);
@@ -118,9 +136,13 @@ export default function ProductDetail() {
   };
 
   const handleBuyNow = () => {
+    if (isOutOfStock) {
+      alert("Maaf, stok varian kombinasi ini sedang habis.");
+      return;
+    }
     addToCart(product, selectedColor, selectedSize, quantity, currentPrice);
     const waUrl = createWhatsAppProductLink(product, selectedColor, selectedSize, quantity, currentPrice);
-    window.open(waUrl, '_blank');
+    window.open(waUrl, "_blank");
   };
 
   const handleColorChange = (c) => {

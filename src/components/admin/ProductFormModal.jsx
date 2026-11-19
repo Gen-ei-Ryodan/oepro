@@ -86,11 +86,13 @@ export const getTieredSizePrice = (categoryName, size, basePrice, baseOriginalPr
 };
 
 export default function ProductFormModal({
+  isOpen = false,
   product = null,
   categories = [],
   onSave,
   onClose,
 }) {
+  if (!isOpen) return null;
   const isEditing = Boolean(product && product.id);
   const initialCat = product?.category || (categories[0] ? categories[0].name : 'Kaos Polo Premium');
   const catDefaults = getCategoryDefaults(initialCat);
