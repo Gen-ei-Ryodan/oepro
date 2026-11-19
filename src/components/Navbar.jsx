@@ -34,12 +34,13 @@ export default function Navbar() {
   return (
     <>
       {/* 1. TOP ANNOUNCEMENT BAR */}
-      <div className="bg-neutral-950 text-neutral-300 text-[11px] sm:text-xs py-1.5 px-4 text-center font-normal tracking-wide flex items-center justify-center gap-2 sm:gap-3 border-b border-neutral-900">
-        <span className="font-mono bg-neutral-800 text-amber-300 px-1.5 py-0.5 rounded text-[10px] sm:text-[11px] border border-neutral-700">
+      {/* Desktop (>= sm): Stationary layout */}
+      <div className="hidden sm:flex bg-neutral-950 text-neutral-300 text-xs py-1.5 px-4 text-center font-normal tracking-wide items-center justify-center gap-3 border-b border-neutral-900">
+        <span className="font-mono bg-neutral-800 text-amber-300 px-1.5 py-0.5 rounded text-[11px] border border-neutral-700">
           OEPRO10
         </span>
         <span>Diskon 10% Koleksi Katun Murni</span>
-        <span className="hidden sm:inline text-neutral-600">|</span>
+        <span className="text-neutral-600">|</span>
         <a
           href={createWhatsAppGeneralLink()}
           target="_blank"
@@ -49,8 +50,59 @@ export default function Navbar() {
           <WhatsAppIcon className="w-3 h-3 fill-current" />
           <span>WA: 0811-3458-177</span>
         </a>
-        <span className="hidden sm:inline text-neutral-600">|</span>
-        <span className="hidden sm:inline text-neutral-400">Garansi Tukar Ukuran 7 Hari</span>
+        <span className="text-neutral-600">|</span>
+        <span className="text-neutral-400">Garansi Tukar Ukuran 7 Hari</span>
+      </div>
+
+      {/* Mobile (< sm): 1-Baris Ramping (h-7, text-[11px]), Smooth Continuous Running Marquee */}
+      <div className="sm:hidden bg-neutral-950 text-neutral-300 text-[11px] h-7 border-b border-neutral-900 overflow-hidden relative flex items-center select-none">
+        {/* Soft edge gradient fades for refined look */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-neutral-950 to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-neutral-950 to-transparent z-10" />
+
+        <div className="flex animate-marquee items-center whitespace-nowrap">
+          {/* Marquee Set A */}
+          <div className="flex items-center gap-3 px-3 shrink-0">
+            <span className="font-mono bg-neutral-800 text-amber-300 px-1.5 py-0.5 rounded text-[10px] border border-neutral-700">
+              OEPRO10
+            </span>
+            <span className="text-neutral-200">Diskon 10% Koleksi Katun Murni</span>
+            <span className="text-neutral-600">•</span>
+            <a
+              href={createWhatsAppGeneralLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-400 inline-flex items-center gap-1 font-semibold"
+            >
+              <WhatsAppIcon className="w-2.5 h-2.5 fill-current" />
+              <span>WA: 0811-3458-177</span>
+            </a>
+            <span className="text-neutral-600">•</span>
+            <span className="text-neutral-400">Garansi Tukar Ukuran 7 Hari</span>
+            <span className="text-neutral-600">•</span>
+          </div>
+
+          {/* Marquee Set B (Seamless clone) */}
+          <div className="flex items-center gap-3 px-3 shrink-0" aria-hidden="true">
+            <span className="font-mono bg-neutral-800 text-amber-300 px-1.5 py-0.5 rounded text-[10px] border border-neutral-700">
+              OEPRO10
+            </span>
+            <span className="text-neutral-200">Diskon 10% Koleksi Katun Murni</span>
+            <span className="text-neutral-600">•</span>
+            <a
+              href={createWhatsAppGeneralLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-emerald-400 inline-flex items-center gap-1 font-semibold"
+            >
+              <WhatsAppIcon className="w-2.5 h-2.5 fill-current" />
+              <span>WA: 0811-3458-177</span>
+            </a>
+            <span className="text-neutral-600">•</span>
+            <span className="text-neutral-400">Garansi Tukar Ukuran 7 Hari</span>
+            <span className="text-neutral-600">•</span>
+          </div>
+        </div>
       </div>
 
       {/* 2. MAIN HEADER */}
