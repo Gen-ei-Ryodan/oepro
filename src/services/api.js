@@ -32,23 +32,23 @@ axiosInstance.interceptors.response.use(
 );
 
 export const fetchBanners = () => axiosInstance.get('/banners');
-export const createBanner = (data) => axiosInstance.post('/banners', data, { headers: { 'Content-Type': 'multipart/form-data' } });
-export const updateBanner = (id, data) => axiosInstance.post(`/banners/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
-export const deleteBanner = (id) => axiosInstance.delete(`/banners/${id}`);
-export const reorderBanners = (orderData) => axiosInstance.put('/banners/reorder', orderData);
+export const createBanner = (data) => axiosInstance.post('/admin/banners', data, { headers: { 'Content-Type': 'multipart/form-data' } });
+export const updateBanner = (id, data) => axiosInstance.post(`/admin/banners/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+export const deleteBanner = (id) => axiosInstance.delete(`/admin/banners/${id}`);
+export const reorderBanners = (orderData) => axiosInstance.post('/admin/banners/reorder', orderData);
 
 export const fetchCategories = () => axiosInstance.get('/categories');
-export const createCategory = (data) => axiosInstance.post('/categories', data);
-export const updateCategory = (id, data) => axiosInstance.put(`/categories/${id}`, data);
-export const deleteCategory = (id) => axiosInstance.delete(`/categories/${id}`);
+export const createCategory = (data) => axiosInstance.post('/admin/categories', data);
+export const updateCategory = (id, data) => axiosInstance.put(`/admin/categories/${id}`, data);
+export const deleteCategory = (id) => axiosInstance.delete(`/admin/categories/${id}`);
 
 export const fetchProducts = (params) => axiosInstance.get('/products', { params });
 export const fetchProduct = (idOrSlug) => axiosInstance.get(`/products/${idOrSlug}`);
-export const createProduct = (data) => axiosInstance.post('/products', data, { headers: { 'Content-Type': 'multipart/form-data' } });
-export const updateProduct = (id, data) => axiosInstance.post(`/products/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
-export const deleteProduct = (id) => axiosInstance.delete(`/products/${id}`);
-export const addProductImage = (productId, formData) => axiosInstance.post(`/products/${productId}/images`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-export const removeProductImage = (imageId) => axiosInstance.delete(`/products/images/${imageId}`);
+export const createProduct = (data) => axiosInstance.post('/admin/products', data, { headers: { 'Content-Type': 'multipart/form-data' } });
+export const updateProduct = (id, data) => axiosInstance.post(`/admin/products/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } });
+export const deleteProduct = (id) => axiosInstance.delete(`/admin/products/${id}`);
+export const addProductImage = (productId, formData) => axiosInstance.post(`/admin/products/${productId}/images`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+export const removeProductImage = (imageId) => axiosInstance.delete(`/admin/products/images/${imageId}`);
 
 export const createOrder = (orderData) => axiosInstance.post('/orders', orderData);
 export const fetchOrders = () => axiosInstance.get('/admin/orders');

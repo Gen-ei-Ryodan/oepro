@@ -9,11 +9,27 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        // Validate request
-        $credentials = $request->validate([
-            'email' => 'required|email',
+        // Validate request - accept either email or username
+        $request->validate([
+            'email' => 'sometimes|email',
+            'username' => 'sometimes|string',
             'password' => 'required'
         ]);
+
+        $identifier = $request->input('email') ?? $request->input('username');
+
+        // Map 'admin' username to email
+        if ($identifier === 'admin') {
+            $identifier = 'admin@oepro.com';
+        }
+
+        // Determine if identifier is email or username
+        $field = filter_var($identifier, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        $credentials = [
+            $field => $identifier,
+            'password' => $request->input('password')
+        ];
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();

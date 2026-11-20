@@ -42,7 +42,12 @@ const cleanProductImages = (items) => {
   return items.map((p) => ({
     ...p,
     images: Array.isArray(p.images)
-      ? p.images.filter((img) => !img.toLowerCase().includes('total') && !img.toLowerCase().includes('worxt'))
+      ? p.images
+          .map((img) => {
+            const url = typeof img === 'string' ? img : (img?.url || img?.image_url || '');
+            return url;
+          })
+          .filter((url) => url && !url.toLowerCase().includes('total') && !url.toLowerCase().includes('worxt'))
       : [],
   }));
 };

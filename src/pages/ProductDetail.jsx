@@ -28,7 +28,7 @@ export default function ProductDetail() {
   const { addToCart, setIsCartOpen, totalItems } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
-  const product = productsData.find((p) => p.id === id);
+  const product = productsData.find((p) => p.id === id || p.slug === id || String(p.id) === String(id));
   const hasVariants = Array.isArray(product?.variants) && product.variants.length > 0;
   const has2LevelVariants = hasVariants && product.variants.some((variant) => Array.isArray(variant.options) && variant.options.length > 0);
 

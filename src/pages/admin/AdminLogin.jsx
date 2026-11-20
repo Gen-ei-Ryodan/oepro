@@ -12,13 +12,14 @@ export default function AdminLogin() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
+      e.preventDefault();
+      setError('');
+      setIsLoading(true);
 
-    try {
-      const res = await login({ username, password });
-      const { token, user } = res.data;
+      try {
+        const email = username.includes('@') ? username : 'admin@oepro.com';
+        const res = await login({ email, password });
+        const { token, user } = res.data;
 
       localStorage.setItem('oepro_admin_token', token);
       localStorage.setItem('oepro_admin_auth', JSON.stringify({
