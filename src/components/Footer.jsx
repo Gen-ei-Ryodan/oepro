@@ -41,7 +41,7 @@ export default function Footer() {
               </div>
               <div>
                 <h4 className="text-sm font-bold text-white mb-0.5">{item.title}</h4>
-                <p className="text-xs text-[#AABBB3] leading-relaxed">{item.desc}</p>
+                <p className="text-xs text-white leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
@@ -62,7 +62,7 @@ export default function Footer() {
                 OEPRO<span className="text-[#E0BC66]">.</span>
               </span>
             </div>
-            <p className="text-sm text-[#AABBB3] max-w-sm leading-relaxed">
+            <p className="text-sm text-white max-w-sm leading-relaxed">
               {storeInfo.tagline}. Menghadirkan pakaian esensial kasual berkelas dengan standar katun terbaik untuk kenyamanan aktivitas harian Anda sejak {storeInfo.established}.
             </p>
             <div className="pt-2 flex items-center gap-3">
@@ -70,7 +70,7 @@ export default function Footer() {
                 href={`https://instagram.com/${storeInfo.contact.instagram.replace('@', '')}`}
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-lg bg-white/5 border border-white/10 text-[#AABBB3] hover:text-white hover:bg-white/10 transition"
+                className="p-2 rounded-lg bg-white/5 border border-white/10 text-white hover:text-white hover:bg-white/10 transition"
                 aria-label="Instagram OEPRO"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@ export default function Footer() {
                 href={storeInfo.contact.shopee}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-orange-600/20 text-orange-400 hover:bg-orange-600/30 transition flex items-center gap-1 border border-orange-500/30"
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-orange-600/20 text-white hover:bg-orange-600/30 transition flex items-center gap-1 border border-orange-500/30"
               >
                 <span>Shopee Official</span>
                 <ExternalLink className="w-3 h-3" />
@@ -90,7 +90,7 @@ export default function Footer() {
                 href={storeInfo.contact.tokopedia}
                 target="_blank"
                 rel="noreferrer"
-                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#A8C4B5]/30 text-[#A8C4B5] hover:bg-[#A8C4B5]/50 hover:text-[#081F1C] transition flex items-center gap-1 border border-[#A8C4B5]/40"
+                className="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#A8C4B5]/30 text-white hover:bg-[#A8C4B5]/50 hover:text-[#081F1C] transition flex items-center gap-1 border border-[#A8C4B5]/40"
               >
                 <span>Tokopedia</span>
                 <ExternalLink className="w-3 h-3" />
@@ -140,13 +140,13 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <span className="text-[#AABBB3]">Garansi &amp; Retur Ukuran</span>
+                <span className="text-white">Garansi &amp; Retur Ukuran</span>
               </li>
               <li>
-                <span className="text-[#AABBB3]">Panduan Ukuran (Size Guide)</span>
+                <span className="text-white">Panduan Ukuran (Size Guide)</span>
               </li>
               <li>
-                <span className="text-[#AABBB3]">Syarat &amp; Ketentuan</span>
+                <span className="text-white">Syarat &amp; Ketentuan</span>
               </li>
             </ul>
           </div>
@@ -154,9 +154,9 @@ export default function Footer() {
           {/* Store Info */}
           <div>
             <h4 className="text-xs uppercase tracking-wider font-bold text-white mb-4">Studio &amp; Workshop</h4>
-            <div className="space-y-2.5 text-xs text-[#AABBB3]">
+            <div className="space-y-2.5 text-xs text-white">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-[#AABBB3] mt-0.5 flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
                 <span>
                   {storeInfo.location.address}, {storeInfo.location.city}, {storeInfo.location.province} {storeInfo.location.postal_code}
                 </span>
@@ -173,16 +173,16 @@ export default function Footer() {
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-[#AABBB3] flex-shrink-0" />
+                <Mail className="w-4 h-4 text-white flex-shrink-0" />
                 <span>{storeInfo.contact.email}</span>
               </div>
             </div>
 
             <div className="mt-5 pt-4 border-t border-[#AABBB3]/30">
-              <span className="text-[11px] font-semibold text-[#AABBB3] uppercase tracking-wider block mb-2">
+              <span className="text-[11px] font-semibold text-white uppercase tracking-wider block mb-2">
                 Metode Pembayaran
               </span>
-              <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-[#AABBB3] font-semibold">
+              <div className="flex flex-wrap gap-1.5 text-[10px] font-mono text-white font-semibold">
                 <span className="px-2 py-1 bg-[#696969]/30 rounded border border-[#696969]/70">QRIS</span>
                 <span className="px-2 py-1 bg-[#696969]/30 rounded border border-[#696969]/70">BCA VA</span>
                 <span className="px-2 py-1 bg-[#696969]/30 rounded border border-[#696969]/70">MANDIRI</span>
@@ -194,7 +194,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#AABBB3] gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white gap-4">
           <p>&copy; {new Date().getFullYear()} {storeInfo.legal_name}. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             <span>Dirancang khusus untuk pengalaman belanja nyaman &amp; minimalis</span>

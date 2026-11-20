@@ -51,7 +51,7 @@ export default function CartDrawer() {
             <button
               type="button"
               onClick={() => setIsCartOpen(false)}
-              className="p-2 text-[#AABBB3] hover:text-white rounded-lg hover:bg-[#1A3B33] transition min-w-[36px] min-h-[36px] flex items-center justify-center"
+              className="p-2 text-white hover:text-white rounded-lg hover:bg-[#1A3B33] transition min-w-[36px] min-h-[36px] flex items-center justify-center"
               aria-label="Tutup Keranjang"
             >
               <X className="w-5 h-5" />
@@ -61,12 +61,12 @@ export default function CartDrawer() {
           {/* Items List */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3">
             {items.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-12 text-[#AABBB3]">
+              <div className="h-full flex flex-col items-center justify-center text-center py-12 text-white">
                 <div className="w-14 h-14 rounded-full bg-[#24443B] flex items-center justify-center mb-3 text-2xl">
                   <ShoppingBag className="w-6 h-6 text-[#8FA39B]" />
                 </div>
                 <h3 className="text-sm font-semibold text-white mb-1">Keranjang masih kosong</h3>
-                <p className="text-xs text-[#AABBB3] max-w-xs mb-6">
+                <p className="text-xs text-white max-w-xs mb-6">
                   Jelajahi koleksi kaos polos katun 24s dan polo pique berkualitas kami sekarang.
                 </p>
                 <button
@@ -124,7 +124,7 @@ export default function CartDrawer() {
                           <span className="text-[11px] font-bold text-white px-2 py-0.5 bg-[#24443B] rounded border border-[#24443B]">
                             {item.size}
                           </span>
-                          <span className="text-[11px] font-medium text-[#AABBB3] px-2 py-0.5 bg-[#24443B] rounded flex items-center gap-1">
+                          <span className="text-[11px] font-medium text-white px-2 py-0.5 bg-[#24443B] rounded flex items-center gap-1">
                             <span
                               className="w-2 h-2 rounded-full inline-block border border-neutral-300"
                               style={{ backgroundColor: item.color.hex || '#000' }}
@@ -172,7 +172,7 @@ export default function CartDrawer() {
           {/* Footer Subtotal & WhatsApp Direct Action */}
           {items.length > 0 && (
             <div className="p-4 sm:p-5 pb-8 sm:pb-5 border-t border-[#24443B] bg-[#0E2B26] space-y-3">
-              <div className="flex items-center justify-between text-xs text-[#AABBB3]">
+              <div className="flex items-center justify-between text-xs text-white">
                 <span>Subtotal ({totalItems} item)</span>
                 <span className="text-base font-semibold text-white font-mono">
                   {formatRupiah(subtotal)}
@@ -180,7 +180,7 @@ export default function CartDrawer() {
               </div>
 
               <div className="flex items-center gap-1.5 text-[11px] text-[#DCE5E0] bg-[#24443B] px-2.5 py-1.5 rounded border border-[#24443B]">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#AABBB3] flex-shrink-0" />
+                <ShieldCheck className="w-3.5 h-3.5 text-white flex-shrink-0" />
                 <span>Pemesanan langsung terhubung ke WhatsApp Admin OEPRO.</span>
               </div>
 
@@ -195,7 +195,7 @@ export default function CartDrawer() {
                   <span>Pesan Sekarang via WhatsApp</span>
                 </button>
 
-                <div className="flex items-center justify-between text-xs text-[#AABBB3] pt-0.5">
+                <div className="flex items-center justify-between text-xs text-white pt-0.5">
                   <button
                     type="button"
                     onClick={handleViewCart}

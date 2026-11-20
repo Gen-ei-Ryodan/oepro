@@ -83,7 +83,7 @@ export default function ProductCard({ product }) {
           type="button"
           onClick={handleFavoriteToggle}
           className={`absolute top-2 right-2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#133129]/90 backdrop-blur-xs shadow-xs flex items-center justify-center transition-all z-10 ${
-            isFav ? 'text-red-500 scale-105' : 'text-[#AABBB3] hover:text-red-500 hover:scale-110'
+            isFav ? 'text-red-500 scale-105' : 'text-white hover:text-red-500 hover:scale-110'
           }`}
           title={isFav ? 'Hapus dari favorit' : 'Tambah ke favorit'}
           aria-label="Favorit"
@@ -109,7 +109,7 @@ export default function ProductCard({ product }) {
         
         {/* Category & Color Dots */}
         <div className="flex items-center justify-between gap-1 mb-1">
-          <span className="text-[10px] uppercase font-semibold text-[#AABBB3] tracking-wider">
+          <span className="text-[10px] uppercase font-semibold text-white tracking-wider">
             {product.category_slug === 'polo-shirt' ? 'Polo Pique' : product.category_slug === 'basic-longsleeve' ? 'Longsleeve' : 'Cotton 24s'}
           </span>
           
@@ -123,7 +123,7 @@ export default function ProductCard({ product }) {
               />
             ))}
             {product.colors && product.colors.length > 3 && (
-              <span className="text-[9px] text-[#AABBB3]">+{product.colors.length - 3}</span>
+              <span className="text-[9px] text-white">+{product.colors.length - 3}</span>
             )}
           </div>
         </div>
@@ -136,12 +136,12 @@ export default function ProductCard({ product }) {
         {/* Price & Rating */}
         <div className="mt-auto pt-1 flex items-baseline justify-between gap-1">
           <div>
-            <span className="text-[10px] text-[#AABBB3] block -mb-0.5 font-medium">Mulai</span>
+            <span className="text-[10px] text-white block -mb-0.5 font-medium">Mulai</span>
             <span className="text-xs sm:text-sm font-bold text-white font-mono">
               {formatRupiah(product.price)}
             </span>
             {product.original_price > product.price && (
-              <span className="text-[10px] text-[#AABBB3] line-through block font-mono">
+              <span className="text-[10px] text-white line-through block font-mono">
                 {formatRupiah(product.original_price)}
               </span>
             )}
@@ -155,7 +155,7 @@ export default function ProductCard({ product }) {
 
         {/* Mobile Quick Add icon button */}
         <div className="sm:hidden mt-2 pt-2 border-t border-[#24443B] flex items-center justify-between">
-          <span className="text-[10px] text-[#AABBB3] font-normal">Ready Stock</span>
+          <span className="text-[10px] text-white font-normal">Ready Stock</span>
           <button
             type="button"
             onClick={handleQuickAdd}

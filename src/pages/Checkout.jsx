@@ -63,7 +63,7 @@ export default function Checkout() {
         <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
           Pemesanan Langsung via WhatsApp
         </h1>
-        <p className="text-xs text-[#AABBB3] mt-1">
+        <p className="text-xs text-white mt-1">
           Pesanan diteruskan ke WhatsApp Admin OEPRO untuk konfirmasi stok, ongkos kirim, dan pembayaran.
         </p>
       </div>

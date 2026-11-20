@@ -71,7 +71,7 @@ export default function SizeChartModal({ isOpen, onClose, initialTab = "polo" })
         {/* Backdrop */}
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity" onClick={onClose} />
 
-        <div className="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 z-10 animate-scale-up">
+        <div className="relative bg-white rounded-2xl max-w-xl w-full p-6 sm:p-7 shadow-2xl border border-slate-200 z-10 animate-scale-up text-slate-900">
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-4">
             <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export default function SizeChartModal({ isOpen, onClose, initialTab = "polo" })
             </div>
 
             <div className="overflow-x-auto border border-slate-200 rounded-xl max-h-[300px] overflow-y-auto">
-              <table className="w-full text-xs text-left">
+              <table className="w-full text-xs text-left text-slate-900">
                 <thead className="bg-slate-50 text-slate-700 font-bold border-b border-slate-200 uppercase tracking-wider text-[11px] sticky top-0 z-10">
                   <tr>
                     <th className="py-2.5 px-3 bg-slate-50">Size</th>

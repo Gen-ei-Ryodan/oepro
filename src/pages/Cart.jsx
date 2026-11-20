@@ -68,7 +68,7 @@ export default function Cart() {
           <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             Keranjang Belanja
           </h1>
-          <p className="text-xs text-[#AABBB3] mt-0.5">
+          <p className="text-xs text-white mt-0.5">
             Total {totalItems} item siap diproses langsung ke Admin WhatsApp
           </p>
         </div>

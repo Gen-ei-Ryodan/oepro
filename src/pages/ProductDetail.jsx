@@ -67,7 +67,7 @@ export default function ProductDetail() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
         <h2 className="text-xl font-bold text-white mb-2">Produk Tidak Ditemukan</h2>
-        <p className="text-sm text-[#AABBB3] mb-6">Produk yang Anda cari mungkin sudah tidak tersedia.</p>
+        <p className="text-sm text-white mb-6">Produk yang Anda cari mungkin sudah tidak tersedia.</p>
         <Link
           to="/catalog"
           className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-full text-xs font-semibold"
@@ -234,7 +234,7 @@ export default function ProductDetail() {
       </div>
 
       {/* Desktop Breadcrumb */}
-      <nav className="hidden sm:flex items-center gap-2 text-xs text-[#AABBB3] mb-6">
+      <nav className="hidden sm:flex items-center gap-2 text-xs text-white mb-6">
         <Link to="/" className="hover:text-white transition">Beranda</Link>
         <span>/</span>
         <Link to="/catalog" className="hover:text-white transition">Katalog</Link>
@@ -331,14 +331,14 @@ export default function ProductDetail() {
             </h1>
 
             {/* Rating & SKU */}
-            <div className="flex items-center gap-3 mt-2 text-xs text-[#AABBB3]">
+            <div className="flex items-center gap-3 mt-2 text-xs text-white">
               <div className="flex items-center gap-1 font-semibold text-white">
                 <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                 <span>{product.rating}</span>
                 <span className="text-[#8FA39B] font-normal">({product.reviews_count || 120} ulasan)</span>
               </div>
               <span>&bull;</span>
-              <span className="text-[#AABBB3]">Terjual {product.sold_count} pcs</span>
+              <span className="text-white">Terjual {product.sold_count} pcs</span>
               <span>&bull;</span>
               <span className="font-mono text-[#8FA39B]">SKU: {product.sku}</span>
             </div>
@@ -373,7 +373,7 @@ export default function ProductDetail() {
           <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-white">
-                Pilihan Warna: <span className="font-normal text-[#AABBB3]">{selectedColor ? (selectedColor.name || selectedColor) : ''}</span>
+                Pilihan Warna: <span className="font-normal text-white">{selectedColor ? (selectedColor.name || selectedColor) : ''}</span>
               </span>
               <span className="text-[11px] text-[#8FA39B]">{product.colors ? product.colors.length : 0} Warna</span>
             </div>
@@ -438,13 +438,13 @@ export default function ProductDetail() {
           <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-white">
-                Pilih Ukuran: <span className="font-mono text-[#AABBB3] font-bold">{selectedSize}</span>
+                Pilih Ukuran: <span className="font-mono text-white font-bold">{selectedSize}</span>
               </span>
 
               <button
                 type="button"
                 onClick={() => setSizeChartOpen(true)}
-                className="text-white hover:text-[#AABBB3] font-semibold underline flex items-center gap-1 text-xs"
+                className="text-white hover:text-white font-semibold underline flex items-center gap-1 text-xs"
               >
                 <Ruler className="w-3.5 h-3.5" />
                 <span>Panduan Ukuran</span>
@@ -504,7 +504,7 @@ export default function ProductDetail() {
           <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-white">Jumlah:</span>
-              <span className="text-xs text-[#AABBB3] font-normal">
+              <span className="text-xs text-white font-normal">
                 Stok Ready: {isOutOfStock ? (
                   <strong className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded-md border border-red-200">Stok Habis (0 pcs)</strong>
                 ) : (
@@ -567,7 +567,7 @@ export default function ProductDetail() {
           </div>
 
           {/* Guarantees Strip */}
-          <div className="p-3.5 rounded-xl bg-[#24443B] border border-[#2E5147] text-xs text-[#AABBB3] space-y-1.5">
+          <div className="p-3.5 rounded-xl bg-[#24443B] border border-[#2E5147] text-xs text-white space-y-1.5">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <span><strong>Garansi Tukar Ukuran 7 Hari:</strong> Tidak pas? Kami tukar tanpa dipersulit.</span>
@@ -618,7 +618,7 @@ export default function ProductDetail() {
             <div className="space-y-3">
               <p>{product.description}</p>
               {product.features && (
-                <ul className="space-y-1 pl-4 list-disc text-[#AABBB3]">
+                <ul className="space-y-1 pl-4 list-disc text-white">
                   {product.features.map((feat, i) => (
                     <li key={i}>{feat}</li>
                   ))}
@@ -641,7 +641,7 @@ export default function ProductDetail() {
           )}
 
           {activeTab === 'shipping' && (
-            <p className="text-xs text-[#AABBB3]">
+            <p className="text-xs text-white">
               Garansi penukaran ukuran berlaku 7 hari kerja sejak barang diterima dengan syarat tag masih terpasang dan baju belum dicuci.
             </p>
           )}

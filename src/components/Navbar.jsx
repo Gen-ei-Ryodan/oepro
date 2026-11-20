@@ -40,7 +40,7 @@ export default function Navbar() {
           oepro10
         </span>
         <span>Diskon 10% Koleksi Katun Murni</span>
-        <span className="text-[#AABBB3]">|</span>
+        <span className="text-white">|</span>
         <a
           href={createWhatsAppGeneralLink()}
           target="_blank"
@@ -50,7 +50,7 @@ export default function Navbar() {
           <WhatsAppIcon className="w-3 h-3 fill-current text-[#A8C4B5]" />
           <span>WA: 0811-3458-177</span>
         </a>
-        <span className="text-[#AABBB3]">|</span>
+        <span className="text-white">|</span>
         <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
       </div>
 
@@ -67,7 +67,7 @@ export default function Navbar() {
               oepro10
             </span>
             <span className="text-white">Diskon 10% Koleksi Katun Murni</span>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
             <a
               href={createWhatsAppGeneralLink()}
               target="_blank"
@@ -77,9 +77,9 @@ export default function Navbar() {
               <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
               <span>WA: 0811-3458-177</span>
             </a>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
             <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
           </div>
 
           {/* Marquee Set B (Seamless clone) */}
@@ -88,7 +88,7 @@ export default function Navbar() {
               oepro10
             </span>
             <span className="text-white">Diskon 10% Koleksi Katun Murni</span>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
             <a
               href={createWhatsAppGeneralLink()}
               target="_blank"
@@ -98,9 +98,9 @@ export default function Navbar() {
               <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
               <span>WA: 0811-3458-177</span>
             </a>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
             <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
-            <span className="text-[#AABBB3]">•</span>
+            <span className="text-white">•</span>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function Navbar() {
                 <span className="text-base sm:text-xl font-bold tracking-tight text-white group-hover:text-[#A8C4B5] transition leading-none">
                   oepro
                 </span>
-                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] font-medium text-[#AABBB3] lowercase mt-0.5">
+                <span className="text-[9px] sm:text-[10px] tracking-[0.2em] font-medium text-white lowercase mt-0.5">
                   cotton basic
                 </span>
               </div>
@@ -139,7 +139,7 @@ export default function Navbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 sm:py-2.5 text-xs sm:text-sm bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-[#0E2B26] focus:border-[#A8C4B5] focus:outline-hidden focus:ring-1 focus:ring-[#A8C4B5] transition shadow-2xs"
                 />
-                <Search className="w-4 h-4 text-[#AABBB3] absolute left-3.5 top-2.5 sm:top-3 pointer-events-none" />
+                <Search className="w-4 h-4 text-white absolute left-3.5 top-2.5 sm:top-3 pointer-events-none" />
               </form>
             </div>
 
@@ -166,7 +166,7 @@ export default function Navbar() {
                 title="Favorit"
                 aria-label="Favorit"
               >
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-[#AABBB3] hover:text-red-500 transition" />
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-white hover:text-red-500 transition" />
                 {wishlistCount > 0 && (
                   <span className="absolute top-0.5 right-0.5 bg-red-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                     {wishlistCount}
@@ -206,7 +206,7 @@ export default function Navbar() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-9 pr-3 py-2 text-xs bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-[#0E2B26] focus:border-[#A8C4B5] focus:outline-hidden transition shadow-2xs"
                 />
-                <Search className="w-3.5 h-3.5 text-[#AABBB3] absolute left-3 top-2.5 pointer-events-none" />
+                <Search className="w-3.5 h-3.5 text-white absolute left-3 top-2.5 pointer-events-none" />
               </div>
               <button
                 type="button"

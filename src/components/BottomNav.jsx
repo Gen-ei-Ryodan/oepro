@@ -23,13 +23,13 @@ export default function BottomNav() {
   return (
     <nav
       aria-label="Mobile Navigation"
-      className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[#133129]/95 backdrop-blur-md text-[#AABBB3] rounded-full px-6 py-2.5 shadow-2xl flex items-center gap-8 border border-[#AABBB3]/40"
+      className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 bg-[#133129]/95 backdrop-blur-md text-white rounded-full px-6 py-2.5 shadow-2xl flex items-center gap-8 border border-[#AABBB3]/40"
     >
       {/* 1. Beranda */}
       <Link
         to="/"
         className={`flex flex-col items-center justify-center transition-all p-1.5 rounded-full ${
-          isHome ? 'text-[#A8C4B5] scale-110' : 'text-[#AABBB3] hover:text-white'
+          isHome ? 'text-[#A8C4B5] scale-110' : 'text-white hover:text-white'
         }`}
         title="Beranda"
         aria-label="Beranda"
@@ -41,7 +41,7 @@ export default function BottomNav() {
       <Link
         to="/catalog"
         className={`flex flex-col items-center justify-center transition-all p-1.5 rounded-full ${
-          isCatalog ? 'text-[#A8C4B5] scale-110' : 'text-[#AABBB3] hover:text-white'
+          isCatalog ? 'text-[#A8C4B5] scale-110' : 'text-white hover:text-white'
         }`}
         title="Katalog Produk"
         aria-label="Katalog"
@@ -53,7 +53,7 @@ export default function BottomNav() {
       <button
         type="button"
         onClick={() => setIsCartOpen(true)}
-        className="relative flex flex-col items-center justify-center transition-all p-1.5 rounded-full text-[#AABBB3] hover:text-white"
+        className="relative flex flex-col items-center justify-center transition-all p-1.5 rounded-full text-white hover:text-white"
         title="Keranjang Belanja"
         aria-label="Keranjang"
       >

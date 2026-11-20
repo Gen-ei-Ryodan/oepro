@@ -2,7 +2,7 @@
 
 **Brand:** OEPRO (Oepro Cotton Basic & Apparel)  
 **Tagline:** Pure Cotton Essentials & Premium Lacoste Pique  
-**Workshop/Store:** Jl. Karah Tama Asri II No. 24, Karah, Kec. Jambangan, Surabaya, Jawa Timur  
+**Workshop/Store:** Jl. Karah Tama Asri II No. 26, Karah, Kec. Jambangan, Surabaya, Jawa Timur  
 **Kontak:** +62 811-3458-177 | Instagram: @oepro.store  
 **Marketplace:** Shopee: https://shopee.co.id/oepro | Tokopedia: https://www.tokopedia.com/oepro  
 

@@ -110,7 +110,7 @@ export default function Home() {
               </div>
 
               {/* Micro USPs */}
-              <div className="hidden sm:flex items-center gap-4 text-xs text-[#AABBB3] pt-2">
+              <div className="hidden sm:flex items-center gap-4 text-xs text-white pt-2">
                 <span className="flex items-center gap-1">
                   <Check className="w-3 h-3 text-[#E0BC66]" /> 100% Cotton
                 </span>
@@ -260,14 +260,14 @@ export default function Home() {
                 ? 'Koleksi Basic T-Shirt 24s'
                 : 'Koleksi Basic Longsleeve'}
             </h2>
-            <span className="text-xs text-[#AABBB3] font-medium font-mono">
+            <span className="text-xs text-white font-medium font-mono">
               ({filteredProducts.length} varian)
             </span>
           </div>
 
           <Link
             to="/catalog"
-            className="text-xs font-medium text-[#AABBB3] hover:text-[#DCE5E0] sm:hidden"
+            className="text-xs font-medium text-white hover:text-[#DCE5E0] sm:hidden"
           >
             Filter &amp; Urutkan &rarr;
           </Link>
@@ -306,7 +306,7 @@ export default function Home() {
               <h3 className="text-xs sm:text-sm font-bold text-white">
                 Bingung Menentukan Ukuran Kaos atau Polo?
               </h3>
-              <p className="text-[11px] sm:text-xs text-[#AABBB3]">
+              <p className="text-[11px] sm:text-xs text-white">
                 Gunakan tabel metrik LD &amp; PB centimeter serta foto panduan ukuran resmi OEPRO.
               </p>
             </div>
@@ -349,7 +349,7 @@ export default function Home() {
               </div>
               <div className="space-y-1">
                 <h4 className="text-xs sm:text-sm font-bold text-white">100% Katun Combed 24s</h4>
-                <p className="text-[11px] sm:text-xs text-[#AABBB3] leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-white leading-relaxed">
                   Gramasi seimbang 175-185 gsm, serat katun disisir halus, tidak menerawang dan sangat adem dipakai harian di iklim tropis.
                 </p>
                 <Link to="/catalog?cat=basic-tshirt" className="text-[11px] font-semibold text-[#E0BC66] hover:underline inline-block pt-1">
@@ -369,7 +369,7 @@ export default function Home() {
               </div>
               <div className="space-y-1">
                 <h4 className="text-xs sm:text-sm font-bold text-white">Lacoste Pique Hexagon</h4>
-                <p className="text-[11px] sm:text-xs text-[#AABBB3] leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-white leading-relaxed">
                   Rajutan pori hexagon dengan kerah rajut 4 lapis anti-melar. Tampilan rapi untuk kerja maupun hangout santai.
                 </p>
                 <Link to="/catalog?cat=polo-shirt" className="text-[11px] font-semibold text-[#E0BC66] hover:underline inline-block pt-1">
@@ -405,7 +405,7 @@ export default function Home() {
               <p className="text-[#DCE5E0] leading-relaxed text-[11px] sm:text-xs">
                 &ldquo;{rev.comment}&rdquo;
               </p>
-              <div className="pt-2 border-t border-[#24443B] flex items-center justify-between text-[10px] text-[#AABBB3]">
+              <div className="pt-2 border-t border-[#24443B] flex items-center justify-between text-[10px] text-white">
                 <span className="font-semibold text-white">{rev.user}</span>
                 <span>{rev.city}</span>
               </div>

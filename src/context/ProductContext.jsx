@@ -6,7 +6,9 @@ const ProductContext = createContext(null);
 
 const STORAGE_KEY = 'oepro_dynamic_products_v5';
 const CATEGORIES_KEY = 'oepro_dynamic_categories_v4';
-const BANNERS_KEY = 'oepro_dynamic_banners_v5';
+const BANNERS_KEY = 'oepro_dynamic_banners_v6';
+const BANNERS_VERSION = '2'; // bump to force reset to new defaults (banner-2 disabled)
+const BANNERS_VERSION_KEY = 'oepro_banners_version';
 const BANNER_LAYOUT_KEY = 'oepro_banner_layout_v4';
 
 export const initialBannersData = [
@@ -31,7 +33,7 @@ export const initialBannersData = [
     ctaLink: '/catalog?cat=polo-shirt',
     image: '/assets/products/polo/ruby-red/ruby-red-oepro.webp',
     imageLayout: 'contained',
-    isActive: true,
+    isActive: false,
     order: 2,
   },
 ];
@@ -82,6 +84,17 @@ export function ProductProvider({ children }) {
   // 3. BANNERS STATE
   const [banners, setBanners] = useState(() => {
     try {
+      // Reset to defaults if the stored version is older than the current one
+      // (forces stale localStorage — e.g. banner-2 still active — to be replaced).
+      const savedVersion = localStorage.getItem(BANNERS_VERSION_KEY);
+      if (savedVersion !== BANNERS_VERSION) {
+        localStorage.removeItem(BANNERS_KEY);
+        // clean up legacy keys
+        localStorage.removeItem('oepro_dynamic_banners_v4');
+        localStorage.removeItem('oepro_dynamic_banners_v5');
+        localStorage.setItem(BANNERS_VERSION_KEY, BANNERS_VERSION);
+        return initialBannersData;
+      }
       const saved = localStorage.getItem(BANNERS_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
