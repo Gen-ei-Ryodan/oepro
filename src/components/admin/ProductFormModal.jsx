@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useProducts } from '../../context/ProductContext';
 import {
   X,
   Plus,
@@ -629,13 +630,60 @@ export default function ProductFormModal({
   };
 
   // Reorder gallery images via drag & drop (index 0 = foto utama/cover)
+  const { updateProduct } = useProducts();
+
+  const compressImage = (file, maxWidth, quality, callback) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ratio = img.width / img.height;
+        if (img.width > maxWidth) {
+          canvas.width = maxWidth;
+          canvas.height = maxWidth / ratio;
+        } else {
+          canvas.width = img.width;
+          canvas.height = img.height;
+        }
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          callback(blob);
+        }, 'image/jpeg', quality);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const compressAndUploadImage = (event, maxWidth, quality) => {
+    const file = event.target.files[0];
+    if (file) {
+      compressImage(file, maxWidth, quality, (compressedBlob) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const newImageUrl = event.target.result;
+          if (newImageUrl.length + (localStorage.getItem('oepro_dynamic_products_v5')?.length || 0) > 5 * 1024 * 1024) {
+            alert('Gambar melampaui batasan kapasitas penyimpanan!');
+          } else {
+            setFormData((prev) => ({ ...prev, images: [newImageUrl, ...prev.images] }));
+          }
+        };
+        reader.readAsDataURL(compressedBlob);
+      });
+    }
+  };
+
   const reorderImage = (from, to) => {
     if (from === null || to === null || from === to) return;
     setFormData((prev) => {
       const next = [...prev.images];
       const [moved] = next.splice(from, 1);
       next.splice(to, 0, moved);
-      return { ...prev, images: next };
+      const updatedFormData = { ...prev, images: next };
+      updateProduct(formData.id, { images: next }); // Update context globally
+      return updatedFormData;
     });
   };
 

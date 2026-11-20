@@ -70,6 +70,31 @@ export default function BannerManager({
     setIsModalOpen(true);
   };
 
+  const compressImage = (file, maxWidth, quality, callback) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ratio = img.width / img.height;
+        if (img.width > maxWidth) {
+          canvas.width = maxWidth;
+          canvas.height = maxWidth / ratio;
+        } else {
+          canvas.width = img.width;
+          canvas.height = img.height;
+        }
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob((blob) => {
+          callback(blob);
+        }, 'image/jpeg', quality);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleImageUpload = (e) => {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
@@ -79,11 +104,13 @@ export default function BannerManager({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      setFormData((prev) => ({ ...prev, image: event.target.result }));
-    };
-    reader.readAsDataURL(file);
+    compressImage(file, 1600, 0.8, (compressedBlob) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setFormData((prev) => ({ ...prev, image: event.target.result }));
+      };
+      reader.readAsDataURL(compressedBlob);
+    });
   };
 
   const handleSubmit = (e) => {

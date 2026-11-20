@@ -49,8 +49,10 @@ const cleanProductImages = (items) => {
 export function ProductProvider({ children }) {
   // 1. PRODUCTS STATE
   const [products, setProducts] = useState(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
+    
+try {
+       localStorage.removeItem('oepro_dynamic_products_v4');
+       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -67,8 +69,9 @@ export function ProductProvider({ children }) {
 
   // 2. CATEGORIES STATE
   const [categories, setCategories] = useState(() => {
-    try {
-      const saved = localStorage.getItem(CATEGORIES_KEY);
+try {
+       localStorage.removeItem('oepro_dynamic_products_v4');
+       const saved = localStorage.getItem(CATEGORIES_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -83,8 +86,10 @@ export function ProductProvider({ children }) {
 
   // 3. BANNERS STATE
   const [banners, setBanners] = useState(() => {
-    try {
-      // Clean up the temporary v6 key created during earlier experiments
+    
+try {
+       localStorage.removeItem('oepro_dynamic_banners_v4');
+       localStorage.removeItem('oepro_dynamic_banners_v6');
       localStorage.removeItem('oepro_dynamic_banners_v6');
       localStorage.removeItem('oepro_banners_version');
       const saved = localStorage.getItem(BANNERS_KEY);
@@ -102,8 +107,10 @@ export function ProductProvider({ children }) {
 
   // 4. BANNER LAYOUT STATE ('boxed' | 'full')
   const [bannerLayout, setBannerLayout] = useState(() => {
-    try {
-      const saved = localStorage.getItem(BANNER_LAYOUT_KEY);
+try {
+       localStorage.removeItem('oepro_dynamic_banners_v4');
+       localStorage.removeItem('oepro_dynamic_banners_v6');
+       const saved = localStorage.getItem(BANNER_LAYOUT_KEY);
       if (saved === 'full' || saved === 'boxed') {
         return saved;
       }
@@ -112,6 +119,20 @@ export function ProductProvider({ children }) {
     }
     return 'boxed';
   });
+
+  useEffect(() => {
+    const handleStorage = (e) => {
+      if (!e.newValue) return;
+      try {
+        if (e.key === BANNERS_KEY) setBanners(JSON.parse(e.newValue));
+        if (e.key === STORAGE_KEY) setProducts(cleanProductImages(JSON.parse(e.newValue)));
+        if (e.key === CATEGORIES_KEY) setCategories(JSON.parse(e.newValue));
+        if (e.key === BANNER_LAYOUT_KEY) setBannerLayout(e.newValue);
+      } catch (err) {}
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
 
   // Sync state to localStorage whenever products change
   useEffect(() => {

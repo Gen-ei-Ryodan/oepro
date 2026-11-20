@@ -90,9 +90,9 @@ export default function ProductDetail() {
     }).format(number);
   };
 
-  const images = product.images && product.images.length > 0
-    ? product.images.map((img) => `/${img.replace(/^\//, '')}`)
-    : ['/assets/brand/oepro-logo.webp'];
+const images = (product.images && product.images.length > 0
+    ? product.images
+    : ['/assets/brand/oepro-logo.webp']).map((img) => `/${img.replace(/^\//, '')}`);
 
   const activeLevel1 = has2LevelVariants
     ? product.variants.find((v) => v.name === (selectedColor?.name || selectedColor)) || product.variants[0]
