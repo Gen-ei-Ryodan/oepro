@@ -1,8 +1,16 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
+
+  # API routes -> Laravel backend
+  RewriteRule ^api/(.*)$ backend/public/index.php [L,QSA]
+  RewriteRule ^api$ backend/public/index.php [L,QSA]
+
+  # Storage -> Laravel storage
+  RewriteRule ^storage/(.*)$ backend/public/storage/$1 [L]
+
+  # React SPA: rewrite non-existing files/dirs to index.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule ^ index.html [L]
 </IfModule>
