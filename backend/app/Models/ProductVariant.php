@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductVariant extends Model
 {
-    //
+    protected $guarded = [];
+
+    protected $casts = [
+        'price' => 'float',
+        'stock' => 'integer',
+    ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

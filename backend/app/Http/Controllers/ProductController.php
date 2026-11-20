@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\ProductImage;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -29,6 +33,10 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'variants' => 'sometimes|array'
         ]);
+
+        if (empty($validatedData['slug'])) {
+            $validatedData['slug'] = Str::slug($validatedData['name']) . '-' . uniqid();
+        }
 
         $product = Product::create($validatedData);
 
@@ -57,7 +65,7 @@ class ProductController extends Controller
         // Update or create variants
         if ($request->has('variants')) {
             foreach ($request->variants as $variantData) {
-                $product->variants()->updateOrCreate(['id' => $variantData['id']], $variantData);
+                $product->variants()->updateOrCreate(['id' => $variantData['id'] ?? null], $variantData);
             }
         }
 

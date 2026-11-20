@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -31,11 +32,11 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
-        $validatedData = $request->validate([
-            'status' => 'required|string'
+        $request->validate([
+            'status' => 'required|string|in:pending,processing,completed,cancelled'
         ]);
 
-        $order->update($validatedData);
+        $order->update(['status' => $request->status]);
 
         return response()->json($order);
     }
