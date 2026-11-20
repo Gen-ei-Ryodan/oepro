@@ -54,7 +54,9 @@ export function ProductProvider({ children }) {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return cleanProductImages(parsed);
+          // Migration: normalize all product ratings to 4.9
+          const normalized = parsed.map((p) => ({ ...p, rating: 4.9 }));
+          return cleanProductImages(normalized);
         }
       }
     } catch (e) {
