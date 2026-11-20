@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Star, ShoppingBag, Heart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { resolveImageUrl } from '../services/api';
 
 export default function ProductCard({ product }) {
   const { addToCart, setIsCartOpen } = useCart();
@@ -38,7 +39,7 @@ export default function ProductCard({ product }) {
   };
 
   const primaryImage = product.images && product.images.length > 0
-    ? `/${product.images[0].replace(/^\//, '')}`
+    ? resolveImageUrl(product.images[0])
     : '/assets/brand/oepro-logo.webp';
 
   return (

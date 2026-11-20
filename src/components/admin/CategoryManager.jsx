@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
   AlertCircle,
 } from 'lucide-react';
+import { resolveImageUrl } from '../../services/api';
 
 export default function CategoryManager({
   categories,
@@ -157,11 +158,11 @@ export default function CategoryManager({
 
       {/* Categories Cards / Table */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {categories.map((cat) => {
-          const count = getProductCount(cat.slug, cat.name);
-          const imgSrc = cat.image
-            ? (cat.image.startsWith('http') || cat.image.startsWith('data:') ? cat.image : `/${cat.image.replace(/^\//, '')}`)
-            : '/assets/brand/oepro-logo.webp';
+{categories.map((cat) => {
+            const count = getProductCount(cat.slug, cat.name);
+            const imgSrc = cat.image
+              ? resolveImageUrl(cat.image)
+              : '/assets/brand/oepro-logo.webp';
 
           return (
             <div
@@ -324,7 +325,7 @@ export default function CategoryManager({
                   <div className="w-16 h-16 rounded-xl border border-neutral-200 overflow-hidden bg-neutral-100 shrink-0">
                     {formData.image ? (
                       <img
-                        src={formData.image.startsWith('http') || formData.image.startsWith('data:') ? formData.image : `/${formData.image.replace(/^\//, '')}`}
+                        src={resolveImageUrl(formData.image)}
                         alt="Preview"
                         className="w-full h-full object-cover"
                       />

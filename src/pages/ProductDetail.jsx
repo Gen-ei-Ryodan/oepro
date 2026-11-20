@@ -19,6 +19,7 @@ import { useProducts } from '../context/ProductContext';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { createWhatsAppProductLink } from '../utils/whatsapp';
 import { getProductPriceBySize, getProductOriginalPriceBySize } from '../utils/pricing';
+import { resolveImageUrl } from '../services/api';
 
 export default function ProductDetail() {
   const { products: productsData } = useProducts();
@@ -92,7 +93,7 @@ export default function ProductDetail() {
 
 const images = (product.images && product.images.length > 0
     ? product.images
-    : ['/assets/brand/oepro-logo.webp']).map((img) => `/${img.replace(/^\//, '')}`);
+    : ['/assets/brand/oepro-logo.webp']).map((img) => resolveImageUrl(img));
 
   const activeLevel1 = has2LevelVariants
     ? product.variants.find((v) => v.name === (selectedColor?.name || selectedColor)) || product.variants[0]
@@ -129,13 +130,13 @@ const images = (product.images && product.images.length > 0
     ? Math.round(((currentOriginalPrice - currentPrice) / currentOriginalPrice) * 100)
     : 0;
 
-  const activeVariantImage = (activeLevel2 && activeLevel2.image)
-    ? (activeLevel2.image.startsWith("http") || activeLevel2.image.startsWith("data:") ? activeLevel2.image : `/${activeLevel2.image.replace(/^\//, "")}`)
+const activeVariantImage = (activeLevel2 && activeLevel2.image)
+    ? resolveImageUrl(activeLevel2.image)
     : (activeFlatVariant && activeFlatVariant.image)
-      ? (activeFlatVariant.image.startsWith("http") || activeFlatVariant.image.startsWith("data:") ? activeFlatVariant.image : `/${activeFlatVariant.image.replace(/^\//, "")}`)
-    : (activeLevel1 && activeLevel1.image)
-      ? (activeLevel1.image.startsWith("http") || activeLevel1.image.startsWith("data:") ? activeLevel1.image : `/${activeLevel1.image.replace(/^\//, "")}`)
-      : null;
+      ? resolveImageUrl(activeFlatVariant.image)
+      : (activeLevel1 && activeLevel1.image)
+        ? resolveImageUrl(activeLevel1.image)
+        : null;
 
   const currentDisplayImage = userSelectedThumb || images[selectedImageIndex] || images[0] || activeVariantImage;
 
@@ -300,7 +301,7 @@ const images = (product.images && product.images.length > 0
                 <button
                   key={idx}
                   type="button"
-                  onClick={() => { setSelectedImageIndex(idx); setUserSelectedThumb(images[idx]); }}
+                  onClick={() => { setSelectedImageIndex(idx); setUserSelectedThumb(img); }}
                   className={`w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden border transition-all flex-shrink-0 bg-[#F8F8F7] relative p-1 flex items-center justify-center ${
                     selectedImageIndex === idx
                       ? 'border-neutral-900 ring-2 ring-[#A8C4B5]'

@@ -25,6 +25,7 @@ import ProductFormModal from '../../components/admin/ProductFormModal';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import CategoryManager from '../../components/admin/CategoryManager';
 import BannerManager from '../../components/admin/BannerManager';
+import { resolveImageUrl } from '../../services/api';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -355,10 +356,9 @@ export default function AdminDashboard() {
                         </thead>
                         <tbody className="divide-y divide-[#E5E5E0]">
                           {filteredProducts.map((prod) => {
-                            const thumb =
-                              prod.images && prod.images.length > 0
-                                ? prod.images[0]
-                                : 'assets/products/polo/black-stone/black-stone-oepro.webp';
+                            const thumb = prod.images && prod.images.length > 0
+                              ? resolveImageUrl(prod.images[0])
+                              : 'assets/products/polo/black-stone/black-stone-oepro.webp';
 
                             const has2LevelVariants =
                               Array.isArray(prod.variants) &&
@@ -520,10 +520,9 @@ export default function AdminDashboard() {
                     {/* Mobile Card Stack */}
                     <div className="md:hidden divide-y divide-[#E5E5E0]">
                       {filteredProducts.map((prod) => {
-                        const thumb =
-                          prod.images && prod.images.length > 0
-                            ? prod.images[0]
-                            : 'assets/products/polo/black-stone/black-stone-oepro.webp';
+                        const thumb = prod.images && prod.images.length > 0
+                          ? resolveImageUrl(prod.images[0])
+                          : 'assets/products/polo/black-stone/black-stone-oepro.webp';
 
                         return (
                           <div key={prod.id} className="p-4 flex gap-3 items-start">

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createOrder as apiCreateOrder } from '../services/api';
 
 const OrderContext = createContext();
 
@@ -155,39 +156,47 @@ export const OrderProvider = ({ children }) => {
     }
   }, [profile]);
 
-  const createOrder = (orderData) => {
-    const timestamp = new Date();
-    const dateFormatted = timestamp.toISOString().slice(0, 10).replace(/-/g, '');
-    const randomHex = Math.floor(100 + Math.random() * 900);
-    const orderId = `OEP-INV-${dateFormatted}-${randomHex}`;
+  const createOrder = async (orderData) => {
+    try {
+      const res = await apiCreateOrder(orderData);
+      const newOrder = res.data;
+      setOrders((prev) => [newOrder, ...prev]);
+      return newOrder;
+    } catch (err) {
+      console.warn('API createOrder failed, creating locally', err);
+      const timestamp = new Date();
+      const dateFormatted = timestamp.toISOString().slice(0, 10).replace(/-/g, '');
+      const randomHex = Math.floor(100 + Math.random() * 900);
+      const orderId = `OEP-INV-${dateFormatted}-${randomHex}`;
 
-    const newOrder = {
-      id: orderId,
-      createdAt: timestamp.toISOString(),
-      status: orderData.payment.method === 'cod' ? 'Diproses' : 'Menunggu Pembayaran',
-      customer: orderData.customer,
-      courier: {
-        ...orderData.courier,
-        trackingNumber: `OEP${Math.floor(1000000000 + Math.random() * 9000000000)}`,
-      },
-      payment: {
-        ...orderData.payment,
-        isPaid: orderData.payment.method !== 'cod' ? false : true,
-        paidAt: null,
-      },
-      items: orderData.items,
-      summary: orderData.summary,
-      timeline: [
-        {
-          status: 'Pesanan Dibuat',
-          time: new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(timestamp),
-          desc: orderData.payment.method === 'cod' ? 'Pesanan COD berhasil diverifikasi' : 'Menunggu konfirmasi pembayaran',
+      const newOrder = {
+        id: orderId,
+        createdAt: timestamp.toISOString(),
+        status: orderData.payment.method === 'cod' ? 'Diproses' : 'Menunggu Pembayaran',
+        customer: orderData.customer,
+        courier: {
+          ...orderData.courier,
+          trackingNumber: `OEP${Math.floor(1000000000 + Math.random() * 9000000000)}`,
         },
-      ],
-    };
+        payment: {
+          ...orderData.payment,
+          isPaid: orderData.payment.method !== 'cod' ? false : true,
+          paidAt: null,
+        },
+        items: orderData.items,
+        summary: orderData.summary,
+        timeline: [
+          {
+            status: 'Pesanan Dibuat',
+            time: new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(timestamp),
+            desc: orderData.payment.method === 'cod' ? 'Pesanan COD berhasil diverifikasi' : 'Menunggu konfirmasi pembayaran',
+          },
+        ],
+      };
 
-    setOrders((prev) => [newOrder, ...prev]);
-    return newOrder;
+      setOrders((prev) => [newOrder, ...prev]);
+      return newOrder;
+    }
   };
 
   const updateOrderStatus = (orderId, newStatus) => {

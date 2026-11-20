@@ -8,6 +8,7 @@ import { createWhatsAppGeneralLink } from '../utils/whatsapp';
 import { useProducts } from '../context/ProductContext';
 import reviewsData from '../data/reviews.json';
 import storeInfo from '../data/store_info.json';
+import { resolveImageUrl } from '../services/api';
 
 export default function Home() {
   const { products: productsData, categories: categoriesData, banners: bannersData, bannerLayout } = useProducts();
@@ -39,7 +40,7 @@ export default function Home() {
   }, [activeBanners.length]);
 
   const currentBanner = activeBanners[currentBannerIdx] || activeBanners[0];
-  const heroImage = currentBanner.image || '/assets/products/polo/black-stone/black-stone-oepro.webp';
+  const heroImage = currentBanner.image ? resolveImageUrl(currentBanner.image) : '/assets/products/polo/black-stone/black-stone-oepro.webp';
   const heroLayout = currentBanner.imageLayout || currentBanner.layout || bannerLayout;
   const isHeroFull = heroLayout === 'full';
   const isHeroBg = heroLayout === 'background';

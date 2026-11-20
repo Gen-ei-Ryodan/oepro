@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, User, Eye, EyeOff, ShieldCheck, ArrowLeft } from 'lucide-react';
+import { Lock, User, Eye, EyeOff, ShieldCheck, ArrowLeft, AlertCircle } from 'lucide-react';
+import { login } from '../../services/api';
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -10,29 +11,30 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
-    // Lean Admin Auth (Default credentials: admin / oepro2026 or admin123)
-    setTimeout(() => {
-      if (
-        (username === 'admin' && (password === 'admin123' || password === 'oepro2026')) ||
-        (username === 'admin@oepro.com' && password === 'admin123')
-      ) {
-        localStorage.setItem('oepro_admin_auth', JSON.stringify({
-          token: `oep_jwt_${Date.now()}`,
-          username: username,
-          role: 'Super Admin',
-          loginAt: new Date().toISOString()
-        }));
-        navigate('/admin');
-      } else {
-        setError('Kredensial tidak valid. Silakan gunakan username: admin & password: admin123');
-      }
+    try {
+      const res = await login({ username, password });
+      const { token, user } = res.data;
+
+      localStorage.setItem('oepro_admin_token', token);
+      localStorage.setItem('oepro_admin_auth', JSON.stringify({
+        token,
+        username: user?.name || username,
+        role: user?.role || 'Super Admin',
+        loginAt: new Date().toISOString()
+      }));
+
+      navigate('/admin');
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Kredensial tidak valid. Silakan coba lagi.';
+      setError(msg);
+    } finally {
       setIsLoading(false);
-    }, 400);
+    }
   };
 
   return (
@@ -65,7 +67,7 @@ export default function AdminLogin() {
 
         {error && (
           <div className="mb-6 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-start gap-2.5">
-            <span className="font-bold">Error:</span>
+            <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
             <span>{error}</span>
           </div>
         )}

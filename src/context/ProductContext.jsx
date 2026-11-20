@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import initialProductsData from '../data/products.json';
 import initialCategoriesData from '../data/categories.json';
+import { fetchBanners, fetchCategories, fetchProducts, createBanner, updateBanner, deleteBanner, createCategory, updateCategory, deleteCategory, createProduct, updateProduct, deleteProduct } from '../services/api';
 
 const ProductContext = createContext(null);
 
@@ -47,16 +48,13 @@ const cleanProductImages = (items) => {
 };
 
 export function ProductProvider({ children }) {
-  // 1. PRODUCTS STATE
   const [products, setProducts] = useState(() => {
-    
-try {
-       localStorage.removeItem('oepro_dynamic_products_v4');
-       const saved = localStorage.getItem(STORAGE_KEY);
+    try {
+      localStorage.removeItem('oepro_dynamic_products_v4');
+      const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Migration: normalize all product ratings to 4.9
           const normalized = parsed.map((p) => ({ ...p, rating: 4.9 }));
           return cleanProductImages(normalized);
         }
@@ -67,11 +65,10 @@ try {
     return cleanProductImages(initialProductsData);
   });
 
-  // 2. CATEGORIES STATE
   const [categories, setCategories] = useState(() => {
-try {
-       localStorage.removeItem('oepro_dynamic_products_v4');
-       const saved = localStorage.getItem(CATEGORIES_KEY);
+    try {
+      localStorage.removeItem('oepro_dynamic_products_v4');
+      const saved = localStorage.getItem(CATEGORIES_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) {
@@ -84,12 +81,10 @@ try {
     return initialCategoriesData;
   });
 
-  // 3. BANNERS STATE
   const [banners, setBanners] = useState(() => {
-    
-try {
-       localStorage.removeItem('oepro_dynamic_banners_v4');
-       localStorage.removeItem('oepro_dynamic_banners_v6');
+    try {
+      localStorage.removeItem('oepro_dynamic_banners_v4');
+      localStorage.removeItem('oepro_dynamic_banners_v6');
       localStorage.removeItem('oepro_dynamic_banners_v6');
       localStorage.removeItem('oepro_banners_version');
       const saved = localStorage.getItem(BANNERS_KEY);
@@ -105,12 +100,11 @@ try {
     return initialBannersData;
   });
 
-  // 4. BANNER LAYOUT STATE ('boxed' | 'full')
   const [bannerLayout, setBannerLayout] = useState(() => {
-try {
-       localStorage.removeItem('oepro_dynamic_banners_v4');
-       localStorage.removeItem('oepro_dynamic_banners_v6');
-       const saved = localStorage.getItem(BANNER_LAYOUT_KEY);
+    try {
+      localStorage.removeItem('oepro_dynamic_banners_v4');
+      localStorage.removeItem('oepro_dynamic_banners_v6');
+      const saved = localStorage.getItem(BANNER_LAYOUT_KEY);
       if (saved === 'full' || saved === 'boxed') {
         return saved;
       }
@@ -119,6 +113,32 @@ try {
     }
     return 'boxed';
   });
+
+  const [loading, setLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      try {
+        const [bannersRes, productsRes, categoriesRes] = await Promise.all([
+          fetchBanners().catch(() => ({ data: [] })),
+          fetchProducts().catch(() => ({ data: [] })),
+          fetchCategories().catch(() => ({ data: [] })),
+        ]);
+
+        if (bannersRes.data?.length) setBanners(bannersRes.data);
+        if (productsRes.data?.length) setProducts(cleanProductImages(productsRes.data));
+        if (categoriesRes.data?.length) setCategories(categoriesRes.data);
+      } catch (err) {
+        console.warn('API fetch failed, using local data', err);
+        setApiError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadInitialData();
+  }, []);
 
   useEffect(() => {
     const handleStorage = (e) => {
@@ -134,7 +154,6 @@ try {
     return () => window.removeEventListener('storage', handleStorage);
   }, []);
 
-  // Sync state to localStorage whenever products change
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
@@ -143,7 +162,6 @@ try {
     }
   }, [products]);
 
-  // Sync categories to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(CATEGORIES_KEY, JSON.stringify(categories));
@@ -152,7 +170,6 @@ try {
     }
   }, [categories]);
 
-  // Sync banners to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(BANNERS_KEY, JSON.stringify(banners));
@@ -161,7 +178,6 @@ try {
     }
   }, [banners]);
 
-  // Sync banner layout to localStorage
   useEffect(() => {
     try {
       localStorage.setItem(BANNER_LAYOUT_KEY, bannerLayout);
@@ -170,78 +186,251 @@ try {
     }
   }, [bannerLayout]);
 
-  // --- PRODUCT ACTIONS ---
-  const addProduct = (newProduct) => {
-    const productWithId = {
-      ...newProduct,
-      id: newProduct.id || `oepro-${Date.now()}`,
-      rating: newProduct.rating || 5.0,
-      review_count: newProduct.review_count || 0,
-      sold_count: newProduct.sold_count || 0,
-    };
-    setProducts((prev) => [productWithId, ...prev]);
-    return productWithId;
+  const addProduct = async (newProduct) => {
+    try {
+      const formData = new FormData();
+      Object.entries(newProduct).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'images' && Array.isArray(value)) {
+            value.forEach((img, idx) => {
+              if (img.startsWith('data:')) {
+                const base64Data = img.split(',')[1];
+                const mimeType = img.split(',')[0].split(':')[1].split(';')[0];
+                const byteCharacters = atob(base64Data);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                  byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: mimeType });
+                formData.append(`images[${idx}]`, blob, `image_${idx}.jpg`);
+              }
+            });
+          } else if (key === 'variants' || key === 'features' || key === 'sizes' || key === 'colors') {
+            formData.append(key, JSON.stringify(value));
+          } else if (typeof value === 'object') {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      const res = await createProduct(formData);
+      const productWithId = { ...newProduct, ...res.data, id: newProduct.id || res.data.id || `oepro-${Date.now()}` };
+      setProducts((prev) => [productWithId, ...prev]);
+      return productWithId;
+    } catch (err) {
+      const productWithId = {
+        ...newProduct,
+        id: newProduct.id || `oepro-${Date.now()}`,
+        rating: newProduct.rating || 5.0,
+        review_count: newProduct.review_count || 0,
+        sold_count: newProduct.sold_count || 0,
+      };
+      setProducts((prev) => [productWithId, ...prev]);
+      return productWithId;
+    }
   };
 
-  const updateProduct = (id, updatedFields) => {
-    setProducts((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item))
-    );
+  const updateProductFn = async (id, updatedFields) => {
+    try {
+      const formData = new FormData();
+      formData.append('_method', 'PUT');
+      Object.entries(updatedFields).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'images' && Array.isArray(value)) {
+            value.forEach((img, idx) => {
+              if (img.startsWith('data:')) {
+                const base64Data = img.split(',')[1];
+                const mimeType = img.split(',')[0].split(':')[1].split(';')[0];
+                const byteCharacters = atob(base64Data);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                  byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: mimeType });
+                formData.append(`images[${idx}]`, blob, `image_${idx}.jpg`);
+              }
+            });
+          } else if (key === 'variants' || key === 'features' || key === 'sizes' || key === 'colors') {
+            formData.append(key, JSON.stringify(value));
+          } else if (typeof value === 'object') {
+            formData.append(key, JSON.stringify(value));
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      await updateProduct(id, formData);
+    } catch (err) {
+      console.warn('API update failed, updating locally only', err);
+    }
+    setProducts((prev) => prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item)));
   };
 
-  const deleteProduct = (id) => {
+  const deleteProductFn = async (id) => {
+    try {
+      await deleteProduct(id);
+    } catch (err) {
+      console.warn('API delete failed, deleting locally only', err);
+    }
     setProducts((prev) => prev.filter((item) => item.id !== id));
   };
 
-  // --- CATEGORY ACTIONS ---
-  const addCategory = (newCat) => {
-    const categoryWithId = {
-      ...newCat,
-      id: newCat.id || `cat-${Date.now()}`,
-      slug: newCat.slug || (newCat.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
-      item_count: newCat.item_count || 0,
-    };
-    setCategories((prev) => [...prev, categoryWithId]);
-    return categoryWithId;
+  const addCategory = async (newCat) => {
+    try {
+      const formData = new FormData();
+      Object.entries(newCat).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'image' && typeof value === 'string' && value.startsWith('data:')) {
+            const base64Data = value.split(',')[1];
+            const mimeType = value.split(',')[0].split(':')[1].split(';')[0];
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: mimeType });
+            formData.append('image', blob, 'category_image.jpg');
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      const res = await createCategory(formData);
+      const categoryWithId = { ...newCat, ...res.data, id: newCat.id || res.data.id || `cat-${Date.now()}` };
+      setCategories((prev) => [...prev, categoryWithId]);
+      return categoryWithId;
+    } catch (err) {
+      const categoryWithId = {
+        ...newCat,
+        id: newCat.id || `cat-${Date.now()}`,
+        slug: newCat.slug || (newCat.name || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+        item_count: newCat.item_count || 0,
+      };
+      setCategories((prev) => [...prev, categoryWithId]);
+      return categoryWithId;
+    }
   };
 
-  const updateCategory = (id, updatedFields) => {
-    setCategories((prev) =>
-      prev.map((cat) => (cat.id === id ? { ...cat, ...updatedFields } : cat))
-    );
+  const updateCategoryFn = async (id, updatedFields) => {
+    try {
+      const formData = new FormData();
+      formData.append('_method', 'PUT');
+      Object.entries(updatedFields).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'image' && typeof value === 'string' && value.startsWith('data:')) {
+            const base64Data = value.split(',')[1];
+            const mimeType = value.split(',')[0].split(':')[1].split(';')[0];
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: mimeType });
+            formData.append('image', blob, 'category_image.jpg');
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      await updateCategory(id, formData);
+    } catch (err) {
+      console.warn('API update failed, updating locally only', err);
+    }
+    setCategories((prev) => prev.map((cat) => (cat.id === id ? { ...cat, ...updatedFields } : cat)));
   };
 
-  const deleteCategory = (id) => {
+  const deleteCategoryFn = async (id) => {
+    try {
+      await deleteCategory(id);
+    } catch (err) {
+      console.warn('API delete failed, deleting locally only', err);
+    }
     setCategories((prev) => prev.filter((cat) => cat.id !== id));
   };
 
-  // --- BANNER ACTIONS ---
-  const addBanner = (newBanner) => {
-    const bannerWithId = {
-      ...newBanner,
-      id: newBanner.id || `banner-${Date.now()}`,
-      order: newBanner.order || banners.length + 1,
-      imageLayout: newBanner.imageLayout || 'contained',
-      isActive: newBanner.isActive !== undefined ? newBanner.isActive : true,
-    };
-    setBanners((prev) => [...prev, bannerWithId]);
-    return bannerWithId;
+  const addBanner = async (newBanner) => {
+    try {
+      const formData = new FormData();
+      Object.entries(newBanner).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'image' && typeof value === 'string' && value.startsWith('data:')) {
+            const base64Data = value.split(',')[1];
+            const mimeType = value.split(',')[0].split(':')[1].split(';')[0];
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: mimeType });
+            formData.append('image', blob, 'banner_image.jpg');
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      const res = await createBanner(formData);
+      const bannerWithId = { ...newBanner, ...res.data, id: newBanner.id || res.data.id || `banner-${Date.now()}` };
+      setBanners((prev) => [...prev, bannerWithId]);
+      return bannerWithId;
+    } catch (err) {
+      const bannerWithId = {
+        ...newBanner,
+        id: newBanner.id || `banner-${Date.now()}`,
+        order: newBanner.order || banners.length + 1,
+        imageLayout: newBanner.imageLayout || 'contained',
+        isActive: newBanner.isActive !== undefined ? newBanner.isActive : true,
+      };
+      setBanners((prev) => [...prev, bannerWithId]);
+      return bannerWithId;
+    }
   };
 
-  const updateBanner = (id, updatedFields) => {
-    setBanners((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, ...updatedFields } : b))
-    );
+  const updateBannerFn = async (id, updatedFields) => {
+    try {
+      const formData = new FormData();
+      formData.append('_method', 'PUT');
+      Object.entries(updatedFields).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          if (key === 'image' && typeof value === 'string' && value.startsWith('data:')) {
+            const base64Data = value.split(',')[1];
+            const mimeType = value.split(',')[0].split(':')[1].split(';')[0];
+            const byteCharacters = atob(base64Data);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+              byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: mimeType });
+            formData.append('image', blob, 'banner_image.jpg');
+          } else {
+            formData.append(key, value);
+          }
+        }
+      });
+      await updateBanner(id, formData);
+    } catch (err) {
+      console.warn('API update failed, updating locally only', err);
+    }
+    setBanners((prev) => prev.map((b) => (b.id === id ? { ...b, ...updatedFields } : b)));
   };
 
-  const deleteBanner = (id) => {
+  const deleteBannerFn = async (id) => {
+    try {
+      await deleteBanner(id);
+    } catch (err) {
+      console.warn('API delete failed, deleting locally only', err);
+    }
     setBanners((prev) => prev.filter((b) => b.id !== id));
   };
 
   const toggleBannerStatus = (id) => {
-    setBanners((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, isActive: !b.isActive } : b))
-    );
+    setBanners((prev) => prev.map((b) => (b.id === id ? { ...b, isActive: !b.isActive } : b)));
   };
 
   const resetToDefault = () => {
@@ -264,16 +453,18 @@ try {
         bannerLayout,
         setBannerLayout,
         addProduct,
-        updateProduct,
-        deleteProduct,
+        updateProduct: updateProductFn,
+        deleteProduct: deleteProductFn,
         addCategory,
-        updateCategory,
-        deleteCategory,
+        updateCategory: updateCategoryFn,
+        deleteCategory: deleteCategoryFn,
         addBanner,
-        updateBanner,
-        deleteBanner,
+        updateBanner: updateBannerFn,
+        deleteBanner: deleteBannerFn,
         toggleBannerStatus,
         resetToDefault,
+        loading,
+        apiError,
       }}
     >
       {children}

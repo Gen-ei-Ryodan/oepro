@@ -17,6 +17,7 @@ import {
   LayoutGrid,
   Maximize2,
 } from 'lucide-react';
+import { resolveImageUrl } from '../../services/api';
 
 export default function BannerManager({
   banners,
@@ -172,11 +173,11 @@ export default function BannerManager({
 
       {/* Banners List */}
       <div className="space-y-4">
-        {banners.map((banner, index) => {
-          const imgSrc = banner.image
-            ? (banner.image.startsWith('http') || banner.image.startsWith('data:') ? banner.image : `/${banner.image.replace(/^\//, '')}`)
-            : '/assets/products/polo/black-stone/black-stone-oepro.webp';
-          const layoutMode = banner.imageLayout || (banner.layout === 'full' ? 'full' : 'contained');
+{banners.map((banner, index) => {
+            const imgSrc = banner.image
+              ? resolveImageUrl(banner.image)
+              : '/assets/products/polo/black-stone/black-stone-oepro.webp';
+            const layoutMode = banner.imageLayout || (banner.layout === 'full' ? 'full' : 'contained');
 
           return (
             <div
@@ -324,7 +325,7 @@ export default function BannerManager({
                   <div className="col-span-4 flex items-center justify-center h-16">
                     {formData.image ? (
                       <img
-                        src={formData.image.startsWith('http') || formData.image.startsWith('data:') ? formData.image : `/${formData.image.replace(/^\//, '')}`}
+                        src={resolveImageUrl(formData.image)}
                         alt="Preview"
                         className="h-full object-contain"
                       />

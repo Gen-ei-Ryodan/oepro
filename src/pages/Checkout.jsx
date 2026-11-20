@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { ShieldCheck, ArrowLeft, ArrowRight, User, MapPin, Phone } from 'lucide-react';
+import { ShieldCheck, ArrowLeft, ArrowRight, User, MapPin, Phone, CheckCircle2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useOrders } from '../context/OrderContext';
 import WhatsAppIcon from '../components/WhatsAppIcon';
@@ -8,7 +8,7 @@ import { createWhatsAppOrderLink, formatRupiah } from '../utils/whatsapp';
 
 export default function Checkout() {
   const { items, subtotal, discountAmount, coupon } = useCart();
-  const { profile } = useOrders();
+  const { profile, createOrder } = useOrders();
   const navigate = useNavigate();
 
   // Redirect if cart is empty
@@ -36,7 +36,7 @@ export default function Checkout() {
 
   const finalSubtotal = Math.max(0, subtotal - discountAmount);
 
-  const handleSendToWhatsApp = (e) => {
+  const handleSendToWhatsApp = async (e) => {
     if (e) e.preventDefault();
     let note = '';
     if (formData.name) note += `Nama: ${formData.name}\n`;
@@ -44,6 +44,49 @@ export default function Checkout() {
     if (formData.address) note += `Alamat: ${formData.address}, ${formData.city}\n`;
     if (formData.notes) note += `Catatan: ${formData.notes}\n`;
     if (coupon) note += `Promo: ${coupon.code} (-${coupon.discountPercent}%)`;
+
+    // Create order via API
+    const orderData = {
+      customer: {
+        name: formData.name || profile.name || 'Guest',
+        phone: formData.phone || profile.phone || '',
+        address: formData.address || defaultAddr?.address || '',
+        city: formData.city || defaultAddr?.city || 'Surabaya',
+        notes: formData.notes || '',
+      },
+      courier: {
+        id: 'pickup',
+        name: 'Ambil di Toko / Kurir Sendiri',
+        service: 'PICKUP',
+        cost: 0,
+      },
+      payment: {
+        method: 'whatsapp',
+        name: 'WhatsApp / Transfer Manual',
+      },
+      items: items.map((item) => ({
+        product_id: item.product.id,
+        product_name: item.product.name,
+        color: item.color.name || item.color,
+        size: item.size,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      summary: {
+        subtotal,
+        discountAmount,
+        couponCode: coupon?.code || null,
+        shippingCost: 0,
+        grandTotal: finalSubtotal,
+      },
+    };
+
+    try {
+      const order = await createOrder(orderData);
+      note += `\nNo. Pesanan: ${order.id}`;
+    } catch (err) {
+      console.warn('Failed to create order via API', err);
+    }
 
     const waUrl = createWhatsAppOrderLink(items, finalSubtotal, note);
     window.open(waUrl, '_blank');
