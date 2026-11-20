@@ -241,7 +241,7 @@ const activeVariantImage = (activeLevel2 && activeLevel2.image)
         <Link to="/catalog" className="hover:text-white transition">Katalog</Link>
         <span>/</span>
         <Link to={`/catalog?cat=${product.category_slug}`} className="hover:text-white font-medium text-[#DCE5E0] transition">
-          {product.category}
+          {typeof product.category === 'object' ? product.category?.name : (product.category || '-')}
         </Link>
         <span>/</span>
         <span className="text-white font-medium line-clamp-1">{product.name}</span>

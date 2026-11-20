@@ -39,17 +39,22 @@ export const initialBannersData = [
 
 const cleanProductImages = (items) => {
   if (!Array.isArray(items)) return [];
-  return items.map((p) => ({
-    ...p,
-    images: Array.isArray(p.images)
-      ? p.images
-          .map((img) => {
-            const url = typeof img === 'string' ? img : (img?.url || img?.image_url || '');
-            return url;
-          })
-          .filter((url) => url && !url.toLowerCase().includes('total') && !url.toLowerCase().includes('worxt'))
-      : [],
-  }));
+  return items.map((p) => {
+    const catObj = (typeof p.category === 'object' && p.category !== null) ? p.category : null;
+    return {
+      ...p,
+      category: catObj ? catObj.name : (p.category || ''),
+      category_slug: catObj ? catObj.slug : (p.category_slug || ''),
+      images: Array.isArray(p.images)
+        ? p.images
+            .map((img) => {
+              const url = typeof img === 'string' ? img : (img?.url || img?.image_url || '');
+              return url;
+            })
+            .filter((url) => url && !url.toLowerCase().includes('total') && !url.toLowerCase().includes('worxt'))
+        : [],
+    };
+  });
 };
 
 export function ProductProvider({ children }) {

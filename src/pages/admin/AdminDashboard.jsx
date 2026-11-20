@@ -395,7 +395,7 @@ export default function AdminDashboard() {
                                 {/* Kategori */}
                                 <td className="py-3 px-4 whitespace-nowrap">
                                   <span className="text-[11px] font-medium text-neutral-700 bg-neutral-100 px-2 py-0.5 rounded-md">
-                                    {prod.category}
+                                    {typeof prod.category === 'object' ? prod.category?.name : (prod.category || '-')}
                                   </span>
                                 </td>
 
@@ -547,7 +547,7 @@ export default function AdminDashboard() {
                                 </span>
                               </div>
                               <span className="font-mono text-[9px] text-neutral-400 uppercase">
-                                {prod.sku || '-'} &bull; {prod.category}
+                                {prod.sku || '-'} &bull; {typeof prod.category === 'object' ? prod.category?.name : (prod.category || '-')}
                               </span>
 
                               <div className="mt-1 flex items-baseline gap-2">

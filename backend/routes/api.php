@@ -23,9 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
     Route::post('/admin/banners', [BannerController::class, 'store']);
+    Route::post('/admin/banners/reorder', [BannerController::class, 'reorder']);
     Route::match(['put', 'post'], '/admin/banners/{id}', [BannerController::class, 'update']);
     Route::delete('/admin/banners/{id}', [BannerController::class, 'destroy']);
-    Route::post('/admin/banners/reorder', [BannerController::class, 'reorder']);
 
     Route::post('/admin/categories', [CategoryController::class, 'store']);
     Route::put('/admin/categories/{id}', [CategoryController::class, 'update']);

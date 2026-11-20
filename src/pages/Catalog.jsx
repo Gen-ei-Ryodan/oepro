@@ -77,7 +77,8 @@ export default function Catalog() {
         if (searchQuery.trim()) {
           const q = searchQuery.toLowerCase();
           const matchName = p.name.toLowerCase().includes(q);
-          const matchCategory = p.category.toLowerCase().includes(q);
+          const catName = typeof p.category === 'object' ? p.category?.name : (p.category || '');
+          const matchCategory = catName.toLowerCase().includes(q);
           const matchColor = p.colors && p.colors.some((c) => c.name.toLowerCase().includes(q));
           if (!matchName && !matchCategory && !matchColor) return false;
         }
