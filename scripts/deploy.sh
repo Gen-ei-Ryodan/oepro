@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 SSH_USER="alurelab"
 SSH_HOST="emerald.hidden-server.net"
 SSH_PORT="31988"
@@ -8,10 +10,10 @@ REMOTE_ROOT="/home/alurelab/oepro.id"
 REMOTE_BACKEND="${REMOTE_ROOT}/backend"
 
 echo "==> Building frontend..."
-npm run build
+npm --prefix "$PROJECT_DIR" run build
 
 echo "==> Deploying frontend (dist/)..."
-rsync -avz --delete -e "ssh -p ${SSH_PORT}" dist/ "${SSH_USER}@${SSH_HOST}:${REMOTE_ROOT}/"
+rsync -avz --delete -e "ssh -p ${SSH_PORT}" "$PROJECT_DIR/dist/" "${SSH_USER}@${SSH_HOST}:${REMOTE_ROOT}/"
 
 echo "==> Deploying backend..."
 rsync -avz --delete \
@@ -19,7 +21,7 @@ rsync -avz --delete \
   --exclude '.git' \
   --exclude 'node_modules' \
   --exclude 'storage/logs/*' \
-  backend/ "${SSH_USER}@${SSH_HOST}:${REMOTE_BACKEND}/"
+  "$PROJECT_DIR/backend/" "${SSH_USER}@${SSH_HOST}:${REMOTE_BACKEND}/"
 
 echo "==> Configuring backend on server..."
 ssh -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" << 'ENDSSH'
