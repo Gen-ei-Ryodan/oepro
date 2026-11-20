@@ -192,7 +192,7 @@ export default function BannerManager({
                         </span>
                       )}
                       <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#A8C4B5]/10 text-[#A8C4B5]">
-                        {layoutMode === 'full' ? 'Layout: Full' : 'Layout: Kecil'}
+                        {layoutMode === 'full' ? 'Layout: Full' : layoutMode === 'background' ? 'Layout: Background' : 'Layout: Kecil'}
                       </span>
                     </div>
 
@@ -377,17 +377,17 @@ export default function BannerManager({
                 </div>
               </div>
 
-              {/* Image Layout (Contained vs Full) */}
+              {/* Image Layout (Contained vs Full vs Background) */}
               <div>
                 <label className="block text-xs font-semibold text-neutral-700 mb-1.5">
                   Tata Letak Gambar Banner
                 </label>
-                <div className="inline-flex p-1 bg-[#081F1C] rounded-xl border border-[#133129]">
+                <div className="inline-flex p-1 bg-[#081F1C] rounded-xl border border-[#133129] flex-wrap">
                   <button
                     type="button"
                     onClick={() => setFormData({ ...formData, imageLayout: 'contained' })}
                     className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
-                      formData.imageLayout !== 'full'
+                      formData.imageLayout === 'contained'
                         ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
                         : 'text-[#DCE5E0] hover:text-[#A8C4B5]'
                     }`}
@@ -407,7 +407,22 @@ export default function BannerManager({
                     <Maximize2 className="w-3.5 h-3.5" />
                     <span>Gambar Full / Penuh</span>
                   </button>
+                  <button
+                    type="button"
+                    onClick={() => setFormData({ ...formData, imageLayout: 'background' })}
+                    className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 cursor-pointer ${
+                      formData.imageLayout === 'background'
+                        ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
+                        : 'text-[#DCE5E0] hover:text-[#A8C4B5]'
+                    }`}
+                  >
+                    <ImageIcon className="w-3.5 h-3.5" />
+                    <span>Latar Penuh / Background</span>
+                  </button>
                 </div>
+                <p className="text-[10px] text-neutral-500 mt-1.5">
+                  Background: gambar memenuhi seluruh banner dan teks ditimpakan di atasnya (cocok untuk banner wide dengan model di sisi kanan).
+                </p>
               </div>
 
               {/* CTA Button Text & Link */}

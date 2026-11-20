@@ -40,7 +40,7 @@ function AppLayout() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBFBFA] text-[#171717] selection:bg-neutral-900 selection:text-white relative">
+    <div className="min-h-screen flex flex-col bg-[#081F1C] text-[#DCE5E0] selection:bg-[#A8C4B5] selection:text-[#081F1C] relative">
       <Navbar />
       <CartDrawer />
       <Toast />

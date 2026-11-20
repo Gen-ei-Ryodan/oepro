@@ -6,7 +6,7 @@ const ProductContext = createContext(null);
 
 const STORAGE_KEY = 'oepro_dynamic_products_v5';
 const CATEGORIES_KEY = 'oepro_dynamic_categories_v4';
-const BANNERS_KEY = 'oepro_dynamic_banners_v4';
+const BANNERS_KEY = 'oepro_dynamic_banners_v5';
 const BANNER_LAYOUT_KEY = 'oepro_banner_layout_v4';
 
 export const initialBannersData = [
@@ -17,8 +17,8 @@ export const initialBannersData = [
     tag: 'Koleksi Katun 100%',
     ctaText: 'Belanja Sekarang',
     ctaLink: '/catalog',
-    image: '/assets/products/polo/black-stone/black-stone-oepro.webp',
-    imageLayout: 'contained',
+    image: '/assets/banners/hero-banner-new.jpg',
+    imageLayout: 'background',
     isActive: true,
     order: 1,
   },

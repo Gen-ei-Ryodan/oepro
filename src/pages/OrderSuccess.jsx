@@ -32,8 +32,8 @@ export default function OrderSuccess() {
   if (!order) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-xl font-bold text-slate-900 mb-2">Pesanan tidak ditemukan</h2>
-        <Link to="/history" className="text-xs font-bold text-emerald-700 underline">
+        <h2 className="text-xl font-bold text-white mb-2">Pesanan tidak ditemukan</h2>
+        <Link to="/history" className="text-xs font-bold text-[#A8C4B5] hover:text-white underline">
           Lihat Riwayat Pesanan Saya
         </Link>
       </div>

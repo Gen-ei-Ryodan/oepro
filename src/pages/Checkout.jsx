@@ -15,9 +15,9 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-xl font-semibold text-neutral-900 mb-2">Keranjang Anda masih kosong</h2>
-        <p className="text-xs text-neutral-500 mb-6">Silakan pilih produk terlebih dahulu sebelum memesan.</p>
-        <Link to="/catalog" className="px-5 py-2.5 bg-neutral-950 text-white font-medium text-xs rounded-lg min-h-[44px] inline-flex items-center">
+        <h2 className="text-xl font-semibold text-white mb-2">Keranjang Anda masih kosong</h2>
+        <p className="text-xs text-[#DCE5E0] mb-6">Silakan pilih produk terlebih dahulu sebelum memesan.</p>
+        <Link to="/catalog" className="px-5 py-2.5 bg-[#A8C4B5] text-[#081F1C] font-medium text-xs rounded-lg min-h-[44px] inline-flex items-center">
           Kembali ke Katalog
         </Link>
       </div>
@@ -52,18 +52,18 @@ export default function Checkout() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-32">
       {/* Back button & Title */}
-      <div className="mb-6 pb-4 border-b border-neutral-200">
+      <div className="mb-6 pb-4 border-b border-[#24443B]">
         <Link
           to="/cart"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-600 hover:text-neutral-950 mb-3"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#DCE5E0] hover:text-white mb-3"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Kembali ke Keranjang</span>
         </Link>
-        <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
           Pemesanan Langsung via WhatsApp
         </h1>
-        <p className="text-xs text-neutral-500 mt-1">
+        <p className="text-xs text-[#AABBB3] mt-1">
           Pesanan diteruskan ke WhatsApp Admin OEPRO untuk konfirmasi stok, ongkos kirim, dan pembayaran.
         </p>
       </div>

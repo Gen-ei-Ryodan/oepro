@@ -16,6 +16,8 @@ import {
   Sliders,
   Grid,
   RefreshCw,
+  GripVertical,
+  Star,
 } from 'lucide-react';
 
 const STANDARD_SIZES = ['S', 'M', 'L', 'XL'];
@@ -123,6 +125,8 @@ export default function ProductFormModal({
   const isFlatVariants = formData.variants.length > 0 && formData.variants.every((variant) => !Array.isArray(variant.options));
 
   const [newImageUrl, setNewImageUrl] = useState('');
+  const [dragImageIdx, setDragImageIdx] = useState(null);
+  const [dragOverImageIdx, setDragOverImageIdx] = useState(null);
   const [bulkOriginalPrice, setBulkOriginalPrice] = useState('');
   const [bulkPrice, setBulkPrice] = useState('');
   const [bulkStock, setBulkStock] = useState('');
@@ -622,6 +626,47 @@ export default function ProductFormModal({
 
   const removeImage = (index) => {
     setFormData((prev) => ({ ...prev, images: prev.images.filter((_, i) => i !== index) }));
+  };
+
+  // Reorder gallery images via drag & drop (index 0 = foto utama/cover)
+  const reorderImage = (from, to) => {
+    if (from === null || to === null || from === to) return;
+    setFormData((prev) => {
+      const next = [...prev.images];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return { ...prev, images: next };
+    });
+  };
+
+  const handleImageDragStart = (idx) => {
+    setDragImageIdx(idx);
+    setDragOverImageIdx(idx);
+  };
+
+  const handleImageDragOver = (e, idx) => {
+    e.preventDefault();
+    if (dragImageIdx !== null && dragImageIdx !== idx) {
+      setDragOverImageIdx(idx);
+    }
+  };
+
+  const handleImageDrop = (e, idx) => {
+    e.preventDefault();
+    reorderImage(dragImageIdx, idx);
+    setDragImageIdx(null);
+    setDragOverImageIdx(null);
+  };
+
+  const handleImageDragEnd = () => {
+    setDragImageIdx(null);
+    setDragOverImageIdx(null);
+  };
+
+  // Pilih foto jadi utama (jalan juga di touch device yang tidak mendukung drag)
+  const makeImagePrimary = (index) => {
+    if (index === 0) return;
+    reorderImage(index, 0);
   };
 
   // Form Submit
@@ -1308,13 +1353,38 @@ export default function ProductFormModal({
               {formData.images.map((img, idx) => (
                 <div
                   key={idx}
-                  className="relative group aspect-square rounded-xl overflow-hidden bg-white border border-neutral-200"
+                  draggable
+                  onDragStart={() => handleImageDragStart(idx)}
+                  onDragOver={(e) => handleImageDragOver(e, idx)}
+                  onDrop={(e) => handleImageDrop(e, idx)}
+                  onDragEnd={handleImageDragEnd}
+                  className={`relative group aspect-square rounded-xl overflow-hidden bg-white border transition-all cursor-grab active:cursor-grabbing ${
+                    dragOverImageIdx === idx && dragImageIdx !== null && dragImageIdx !== idx
+                      ? 'border-[#A8C4B5] ring-2 ring-[#A8C4B5] scale-95 opacity-70'
+                      : 'border-neutral-200'
+                  } ${dragImageIdx === idx ? 'opacity-40 scale-95' : ''}`}
+                  title="Seret untuk mengubah urutan foto"
                 >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <img src={img} alt="" className="w-full h-full object-cover pointer-events-none" />
                   {idx === 0 && (
                     <span className="absolute top-1 left-1 bg-neutral-950 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-sm">
                       Utama
                     </span>
+                  )}
+                  {/* Drag handle */}
+                  <span className="absolute top-1 left-1/2 -translate-x-1/2 p-0.5 bg-black/55 text-white rounded-md opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                    <GripVertical className="w-3 h-3" />
+                  </span>
+                  {/* Jadikan utama (untuk touch / tanpa drag) */}
+                  {idx !== 0 && (
+                    <button
+                      type="button"
+                      onClick={() => makeImagePrimary(idx)}
+                      className="absolute bottom-1 left-1 p-1 bg-black/60 text-white rounded-md opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition hover:bg-[#E0BC66] hover:text-black"
+                      title="Jadikan foto utama"
+                    >
+                      <Star className="w-3 h-3" />
+                    </button>
                   )}
                   <button
                     type="button"
@@ -1326,6 +1396,11 @@ export default function ProductFormModal({
                 </div>
               ))}
             </div>
+
+            <p className="text-[11px] text-neutral-500 flex items-center gap-1.5">
+              <GripVertical className="w-3.5 h-3.5" />
+              Seret foto untuk mengatur urutan &mdash; foto pertama menjadi gambar utama/cover katalog.
+            </p>
 
             <div className="flex flex-col sm:flex-row gap-2">
               <label className="flex items-center justify-center gap-2 py-2 px-3 bg-white border border-dashed border-neutral-300 rounded-xl text-xs font-semibold text-neutral-700 hover:border-neutral-950 cursor-pointer transition shrink-0">

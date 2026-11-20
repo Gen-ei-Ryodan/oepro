@@ -42,12 +42,12 @@ export default function ProductCard({ product }) {
     : '/assets/brand/oepro-logo.webp';
 
   return (
-    <div className="group relative flex flex-col bg-[#24443B] rounded-2xl border border-[#133129] hover:border-[#AABBB3] overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300">
+    <div className="group relative flex flex-col bg-gradient-to-b from-[#153528] to-[#0F2A24] rounded-2xl border border-[#24443B] hover:border-[#A8C4B5]/60 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300">
       
       {/* 1. IMAGE CONTAINER WITH ASPECT-[3/4] & PADDING */}
       <Link
         to={`/product/${product.id}`}
-        className="relative w-full aspect-[3/4] bg-[#081F1C]/60 overflow-hidden block p-2.5 sm:p-3 flex items-center justify-center cursor-pointer"
+        className="relative w-full aspect-[3/4] bg-white overflow-hidden block p-2.5 sm:p-3 flex items-center justify-center cursor-pointer"
       >
         <img
           src={primaryImage}
@@ -72,7 +72,7 @@ export default function ProductCard({ product }) {
             </span>
           )}
           {!product.is_best_seller && product.is_new_arrival && (
-            <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-medium uppercase bg-[#133129] text-[#081F1C] rounded-md shadow-xs">
+            <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-medium uppercase bg-[#696969] text-white rounded-md shadow-xs">
               New
             </span>
           )}
@@ -105,7 +105,7 @@ export default function ProductCard({ product }) {
       </Link>
 
       {/* 2. PRODUCT METADATA */}
-      <div className="p-3 sm:p-3.5 flex flex-col flex-1 bg-white">
+      <div className="p-3 sm:p-3.5 flex flex-col flex-1">
         
         {/* Category & Color Dots */}
         <div className="flex items-center justify-between gap-1 mb-1">
@@ -147,14 +147,14 @@ export default function ProductCard({ product }) {
             )}
           </div>
 
-          <div className="flex items-center gap-0.5 text-[10px] text-[#AABBB3] font-medium">
-            <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
+          <div className="flex items-center gap-0.5 text-[10px] text-white font-medium">
+            <Star className="w-3 h-3 text-[#E0BC66] fill-[#E0BC66]" />
             <span>{product.rating}</span>
           </div>
         </div>
 
         {/* Mobile Quick Add icon button */}
-        <div className="sm:hidden mt-2 pt-2 border-t border-[#133129] flex items-center justify-between">
+        <div className="sm:hidden mt-2 pt-2 border-t border-[#24443B] flex items-center justify-between">
           <span className="text-[10px] text-[#AABBB3] font-normal">Ready Stock</span>
           <button
             type="button"

@@ -42,16 +42,16 @@ export default function Cart() {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center">
         <div className="max-w-md mx-auto">
-          <div className="w-20 h-20 rounded-full bg-neutral-100 flex items-center justify-center mx-auto mb-4 text-neutral-400">
+          <div className="w-20 h-20 rounded-full bg-[#24443B] flex items-center justify-center mx-auto mb-4 text-[#E0BC66]">
             <ShoppingBag className="w-10 h-10" />
           </div>
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-2">Keranjang Belanja Kosong</h1>
-          <p className="text-xs sm:text-sm text-neutral-500 mb-8 leading-relaxed">
+          <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">Keranjang Belanja Kosong</h1>
+          <p className="text-xs sm:text-sm text-[#DCE5E0] mb-8 leading-relaxed">
             Anda belum menambahkan produk kaos polos combed 24s atau polo pique ke keranjang.
           </p>
           <Link
             to="/catalog"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-950 text-white text-xs sm:text-sm font-medium rounded-lg hover:bg-neutral-800 transition min-h-[44px]"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#A8C4B5] text-[#081F1C] text-xs sm:text-sm font-medium rounded-lg hover:bg-white transition min-h-[44px]"
           >
             Mulai Belanja Produk OEPRO
           </Link>
@@ -63,18 +63,18 @@ export default function Cart() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-32">
       {/* Title */}
-      <div className="flex items-baseline justify-between mb-6 pb-4 border-b border-neutral-200">
+      <div className="flex items-baseline justify-between mb-6 pb-4 border-b border-[#24443B]">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-neutral-900 tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
             Keranjang Belanja
           </h1>
-          <p className="text-xs text-neutral-500 mt-0.5">
+          <p className="text-xs text-[#AABBB3] mt-0.5">
             Total {totalItems} item siap diproses langsung ke Admin WhatsApp
           </p>
         </div>
         <Link
           to="/catalog"
-          className="text-xs font-medium text-neutral-600 hover:text-neutral-950 hidden sm:inline"
+          className="text-xs font-medium text-[#DCE5E0] hover:text-white hidden sm:inline"
         >
           &larr; Lanjutkan belanja
         </Link>
@@ -183,7 +183,7 @@ export default function Cart() {
           <div className="pt-2">
             <Link
               to="/catalog"
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600 hover:text-neutral-950 py-2"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#DCE5E0] hover:text-white py-2"
             >
               &larr; Lanjutkan belanja produk lain
             </Link>

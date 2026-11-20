@@ -136,11 +136,11 @@ export default function Catalog() {
       <div className="mb-4 sm:mb-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-neutral-500 uppercase tracking-widest mb-1">
+            <div className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#E0BC66] uppercase tracking-widest mb-1">
               <Sparkles className="w-3 h-3 text-amber-500" />
               <span>Katalog Resmi OEPRO</span>
             </div>
-            <h1 className="text-xl sm:text-3xl font-bold text-neutral-950 tracking-tight">
+            <h1 className="text-xl sm:text-3xl font-bold text-white tracking-tight">
               {wishlistOnly
                 ? 'Daftar Produk Favorit Anda'
                 : selectedCategory === 'all'
@@ -180,14 +180,14 @@ export default function Catalog() {
         </div>
 
         {/* Category Pills Bar (Horizontal Scrollable) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2.5 mt-2 border-b border-neutral-200">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2.5 mt-2 border-b border-[#24443B]">
           <button
             type="button"
             onClick={() => handleCategorySelect('all')}
             className={`px-4 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all ${
               selectedCategory === 'all' && !wishlistOnly
-                ? 'bg-neutral-900 text-white shadow-xs'
-                : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
+                : 'bg-[#24443B] text-[#DCE5E0] hover:bg-[#1A3B33]'
             }`}
           >
             Semua ({productsData.length})
@@ -199,8 +199,8 @@ export default function Catalog() {
               onClick={() => handleCategorySelect(cat.slug)}
               className={`px-4 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all ${
                 selectedCategory === cat.slug && !wishlistOnly
-                  ? 'bg-neutral-900 text-white shadow-xs'
-                  : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
+                  ? 'bg-[#A8C4B5] text-[#081F1C] shadow-xs'
+                  : 'bg-[#24443B] text-[#DCE5E0] hover:bg-[#1A3B33]'
               }`}
             >
               {cat.name} ({cat.item_count})
@@ -220,7 +220,7 @@ export default function Catalog() {
               className={`px-3.5 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-all flex items-center gap-1 ${
                 wishlistOnly
                   ? 'bg-red-500 text-white shadow-xs'
-                  : 'bg-neutral-100 text-red-600 hover:bg-red-50'
+                  : 'bg-[#24443B] text-red-400 hover:bg-[#1A3B33]'
               }`}
             >
               <Heart className="w-3.5 h-3.5 fill-current" />

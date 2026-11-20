@@ -66,8 +66,8 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-        <h2 className="text-xl font-bold text-neutral-900 mb-2">Produk Tidak Ditemukan</h2>
-        <p className="text-sm text-neutral-500 mb-6">Produk yang Anda cari mungkin sudah tidak tersedia.</p>
+        <h2 className="text-xl font-bold text-white mb-2">Produk Tidak Ditemukan</h2>
+        <p className="text-sm text-[#AABBB3] mb-6">Produk yang Anda cari mungkin sudah tidak tersedia.</p>
         <Link
           to="/catalog"
           className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 text-white rounded-full text-xs font-semibold"
@@ -205,7 +205,7 @@ export default function ProductDetail() {
           <ArrowLeft className="w-4 h-4" />
         </button>
 
-        <span className="text-sm font-bold text-neutral-900">Detail Produk</span>
+        <span className="text-sm font-bold text-white">Detail Produk</span>
 
         <div className="flex items-center gap-1.5">
           <button
@@ -234,16 +234,16 @@ export default function ProductDetail() {
       </div>
 
       {/* Desktop Breadcrumb */}
-      <nav className="hidden sm:flex items-center gap-2 text-xs text-neutral-500 mb-6">
-        <Link to="/" className="hover:text-neutral-900 transition">Beranda</Link>
+      <nav className="hidden sm:flex items-center gap-2 text-xs text-[#AABBB3] mb-6">
+        <Link to="/" className="hover:text-white transition">Beranda</Link>
         <span>/</span>
-        <Link to="/catalog" className="hover:text-neutral-900 transition">Katalog</Link>
+        <Link to="/catalog" className="hover:text-white transition">Katalog</Link>
         <span>/</span>
-        <Link to={`/catalog?cat=${product.category_slug}`} className="hover:text-neutral-900 font-medium text-neutral-700 transition">
+        <Link to={`/catalog?cat=${product.category_slug}`} className="hover:text-white font-medium text-[#DCE5E0] transition">
           {product.category}
         </Link>
         <span>/</span>
-        <span className="text-neutral-900 font-medium line-clamp-1">{product.name}</span>
+        <span className="text-white font-medium line-clamp-1">{product.name}</span>
       </nav>
 
       {/* Main PDP Grid */}
@@ -303,7 +303,7 @@ export default function ProductDetail() {
                   onClick={() => { setSelectedImageIndex(idx); setUserSelectedThumb(images[idx]); }}
                   className={`w-16 h-20 sm:w-20 sm:h-24 rounded-xl overflow-hidden border transition-all flex-shrink-0 bg-[#F8F8F7] relative p-1 flex items-center justify-center ${
                     selectedImageIndex === idx
-                      ? 'border-neutral-900 ring-2 ring-neutral-900'
+                      ? 'border-neutral-900 ring-2 ring-[#A8C4B5]'
                       : 'border-neutral-200/80 opacity-70 hover:opacity-100'
                   }`}
                   aria-label={`Lihat gambar ${idx + 1}`}
@@ -320,36 +320,36 @@ export default function ProductDetail() {
           
           <div>
             {/* Material Badge */}
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-100 border border-neutral-200 text-neutral-800 text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2">
-              <Check className="w-3 h-3 text-emerald-600" />
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#24443B] border border-[#2E5147] text-white text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2">
+              <Check className="w-3 h-3 text-emerald-400" />
               <span>{product.category_slug === 'polo-shirt' ? 'pique hexagon premium' : '100% Cotton Combed 24s'}</span>
             </div>
 
             {/* Product Title */}
-            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-neutral-950 tracking-tight leading-snug">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-snug">
               {product.name}
             </h1>
 
             {/* Rating & SKU */}
-            <div className="flex items-center gap-3 mt-2 text-xs text-neutral-600">
-              <div className="flex items-center gap-1 font-semibold text-neutral-900">
+            <div className="flex items-center gap-3 mt-2 text-xs text-[#AABBB3]">
+              <div className="flex items-center gap-1 font-semibold text-white">
                 <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                 <span>{product.rating}</span>
-                <span className="text-neutral-400 font-normal">({product.reviews_count || 120} ulasan)</span>
+                <span className="text-[#8FA39B] font-normal">({product.reviews_count || 120} ulasan)</span>
               </div>
               <span>&bull;</span>
-              <span className="text-neutral-500">Terjual {product.sold_count} pcs</span>
+              <span className="text-[#AABBB3]">Terjual {product.sold_count} pcs</span>
               <span>&bull;</span>
-              <span className="font-mono text-neutral-400">SKU: {product.sku}</span>
+              <span className="font-mono text-[#8FA39B]">SKU: {product.sku}</span>
             </div>
 
             {/* Price Display */}
             <div className="mt-3 sm:mt-4 flex items-baseline gap-3 flex-wrap">
-              <span className="text-2xl sm:text-3xl font-bold text-neutral-950 font-mono">
+              <span className="text-2xl sm:text-3xl font-bold text-white font-mono">
                 {formatRupiah(currentPrice)}
               </span>
               {currentOriginalPrice > currentPrice && (
-                <span className="text-sm sm:text-base text-neutral-400 line-through font-mono">
+                <span className="text-sm sm:text-base text-[#8FA39B] line-through font-mono">
                   {formatRupiah(currentOriginalPrice)}
                 </span>
               )}
@@ -358,7 +358,7 @@ export default function ProductDetail() {
                   -{currentDiscountPercent}%
                 </span>
               )}
-              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 border border-neutral-200">
+              <span className="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-[#24443B] text-[#DCE5E0] border border-[#2E5147]">
                 Size {selectedSize}
               </span>
               {isOutOfStock && (
@@ -370,12 +370,12 @@ export default function ProductDetail() {
           </div>
 
           {/* Color Selector */}
-          <div className="space-y-2 pt-2 border-t border-neutral-200">
+          <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-neutral-900">
-                Pilihan Warna: <span className="font-normal text-neutral-600">{selectedColor ? (selectedColor.name || selectedColor) : ''}</span>
+              <span className="font-semibold text-white">
+                Pilihan Warna: <span className="font-normal text-[#AABBB3]">{selectedColor ? (selectedColor.name || selectedColor) : ''}</span>
               </span>
-              <span className="text-[11px] text-neutral-400">{product.colors ? product.colors.length : 0} Warna</span>
+              <span className="text-[11px] text-[#8FA39B]">{product.colors ? product.colors.length : 0} Warna</span>
             </div>
 
             <div className="flex flex-wrap gap-2 pt-0.5">
@@ -395,7 +395,7 @@ export default function ProductDetail() {
                       }}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition border ${
                         isSelected
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
+                          ? 'bg-[#A8C4B5] text-[#081F1C] border-[#A8C4B5] shadow-xs'
                           : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400'
                       }`}
                     >
@@ -418,7 +418,7 @@ export default function ProductDetail() {
                       onClick={() => handleColorChange(c)}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs transition border ${
                         isSelected
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs'
+                          ? 'bg-[#A8C4B5] text-[#081F1C] border-[#A8C4B5] shadow-xs'
                           : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-400'
                       }`}
                     >
@@ -435,16 +435,16 @@ export default function ProductDetail() {
           </div>
 
           {/* Size Selector (Pill buttons - matches reference Screen 3) */}
-          <div className="space-y-2 pt-2 border-t border-neutral-200">
+          <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-neutral-900">
-                Pilih Ukuran: <span className="font-mono text-neutral-600 font-bold">{selectedSize}</span>
+              <span className="font-semibold text-white">
+                Pilih Ukuran: <span className="font-mono text-[#AABBB3] font-bold">{selectedSize}</span>
               </span>
 
               <button
                 type="button"
                 onClick={() => setSizeChartOpen(true)}
-                className="text-neutral-900 hover:text-neutral-600 font-semibold underline flex items-center gap-1 text-xs"
+                className="text-white hover:text-[#AABBB3] font-semibold underline flex items-center gap-1 text-xs"
               >
                 <Ruler className="w-3.5 h-3.5" />
                 <span>Panduan Ukuran</span>
@@ -462,12 +462,12 @@ export default function ProductDetail() {
                       onClick={() => { setSelectedSize(v2.name); setUserSelectedThumb(null); }}
                       className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
                         isSelected
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
+                          ? 'bg-[#A8C4B5] text-[#081F1C] border-[#A8C4B5] shadow-xs ring-1 ring-[#A8C4B5]'
                           : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
                       }`}
                     >
                       <span className="font-bold">{v2.name}</span>
-                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-[#081F1C]/70' : 'text-neutral-500'}`}>
                         {formatRupiah(v2.price || currentPrice)}
                       </span>
                     </button>
@@ -485,12 +485,12 @@ export default function ProductDetail() {
                       onClick={() => { setSelectedSize(sz); setUserSelectedThumb(null); }}
                       className={`py-2 px-1 text-xs font-mono rounded-xl border transition flex flex-col items-center justify-center min-h-[48px] ${
                         isSelected
-                          ? 'bg-neutral-900 text-white border-neutral-900 shadow-xs ring-1 ring-neutral-900'
+                          ? 'bg-[#A8C4B5] text-[#081F1C] border-[#A8C4B5] shadow-xs ring-1 ring-[#A8C4B5]'
                           : 'border-neutral-200 text-neutral-700 hover:border-neutral-400 bg-white'
                       }`}
                     >
                       <span className="font-bold">{sz}</span>
-                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                      <span className={`text-[10px] tracking-tight ${isSelected ? 'text-[#081F1C]/70' : 'text-neutral-500'}`}>
                         {formatRupiah(szPrice)}
                       </span>
                     </button>
@@ -501,14 +501,14 @@ export default function ProductDetail() {
           </div>
 
           {/* Quantity & Stock (Desktop & Tablet) */}
-          <div className="space-y-2 pt-2 border-t border-neutral-200">
+          <div className="space-y-2 pt-2 border-t border-[#24443B]">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-neutral-900">Jumlah:</span>
-              <span className="text-xs text-neutral-500 font-normal">
+              <span className="text-xs font-semibold text-white">Jumlah:</span>
+              <span className="text-xs text-[#AABBB3] font-normal">
                 Stok Ready: {isOutOfStock ? (
                   <strong className="text-red-600 font-bold bg-red-50 px-2 py-0.5 rounded-md border border-red-200">Stok Habis (0 pcs)</strong>
                 ) : (
-                  <strong className="text-neutral-900 font-medium">{currentStock} pcs</strong>
+                  <strong className="text-white font-medium">{currentStock} pcs</strong>
                 )}
               </span>
             </div>
@@ -567,13 +567,13 @@ export default function ProductDetail() {
           </div>
 
           {/* Guarantees Strip */}
-          <div className="p-3.5 rounded-xl bg-neutral-100 border border-neutral-200 text-xs text-neutral-600 space-y-1.5">
+          <div className="p-3.5 rounded-xl bg-[#24443B] border border-[#2E5147] text-xs text-[#AABBB3] space-y-1.5">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+              <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
               <span><strong>Garansi Tukar Ukuran 7 Hari:</strong> Tidak pas? Kami tukar tanpa dipersulit.</span>
             </div>
             <div className="flex items-center gap-2">
-              <Truck className="w-4 h-4 text-neutral-700 flex-shrink-0" />
+              <Truck className="w-4 h-4 text-[#DCE5E0] flex-shrink-0" />
               <span><strong>Pengiriman Cepat Surabaya:</strong> Siap kirim hari ini pukul 15.00 WIB.</span>
             </div>
           </div>
@@ -582,13 +582,13 @@ export default function ProductDetail() {
       </div>
 
       {/* Tabs: Description, Specs, Shipping */}
-      <div className="mt-10 sm:mt-16 pt-6 border-t border-neutral-200">
-        <div className="flex items-center gap-3 sm:gap-6 border-b border-neutral-200 text-xs sm:text-sm font-semibold">
+      <div className="mt-10 sm:mt-16 pt-6 border-t border-[#24443B]">
+        <div className="flex items-center gap-3 sm:gap-6 border-b border-[#24443B] text-xs sm:text-sm font-semibold">
           <button
             type="button"
             onClick={() => setActiveTab('desc')}
             className={`pb-3 transition relative ${
-              activeTab === 'desc' ? 'text-neutral-950 border-b-2 border-neutral-950 font-bold' : 'text-neutral-400 hover:text-neutral-700'
+              activeTab === 'desc' ? 'text-white border-b-2 border-[#A8C4B5] font-bold' : 'text-[#8FA39B] hover:text-white'
             }`}
           >
             Deskripsi Produk
@@ -597,7 +597,7 @@ export default function ProductDetail() {
             type="button"
             onClick={() => setActiveTab('specs')}
             className={`pb-3 transition relative ${
-              activeTab === 'specs' ? 'text-neutral-950 border-b-2 border-neutral-950 font-bold' : 'text-neutral-400 hover:text-neutral-700'
+              activeTab === 'specs' ? 'text-white border-b-2 border-[#A8C4B5] font-bold' : 'text-[#8FA39B] hover:text-white'
             }`}
           >
             Spesifikasi Bahan
@@ -606,19 +606,19 @@ export default function ProductDetail() {
             type="button"
             onClick={() => setActiveTab('shipping')}
             className={`pb-3 transition relative ${
-              activeTab === 'shipping' ? 'text-neutral-950 border-b-2 border-neutral-950 font-bold' : 'text-neutral-400 hover:text-neutral-700'
+              activeTab === 'shipping' ? 'text-white border-b-2 border-[#A8C4B5] font-bold' : 'text-[#8FA39B] hover:text-white'
             }`}
           >
             Garansi &amp; Retur
           </button>
         </div>
 
-        <div className="py-4 text-xs sm:text-sm text-neutral-700 leading-relaxed max-w-4xl space-y-3">
+        <div className="py-4 text-xs sm:text-sm text-[#DCE5E0] leading-relaxed max-w-4xl space-y-3">
           {activeTab === 'desc' && (
             <div className="space-y-3">
               <p>{product.description}</p>
               {product.features && (
-                <ul className="space-y-1 pl-4 list-disc text-neutral-600">
+                <ul className="space-y-1 pl-4 list-disc text-[#AABBB3]">
                   {product.features.map((feat, i) => (
                     <li key={i}>{feat}</li>
                   ))}
@@ -641,7 +641,7 @@ export default function ProductDetail() {
           )}
 
           {activeTab === 'shipping' && (
-            <p className="text-xs text-neutral-600">
+            <p className="text-xs text-[#AABBB3]">
               Garansi penukaran ukuran berlaku 7 hari kerja sejak barang diterima dengan syarat tag masih terpasang dan baju belum dicuci.
             </p>
           )}
@@ -650,8 +650,8 @@ export default function ProductDetail() {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <div className="mt-10 sm:mt-14 pt-8 border-t border-neutral-200">
-          <h2 className="text-base sm:text-xl font-bold text-neutral-950 mb-4">
+        <div className="mt-10 sm:mt-14 pt-8 border-t border-[#24443B]">
+          <h2 className="text-base sm:text-xl font-bold text-white mb-4">
             Varian Lain yang Serupa
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">

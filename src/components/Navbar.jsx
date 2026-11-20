@@ -35,7 +35,7 @@ export default function Navbar() {
     <>
       {/* 1. TOP ANNOUNCEMENT BAR */}
       {/* Desktop (>= sm): Stationary layout */}
-      <div className="hidden sm:flex bg-[#133129] text-[#081F1C] text-xs py-1.5 px-4 text-center font-normal tracking-wide items-center justify-center gap-3 border-b border-[#AABBB3]/30">
+      <div className="hidden sm:flex bg-[#133129] text-white text-xs py-1.5 px-4 text-center font-normal tracking-wide items-center justify-center gap-3 border-b border-[#AABBB3]/30">
         <span className="font-mono bg-[#A8C4B5] text-[#081F1C] px-1.5 py-0.5 rounded text-[11px] border border-[#A8C4B5]/40 font-semibold shadow-xs">
           oepro10
         </span>
@@ -45,17 +45,17 @@ export default function Navbar() {
           href={createWhatsAppGeneralLink()}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#133129] hover:text-white inline-flex items-center gap-1 font-semibold transition-colors"
+          className="text-[#A8C4B5] hover:text-white inline-flex items-center gap-1 font-semibold transition-colors"
         >
-          <WhatsAppIcon className="w-3 h-3 fill-current text-[#133129]" />
+          <WhatsAppIcon className="w-3 h-3 fill-current text-[#A8C4B5]" />
           <span>WA: 0811-3458-177</span>
         </a>
         <span className="text-[#AABBB3]">|</span>
-        <span className="text-[#24443B]">Garansi Tukar Ukuran 7 Hari</span>
+        <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
       </div>
 
       {/* Mobile (< sm): 1-Baris Ramping (h-7, text-[11px]), Smooth Continuous Running Marquee */}
-      <div className="sm:hidden bg-[#133129] text-[#081F1C] text-[11px] h-7 border-b border-[#AABBB3]/30 overflow-hidden relative flex items-center select-none">
+      <div className="sm:hidden bg-[#133129] text-white text-[11px] h-7 border-b border-[#AABBB3]/30 overflow-hidden relative flex items-center select-none">
         {/* Soft edge gradient fades for refined look */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-[#133129] to-transparent z-10" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-[#133129] to-transparent z-10" />
@@ -66,19 +66,19 @@ export default function Navbar() {
             <span className="font-mono bg-[#A8C4B5] text-[#081F1C] px-1.5 py-0.5 rounded text-[10px] border border-[#A8C4B5]/40 font-semibold shadow-xs">
               oepro10
             </span>
-            <span className="text-[#081F1C]">Diskon 10% Koleksi Katun Murni</span>
+            <span className="text-white">Diskon 10% Koleksi Katun Murni</span>
             <span className="text-[#AABBB3]">•</span>
             <a
               href={createWhatsAppGeneralLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#133129] inline-flex items-center gap-1 font-semibold"
+              className="text-[#A8C4B5] inline-flex items-center gap-1 font-semibold"
             >
-              <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#133129]" />
+              <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
               <span>WA: 0811-3458-177</span>
             </a>
             <span className="text-[#AABBB3]">•</span>
-            <span className="text-[#24443B]">Garansi Tukar Ukuran 7 Hari</span>
+            <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
             <span className="text-[#AABBB3]">•</span>
           </div>
 
@@ -87,19 +87,19 @@ export default function Navbar() {
             <span className="font-mono bg-[#A8C4B5] text-[#081F1C] px-1.5 py-0.5 rounded text-[10px] border border-[#A8C4B5]/40 font-semibold shadow-xs">
               oepro10
             </span>
-            <span className="text-[#081F1C]">Diskon 10% Koleksi Katun Murni</span>
+            <span className="text-white">Diskon 10% Koleksi Katun Murni</span>
             <span className="text-[#AABBB3]">•</span>
             <a
               href={createWhatsAppGeneralLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#133129] inline-flex items-center gap-1 font-semibold"
+              className="text-[#A8C4B5] inline-flex items-center gap-1 font-semibold"
             >
-              <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#133129]" />
+              <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
               <span>WA: 0811-3458-177</span>
             </a>
             <span className="text-[#AABBB3]">•</span>
-            <span className="text-[#24443B]">Garansi Tukar Ukuran 7 Hari</span>
+            <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
             <span className="text-[#AABBB3]">•</span>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function Navbar() {
                   placeholder="Cari kaos polos, polo lacoste, longsleeve..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 sm:py-2.5 text-xs sm:text-sm bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden focus:ring-1 focus:ring-[#A8C4B5] transition shadow-2xs"
+                  className="w-full pl-10 pr-4 py-2 sm:py-2.5 text-xs sm:text-sm bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-[#0E2B26] focus:border-[#A8C4B5] focus:outline-hidden focus:ring-1 focus:ring-[#A8C4B5] transition shadow-2xs"
                 />
                 <Search className="w-4 h-4 text-[#AABBB3] absolute left-3.5 top-2.5 sm:top-3 pointer-events-none" />
               </form>
@@ -204,7 +204,7 @@ export default function Navbar() {
                   placeholder="Cari produk oepro..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-xs bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-white focus:border-[#A8C4B5] focus:outline-hidden transition shadow-2xs"
+                  className="w-full pl-9 pr-3 py-2 text-xs bg-[#133129]/70 border border-[#24443B] rounded-full text-[#DCE5E0] placeholder:text-[#AABBB3] focus:bg-[#0E2B26] focus:border-[#A8C4B5] focus:outline-hidden transition shadow-2xs"
                 />
                 <Search className="w-3.5 h-3.5 text-[#AABBB3] absolute left-3 top-2.5 pointer-events-none" />
               </div>
