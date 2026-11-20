@@ -137,7 +137,7 @@ export default function ProductDetail() {
       ? (activeLevel1.image.startsWith("http") || activeLevel1.image.startsWith("data:") ? activeLevel1.image : `/${activeLevel1.image.replace(/^\//, "")}`)
       : null;
 
-  const currentDisplayImage = userSelectedThumb || activeVariantImage || images[selectedImageIndex] || images[0];
+  const currentDisplayImage = userSelectedThumb || images[selectedImageIndex] || images[0] || activeVariantImage;
 
   const handleAddToCart = () => {
     if (isOutOfStock) {

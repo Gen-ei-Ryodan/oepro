@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html><body>
+<script>
+  fetch('/data/products.json').then(function(r){ return r.json(); }).then(function(products){
+    // reorder dusty-pink: move dusty-rose.webp (main shot) to front
+    for (var i = 0; i < products.length; i++) {
+      if (products[i].id === 'oepro-polo-dusty-pink') {
+        var imgs = products[i].images.slice();
+        var idx = imgs.findIndex(function(x){ return x.indexOf('dusty-rose.webp') !== -1 && x.indexOf('detail') === -1; });
+        if (idx > 0) { var m = imgs.splice(idx,1)[0]; imgs.unshift(m); }
+        products[i].images = imgs;
+      }
+    }
+    localStorage.setItem('oepro_dynamic_products_v5', JSON.stringify(products));
+    window.location.replace('/product/oepro-polo-dusty-pink');
+  });
+</script>
+</body></html>

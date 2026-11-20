@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><body>
+<pre id="out"></pre>
+<script>
+  var key = 'oepro_dynamic_products_v5';
+  var raw = localStorage.getItem(key);
+  var products = raw ? JSON.parse(raw) : null;
+  var out = document.getElementById('out');
+  if (!products) { out.textContent = 'NO PRODUCTS IN LOCALSTORAGE'; }
+  else {
+    var p = products.find(function(x){ return x.id === 'oepro-polo-dusty-pink'; });
+    out.textContent = 'images[0] = ' + (p ? p.images[0] : 'product not found') + '\n';
+    out.textContent += 'all images: ' + (p ? JSON.stringify(p.images) : '');
+  }
+</script>
+</body></html>
