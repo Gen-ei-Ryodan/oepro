@@ -69,6 +69,33 @@ class ProductController extends Controller
             }
         }
 
+        // Handle images order and is_primary
+        if ($request->has('images')) {
+            $images = $request->images;
+            foreach ($images as $index => $imageData) {
+                $imageUrl = is_array($imageData)
+                    ? ($imageData['url'] ?? $imageData['image_url'] ?? '')
+                    : $imageData;
+
+                $existingImage = $product->images()
+                    ->where('image_url', $imageUrl)
+                    ->first();
+
+                if ($existingImage) {
+                    $existingImage->update([
+                        'order' => $index,
+                        'is_primary' => $index === 0
+                    ]);
+                } elseif (!empty($imageUrl)) {
+                    $product->images()->create([
+                        'image_url' => $imageUrl,
+                        'order' => $index,
+                        'is_primary' => $index === 0
+                    ]);
+                }
+            }
+        }
+
         return response()->json($product);
     }
 

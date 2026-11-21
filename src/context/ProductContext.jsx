@@ -3,6 +3,15 @@ import initialProductsData from '../data/products.json';
 import initialCategoriesData from '../data/categories.json';
 import { fetchBanners, fetchCategories, fetchProducts, createBanner, updateBanner, deleteBanner, createCategory, updateCategory, deleteCategory, createProduct, updateProduct, deleteProduct } from '../services/api';
 
+const normalizeBanner = (banner) => ({
+  ...banner,
+  ctaText: banner.cta_text || banner.ctaText || '',
+  ctaLink: banner.cta_link || banner.ctaLink || '',
+  imageLayout: banner.image_layout || banner.imageLayout || 'contained',
+  isActive: banner.is_active !== undefined ? banner.is_active : banner.isActive ?? true,
+  image: banner.image_url || banner.image || banner.image_url || '',
+});
+
 const ProductContext = createContext(null);
 
 const STORAGE_KEY = 'oepro_dynamic_products_v5';
@@ -136,7 +145,7 @@ export function ProductProvider({ children }) {
           fetchCategories().catch(() => ({ data: [] })),
         ]);
 
-        if (bannersRes.data?.length) setBanners(bannersRes.data);
+        if (bannersRes.data?.length) setBanners(bannersRes.data.map(normalizeBanner));
         if (productsRes.data?.length) setProducts(cleanProductImages(productsRes.data));
         if (categoriesRes.data?.length) setCategories(categoriesRes.data);
       } catch (err) {
@@ -250,7 +259,10 @@ export function ProductProvider({ children }) {
         if (value !== undefined && value !== null) {
           if (key === 'images' && Array.isArray(value)) {
             value.forEach((img, idx) => {
-              if (img.startsWith('data:')) {
+              if (typeof img === 'object' && img !== null && !Array.isArray(img)) {
+                // New format: {order, is_primary, url}
+                formData.append(`images[${idx}]`, img.url || '');
+              } else if (img.startsWith('data:')) {
                 const base64Data = img.split(',')[1];
                 const mimeType = img.split(',')[0].split(':')[1].split(';')[0];
                 const byteCharacters = atob(base64Data);
@@ -261,6 +273,8 @@ export function ProductProvider({ children }) {
                 const byteArray = new Uint8Array(byteNumbers);
                 const blob = new Blob([byteArray], { type: mimeType });
                 formData.append(`images[${idx}]`, blob, `image_${idx}.jpg`);
+              } else {
+                formData.append(`images[${idx}]`, img);
               }
             });
           } else if (key === 'variants' || key === 'features' || key === 'sizes' || key === 'colors') {
@@ -405,9 +419,14 @@ export function ProductProvider({ children }) {
     try {
       const formData = new FormData();
       formData.append('_method', 'PUT');
+      // Normalize camelCase to snake_case for backend compatibility
+      const normalizeKey = (key) => {
+        return key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+      };
       Object.entries(updatedFields).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          if (key === 'image' && typeof value === 'string' && value.startsWith('data:')) {
+          const normalizedKey = normalizeKey(key);
+          if (normalizedKey === 'image' && typeof value === 'string' && value.startsWith('data:')) {
             const base64Data = value.split(',')[1];
             const mimeType = value.split(',')[0].split(':')[1].split(';')[0];
             const byteCharacters = atob(base64Data);
@@ -418,8 +437,12 @@ export function ProductProvider({ children }) {
             const byteArray = new Uint8Array(byteNumbers);
             const blob = new Blob([byteArray], { type: mimeType });
             formData.append('image', blob, 'banner_image.jpg');
+          } else if (key === 'variants' || key === 'features' || key === 'sizes' || key === 'colors') {
+            formData.append(normalizedKey, JSON.stringify(value));
+          } else if (typeof value === 'object') {
+            formData.append(normalizedKey, JSON.stringify(value));
           } else {
-            formData.append(key, value);
+            formData.append(normalizedKey, value);
           }
         }
       });

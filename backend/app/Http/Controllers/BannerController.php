@@ -11,16 +11,43 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::where('is_active', true)->orderBy('order', 'asc')->get();
-        return response()->json($banners);
+        $formatted = [];
+        foreach ($banners as $banner) {
+            $formatted[] = [
+                'ctaText' => $banner->cta_text,
+                'ctaLink' => $banner->cta_link,
+                'imageLayout' => $banner->image_layout,
+                'isActive' => $banner->is_active,
+                'image' => $banner->image_url ?? $banner->image,
+                'title' => $banner->title,
+                'headline' => $banner->headline,
+                'subheadline' => $banner->subheadline,
+                'tag' => $banner->tag,
+                'cta_text' => $banner->cta_text,
+                'cta_link' => $banner->cta_link,
+                'image_layout' => $banner->image_layout,
+                'is_active' => $banner->is_active,
+                'image_url' => $banner->image_url,
+                'order' => $banner->order,
+            ];
+        }
+        return response()->json($formatted);
     }
 
     public function store(Request $request)
     {
-        // Validate request inputs
+        // Validate request inputs (keys already normalized to snake_case by frontend)
         $request->validate([
             'title' => 'required|string',
+            'headline' => 'sometimes|string',
+            'subheadline' => 'sometimes|string',
+            'tag' => 'sometimes|string',
+            'cta_text' => 'sometimes|string',
+            'cta_link' => 'sometimes|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'order' => 'required|integer'
+            'image_layout' => 'sometimes|string',
+            'order' => 'required|integer',
+            'is_active' => 'sometimes|boolean'
         ]);
 
         // Store image publicly
@@ -28,9 +55,16 @@ class BannerController extends Controller
 
         $banner = Banner::create([
             'title' => $request->title,
+            'headline' => $request->headline,
+            'subheadline' => $request->subheadline,
+            'tag' => $request->tag,
+            'cta_text' => $request->cta_text,
+            'cta_link' => $request->cta_link,
             'image_url' => Storage::url($path),
+            'image' => $path,
+            'image_layout' => $request->image_layout,
             'order' => $request->order,
-            'is_active' => true
+            'is_active' => $request->is_active ?? true
         ]);
 
         return response()->json($banner, 201);
@@ -42,7 +76,13 @@ class BannerController extends Controller
 
         $request->validate([
             'title' => 'sometimes|string',
+            'headline' => 'sometimes|string',
+            'subheadline' => 'sometimes|string',
+            'tag' => 'sometimes|string',
+            'cta_text' => 'sometimes|string',
+            'cta_link' => 'sometimes|string',
             'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image_layout' => 'sometimes|string',
             'order' => 'sometimes|integer',
             'is_active' => 'sometimes|boolean'
         ]);
@@ -53,9 +93,21 @@ class BannerController extends Controller
 
             $path = $request->file('image')->store('banners', 'public');
             $banner->image_url = Storage::url($path);
+            $banner->image = $path;
         }
 
-        $banner->update($request->only('title', 'order', 'is_active'));
+        $banner->update($request->only(
+            'title',
+            'headline',
+            'subheadline',
+            'tag',
+            'cta_text',
+            'cta_link',
+            'image',
+            'image_layout',
+            'order',
+            'is_active'
+        ));
 
         return response()->json($banner);
     }

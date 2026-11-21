@@ -21,9 +21,9 @@ import {
   Star,
 } from 'lucide-react';
 
-const STANDARD_SIZES = ['S', 'M', 'L', 'XL'];
-const JUMBO_SIZES = ['2XL', '3XL', '4XL', '5XL', '6XL', '7XL', '8XL'];
-const ALL_SIZES = ['XS', ...STANDARD_SIZES, ...JUMBO_SIZES];
+const STANDARD_SIZES = ['S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL', '6XL', '7XL', '8XL'];
+const JUMBO_SIZES = [];
+const ALL_SIZES = ['XS', ...STANDARD_SIZES];
 
 export const getCategoryDefaults = (categoryName) => {
   const cat = (categoryName || '').toLowerCase();
@@ -182,7 +182,7 @@ export default function ProductFormModal({
           };
         });
       } else if (Array.isArray(product.colors) && product.colors.length > 0) {
-        const sizesToUse = (product.sizes && product.sizes.length > 0) ? product.sizes.slice(0, 5) : STANDARD_SIZES;
+        const sizesToUse = (product.sizes && product.sizes.length > 0) ? product.sizes : STANDARD_SIZES;
         initialVariants = product.colors.slice(0, 3).map((c, idx) => ({
           id: `var1-${idx + 1}`,
           name: c.name || `Warna ${idx + 1}`,
@@ -291,7 +291,7 @@ export default function ProductFormModal({
         material: curCatDef.material,
         fit: 'Regular Fit Unisex',
         description: 'Pakaian katun berkualitas tinggi dengan jahitan rapi standar ekspor dan handfeel nyaman.',
-        sizes: ['S', 'M', 'L', 'XL', '2XL'],
+        sizes: [...STANDARD_SIZES],
         images: ['assets/products/polo/black-stone/black-stone-oepro.webp'],
         features: curCatDef.features,
         is_best_seller: false,
@@ -349,7 +349,7 @@ export default function ProductFormModal({
       name: `Varian Warna ${newIdx}`,
       hex: '#3A3732',
       image: defaultImg,
-      options: ['S', 'M', 'L', 'XL', '2XL'].map((sz, i) => {
+      options: STANDARD_SIZES.map((sz, i) => {
         const tiered = getTieredSizePrice(cat, sz, formData.price, formData.original_price);
         return {
           id: `var2-${Date.now()}-${i + 1}`,
@@ -467,7 +467,7 @@ export default function ProductFormModal({
     const v1 = nextVariants[v1Idx];
     const defaultImg = v1.image || formData.images[0] || 'assets/brand/oepro-logo.webp';
 
-    const newOptions = ['S', 'M', 'L', 'XL', '2XL'].map((sz, i) => {
+    const newOptions = STANDARD_SIZES.map((sz, i) => {
       const tiered = getTieredSizePrice(formData.category, sz, formData.price, formData.original_price);
       return {
         id: `var2-${Date.now()}-${i}`,
@@ -741,11 +741,19 @@ export default function ProductFormModal({
       ? matchingCat.slug
       : formData.category.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
+    // Transform images to include order and is_primary
+    const transformedImages = (formData.images || []).map((url, idx) => ({
+      order: idx,
+      is_primary: idx === 0,
+      url: url,
+    }));
+
     const productPayload = {
       ...formData,
       category_slug,
       colors: isFlatVariants ? (product?.colors || []) : generatedColors,
       sizes: generatedSizes.length > 0 ? generatedSizes : formData.sizes,
+      images: transformedImages,
     };
 
     onSave(productPayload);
