@@ -90,6 +90,9 @@ class ProductController extends Controller
             $variants = json_decode($variants, true) ?? [];
         }
         if (is_array($variants)) {
+            $product->variants_data = $variants;
+            $product->save();
+
             foreach ($variants as $variantData) {
                 if (is_array($variantData)) {
                     $sizeName = $variantData['size'] ?? $variantData['name'] ?? '';

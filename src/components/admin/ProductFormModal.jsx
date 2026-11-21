@@ -205,6 +205,19 @@ export default function ProductFormModal({
             }),
           };
         });
+      } else if (Array.isArray(product.sizes) && product.sizes.length > 0) {
+        initialVariants = product.sizes.map((sz, szIdx) => {
+          const tiered = getTieredSizePrice(curCat, sz, prodPrice, prodOrigPrice);
+          return {
+            id: `var-${szIdx + 1}`,
+            name: sz,
+            price: tiered.price,
+            original_price: tiered.original_price,
+            stock: 25,
+            image: (product.images && product.images[0]) || '',
+            sku: `${product.sku || 'OEP'}-${sz}`,
+          };
+        });
       } else if (Array.isArray(product.colors) && product.colors.length > 0) {
         const sizesToUse = (product.sizes && product.sizes.length > 0) ? product.sizes : STANDARD_SIZES;
         initialVariants = product.colors.slice(0, 3).map((c, idx) => ({
