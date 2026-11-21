@@ -19,7 +19,7 @@ class BannerController extends Controller
                 'ctaLink' => $banner->cta_link,
                 'imageLayout' => $banner->image_layout,
                 'isActive' => $banner->is_active,
-                'image' => $banner->image_url ?? $banner->image,
+                'image' => $banner->image_url ?? $banner->image ?? '/assets/banners/hero-banner-new.jpg',
                 'title' => $banner->title,
                 'headline' => $banner->headline,
                 'subheadline' => $banner->subheadline,

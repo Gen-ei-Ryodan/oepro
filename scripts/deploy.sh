@@ -102,6 +102,15 @@ chmod -R 775 storage bootstrap/cache
 
 # Create storage symlink
 php artisan storage:link
+# Also create symlink at root web level
+ln -sfn /home/alurelab/oepro.id/backend/storage/app/public /home/alurelab/oepro.id/storage 2>/dev/null || true
+
+# Copy banner fallback ke storage public
+mkdir -p /home/alurelab/oepro.id/backend/storage/app/public/banners
+cp -f /home/alurelab/oepro.id/assets/banners/hero-banner-new.jpg /home/alurelab/oepro.id/backend/storage/app/public/banners/banner1.jpg 2>/dev/null || true
+cp -f /home/alurelab/oepro.id/assets/banners/hero-banner-new.jpg /home/alurelab/oepro.id/backend/storage/app/public/banners/hero-banner-new.jpg 2>/dev/null || true
+# Ensure banner record uses the fallback
+php artisan db:seed --force --class=DatabaseSeeder
 
 # Run migrations
 php artisan migrate --force

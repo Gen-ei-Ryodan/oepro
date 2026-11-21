@@ -131,8 +131,12 @@ class ProductController extends Controller
 
         $path = $request->file('image')->store('products', 'public');
 
+        $imageUrl = Storage::disk('public')->url($path);
+
         $image = $product->images()->create([
-            'image_url' => Storage::url($path)
+            'image_url' => $imageUrl,
+            'order' => 1,
+            'is_primary' => true
         ]);
 
         return response()->json($image, 201);
