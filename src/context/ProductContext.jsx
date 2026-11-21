@@ -439,6 +439,8 @@ if (typeof img === 'string' && img.startsWith('data:')) {
             formData.append('image', blob, 'banner_image.jpg');
           } else if (key === 'variants' || key === 'features' || key === 'sizes' || key === 'colors') {
             formData.append(normalizedKey, JSON.stringify(value));
+          } else if (key === 'is_active' || key === 'isActive') {
+            formData.append(normalizedKey, value ? '1' : '0');
           } else if (typeof value === 'object') {
             formData.append(normalizedKey, JSON.stringify(value));
           } else {

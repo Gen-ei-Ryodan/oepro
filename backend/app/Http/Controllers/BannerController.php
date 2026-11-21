@@ -75,6 +75,10 @@ class BannerController extends Controller
     {
         $banner = Banner::findOrFail($id);
 
+        if ($request->has('is_active')) {
+            $request->merge(['is_active' => filter_var($request->is_active, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE) ?? true]);
+        }
+
         $request->validate([
             'title' => 'sometimes|string',
             'headline' => 'sometimes|string',

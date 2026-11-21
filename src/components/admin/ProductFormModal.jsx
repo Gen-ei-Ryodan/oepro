@@ -682,7 +682,7 @@ export default function ProductFormModal({
       const [moved] = next.splice(from, 1);
       next.splice(to, 0, moved);
       const updatedFormData = { ...prev, images: next };
-      updateProduct(formData.id, { images: next }); // Update context globally
+      updateProduct(product?.id, { images: next }); // Update context globally
       return updatedFormData;
     });
   };
