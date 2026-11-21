@@ -38,7 +38,7 @@ export default function ProductCard({ product }) {
       {/* 1. IMAGE CONTAINER */}
       <Link
         to={`/product/${product.id}`}
-        className="relative w-full aspect-[3/4] bg-white overflow-hidden block cursor-pointer"
+        className="relative w-full aspect-square bg-white overflow-hidden block cursor-pointer"
       >
         <img
           src={primaryImage}

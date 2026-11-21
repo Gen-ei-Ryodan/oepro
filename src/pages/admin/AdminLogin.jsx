@@ -17,7 +17,7 @@ export default function AdminLogin() {
       setIsLoading(true);
 
       try {
-        const email = username.includes('@') ? username : 'admin@oepro.com';
+        const email = username.includes('@') ? username : 'admin@oepro.id';
         const res = await login({ email, password });
         const { token, user } = res.data;
 
@@ -116,7 +116,7 @@ export default function AdminLogin() {
               </button>
             </div>
             <p className="text-[11px] text-neutral-400 mt-1.5">
-              Default akses demo: <code className="text-neutral-700 font-semibold">admin</code> / <code className="text-neutral-700 font-semibold">admin123</code>
+              Default akses demo: admin / <code className="text-neutral-700 font-semibold">admin123</code> atau password
             </p>
           </div>
 
