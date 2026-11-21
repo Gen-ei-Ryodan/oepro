@@ -53,8 +53,12 @@ LOG_STACK=single
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=error
 
-DB_CONNECTION=sqlite
-DB_DATABASE=/home/alurelab/oepro.id/backend/database/database.sqlite
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=alurelab_oepro
+DB_USERNAME=alurelab_oepro
+DB_PASSWORD=OePro2026Password123
 
 SESSION_DRIVER=database
 SESSION_LIFETIME=120

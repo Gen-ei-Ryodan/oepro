@@ -4,29 +4,26 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Banner;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::firstOrCreate([
-            'email' => 'admin@oepro.com'
-        ], [
-            'name' => 'Admin OEPro',
-            'password' => bcrypt('password')
-        ]);
+        // Default Admin User
+        User::firstOrCreate(
+            ['email' => 'admin@oepro.com'],
+            [
+                'name' => 'Admin OEPro',
+                'password' => bcrypt('password')
+            ]
+        );
 
         // Default banner
-        Banner::updateOrCreate(
+        Banner::firstOrCreate(
             ['id' => 1],
             [
                 'title' => 'Hero Banner',
