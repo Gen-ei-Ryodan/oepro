@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin OEPro',
             'password' => bcrypt('password')
         ]);
+
+        $this->call(ProductSeeder::class);
     }
 }

@@ -48,7 +48,7 @@ export default function Navbar() {
           className="text-[#A8C4B5] hover:text-white inline-flex items-center gap-1 font-semibold transition-colors"
         >
           <WhatsAppIcon className="w-3 h-3 fill-current text-[#A8C4B5]" />
-          <span>WA: 0811-3458-177</span>
+          <span>WA: 0813-1388-8927</span>
         </a>
         <span className="text-white">|</span>
         <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
@@ -75,7 +75,7 @@ export default function Navbar() {
               className="text-[#A8C4B5] inline-flex items-center gap-1 font-semibold"
             >
               <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
-              <span>WA: 0811-3458-177</span>
+              <span>WA: 0813-1388-8927</span>
             </a>
             <span className="text-white">•</span>
             <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
@@ -96,7 +96,7 @@ export default function Navbar() {
               className="text-[#A8C4B5] inline-flex items-center gap-1 font-semibold"
             >
               <WhatsAppIcon className="w-2.5 h-2.5 fill-current text-[#A8C4B5]" />
-              <span>WA: 0811-3458-177</span>
+              <span>WA: 0813-1388-8927</span>
             </a>
             <span className="text-white">•</span>
             <span className="text-[#E0BC66]">Garansi Tukar Ukuran 7 Hari</span>
@@ -178,13 +178,13 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsCartOpen(true)}
-                className="relative p-2 sm:px-3.5 sm:py-2 bg-[#A8C4B5] text-[#081F1C] rounded-full sm:rounded-xl hover:bg-[#97b5a5] transition flex items-center gap-2 shadow-xs min-w-[36px] min-h-[36px] justify-center"
+                className="relative p-2 sm:px-3.5 sm:py-2 bg-white text-neutral-900 border border-neutral-900 rounded-full sm:rounded-xl hover:bg-neutral-100 transition flex items-center gap-2 shadow-xs min-w-[36px] min-h-[36px] justify-center"
                 aria-label="Keranjang Belanja"
               >
                 <ShoppingBag className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
                 <span className="hidden sm:inline text-xs font-medium">Keranjang</span>
                 {totalItems > 0 && (
-                  <span className="bg-[#133129] text-[#A8C4B5] text-[10px] font-bold w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center -ml-0.5 shadow-xs">
+                  <span className="bg-neutral-900 text-white text-[10px] font-bold w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center -ml-0.5 shadow-xs">
                     {totalItems}
                   </span>
                 )}

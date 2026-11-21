@@ -23,6 +23,10 @@ rsync -avz --delete \
   --exclude 'storage/logs/*' \
   "$PROJECT_DIR/backend/" "${SSH_USER}@${SSH_HOST}:${REMOTE_BACKEND}/"
 
+echo "==> Deploying backend public storage..."
+rsync -avz -e "ssh -p ${SSH_PORT}" \
+  "$PROJECT_DIR/backend/storage/app/public/" "${SSH_USER}@${SSH_HOST}:${REMOTE_BACKEND}/storage/app/public/"
+
 echo "==> Configuring backend on server..."
 ssh -p "${SSH_PORT}" "${SSH_USER}@${SSH_HOST}" << 'ENDSSH'
 set -euo pipefail
@@ -101,6 +105,7 @@ php artisan storage:link
 
 # Run migrations
 php artisan migrate --force
+php artisan db:seed --force
 
 # Cache config & routes
 php artisan config:cache

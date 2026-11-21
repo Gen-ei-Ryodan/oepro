@@ -92,7 +92,7 @@ class ProductController extends Controller
         $path = $request->file('image')->store('products', 'public');
 
         $image = $product->images()->create([
-            'url' => Storage::url($path)
+            'image_url' => Storage::url($path)
         ]);
 
         return response()->json($image, 201);
@@ -101,7 +101,7 @@ class ProductController extends Controller
     public function removeImage($imageId)
     {
         $image = ProductImage::findOrFail($imageId);
-        Storage::disk('public')->delete(str_replace('/storage/', '', $image->url));
+        Storage::disk('public')->delete(str_replace('/storage/', '', $image->image_url));
         $image->delete();
         return response()->json(['message' => 'Image removed successfully']);
     }

@@ -10,7 +10,18 @@ class Product extends Model
 
     protected $casts = [
         'price' => 'float',
+        'original_price' => 'float',
+        'discount_percent' => 'integer',
+        'rating' => 'float',
         'min_order' => 'integer',
+        'stock' => 'integer',
+        'sold_count' => 'integer',
+        'sizes' => 'array',
+        'colors' => 'array',
+        'features' => 'array',
+        'is_best_seller' => 'boolean',
+        'is_featured' => 'boolean',
+        'is_new_arrival' => 'boolean',
     ];
 
     public function category()

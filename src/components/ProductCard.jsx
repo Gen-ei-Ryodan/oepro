@@ -1,15 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ShoppingBag, Heart } from 'lucide-react';
+import { Star, ShoppingBag } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { useWishlist } from '../context/WishlistContext';
 import { resolveImageUrl } from '../services/api';
 
 export default function ProductCard({ product }) {
   const { addToCart, setIsCartOpen } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist();
-
-  const isFav = isInWishlist(product.id);
 
   const formatRupiah = (number) => {
     return new Intl.NumberFormat('id-ID', {
@@ -32,12 +28,6 @@ export default function ProductCard({ product }) {
     }
   };
 
-  const handleFavoriteToggle = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleWishlist(product.id);
-  };
-
   const primaryImage = product.images && product.images.length > 0
     ? resolveImageUrl(product.images[0])
     : '/assets/brand/oepro-logo.webp';
@@ -45,52 +35,20 @@ export default function ProductCard({ product }) {
   return (
     <div className="group relative flex flex-col bg-gradient-to-b from-[#153528] to-[#0F2A24] rounded-2xl border border-[#24443B] hover:border-[#A8C4B5]/60 overflow-hidden shadow-2xs hover:shadow-md transition-all duration-300">
       
-      {/* 1. IMAGE CONTAINER WITH ASPECT-[3/4] & PADDING */}
+      {/* 1. IMAGE CONTAINER */}
       <Link
         to={`/product/${product.id}`}
-        className="relative w-full aspect-[3/4] bg-white overflow-hidden block p-2.5 sm:p-3 flex items-center justify-center cursor-pointer"
+        className="relative w-full aspect-[3/4] bg-white overflow-hidden block cursor-pointer"
       >
         <img
           src={primaryImage}
           alt={product.name}
-          className="w-full h-full object-contain object-center transition-transform duration-500 ease-out group-hover:scale-105"
+          className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
           loading="lazy"
           onError={(e) => {
             e.target.src = '/assets/brand/oepro-logo.webp';
           }}
         />
-
-        {/* Status Badges */}
-        <div className="absolute top-2 left-2 flex items-center gap-1 z-10">
-          {product.discount_percent > 0 && (
-            <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase bg-red-600 text-white rounded-md shadow-xs">
-              -{product.discount_percent}%
-            </span>
-          )}
-          {product.is_best_seller && (
-            <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-semibold uppercase bg-[#A8C4B5] text-[#081F1C] rounded-md shadow-xs">
-              Best Seller
-            </span>
-          )}
-          {!product.is_best_seller && product.is_new_arrival && (
-            <span className="px-1.5 py-0.5 text-[9px] sm:text-[10px] font-medium uppercase bg-[#696969] text-white rounded-md shadow-xs">
-              New
-            </span>
-          )}
-        </div>
-
-        {/* Floating Heart Button */}
-        <button
-          type="button"
-          onClick={handleFavoriteToggle}
-          className={`absolute top-2 right-2 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#133129]/90 backdrop-blur-xs shadow-xs flex items-center justify-center transition-all z-10 ${
-            isFav ? 'text-red-500 scale-105' : 'text-white hover:text-red-500 hover:scale-110'
-          }`}
-          title={isFav ? 'Hapus dari favorit' : 'Tambah ke favorit'}
-          aria-label="Favorit"
-        >
-          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isFav ? 'fill-red-500' : ''}`} />
-        </button>
 
         {/* Quick Add Button on Hover (Desktop) / Bottom right button */}
         <div className="hidden sm:block absolute inset-x-2.5 bottom-2.5 opacity-0 group-hover:opacity-100 transition-all duration-200 translate-y-1 group-hover:translate-y-0 z-10">

@@ -87,7 +87,7 @@ export default function AdminLogin() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="admin"
-                className="w-full pl-10 pr-4 py-2.5 text-sm bg-[#FBFBFA] border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden transition"
+                className="w-full pl-10 pr-4 py-2.5 text-sm text-black bg-white border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden transition"
               />
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 text-sm bg-[#FBFBFA] border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden transition"
+                className="w-full pl-10 pr-10 py-2.5 text-sm text-black bg-white border border-[#E5E5E0] rounded-xl focus:bg-white focus:border-neutral-950 focus:outline-hidden transition"
               />
               <button
                 type="button"

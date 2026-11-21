@@ -1,6 +1,6 @@
 import { getProductPriceBySize } from './pricing';
 
-export const STORE_WA_NUMBER = '628113458177';
+export const STORE_WA_NUMBER = '6281313888927';
 
 export const formatRupiah = (num) => {
   return new Intl.NumberFormat('id-ID', {

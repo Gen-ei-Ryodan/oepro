@@ -131,7 +131,7 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <a
-                  href="https://wa.me/628113458177?text=Halo%20Admin%20OEPRO%2C%20saya%20ingin%20cek%20status%20pesanan%20saya"
+                  href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO%2C%20saya%20ingin%20cek%20status%20pesanan%20saya"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition flex items-center gap-1.5"
@@ -158,7 +158,7 @@ export default function Footer() {
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-white mt-0.5 flex-shrink-0" />
                 <span>
-                  {storeInfo.location.address}, {storeInfo.location.city}, {storeInfo.location.province} {storeInfo.location.postal_code}
+                  {storeInfo.location.address}, {storeInfo.location.province} {storeInfo.location.postal_code}
                 </span>
               </div>
               <div className="flex items-center gap-2">

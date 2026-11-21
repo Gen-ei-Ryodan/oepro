@@ -254,34 +254,15 @@ const activeVariantImage = (activeLevel2 && activeLevel2.image)
         <div className="lg:col-span-6 space-y-3 sm:space-y-4">
           
           {/* Main Large Image */}
-          <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#F8F8F7] border border-neutral-200/70 shadow-2xs p-4 sm:p-8 flex items-center justify-center">
+          <div className="relative aspect-[3/4] rounded-2xl sm:rounded-3xl overflow-hidden bg-[#F8F8F7] border border-neutral-200/70 shadow-2xs flex items-center justify-center">
             <img
               src={currentDisplayImage}
               alt={product.name}
-              className="w-full h-full object-contain object-center transition-all duration-300"
+              className="w-full h-full object-cover object-center transition-all duration-300"
               onError={(e) => {
                 e.target.src = '/assets/brand/oepro-logo.webp';
               }}
             />
-
-            {/* Badges */}
-            <div className="absolute top-3 left-3 flex items-center gap-1.5 z-10">
-              {product.discount_percent > 0 && (
-                <span className="px-2 py-0.5 text-[10px] font-semibold uppercase bg-red-600 text-white rounded-md shadow-xs">
-                  -{product.discount_percent}%
-                </span>
-              )}
-              {product.is_best_seller && (
-                <span className="px-2 py-0.5 text-[10px] font-medium uppercase bg-neutral-900/90 text-white rounded-md shadow-xs">
-                  Best Seller
-                </span>
-              )}
-              {!product.is_best_seller && product.is_new_arrival && (
-                <span className="px-2 py-0.5 text-[10px] font-medium uppercase bg-[#2D4A3E] text-white rounded-md shadow-xs">
-                  New
-                </span>
-              )}
-            </div>
 
             <button
               type="button"
