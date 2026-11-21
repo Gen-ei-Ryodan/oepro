@@ -13,7 +13,7 @@ class Banner extends Model
         'tag',
         'cta_text',
         'cta_link',
-        'image',
+        'image_url',
         'image_layout',
         'order',
         'is_active',

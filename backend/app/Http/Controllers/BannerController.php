@@ -62,7 +62,6 @@ class BannerController extends Controller
             'cta_text' => $request->cta_text,
             'cta_link' => $request->cta_link,
             'image_url' => Storage::url($path),
-            'image' => $path,
             'image_layout' => $request->image_layout,
             'order' => $request->order,
             'is_active' => $request->is_active ?? true
@@ -107,7 +106,6 @@ class BannerController extends Controller
             'tag',
             'cta_text',
             'cta_link',
-            'image',
             'image_layout',
             'order',
             'is_active'
