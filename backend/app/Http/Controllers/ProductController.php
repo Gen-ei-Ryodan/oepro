@@ -57,8 +57,30 @@ class ProductController extends Controller
         $validatedData = $request->validate([
             'name' => 'sometimes|string',
             'category_id' => 'sometimes|integer|exists:categories,id',
-            'price' => 'sometimes|numeric'
+            'price' => 'sometimes|numeric',
+            'original_price' => 'sometimes|nullable|numeric',
+            'discount_percent' => 'sometimes|nullable|integer',
+            'stock' => 'sometimes|nullable|integer',
+            'material' => 'sometimes|nullable|string',
+            'fit' => 'sometimes|nullable|string',
+            'description' => 'sometimes|nullable|string',
+            'sku' => 'sometimes|nullable|string',
+            'is_best_seller' => 'sometimes|boolean',
+            'is_featured' => 'sometimes|boolean',
+            'is_new_arrival' => 'sometimes|boolean',
         ]);
+
+        foreach (['sizes', 'colors', 'features'] as $jsonField) {
+            if ($request->has($jsonField)) {
+                $val = $request->$jsonField;
+                if (is_string($val)) {
+                    $decoded = json_decode($val, true);
+                    $validatedData[$jsonField] = $decoded !== null ? $decoded : $val;
+                } else {
+                    $validatedData[$jsonField] = $val;
+                }
+            }
+        }
 
         $product->update($validatedData);
 
@@ -70,10 +92,13 @@ class ProductController extends Controller
         if (is_array($variants)) {
             foreach ($variants as $variantData) {
                 if (is_array($variantData)) {
-                    $product->variants()->updateOrCreate(
-                        ['product_id' => $product->id, 'size' => $variantData['size'] ?? ''],
-                        ['stock' => $variantData['stock'] ?? 0]
-                    );
+                    $sizeName = $variantData['size'] ?? $variantData['name'] ?? '';
+                    if (!empty($sizeName)) {
+                        $product->variants()->updateOrCreate(
+                            ['product_id' => $product->id, 'size' => $sizeName],
+                            ['stock' => $variantData['stock'] ?? 0]
+                        );
+                    }
                 }
             }
         }
@@ -84,32 +109,44 @@ class ProductController extends Controller
             $images = json_decode($images, true) ?? [];
         }
         if (is_array($images)) {
+            $incomingUrls = [];
             foreach ($images as $index => $imageData) {
                 $imageUrl = is_array($imageData)
                     ? ($imageData['url'] ?? $imageData['image_url'] ?? '')
                     : (is_string($imageData) ? $imageData : '');
 
                 if (!empty($imageUrl)) {
+                    $incomingUrls[] = $imageUrl;
+                    $isPrimary = is_array($imageData)
+                        ? ($imageData['is_primary'] ?? ($index === 0))
+                        : ($index === 0);
+
+                    // Update existing or create new with explicit order & is_primary
                     $image = $product->images()
                         ->where('image_url', $imageUrl)
                         ->first();
                     if ($image) {
                         $image->update([
                             'order' => $index,
-                            'is_primary' => is_array($imageData) ? ($imageData['is_primary'] ?? ($index === 0)) : ($index === 0)
+                            'is_primary' => $isPrimary
                         ]);
                     } else {
                         $product->images()->create([
                             'image_url' => $imageUrl,
                             'order' => $index,
-                            'is_primary' => is_array($imageData) ? ($imageData['is_primary'] ?? ($index === 0)) : ($index === 0)
+                            'is_primary' => $isPrimary
                         ]);
                     }
                 }
             }
+
+            // Remove images that were removed by admin
+            if (!empty($incomingUrls)) {
+                $product->images()->whereNotIn('image_url', $incomingUrls)->delete();
+            }
         }
 
-        return response()->json($product);
+        return response()->json($product->load(['images', 'variants', 'category']));
     }
 
     public function destroy($id)

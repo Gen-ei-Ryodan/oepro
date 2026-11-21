@@ -73,19 +73,43 @@ export const getCategoryDefaults = (categoryName) => {
 export const getTieredSizePrice = (categoryName, size, basePrice, baseOriginalPrice) => {
   const cat = (categoryName || '').toLowerCase();
   const sz = (size || '').toUpperCase().trim();
+
+  const poloTiers = {
+    'XS': [92000, 119000], 'S': [92000, 119000], 'M': [92000, 119000], 'L': [92000, 119000], 'XL': [92000, 119000],
+    '2XL': [100000, 125000], '3XL': [108000, 135000], '4XL': [116000, 145000], '5XL': [124000, 155000],
+    '6XL': [132000, 165000], '7XL': [140000, 175000], '8XL': [148000, 185000]
+  };
+
+  const lsTiers = {
+    'XS': [72000, 89000], 'S': [72000, 89000], 'M': [72000, 89000], 'L': [72000, 89000], 'XL': [72000, 89000],
+    '2XL': [79000, 98000], '3XL': [86000, 107000], '4XL': [93000, 116000], '5XL': [100000, 125000],
+    '6XL': [107000, 134000], '7XL': [114000, 143000], '8XL': [121000, 151000]
+  };
+
+  const tsTiers = {
+    'XS': [62000, 79000], 'S': [62000, 79000], 'M': [62000, 79000], 'L': [62000, 79000], 'XL': [62000, 79000],
+    '2XL': [67000, 85000], '3XL': [72000, 90000], '4XL': [77000, 96000], '5XL': [82000, 103000],
+    '6XL': [87000, 109000], '7XL': [92000, 115000], '8XL': [97000, 121000]
+  };
+
   if (cat.includes('polo')) {
-    const pr = sz === '2XL' ? 100000 : (sz === '3XL' ? 108000 : (basePrice || 92000));
-    const orig = sz === '2XL' ? 129000 : (sz === '3XL' ? 139000 : (baseOriginalPrice || 119000));
-    return { price: pr, original_price: orig };
+    if (poloTiers[sz]) {
+      return { price: poloTiers[sz][0], original_price: poloTiers[sz][1] };
+    }
+    return { price: basePrice || 92000, original_price: baseOriginalPrice || 119000 };
   }
+
   if (cat.includes('longsleeve') || cat.includes('lengan panjang')) {
-    const pr = sz === '2XL' ? 79000 : (sz === '3XL' ? 86000 : (basePrice || 72000));
-    const orig = sz === '2XL' ? 98000 : (sz === '3XL' ? 107000 : (baseOriginalPrice || 89000));
-    return { price: pr, original_price: orig };
+    if (lsTiers[sz]) {
+      return { price: lsTiers[sz][0], original_price: lsTiers[sz][1] };
+    }
+    return { price: basePrice || 72000, original_price: baseOriginalPrice || 89000 };
   }
-  const pr = sz === '2XL' ? 67000 : (sz === '3XL' ? 72000 : (basePrice || 62000));
-  const orig = sz === '2XL' ? 85000 : (sz === '3XL' ? 92000 : (baseOriginalPrice || 79000));
-  return { price: pr, original_price: orig };
+
+  if (tsTiers[sz]) {
+    return { price: tsTiers[sz][0], original_price: tsTiers[sz][1] };
+  }
+  return { price: basePrice || 62000, original_price: baseOriginalPrice || 79000 };
 };
 
 export default function ProductFormModal({
@@ -681,9 +705,7 @@ export default function ProductFormModal({
       const next = [...prev.images];
       const [moved] = next.splice(from, 1);
       next.splice(to, 0, moved);
-      const updatedFormData = { ...prev, images: next };
-      updateProduct(product?.id, { images: next }); // Update context globally
-      return updatedFormData;
+      return { ...prev, images: next };
     });
   };
 

@@ -14,7 +14,7 @@ const normalizeBanner = (banner) => ({
 
 const ProductContext = createContext(null);
 
-const STORAGE_KEY = 'oepro_dynamic_products_v5';
+const STORAGE_KEY = 'oepro_dynamic_products_v6';
 const CATEGORIES_KEY = 'oepro_dynamic_categories_v4';
 const BANNERS_KEY = 'oepro_dynamic_banners_v5';
 const BANNER_LAYOUT_KEY = 'oepro_banner_layout_v4';
@@ -70,6 +70,7 @@ export function ProductProvider({ children }) {
   const [products, setProducts] = useState(() => {
     try {
       localStorage.removeItem('oepro_dynamic_products_v4');
+      localStorage.removeItem('oepro_dynamic_products_v5');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
