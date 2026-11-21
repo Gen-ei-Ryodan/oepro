@@ -55,7 +55,15 @@ const cleanProductImages = (items) => {
       category: catObj ? catObj.name : (p.category || ''),
       category_slug: catObj ? catObj.slug : (p.category_slug || ''),
       images: Array.isArray(p.images)
-        ? p.images
+        ? [...p.images]
+            .sort((a, b) => {
+              if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
+                if (a.is_primary && !b.is_primary) return -1;
+                if (!a.is_primary && b.is_primary) return 1;
+                return (a.order ?? 0) - (b.order ?? 0);
+              }
+              return 0;
+            })
             .map((img) => {
               const url = typeof img === 'string' ? img : (img?.url || img?.image_url || '');
               return url;
@@ -291,7 +299,13 @@ if (typeof img === 'string' && img.startsWith('data:')) {
     } catch (err) {
       console.warn('API update failed, updating locally only', err);
     }
-    setProducts((prev) => prev.map((item) => (item.id === id ? { ...item, ...updatedFields } : item)));
+    let normalizedUpdated = { ...updatedFields };
+    if (Array.isArray(updatedFields.images)) {
+      normalizedUpdated.images = updatedFields.images.map((img) =>
+        typeof img === 'string' ? img : (img?.url || img?.image_url || '')
+      );
+    }
+    setProducts((prev) => prev.map((item) => (item.id === id ? { ...item, ...normalizedUpdated } : item)));
   };
 
   const deleteProductFn = async (id) => {
