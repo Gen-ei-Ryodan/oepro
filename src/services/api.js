@@ -60,18 +60,19 @@ export const getMe = () => axiosInstance.get('/auth/me');
 
 export const resolveImageUrl = (path) => {
     if (!path) return '/assets/brand/oepro-logo.webp';
-    if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('data:')) {
-        return path;
+    const imgUrl = typeof path === 'object' && path !== null ? path.url || path.image_url || '' : path;
+    if (imgUrl.startsWith('http://') || imgUrl.startsWith('https://') || imgUrl.startsWith('data:')) {
+        return imgUrl;
     }
     const backendBase = import.meta.env.VITE_API_BASE_URL || window.location.origin;
     const storageBase = backendBase.replace(/\/api$/, '') + '/storage/';
-    if (path.startsWith('storage/')) {
-        return storageBase + path.replace('storage/', '');
+    if (imgUrl.startsWith('storage/')) {
+        return storageBase + imgUrl.replace('storage/', '');
     }
-    if (path.startsWith('/storage/')) {
-        return storageBase + path.replace('/storage/', '');
+    if (imgUrl.startsWith('/storage/')) {
+        return storageBase + imgUrl.replace('/storage/', '');
     }
-    return path.startsWith('/') ? path : '/' + path;
+    return imgUrl.startsWith('/') ? imgUrl : '/' + imgUrl;
 };
 
 export default axiosInstance;

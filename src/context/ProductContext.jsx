@@ -212,7 +212,7 @@ export function ProductProvider({ children }) {
         if (value !== undefined && value !== null) {
           if (key === 'images' && Array.isArray(value)) {
             value.forEach((img, idx) => {
-              if (img.startsWith('data:')) {
+if (typeof img === 'string' && img.startsWith('data:')) {
                 const base64Data = img.split(',')[1];
                 const mimeType = img.split(',')[0].split(':')[1].split(';')[0];
                 const byteCharacters = atob(base64Data);
@@ -262,7 +262,7 @@ export function ProductProvider({ children }) {
               if (typeof img === 'object' && img !== null && !Array.isArray(img)) {
                 // New format: {order, is_primary, url}
                 formData.append(`images[${idx}]`, img.url || '');
-              } else if (img.startsWith('data:')) {
+              } else if (typeof img === 'string' && img.startsWith('data:')) {
                 const base64Data = img.split(',')[1];
                 const mimeType = img.split(',')[0].split(':')[1].split(';')[0];
                 const byteCharacters = atob(base64Data);

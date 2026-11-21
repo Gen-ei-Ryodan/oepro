@@ -14,6 +14,7 @@ class BannerController extends Controller
         $formatted = [];
         foreach ($banners as $banner) {
             $formatted[] = [
+                'id' => $banner->id,
                 'ctaText' => $banner->cta_text,
                 'ctaLink' => $banner->cta_link,
                 'imageLayout' => $banner->image_layout,

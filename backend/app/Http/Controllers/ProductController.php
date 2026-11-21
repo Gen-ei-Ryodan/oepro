@@ -65,7 +65,10 @@ class ProductController extends Controller
         // Update or create variants
         if ($request->has('variants')) {
             foreach ($request->variants as $variantData) {
-                $product->variants()->updateOrCreate(['id' => $variantData['id'] ?? null], $variantData);
+                $product->variants()->updateOrCreate(
+                    ['product_id' => $product->id, 'size' => $variantData['size'] ?? ''],
+                    ['stock' => $variantData['stock'] ?? 0]
+                );
             }
         }
 
