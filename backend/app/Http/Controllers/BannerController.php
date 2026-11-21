@@ -82,7 +82,6 @@ class BannerController extends Controller
             'tag' => 'sometimes|string',
             'cta_text' => 'sometimes|string',
             'cta_link' => 'sometimes|string',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image_layout' => 'sometimes|string',
             'order' => 'sometimes|integer',
             'is_active' => 'sometimes|boolean'

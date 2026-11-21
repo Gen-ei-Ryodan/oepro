@@ -63,38 +63,48 @@ class ProductController extends Controller
         $product->update($validatedData);
 
         // Update or create variants
-        if ($request->has('variants')) {
-            foreach ($request->variants as $variantData) {
-                $product->variants()->updateOrCreate(
-                    ['product_id' => $product->id, 'size' => $variantData['size'] ?? ''],
-                    ['stock' => $variantData['stock'] ?? 0]
-                );
+        $variants = $request->variants;
+        if (is_string($variants)) {
+            $variants = json_decode($variants, true) ?? [];
+        }
+        if (is_array($variants)) {
+            foreach ($variants as $variantData) {
+                if (is_array($variantData)) {
+                    $product->variants()->updateOrCreate(
+                        ['product_id' => $product->id, 'size' => $variantData['size'] ?? ''],
+                        ['stock' => $variantData['stock'] ?? 0]
+                    );
+                }
             }
         }
 
         // Handle images order and is_primary
-        if ($request->has('images')) {
-            $images = $request->images;
+        $images = $request->images;
+        if (is_string($images)) {
+            $images = json_decode($images, true) ?? [];
+        }
+        if (is_array($images)) {
             foreach ($images as $index => $imageData) {
                 $imageUrl = is_array($imageData)
                     ? ($imageData['url'] ?? $imageData['image_url'] ?? '')
-                    : $imageData;
+                    : (is_string($imageData) ? $imageData : '');
 
-                $existingImage = $product->images()
-                    ->where('image_url', $imageUrl)
-                    ->first();
-
-                if ($existingImage) {
-                    $existingImage->update([
-                        'order' => $index,
-                        'is_primary' => $index === 0
-                    ]);
-                } elseif (!empty($imageUrl)) {
-                    $product->images()->create([
-                        'image_url' => $imageUrl,
-                        'order' => $index,
-                        'is_primary' => $index === 0
-                    ]);
+                if (!empty($imageUrl)) {
+                    $image = $product->images()
+                        ->where('image_url', $imageUrl)
+                        ->first();
+                    if ($image) {
+                        $image->update([
+                            'order' => $index,
+                            'is_primary' => is_array($imageData) ? ($imageData['is_primary'] ?? ($index === 0)) : ($index === 0)
+                        ]);
+                    } else {
+                        $product->images()->create([
+                            'image_url' => $imageUrl,
+                            'order' => $index,
+                            'is_primary' => is_array($imageData) ? ($imageData['is_primary'] ?? ($index === 0)) : ($index === 0)
+                        ]);
+                    }
                 }
             }
         }
