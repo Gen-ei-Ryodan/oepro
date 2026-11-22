@@ -51,7 +51,28 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.store('cart', {
-                items: JSON.parse(localStorage.getItem('oepro_cart_items') || '[]'),
+                items: (function() {
+                    const saved = JSON.parse(localStorage.getItem('oepro_cart_items') || '[]');
+                    // Bersihkan / auto-perbaiki item cart yang mungkin tersimpan dengan logo default
+                    return saved.map(i => {
+                        if (i.image && i.image.includes('oepro-logo.webp') && i.slug) {
+                            // Tentukan path gambar berdasarkan slug produk
+                            const parts = i.slug.replace('kaos-', '').split('-');
+                            // Contoh: kaos-polo-premium-red-chili -> polo, red-chili
+                            if (i.slug.includes('polo')) {
+                                const colorSlug = i.slug.replace('kaos-polo-premium-', '');
+                                i.image = `/storage/products/polo/${colorSlug}/${colorSlug}-oepro.webp`;
+                            } else if (i.slug.includes('longsleeve')) {
+                                const colorSlug = i.slug.replace('basic-longsleeve-', '');
+                                i.image = `/storage/products/longsleeve/${colorSlug}/${colorSlug}-oepro.webp`;
+                            } else if (i.slug.includes('tshirt') || i.slug.includes('t-shirt') || i.slug.includes('basic')) {
+                                const colorSlug = i.slug.replace('basic-tshirt-24s-', '');
+                                i.image = `/storage/products/tshirt/${colorSlug}/${colorSlug}-oepro.webp`;
+                            }
+                        }
+                        return i;
+                    });
+                })(),
                 isOpen: false,
                 
                 add(product, selectedSize = 'L', selectedColor = '', qty = 1, price = null, image = '') {
@@ -249,10 +270,10 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-xs flex justify-end"
+         class="fixed inset-0 z-60 overflow-hidden bg-black/70 backdrop-blur-xs flex justify-end"
          @keydown.escape.window="$store.cart.isOpen = false"
          x-cloak>
-        <div class="w-full max-w-md bg-[#0E2824] border-l border-white/10 h-full flex flex-col p-6 shadow-2xl"
+        <div class="w-full max-w-md bg-[#0E2824] border-l border-white/10 h-full flex flex-col p-4 sm:p-6 shadow-2xl"
              @click.away="$store.cart.isOpen = false">
             
             <div class="flex items-center justify-between pb-4 border-b border-white/10">
@@ -298,7 +319,7 @@
             </div>
 
             {{-- Checkout Footer -> Langsung arah WhatsApp --}}
-            <div class="pt-4 border-t border-white/10 space-y-3">
+            <div class="pt-4 border-t border-white/10 space-y-3 pb-6 sm:pb-0">
                 <div class="flex justify-between items-center text-xs">
                     <span class="text-gray-400 font-medium">Total Belanja:</span>
                     <span class="text-lg font-black text-[#D8B761] font-mono" x-text="$store.cart.formatRupiah($store.cart.totalPrice())"></span>
@@ -322,7 +343,14 @@
     </main>
 
     {{-- MOBILE FLOATING BOTTOM NAV --}}
-    <div class="md:hidden fixed bottom-4 inset-x-4 z-50 bg-[#133129]/95 backdrop-blur-lg border border-white/15 rounded-2xl shadow-2xl p-2 flex items-center justify-around text-xs font-bold">
+    <div x-show="!$store.cart.isOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 translate-y-4"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 translate-y-0"
+         x-transition:leave-end="opacity-0 translate-y-4"
+         class="md:hidden fixed bottom-4 inset-x-4 z-40 bg-[#133129]/95 backdrop-blur-lg border border-white/15 rounded-2xl shadow-2xl p-2 flex items-center justify-around text-xs font-bold">
         <a href="{{ url('/') }}" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition {{ request()->is('/') ? 'text-[#D8B761] bg-[#081F1C]' : 'text-gray-300 hover:text-white' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
