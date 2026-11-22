@@ -235,41 +235,43 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            {{-- Card 1: 100% Katun Combed 24s (Foto Cewek) --}}
-            <div class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761]/50 transition-all">
+            {{-- Card 1: 100% Katun Combed 24s (Foto Cewek) -> Klik masuk ke Kategori Kaos --}}
+            <a href="{{ url('/catalog?category=basic-tshirt') }}"
+               class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
                 <div class="w-32 h-40 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
                     <img src="/assets/images/mutu-combed24s-cewe.jpg" alt="100% Katun Combed 24s" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="flex-1 text-center sm:text-left space-y-2.5">
                     <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 01</span>
-                    <h3 class="text-xl font-black text-[#D8B761]">1. 100% Katun Combed 24s</h3>
+                    <h3 class="text-xl font-black text-[#D8B761] group-hover:text-white transition">1. 100% Katun Combed 24s</h3>
                     <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-light">
                         Terbuat dari 100% serat katun berkualitas, memiliki tekstur lembut, adem, nyaman menyerap keringat, dan cocok untuk penggunaan sehari-hari.
                     </p>
-                    <a href="{{ url('/catalog?category=basic-t-shirt-24s') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] hover:text-white pt-2 transition">
-                        <span>Lihat Kaos Combed 24s</span>
+                    <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] group-hover:text-white pt-2 transition">
+                        <span>Lihat Koleksi Kaos Combed 24s</span>
                         <span>→</span>
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
 
-            {{-- Card 2: Pique Hexagon Premium (Foto Cowok) --}}
-            <div class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761]/50 transition-all">
+            {{-- Card 2: Pique Hexagon Premium (Foto Cowok) -> Klik masuk ke Kategori Polo --}}
+            <a href="{{ url('/catalog?category=polo-shirt') }}"
+               class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
                 <div class="w-32 h-40 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
                     <img src="/assets/images/mutu-pique-cowo.jpg" alt="Pique Hexagon Premium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
                 <div class="flex-1 text-center sm:text-left space-y-2.5">
                     <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 02</span>
-                    <h3 class="text-xl font-black text-[#D8B761]">2. Pique Hexagon Premium</h3>
+                    <h3 class="text-xl font-black text-[#D8B761] group-hover:text-white transition">2. Pique Hexagon Premium</h3>
                     <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-light">
                         Kain bertekstur motif hexagon dengan tampilan elegan dan eksklusif. Memiliki karakteristik kuat, nyaman, serta memberikan kesan premium saat dikenakan.
                     </p>
-                    <a href="{{ url('/catalog?category=kaos-polo') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] hover:text-white pt-2 transition">
-                        <span>Lihat Kaos Polo Pique</span>
+                    <div class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] group-hover:text-white pt-2 transition">
+                        <span>Lihat Koleksi Kaos Polo Pique</span>
                         <span>→</span>
-                    </a>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 </section>
