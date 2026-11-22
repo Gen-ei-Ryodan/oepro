@@ -6,6 +6,7 @@
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12"
      x-data="productDetail({
          name: {{ json_encode($product->name) }},
+         defaultImg: {{ json_encode($product->images->first()?->image_url ?? '/assets/brand/oepro-logo.webp') }},
          basePrice: {{ (float) $product->price }},
          origPrice: {{ (float) ($product->original_price ?? $product->price) }},
          category: {{ json_encode(strtolower($product->category->name ?? '')) }},
@@ -39,20 +40,12 @@
             
             {{-- Main Image Viewer --}}
             <div class="relative aspect-square rounded-3xl overflow-hidden bg-[#0E2824] border border-[#A8C4B5]/20 shadow-2xl">
-                <img src="/assets/images/oepro-size-chart.jpg" :src="currentImage" alt="{{ $product->name }}" class="w-full h-full object-cover transition-all duration-300">
+                <img src="{{ $defaultImg }}" :src="currentImage" alt="{{ $product->name }}" class="w-full h-full object-cover transition-all duration-300">
             </div>
 
-            {{-- Thumbnail Selector (Dengan Size Chart Sebagai Thumbnail Pertama) --}}
+            {{-- Thumbnail Selector --}}
+            @if($images->count() > 1)
             <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
-                {{-- Size Chart Image Thumbnail --}}
-                <button type="button"
-                        @click="currentImage = '/assets/images/oepro-size-chart.jpg'"
-                        :class="currentImage === '/assets/images/oepro-size-chart.jpg' ? 'border-[#D8B761] ring-2 ring-[#D8B761]/50 scale-95' : 'border-[#A8C4B5]/20 opacity-70 hover:opacity-100'"
-                        class="w-20 h-20 rounded-2xl overflow-hidden border-2 shrink-0 transition bg-white p-1 flex flex-col items-center justify-center text-center relative group">
-                    <img src="/assets/images/oepro-size-chart.jpg" alt="Size Chart" class="w-full h-full object-contain">
-                    <span class="absolute bottom-0 inset-x-0 bg-[#081F1C]/80 text-[#D8B761] text-[9px] font-bold py-0.5">Size Chart</span>
-                </button>
-
                 @foreach($images as $img)
                 <button type="button"
                         @click="currentImage = '{{ $img->image_url }}'"
@@ -62,6 +55,7 @@
                 </button>
                 @endforeach
             </div>
+            @endif
         </div>
 
         {{-- INFO & ORDER PEMESANAN --}}
@@ -115,15 +109,23 @@
             <div class="space-y-3">
                 <div class="flex items-center justify-between">
                     <label class="text-xs font-bold uppercase tracking-wider text-gray-300">
-                        Pilih Ukuran: <span class="text-[#A8C4B5] font-bold font-mono" x-text="selectedSize"></span>
+                        Pilih Ukuran: <span class="text-[#D8B761] font-bold font-mono" x-text="selectedSize"></span>
                     </label>
-                    <span class="text-[11px] text-gray-400 font-medium">Ukuran standar lokal unisex</span>
+                    {{-- Tombol Buka Pop-up Size Chart --}}
+                    <button type="button"
+                            @click="isSizeChartOpen = true"
+                            class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] hover:text-white bg-[#133129] hover:bg-[#163B35] border border-[#D8B761]/40 px-3 py-1.5 rounded-xl transition shadow-xs">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>
+                        <span>Panduan Ukuran (Size Chart)</span>
+                    </button>
                 </div>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="sz in sizes" :key="sz">
                         <button type="button"
                                 @click="selectSize(sz)"
-                                :class="selectedSize === sz ? 'bg-[#A8C4B5] text-[#081F1C] border-[#A8C4B5] shadow-lg font-black' : 'bg-[#0E2824] text-gray-300 border-[#A8C4B5]/20 hover:border-[#A8C4B5]/60'"
+                                :class="selectedSize === sz ? 'bg-[#D8B761] text-[#081F1C] border-[#D8B761] shadow-lg font-black' : 'bg-[#0E2824] text-gray-300 border-[#A8C4B5]/20 hover:border-[#D8B761]/60'"
                                 class="min-w-[46px] h-10 px-3.5 rounded-xl border text-xs font-bold font-mono transition flex items-center justify-center">
                             <span x-text="sz"></span>
                         </button>
@@ -239,13 +241,62 @@
         </div>
     </div>
     @endif
+
+    {{-- MODAL / POP-UP SIZE CHART --}}
+    <div x-show="isSizeChartOpen"
+         x-cloak
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+         @keydown.escape.window="isSizeChartOpen = false">
+        
+        {{-- Backdrop click to close --}}
+        <div class="fixed inset-0" @click="isSizeChartOpen = false"></div>
+
+        <div class="relative bg-[#0E2824] border border-[#D8B761]/40 rounded-3xl p-4 sm:p-6 max-w-2xl w-full shadow-2xl z-10 space-y-4 max-h-[90vh] flex flex-col"
+             @click.stop>
+            {{-- Header Modal --}}
+            <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-lg">📏</span>
+                    <h3 class="text-base sm:text-lg font-black text-white">Panduan Ukuran (Size Chart OEPRO)</h3>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="/assets/images/oepro-size-chart.jpg" target="_blank" class="text-xs text-[#D8B761] hover:underline flex items-center gap-1 font-semibold">
+                        <span>Buka Gambar Penuh</span>
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    </a>
+                    <button type="button" @click="isSizeChartOpen = false" class="p-1 text-gray-400 hover:text-white rounded-lg transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            {{-- Image Viewer Container --}}
+            <div class="overflow-auto rounded-2xl bg-white p-3 flex items-center justify-center shadow-inner">
+                <img src="/assets/images/oepro-size-chart.jpg" alt="Panduan Ukuran OEPRO" class="w-full h-auto max-h-[60vh] object-contain">
+            </div>
+
+            <div class="flex items-center justify-between text-xs text-gray-400 pt-1">
+                <span>*Semua ukuran dalam centimeter (cm). Toleransi jahit 1-2 cm.</span>
+                <button type="button" @click="isSizeChartOpen = false" class="px-5 py-2 bg-[#133129] hover:bg-black text-[#D8B761] font-bold rounded-xl border border-[#D8B761]/30 transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 @push('scripts')
 <script>
 function productDetail(config) {
     return {
-        currentImage: '/assets/images/oepro-size-chart.jpg',
+        currentImage: config.defaultImg,
+        isSizeChartOpen: false,
         name: config.name,
         basePrice: config.basePrice,
         origPrice: config.origPrice,
