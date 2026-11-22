@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- HERO SECTION / BANNER SLIDER (BOXED, GAMBAR UTUH 100% TANPA KARTU/OVERLAY TEKS) --}}
+{{-- HERO SECTION / BANNER SLIDER (BOXED, 100% OPACITY FOTO TERANG, TEKS LANGSUNG DI ATAS FOTO TANPA CARD) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-6">
     <div class="relative bg-[#0E2824] border border-[#A8C4B5]/20 rounded-3xl overflow-hidden shadow-2xl"
          x-data="{ active: 0, total: {{ count($banners) > 0 ? count($banners) : 1 }} }"
@@ -16,21 +16,71 @@
                  x-transition:enter="transition ease-out duration-700"
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
-                 class="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[21/8] overflow-hidden">
+                 class="relative min-h-[380px] sm:min-h-[460px] md:min-h-[500px] flex items-center overflow-hidden">
                 
-                {{-- Foto Banner 100% Opacity Terang Bersih, Gambar saja --}}
-                @if($b->cta_link)
-                <a href="{{ url($b->cta_link) }}" class="block w-full h-full">
-                    <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover opacity-100">
-                </a>
+                {{-- Foto Banner 100% Opacity Penuh & Terang --}}
+                @if($b->image_url)
+                <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="absolute inset-0 w-full h-full object-cover object-right md:object-center opacity-100">
                 @else
-                <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover opacity-100">
+                <div class="absolute inset-0 bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
                 @endif
+
+                {{-- Teks Langsung di Atas Foto (Tanpa Card Box / Container) --}}
+                <div class="relative z-10 px-6 sm:px-12 lg:px-16 py-10 sm:py-14 w-full">
+                    <div class="max-w-md sm:max-w-lg space-y-4">
+                        @if($b->tag)
+                        <span class="inline-block text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-3 py-1 rounded-full drop-shadow-md">
+                            {{ $b->tag }}
+                        </span>
+                        @endif
+
+                        {{-- HEADLINE --}}
+                        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md">
+                            {{ $b->title ?? $b->headline }}
+                        </h1>
+
+                        {{-- SUB HEADLINE --}}
+                        @if($b->subheadline)
+                        <p class="text-white text-xs sm:text-base leading-relaxed font-normal drop-shadow-md">
+                            {{ $b->subheadline }}
+                        </p>
+                        @endif
+
+                        {{-- TOMBOL-TOMBOL --}}
+                        <div class="pt-3 flex flex-wrap gap-3">
+                            <a href="{{ url($b->cta_link ?? '/catalog') }}"
+                               class="px-6 py-2.5 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                                {{ $b->cta_text ?? 'Lihat Katalog' }} →
+                            </a>
+                            <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20harga"
+                               target="_blank"
+                               class="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#081F1C]/80 hover:bg-[#133129] border border-white/40 text-white font-bold rounded-full text-xs uppercase tracking-wider transition shadow-lg">
+                                Chat Admin WA
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
             @endforeach
         @else
             {{-- Default Hero Fallback --}}
-            <div class="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[21/8] bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]">
+            <div class="relative min-h-[380px] sm:min-h-[460px] flex items-center bg-[#0E2824] px-6 sm:px-12 py-12">
+                <div class="max-w-2xl space-y-4">
+                    <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 px-3.5 py-1 rounded-full border border-[#D8B761]/30">
+                        OEPRO OFFICIAL STORE
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#D8B761]">
+                        100% Full Cotton Murni.<br><span class="text-white">Kenyamanan Berkelas.</span>
+                    </h1>
+                    <p class="text-white text-sm sm:text-base leading-relaxed">
+                        Koleksi Kaos Polos Combed 24s Super Soft, Polo Pique Hexagon Premium, dan Longsleeve dengan standar jahitan rantai ekspor.
+                    </p>
+                    <div class="pt-3 flex gap-3">
+                        <a href="{{ url('/catalog') }}" class="px-7 py-3.5 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                            Belanja Sekarang →
+                        </a>
+                    </div>
+                </div>
             </div>
         @endif
     </div>
