@@ -270,10 +270,11 @@
          x-transition:leave="transition ease-in duration-200"
          x-transition:leave-start="opacity-100"
          x-transition:leave-end="opacity-0"
-         class="fixed inset-0 z-60 overflow-hidden bg-black/70 backdrop-blur-xs flex justify-end"
+         class="fixed inset-0 overflow-hidden bg-black/75 backdrop-blur-sm flex justify-end"
+         style="z-index: 9999;"
          @keydown.escape.window="$store.cart.isOpen = false"
          x-cloak>
-        <div class="w-full max-w-md bg-[#0E2824] border-l border-white/10 h-full flex flex-col p-4 sm:p-6 shadow-2xl"
+        <div class="w-full max-w-md bg-[#0E2824] border-l border-white/10 h-full flex flex-col p-4 sm:p-6 shadow-2xl relative z-10"
              @click.away="$store.cart.isOpen = false">
             
             <div class="flex items-center justify-between pb-4 border-b border-white/10">
