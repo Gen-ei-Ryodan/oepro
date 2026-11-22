@@ -16,7 +16,7 @@
                  x-transition:enter="transition ease-out duration-700"
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
-                 class="relative aspect-[2/1] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
+                 class="relative aspect-[2.4/1] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
                 
                 {{-- Foto Banner 100% Opacity Penuh & Terang Tetap Landscape --}}
                 @if($b->image_url)
@@ -26,36 +26,36 @@
                 @endif
 
                 {{-- Teks di Atas Banner (Responsif, Proporsional di Layar Mobile) --}}
-                <div class="relative z-10 px-4 sm:px-12 lg:px-16 py-4 sm:py-14 w-full">
-                    <div class="max-w-[70%] sm:max-w-md lg:max-w-lg space-y-1.5 sm:space-y-4">
+                <div class="relative z-10 px-3.5 sm:px-12 lg:px-16 py-3 sm:py-14 w-full">
+                    <div class="max-w-[65%] sm:max-w-md lg:max-w-lg space-y-1 sm:space-y-4">
                         @if($b->tag)
-                        <span class="inline-block text-[9px] sm:text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3 py-0.5 rounded-full drop-shadow-md">
+                        <span class="inline-block text-[8px] sm:text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3 py-0.5 rounded-full drop-shadow-md">
                             {{ $b->tag }}
                         </span>
                         @endif
 
                         {{-- HEADLINE --}}
-                        <h1 class="text-base sm:text-3xl lg:text-5xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md">
+                        <h1 class="text-xs sm:text-3xl lg:text-5xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md">
                             {{ $b->title ?? $b->headline }}
                         </h1>
 
                         {{-- SUB HEADLINE --}}
                         @if($b->subheadline)
-                        <p class="text-white text-[10px] sm:text-xs lg:text-base leading-snug sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
+                        <p class="text-white text-[9px] sm:text-xs lg:text-base leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-1 sm:line-clamp-none">
                             {{ $b->subheadline }}
                         </p>
                         @endif
 
                         {{-- TOMBOL-TOMBOL --}}
-                        <div class="pt-1.5 sm:pt-3 flex flex-wrap gap-2 sm:gap-3">
+                        <div class="pt-1 sm:pt-3 flex flex-wrap gap-1.5 sm:gap-3">
                             <a href="{{ url($b->cta_link ?? '/catalog') }}"
-                               class="px-3.5 py-1.5 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-[10px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                                {{ $b->cta_text ?? 'Lihat Katalog' }} →
+                               class="px-2.5 py-1 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                                {{ $b->cta_text ?? 'Katalog' }} →
                             </a>
                             <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20harga"
                                target="_blank"
-                               class="px-3 py-1.5 sm:px-6 sm:py-3 bg-[#081F1C]/80 hover:bg-[#133129] border border-white/40 text-white font-bold rounded-full text-[10px] sm:text-xs uppercase tracking-wider transition shadow-lg">
-                                Chat Admin WA
+                               class="px-2 py-1 sm:px-6 sm:py-3 bg-[#081F1C]/80 hover:bg-[#133129] border border-white/40 text-white font-bold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition shadow-lg">
+                                Chat WA
                             </a>
                         </div>
                     </div>
