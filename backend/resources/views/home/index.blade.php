@@ -41,16 +41,16 @@
          x-data="{ showAll: false }">
     {{-- Header & Subhead --}}
     <div class="space-y-4 mb-8">
-        {{-- Filter Pills Kecil Seperti Gambar Referensi --}}
+        {{-- Filter Pills Kecil: Saat diklik langsung membuka /catalog dengan kategori terpilih --}}
         <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-            <a href="{{ url('/') }}#katalog"
-               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 {{ empty($selectedCategory) ? 'bg-[#133129] border border-[#D8B761] text-[#D8B761] shadow-sm' : 'bg-[#0E2824] border border-white/10 text-gray-300 hover:border-white/30' }}">
+            <a href="{{ url('/catalog') }}"
+               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#0E2824] border border-white/10 text-gray-300 hover:border-[#D8B761] hover:text-[#D8B761]">
                 <span>Semua</span>
                 <span class="text-[10px] opacity-80">({{ $totalProductsCount }})</span>
             </a>
             @foreach($categories as $cat)
-            <a href="{{ url('/?category=' . $cat->slug) }}#katalog"
-               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 {{ $selectedCategory == $cat->slug ? 'bg-[#133129] border border-[#D8B761] text-[#D8B761] shadow-sm' : 'bg-[#0E2824] border border-white/10 text-gray-300 hover:border-white/30' }}">
+            <a href="{{ url('/catalog?category=' . $cat->slug) }}"
+               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 bg-[#0E2824] border border-white/10 text-gray-300 hover:border-[#D8B761] hover:text-[#D8B761]">
                 <span>{{ $cat->name }}</span>
                 <span class="text-[10px] opacity-80">({{ $cat->products_count }})</span>
             </a>

@@ -152,12 +152,17 @@
 
                 {{-- SEBELAHNYA: Search product --}}
                 <div class="flex-1 max-w-lg hidden sm:block">
-                    <form method="GET" action="{{ url('/catalog') }}" class="relative">
-                        <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-3 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                        </svg>
+                    <form method="GET" action="{{ url('/catalog') }}" class="relative flex items-center">
                         <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari kaos polos, polo lacoste, longsleeve..."
-                               class="w-full pl-10 pr-4 py-2.5 text-xs bg-[#133129]/80 border border-white/15 rounded-full text-white placeholder-gray-400 focus:bg-[#0E2824] focus:border-[#D8B761] focus:outline-hidden transition shadow-inner">
+                               class="w-full pl-10 pr-24 py-2.5 text-xs bg-[#133129]/80 border border-white/15 rounded-full text-white placeholder-gray-400 focus:bg-[#0E2824] focus:border-[#D8B761] focus:outline-hidden transition shadow-inner">
+                        <button type="submit" class="absolute left-3 text-gray-400 hover:text-[#D8B761] transition" title="Cari di Katalog">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </button>
+                        <button type="submit" class="absolute right-1.5 px-3 py-1 bg-[#D8B761] hover:bg-white text-[#081F1C] text-[11px] font-bold rounded-full transition shadow-xs">
+                            Cari
+                        </button>
                     </form>
                 </div>
 
@@ -188,12 +193,17 @@
 
             {{-- Mobile Search Bar --}}
             <div class="pb-3 sm:hidden">
-                <form method="GET" action="{{ url('/catalog') }}" class="relative">
-                    <svg class="w-4 h-4 text-gray-400 absolute left-3.5 top-2.5 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                    </svg>
+                <form method="GET" action="{{ url('/catalog') }}" class="relative flex items-center">
                     <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari kaos polos, polo lacoste..."
-                           class="w-full pl-10 pr-4 py-2 text-xs bg-[#133129] border border-white/15 rounded-full text-white placeholder-gray-400 focus:outline-hidden">
+                           class="w-full pl-10 pr-16 py-2 text-xs bg-[#133129] border border-white/15 rounded-full text-white placeholder-gray-400 focus:outline-hidden">
+                    <button type="submit" class="absolute left-3 text-gray-400 hover:text-[#D8B761]" title="Cari">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </button>
+                    <button type="submit" class="absolute right-1 px-3 py-1 bg-[#D8B761] text-[#081F1C] text-[10px] font-bold rounded-full">
+                        Cari
+                    </button>
                 </form>
             </div>
         </div>
