@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{-- HERO SECTION / BANNER SLIDER (NON-FULL WIDTH / BOXED, 100% OPACITY TERANG TANPA OVERLAP) --}}
+{{-- HERO SECTION / BANNER SLIDER (BOXED, GAMBAR UTUH 100% TANPA KARTU/OVERLAY TEKS) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-6">
     <div class="relative bg-[#0E2824] border border-[#A8C4B5]/20 rounded-3xl overflow-hidden shadow-2xl"
          x-data="{ active: 0, total: {{ count($banners) > 0 ? count($banners) : 1 }} }"
@@ -16,65 +16,21 @@
                  x-transition:enter="transition ease-out duration-700"
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
-                 class="relative min-h-[380px] sm:min-h-[460px] md:min-h-[500px] flex items-center overflow-hidden">
+                 class="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[21/8] overflow-hidden">
                 
-                {{-- Foto Banner 100% Opacity Penuh & Terang di background --}}
-                @if($b->image_url)
-                <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="absolute inset-0 w-full h-full object-cover object-right md:object-center opacity-100">
+                {{-- Foto Banner 100% Opacity Terang Bersih, Gambar saja --}}
+                @if($b->cta_link)
+                <a href="{{ url($b->cta_link) }}" class="block w-full h-full">
+                    <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover opacity-100">
+                </a>
                 @else
-                <div class="absolute inset-0 bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
+                <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover opacity-100">
                 @endif
-
-                {{-- Konten Teks di Atas Banner (Floating Box Transparan Halus di Kiri agar Foto Tetap 100% Terang) --}}
-                <div class="relative z-10 px-4 sm:px-8 lg:px-12 py-10 sm:py-14 w-full">
-                    <div class="max-w-md sm:max-w-lg bg-[#081F1C]/75 backdrop-blur-md p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl space-y-4">
-                        @if($b->tag)
-                        <span class="inline-block text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#133129] border border-[#D8B761]/30 px-3 py-1 rounded-full">
-                            {{ $b->tag }}
-                        </span>
-                        @endif
-                        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-[#D8B761]">
-                            {{ $b->title ?? $b->headline }}
-                        </h1>
-                        @if($b->subheadline)
-                        <p class="text-white text-xs sm:text-sm leading-relaxed font-normal">
-                            {{ $b->subheadline }}
-                        </p>
-                        @endif
-                        <div class="pt-2 flex flex-wrap gap-3">
-                            <a href="{{ url($b->cta_link ?? '/#katalog') }}"
-                               class="px-6 py-2.5 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                                {{ $b->cta_text ?? 'Lihat Katalog' }} →
-                            </a>
-                            <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20harga"
-                               target="_blank"
-                               class="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#081F1C] hover:bg-[#133129] border border-white/30 text-white font-bold rounded-full text-xs uppercase tracking-wider transition">
-                                Chat Admin WA
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
             @endforeach
         @else
             {{-- Default Hero Fallback --}}
-            <div class="relative min-h-[380px] sm:min-h-[460px] flex items-center bg-[#0E2824] px-6 sm:px-12 py-12">
-                <div class="max-w-2xl space-y-4">
-                    <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 px-3.5 py-1 rounded-full border border-[#D8B761]/30">
-                        OEPRO OFFICIAL STORE
-                    </span>
-                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#D8B761]">
-                        100% Full Cotton Murni.<br><span class="text-white">Kenyamanan Berkelas.</span>
-                    </h1>
-                    <p class="text-white text-sm sm:text-base leading-relaxed">
-                        Koleksi Kaos Polos Combed 24s Super Soft, Polo Pique Hexagon Premium, dan Longsleeve dengan standar jahitan rantai ekspor.
-                    </p>
-                    <div class="pt-3 flex gap-3">
-                        <a href="#katalog" class="px-7 py-3.5 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                            Belanja Sekarang →
-                        </a>
-                    </div>
-                </div>
+            <div class="relative w-full aspect-[16/7] sm:aspect-[16/6] md:aspect-[21/8] bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]">
             </div>
         @endif
     </div>
@@ -146,61 +102,73 @@
     @endif
 </section>
 
-{{-- FITUR KEUNGGULAN (CENTER ALIGNMENT DENGAN IKON SESUAI) --}}
+{{-- FITUR KEUNGGULAN (KOTAK RATA KIRI, POSISI GRID CENTER TENGAH) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-    <div class="bg-[#0E2824] border border-[#D8B761]/30 text-white rounded-3xl p-8 sm:p-12 sm:py-16 relative overflow-hidden shadow-2xl text-center">
-        <div class="max-w-3xl mx-auto space-y-4 relative z-10">
-            <span class="text-xs font-black uppercase tracking-widest text-[#D8B761] block">KUALITAS TANPA KOMPROMI</span>
-            <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-snug text-[#D8B761]">
-                Kenapa Memilih OEPRO?
-            </h2>
-            <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto">
-                Dedikasi kami untuk menghadirkan kenyamanan berkelas lewat material pilihan, konstruksi jahitan presisi, dan daya tahan ekstra.
-            </p>
+    <div class="bg-[#0E2824] border border-[#D8B761]/30 text-white rounded-3xl p-8 sm:p-12 sm:py-16 relative overflow-hidden shadow-2xl">
+        <div class="max-w-4xl mx-auto space-y-4 relative z-10">
+            {{-- Header Section Tetap Rapi di Tengah --}}
+            <div class="text-center space-y-2 mb-8">
+                <span class="text-xs font-black uppercase tracking-widest text-[#D8B761] block">KUALITAS TANPA KOMPROMI</span>
+                <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-snug text-[#D8B761]">
+                    Kenapa Memilih OEPRO?
+                </h2>
+                <p class="text-gray-300 text-xs sm:text-sm max-w-xl mx-auto">
+                    Dedikasi kami untuk menghadirkan kenyamanan berkelas lewat material pilihan, konstruksi jahitan presisi, dan daya tahan ekstra.
+                </p>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8">
+            {{-- Grid 2 Kolom di Tengah, Isi Tiap Kotak Rata Kiri dengan Ikon di Kiri --}}
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 pt-2">
                 {{-- Item 1 --}}
-                <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition space-y-3">
-                    <div class="w-14 h-14 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-4 p-5 sm:p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition text-left">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
                     </div>
-                    <strong class="text-white text-base font-bold block">100% Full Cotton Murni</strong>
-                    <p class="text-gray-300 text-xs leading-relaxed font-light">Tanpa campuran polyester sintesis. Bahan bernapas bebas dan menyerap keringat seketika.</p>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm sm:text-base font-bold block">100% Full Cotton Murni</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Tanpa campuran polyester sintesis. Bahan bernapas bebas dan menyerap keringat seketika.</p>
+                    </div>
                 </div>
 
                 {{-- Item 2 --}}
-                <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition space-y-3">
-                    <div class="w-14 h-14 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-4 p-5 sm:p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition text-left">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                         </svg>
                     </div>
-                    <strong class="text-white text-base font-bold block">Kerah Anti-Melar 4 Lapis</strong>
-                    <p class="text-gray-300 text-xs leading-relaxed font-light">Rib kerah tebal dengan konstruksi double-knit tahan cuci berkali-kali tanpa melipat.</p>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm sm:text-base font-bold block">Kerah Anti-Melar 4 Lapis</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Rib kerah tebal dengan konstruksi double-knit tahan cuci berkali-kali tanpa melipat.</p>
+                    </div>
                 </div>
 
                 {{-- Item 3 --}}
-                <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition space-y-3">
-                    <div class="w-14 h-14 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-4 p-5 sm:p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition text-left">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
                         </svg>
                     </div>
-                    <strong class="text-white text-base font-bold block">Jahitan Rantai Standar Ekspor</strong>
-                    <p class="text-gray-300 text-xs leading-relaxed font-light">Pundak dan sambungan dijahit rantai rapi dengan benang katun kuat standar ekspor.</p>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm sm:text-base font-bold block">Jahitan Rantai Standar Ekspor</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Pundak dan sambungan dijahit rantai rapi dengan benang katun kuat standar ekspor.</p>
+                    </div>
                 </div>
 
                 {{-- Item 4 --}}
-                <div class="flex flex-col items-center text-center p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition space-y-3">
-                    <div class="w-14 h-14 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex items-start gap-4 p-5 sm:p-6 rounded-2xl bg-[#081F1C]/70 border border-white/10 hover:border-[#D8B761]/40 transition text-left">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
                         </svg>
                     </div>
-                    <strong class="text-white text-base font-bold block">Pewarnaan Reaktif Tidak Luntur</strong>
-                    <p class="text-gray-300 text-xs leading-relaxed font-light">Warna pekat, tajam, dan tidak mudah pudar meskipun dicuci rutin dalam jangka panjang.</p>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm sm:text-base font-bold block">Pewarnaan Reaktif Tidak Luntur</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Warna pekat, tajam, dan tidak mudah pudar meskipun dicuci rutin dalam jangka panjang.</p>
+                    </div>
                 </div>
             </div>
         </div>
