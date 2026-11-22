@@ -143,10 +143,10 @@
                 
                 {{-- PALING KIRI: Logo OEPRO dan tulisan oepro cotton basic --}}
                 <a href="{{ url('/') }}" class="flex items-center gap-2.5 shrink-0 group">
-                    <img src="/assets/brand/oepro-logo.webp" alt="OEPRO" class="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-full bg-white/10 p-0.5">
+                    <img src="/assets/brand/oepro-logo.webp" alt="oepro" class="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-full bg-white/10 p-0.5">
                     <div class="flex flex-col">
-                        <span class="text-xl sm:text-2xl font-black tracking-tighter text-white group-hover:text-[#D8B761] transition leading-none">OEPRO</span>
-                        <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-400 font-medium">cotton basic</span>
+                        <span class="text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-[#D8B761] transition leading-none">oepro</span>
+                        <span class="text-[10px] sm:text-[11px] text-gray-300 font-normal leading-tight">cotton basic</span>
                     </div>
                 </a>
 
@@ -322,7 +322,7 @@
                 
                 {{-- Col 1: Brand & Desc --}}
                 <div class="md:col-span-2 space-y-4">
-                    <span class="text-3xl font-black tracking-tighter text-white">OEPRO</span>
+                    <span class="text-3xl font-extrabold tracking-tight text-white">oepro</span>
                     <p class="text-gray-400 text-xs sm:text-sm leading-relaxed max-w-sm">
                         Produksi kaos polos, polo shirt pique premium, dan lengan panjang berbahan 100% katun murni berkualitas standar ekspor. Nyaman, adem, dan awet dicuci.
                     </p>
