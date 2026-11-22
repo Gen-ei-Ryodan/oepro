@@ -191,7 +191,7 @@
 <body class="bg-[#081F1C] text-white font-sans antialiased selection:bg-[#D8B761] selection:text-[#081F1C] flex flex-col min-h-screen pb-20 md:pb-0" x-data>
 
     {{-- TOP PROMO BAR (MARQUEE AUTO-RUN & LOOPING RUNNING TEXT) --}}
-    <div class="bg-[#133129] border-b border-white/10 text-gray-200 text-[11px] sm:text-xs py-1.5 overflow-hidden font-medium tracking-wide">
+    <div class="bg-[#74110F] border-b border-white/10 text-white text-[11px] sm:text-xs py-1.5 overflow-hidden font-medium tracking-wide">
         <div class="animate-marquee items-center gap-12">
             <span class="inline-flex items-center gap-2">
                 <span class="text-[#D8B761]">🚚</span>
