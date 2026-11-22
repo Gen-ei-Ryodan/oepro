@@ -392,13 +392,13 @@ function productDetail(config) {
             let text = `Halo Admin OEPRO, saya ingin memesan produk:\n\n`;
             text += `*${this.name}*\n`;
             if (this.selectedColor) {
-                text += `- Warna: ${this.selectedColor}\n`;
+                text += `Warna: ${this.selectedColor}\n`;
             }
-            text += `- Ukuran: ${this.selectedSize}\n`;
-            text += `- Jumlah: ${this.qty} pcs\n`;
-            text += `- Harga: ${this.formatRupiah(this.currentUnitPrice)} / pcs\n`;
-            text += `- Total Estimasi: ${this.formatRupiah(this.currentUnitPrice * this.qty)}\n\n`;
-            text += `Apakah varian ini ready stok? Mohon info kelanjutan pemesanannya ya. Terima kasih!`;
+            text += `Ukuran: ${this.selectedSize} (${this.formatRupiah(this.currentUnitPrice)}/pcs)\n`;
+            text += `Jumlah: ${this.qty} pcs\n`;
+            text += `Total Estimasi: ${this.formatRupiah(this.currentUnitPrice * this.qty)}\n\n`;
+            text += `Mohon bantu konfirmasi ketersediaan stok dan informasi ongkir ke alamat saya.\n\n`;
+            text += `Apakah pesanan saya juga bisa mendapatkan promo GRATIS ONGKIR?`;
 
             return `https://wa.me/${this.waNumber}?text=${encodeURIComponent(text)}`;
         }

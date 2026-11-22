@@ -168,18 +168,17 @@
                     if (this.items.length === 0) return;
                     let text = `Halo Admin OEPRO, saya ingin memesan produk dari keranjang belanja:\n\n`;
                     this.items.forEach((item, idx) => {
-                        text += `${idx + 1}. *${item.name}*\n`;
-                        if (item.color) text += `   - Warna: ${item.color}\n`;
-                        text += `   - Ukuran: ${item.size} (${this.formatRupiah(item.price)}/pcs)\n`;
-                        text += `   - Jumlah: ${item.qty} pcs\n`;
-                        text += `   - Subtotal: ${this.formatRupiah(item.price * item.qty)}\n\n`;
+                        text += `*${item.name}*\n`;
+                        if (item.color) text += `Warna: ${item.color}\n`;
+                        text += `Ukuran: ${item.size} (${this.formatRupiah(item.price)}/pcs)\n`;
+                        text += `Jumlah: ${item.qty} pcs\n`;
+                        text += `Subtotal: ${this.formatRupiah(item.price * item.qty)}\n\n`;
                     });
-                    text += `--------------------------------\n`;
-                    text += `*Total Item:* ${this.totalCount()} pcs\n`;
-                    text += `*Total Belanja:* ${this.formatRupiah(this.totalPrice())}\n\n`;
+                    text += `Total Item: ${this.totalCount()} pcs\n`;
+                    text += `Total Belanja: ${this.formatRupiah(this.totalPrice())}\n\n`;
                     if (customNote) text += `*Catatan:* ${customNote}\n\n`;
-                    text += `Mohon info ketersediaan stok & ongkir ke alamat saya ya:\n`;
-                    text += `Nama:\nAlamat Lengkap:\nKec / Kota:\nNo. HP:\n\nTerima kasih!`;
+                    text += `Mohon bantu konfirmasi ketersediaan stok dan informasi ongkir ke alamat saya.\n\n`;
+                    text += `Apakah pesanan saya juga bisa mendapatkan promo GRATIS ONGKIR?`;
 
                     const waUrl = `https://wa.me/6281313888927?text=${encodeURIComponent(text)}`;
                     window.open(waUrl, '_blank');
@@ -257,7 +256,7 @@
                 {{-- KANAN: Tulisan WhatsApp + Keranjang (Warna Putih) --}}
                 <div class="flex items-center gap-2 sm:gap-4 shrink-0">
                     {{-- WhatsApp --}}
-                    <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20stok"
+                    <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
                        target="_blank"
                        rel="noopener noreferrer"
                        class="inline-flex items-center gap-2 px-2 sm:px-3 py-1.5 text-xs font-bold text-gray-200 hover:text-white transition group">
@@ -428,7 +427,7 @@
                   class="absolute top-0 right-2 bg-[#D8B761] text-[#081F1C] text-[9px] font-black px-1 rounded-full"></span>
         </button>
 
-        <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20konsultasi%20pesanan" target="_blank"
+        <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!" target="_blank"
            class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-gray-300 hover:text-white transition">
             <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-5 h-5 object-contain">
             <span class="text-[10px]">WhatsApp</span>

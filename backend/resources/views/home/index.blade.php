@@ -52,7 +52,7 @@
                                class="px-2.5 py-1 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
                                 {{ $b->cta_text ?? 'Katalog' }} →
                             </a>
-                            <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20harga"
+                            <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
                                target="_blank"
                                class="px-2 py-1 sm:px-6 sm:py-3 bg-[#081F1C]/80 hover:bg-[#133129] border border-white/40 text-white font-bold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition shadow-lg">
                                 Chat WA
