@@ -53,20 +53,20 @@
             Alpine.store('cart', {
                 items: (function() {
                     const saved = JSON.parse(localStorage.getItem('oepro_cart_items') || '[]');
-                    // Bersihkan / auto-perbaiki item cart yang mungkin tersimpan dengan logo default
+                    // Bersihkan / auto-perbaiki item cart yang tersimpan dengan logo atau tanpa foto
                     return saved.map(i => {
-                        if (i.image && i.image.includes('oepro-logo.webp') && i.slug) {
-                            // Tentukan path gambar berdasarkan slug produk
-                            const parts = i.slug.replace('kaos-', '').split('-');
-                            // Contoh: kaos-polo-premium-red-chili -> polo, red-chili
-                            if (i.slug.includes('polo')) {
-                                const colorSlug = i.slug.replace('kaos-polo-premium-', '');
+                        if (!i.image || i.image.includes('oepro-logo') || i.image.includes('favicon')) {
+                            // Cek berdasarkan nama produk
+                            const n = (i.name || '').toLowerCase();
+                            // Pola: "Kaos Polo Premium - Red Chili" -> color: red-chili
+                            const colorName = n.split(' - ')[1] || '';
+                            const colorSlug = colorName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+                            if (n.includes('polo')) {
                                 i.image = `/storage/products/polo/${colorSlug}/${colorSlug}-oepro.webp`;
-                            } else if (i.slug.includes('longsleeve')) {
-                                const colorSlug = i.slug.replace('basic-longsleeve-', '');
+                            } else if (n.includes('longsleeve') || n.includes('lengan panjang')) {
                                 i.image = `/storage/products/longsleeve/${colorSlug}/${colorSlug}-oepro.webp`;
-                            } else if (i.slug.includes('tshirt') || i.slug.includes('t-shirt') || i.slug.includes('basic')) {
-                                const colorSlug = i.slug.replace('basic-tshirt-24s-', '');
+                            } else {
                                 i.image = `/storage/products/tshirt/${colorSlug}/${colorSlug}-oepro.webp`;
                             }
                         }
@@ -76,23 +76,49 @@
                 isOpen: false,
                 
                 add(product, selectedSize = 'L', selectedColor = '', qty = 1, price = null, image = '') {
-                    const itemPrice = price || product.price;
+                    // Mendukung add({id, name, price, image, size, color, qty}) atau add(product, size, color, qty, price, image)
+                    let pId = product.id;
+                    let pName = product.name;
+                    let pSlug = product.slug || '';
+                    let pSize = product.size || selectedSize || 'L';
+                    let pColor = product.color || selectedColor || '';
+                    let pQty = product.qty || qty || 1;
+                    let pPrice = product.price !== undefined ? product.price : (price || 0);
+                    let pImage = product.image || image || (product.images && product.images[0]?.image_url) || '';
+
+                    // Jika image masih kosong atau default logo, generate dari nama produk
+                    if (!pImage || pImage.includes('oepro-logo')) {
+                        const n = (pName || '').toLowerCase();
+                        const colorName = pColor || (n.split(' - ')[1] || '');
+                        const colorSlug = colorName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                        if (n.includes('polo')) {
+                            pImage = `/storage/products/polo/${colorSlug}/${colorSlug}-oepro.webp`;
+                        } else if (n.includes('longsleeve') || n.includes('lengan panjang')) {
+                            pImage = `/storage/products/longsleeve/${colorSlug}/${colorSlug}-oepro.webp`;
+                        } else {
+                            pImage = `/storage/products/tshirt/${colorSlug}/${colorSlug}-oepro.webp`;
+                        }
+                    }
+
                     const existingIndex = this.items.findIndex(i => 
-                        i.id === product.id && i.size === selectedSize && i.color === selectedColor
+                        i.id === pId && i.size === pSize && i.color === pColor
                     );
 
                     if (existingIndex > -1) {
-                        this.items[existingIndex].qty += qty;
+                        this.items[existingIndex].qty += pQty;
+                        if (pImage && (!this.items[existingIndex].image || this.items[existingIndex].image.includes('oepro-logo'))) {
+                            this.items[existingIndex].image = pImage;
+                        }
                     } else {
                         this.items.push({
-                            id: product.id,
-                            name: product.name,
-                            slug: product.slug,
-                            price: itemPrice,
-                            size: selectedSize,
-                            color: selectedColor,
-                            qty: qty,
-                            image: image || (product.images && product.images[0]?.image_url) || '/assets/brand/oepro-logo.webp'
+                            id: pId,
+                            name: pName,
+                            slug: pSlug,
+                            price: pPrice,
+                            size: pSize,
+                            color: pColor,
+                            qty: pQty,
+                            image: pImage
                         });
                     }
                     this.save();
