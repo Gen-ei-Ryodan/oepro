@@ -260,8 +260,10 @@
                     <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20stok"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-bold text-gray-200 hover:text-[#D8B761] transition">
-                        <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-4 h-4 object-contain">
+                       class="inline-flex items-center gap-2 px-2 sm:px-3 py-1.5 text-xs font-bold text-gray-200 hover:text-white transition group">
+                        <span class="w-6 h-6 rounded-lg bg-[#25D366] flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform shrink-0">
+                            <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-3.5 h-3.5 object-contain">
+                        </span>
                         <span>WhatsApp</span>
                     </a>
 
