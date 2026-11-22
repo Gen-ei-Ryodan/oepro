@@ -16,7 +16,7 @@
                  x-transition:enter="transition ease-out duration-700"
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
-                 class="relative aspect-[16/9] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
+                 class="relative aspect-[2/1] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
                 
                 {{-- Foto Banner 100% Opacity Penuh & Terang Tetap Landscape --}}
                 @if($b->image_url)
