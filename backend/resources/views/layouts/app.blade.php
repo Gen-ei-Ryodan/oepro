@@ -193,26 +193,16 @@
 
     {{-- TOP PROMO BAR (MARQUEE AUTO-RUN & LOOPING RUNNING TEXT) --}}
     <div class="bg-[#133129] border-b border-white/10 text-gray-200 text-[11px] sm:text-xs py-1.5 overflow-hidden font-medium tracking-wide">
-        <div class="animate-marquee items-center gap-10">
+        <div class="animate-marquee items-center gap-12">
             <span class="inline-flex items-center gap-2">
                 <span class="text-[#D8B761]">🚚</span>
                 <span>Nikmati promo Gratis Ongkir ke seluruh Indonesia, karena sekarang pesanan Anda bisa sampai ke mana saja tanpa biaya pengiriman. Syarat & ketentuan berlaku.</span>
-            </span>
-            <span class="text-[#D8B761]/60">•</span>
-            <span class="inline-flex items-center gap-2">
-                <span class="text-[#D8B761]">✨</span>
-                <span>100% Cotton Murni Combed 24s & Pique Hexagon • Garansi Nyaman & Tidak Panas</span>
             </span>
             <span class="text-[#D8B761]/60">•</span>
             {{-- Duplikasi untuk efek looping mulus tanpa patah (seamless infinite loop) --}}
             <span class="inline-flex items-center gap-2">
                 <span class="text-[#D8B761]">🚚</span>
                 <span>Nikmati promo Gratis Ongkir ke seluruh Indonesia, karena sekarang pesanan Anda bisa sampai ke mana saja tanpa biaya pengiriman. Syarat & ketentuan berlaku.</span>
-            </span>
-            <span class="text-[#D8B761]/60">•</span>
-            <span class="inline-flex items-center gap-2">
-                <span class="text-[#D8B761]">✨</span>
-                <span>100% Cotton Murni Combed 24s & Pique Hexagon • Garansi Nyaman & Tidak Panas</span>
             </span>
             <span class="text-[#D8B761]/60">•</span>
         </div>
