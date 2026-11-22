@@ -30,10 +30,10 @@
         <span class="text-white font-medium truncate max-w-xs">{{ $product->name }}</span>
     </nav>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
-        {{-- FOTO PRODUK (Gallery) --}}
-        <div class="lg:col-span-6 space-y-4">
+        {{-- FOTO PRODUK (Gallery) - Sticky di Desktop (lg:sticky lg:top-24) --}}
+        <div class="lg:col-span-6 space-y-4 lg:sticky lg:top-24">
             @php
                 $images = $product->images;
                 $defaultImg = $images->first()?->image_url ?? '/assets/brand/oepro-logo.webp';
