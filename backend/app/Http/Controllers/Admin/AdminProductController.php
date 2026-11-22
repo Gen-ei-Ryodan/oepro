@@ -72,6 +72,7 @@ class AdminProductController extends Controller
             $lines = preg_split('/\r\n|\r|\n/', $request->features_raw);
             $data['features'] = array_values(array_filter(array_map('trim', $lines)));
         }
+        unset($data['features_raw']);
 
         // Process Variants
         $variantsList = [];
@@ -101,6 +102,9 @@ class AdminProductController extends Controller
         if (empty($data['discount_percent']) && !empty($data['original_price']) && $data['original_price'] > $data['price']) {
             $data['discount_percent'] = round((($data['original_price'] - $data['price']) / $data['original_price']) * 100);
         }
+
+        // Clean non-column fields from $data before saving to DB
+        unset($data['features_raw'], $data['images'], $data['variants']);
 
         $product = Product::create($data);
 
@@ -159,6 +163,7 @@ class AdminProductController extends Controller
             $lines = preg_split('/\r\n|\r|\n/', $request->features_raw);
             $data['features'] = array_values(array_filter(array_map('trim', $lines)));
         }
+        unset($data['features_raw']);
 
         // Process Variants 1 Tingkat
         if ($request->has('variants') && is_array($request->variants)) {
@@ -185,6 +190,9 @@ class AdminProductController extends Controller
         if (!empty($data['original_price']) && $data['original_price'] > $data['price']) {
             $data['discount_percent'] = round((($data['original_price'] - $data['price']) / $data['original_price']) * 100);
         }
+
+        // Clean non-column fields from $data before saving to DB
+        unset($data['features_raw'], $data['new_images'], $data['image_order'], $data['variants']);
 
         // Direct update to database
         $product->update($data);
