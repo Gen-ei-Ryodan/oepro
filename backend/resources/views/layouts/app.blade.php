@@ -167,10 +167,8 @@
                     <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20stok"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs font-bold text-gray-200 hover:text-[#D8B761] transition">
-                        <svg class="w-4 h-4 fill-current text-[#25D366]" viewBox="0 0 24 24">
-                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.152.569 4.17 1.564 5.917l-1.664 6.083 6.223-1.633c1.7 1.002 3.69 1.573 5.823 1.573 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
-                        </svg>
+                       class="inline-flex items-center gap-2 px-3 sm:px-4 py-2 text-xs font-bold text-gray-200 hover:text-[#D8B761] transition">
+                        <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-4 h-4 object-contain">
                         <span>WhatsApp</span>
                     </a>
 
@@ -307,10 +305,8 @@
         </button>
 
         <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20konsultasi%20pesanan" target="_blank"
-           class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-[#25D366] hover:text-white transition">
-            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.152.569 4.17 1.564 5.917l-1.664 6.083 6.223-1.633c1.7 1.002 3.69 1.573 5.823 1.573 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
-            </svg>
+           class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-gray-300 hover:text-white transition">
+            <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-5 h-5 object-contain">
             <span class="text-[10px]">WhatsApp</span>
         </a>
     </div>
@@ -357,7 +353,7 @@
                         <a href="https://www.tiktok.com/@oepro.official?_r=1&_t=ZS-9BbqmThyTgu" target="_blank" rel="noopener noreferrer"
                            title="Tokopedia Official"
                            class="w-11 h-11 rounded-2xl bg-[#03AC0E] hover:bg-[#02920c] text-white flex items-center justify-center p-2.5 shadow-lg transition-transform hover:scale-110">
-                            <img src="/assets/icons/tokopedia.svg" alt="Tokopedia" class="w-full h-full object-contain">
+                            <img src="/assets/icons/tokopedia.png" alt="Tokopedia" class="w-full h-full object-contain">
                         </a>
 
                         {{-- TikTok Shop / TikTok Mall Logo Button --}}
