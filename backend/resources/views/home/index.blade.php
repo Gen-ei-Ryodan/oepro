@@ -41,7 +41,7 @@
 
                         {{-- SUB HEADLINE --}}
                         @if($b->subheadline)
-                        <p class="text-white text-[9px] sm:text-xs lg:text-base leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-1 sm:line-clamp-none">
+                        <p class="text-white text-[9px] sm:text-xs lg:text-base leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->subheadline }}
                         </p>
                         @endif
