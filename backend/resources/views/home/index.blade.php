@@ -81,7 +81,8 @@
 </section>
 
 {{-- KATALOG PRODUK OEPRO (LANGSUNG GABUNG SEMUA PRODUK DENGAN FILTER PILL KECIL SEPERTI REFERENSI) --}}
-<section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+<section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12"
+         x-data="{ showAllMobile: false }">
     {{-- Header & Subhead --}}
     <div class="space-y-4 mb-8">
         {{-- Filter Pills Kecil Seperti Gambar Referensi --}}
@@ -114,13 +115,29 @@
         </div>
     </div>
 
-    {{-- Grid Produk All --}}
+    {{-- Grid Produk All (Di mobile dibatasi 8 item pertama, klik Lihat Selengkapnya untuk buka semua) --}}
     @if($allProducts->count() > 0)
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
-        @foreach($allProducts as $prod)
+        @foreach($allProducts as $idx => $prod)
+        <div class="{{ $idx >= 8 ? 'hidden sm:block' : '' }}"
+             @if($idx >= 8) :class="showAllMobile ? '!block' : 'hidden sm:block'" @endif>
             @include('partials.product-card', ['product' => $prod])
+        </div>
         @endforeach
     </div>
+
+    {{-- Tombol Lihat Selengkapnya (Khusus Mobile bila produk > 8) --}}
+    @if($allProducts->count() > 8)
+    <div class="mt-8 text-center sm:hidden" x-show="!showAllMobile">
+        <button type="button"
+                @click="showAllMobile = true"
+                class="w-full py-3.5 px-6 bg-[#133129] hover:bg-[#163B35] text-[#D8B761] font-extrabold rounded-2xl border border-[#D8B761]/40 transition-all flex items-center justify-center gap-2 text-xs shadow-lg">
+            <span>Lihat Selengkapnya ({{ $allProducts->count() - 8 }} Produk Lainnya)</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+    </div>
+    @endif
+
     @else
     <div class="p-16 text-center bg-[#0E2824] rounded-3xl border border-white/10 space-y-3">
         <p class="text-sm text-gray-300">Belum ada produk untuk kategori ini.</p>
