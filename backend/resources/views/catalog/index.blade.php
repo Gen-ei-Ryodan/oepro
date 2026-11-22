@@ -7,7 +7,7 @@
 
     {{-- HEADER --}}
     <div class="space-y-2">
-        <h1 class="text-3xl sm:text-4xl font-black text-[#FCD34D] tracking-tight">Katalog Produk</h1>
+        <h1 class="text-3xl sm:text-4xl font-black text-[#D8B761] tracking-tight">Katalog Produk</h1>
         <p class="text-xs sm:text-sm text-gray-300">Koleksi pakaian basic 100% katun murni untuk kenyamanan aktivitas Anda setiap hari.</p>
     </div>
 

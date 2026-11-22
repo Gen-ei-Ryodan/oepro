@@ -39,22 +39,29 @@
             
             {{-- Main Image Viewer --}}
             <div class="relative aspect-square rounded-3xl overflow-hidden bg-[#0E2824] border border-[#A8C4B5]/20 shadow-2xl">
-                <img src="{{ $defaultImg }}" :src="currentImage" alt="{{ $product->name }}" class="w-full h-full object-cover transition-all duration-300">
+                <img src="/assets/images/oepro-size-chart.jpg" :src="currentImage" alt="{{ $product->name }}" class="w-full h-full object-cover transition-all duration-300">
             </div>
 
-            {{-- Thumbnail Selector --}}
-            @if($images->count() > 1)
+            {{-- Thumbnail Selector (Dengan Size Chart Sebagai Thumbnail Pertama) --}}
             <div class="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+                {{-- Size Chart Image Thumbnail --}}
+                <button type="button"
+                        @click="currentImage = '/assets/images/oepro-size-chart.jpg'"
+                        :class="currentImage === '/assets/images/oepro-size-chart.jpg' ? 'border-[#D8B761] ring-2 ring-[#D8B761]/50 scale-95' : 'border-[#A8C4B5]/20 opacity-70 hover:opacity-100'"
+                        class="w-20 h-20 rounded-2xl overflow-hidden border-2 shrink-0 transition bg-white p-1 flex flex-col items-center justify-center text-center relative group">
+                    <img src="/assets/images/oepro-size-chart.jpg" alt="Size Chart" class="w-full h-full object-contain">
+                    <span class="absolute bottom-0 inset-x-0 bg-[#081F1C]/80 text-[#D8B761] text-[9px] font-bold py-0.5">Size Chart</span>
+                </button>
+
                 @foreach($images as $img)
                 <button type="button"
                         @click="currentImage = '{{ $img->image_url }}'"
-                        :class="currentImage === '{{ $img->image_url }}' ? 'border-[#A8C4B5] ring-2 ring-[#A8C4B5]/40 scale-95' : 'border-[#A8C4B5]/20 opacity-60 hover:opacity-100'"
+                        :class="currentImage === '{{ $img->image_url }}' ? 'border-[#D8B761] ring-2 ring-[#D8B761]/50 scale-95' : 'border-[#A8C4B5]/20 opacity-60 hover:opacity-100'"
                         class="w-20 h-20 rounded-2xl overflow-hidden border-2 shrink-0 transition bg-[#0E2824]">
                     <img src="{{ $img->image_url }}" alt="Thumbnail" class="w-full h-full object-cover">
                 </button>
                 @endforeach
             </div>
-            @endif
         </div>
 
         {{-- INFO & ORDER PEMESANAN --}}
@@ -74,7 +81,7 @@
 
             {{-- Price Display --}}
             <div class="p-5 bg-[#0E2824] rounded-2xl border border-[#A8C4B5]/20 flex items-baseline gap-3 shadow-inner">
-                <span class="text-3xl font-black text-[#FCD34D] font-mono tracking-tight" x-text="formatRupiah(currentUnitPrice)">
+                <span class="text-3xl font-black text-[#D8B761] font-mono tracking-tight" x-text="formatRupiah(currentUnitPrice)">
                     Rp {{ number_format($product->price, 0, ',', '.') }}
                 </span>
                 <template x-if="currentOrigPrice > currentUnitPrice">
@@ -238,7 +245,7 @@
 <script>
 function productDetail(config) {
     return {
-        currentImage: '{{ $defaultImg }}',
+        currentImage: '/assets/images/oepro-size-chart.jpg',
         name: config.name,
         basePrice: config.basePrice,
         origPrice: config.origPrice,

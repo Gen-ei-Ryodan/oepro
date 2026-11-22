@@ -30,9 +30,9 @@
                         dark: '#081F1C',
                         surface: '#0E2824',
                         surfaceHover: '#163B35',
-                        brandYellow: '#FCD34D', // Kuning elegan
-                        brandYellowHover: '#F59E0B',
-                        borderMuted: 'rgba(252, 211, 77, 0.15)',
+                        brandYellow: '#D8B761', // Kuning emas OEPRO
+                        brandYellowHover: '#C4A350',
+                        borderMuted: 'rgba(216, 183, 97, 0.2)',
                     }
                 }
             }
@@ -129,7 +129,7 @@
     </script>
     @stack('styles')
 </head>
-<body class="bg-[#081F1C] text-white font-sans antialiased selection:bg-[#FCD34D] selection:text-[#081F1C] flex flex-col min-h-screen pb-20 md:pb-0" x-data>
+<body class="bg-[#081F1C] text-white font-sans antialiased selection:bg-[#D8B761] selection:text-[#081F1C] flex flex-col min-h-screen pb-20 md:pb-0" x-data>
 
     {{-- TOP PROMO BAR --}}
     <div class="bg-[#133129] border-b border-white/10 text-gray-300 text-[11px] py-1.5 px-4 text-center font-medium tracking-wide">
@@ -145,7 +145,7 @@
                 <a href="{{ url('/') }}" class="flex items-center gap-2.5 shrink-0 group">
                     <img src="/assets/brand/oepro-logo.webp" alt="OEPRO" class="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-full bg-white/10 p-0.5">
                     <div class="flex flex-col">
-                        <span class="text-xl sm:text-2xl font-black tracking-tighter text-white group-hover:text-[#FCD34D] transition leading-none">OEPRO</span>
+                        <span class="text-xl sm:text-2xl font-black tracking-tighter text-white group-hover:text-[#D8B761] transition leading-none">OEPRO</span>
                         <span class="text-[9px] sm:text-[10px] uppercase tracking-wider text-gray-400 font-medium">cotton basic</span>
                     </div>
                 </a>
@@ -157,7 +157,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                         </svg>
                         <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari kaos polos, polo lacoste, longsleeve..."
-                               class="w-full pl-10 pr-4 py-2.5 text-xs bg-[#133129]/80 border border-white/15 rounded-full text-white placeholder-gray-400 focus:bg-[#0E2824] focus:border-[#FCD34D] focus:outline-hidden transition shadow-inner">
+                               class="w-full pl-10 pr-4 py-2.5 text-xs bg-[#133129]/80 border border-white/15 rounded-full text-white placeholder-gray-400 focus:bg-[#0E2824] focus:border-[#D8B761] focus:outline-hidden transition shadow-inner">
                     </form>
                 </div>
 
@@ -167,7 +167,7 @@
                     <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20stok"
                        target="_blank"
                        rel="noopener noreferrer"
-                       class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs font-bold text-gray-200 hover:text-[#FCD34D] transition">
+                       class="inline-flex items-center gap-1.5 px-3 sm:px-4 py-2 text-xs font-bold text-gray-200 hover:text-[#D8B761] transition">
                         <svg class="w-4 h-4 fill-current text-[#25D366]" viewBox="0 0 24 24">
                             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.152.569 4.17 1.564 5.917l-1.664 6.083 6.223-1.633c1.7 1.002 3.69 1.573 5.823 1.573 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
                         </svg>
@@ -183,7 +183,7 @@
                         </svg>
                         <span>Keranjang</span>
                         <span x-show="$store.cart.totalCount() > 0" x-text="$store.cart.totalCount()"
-                              class="bg-[#FCD34D] text-[#081F1C] text-[10px] font-black px-1.5 py-0.2 rounded-full"></span>
+                              class="bg-[#D8B761] text-[#081F1C] text-[10px] font-black px-1.5 py-0.2 rounded-full"></span>
                     </button>
                 </div>
             </div>
@@ -217,7 +217,7 @@
             
             <div class="flex items-center justify-between pb-4 border-b border-white/10">
                 <div class="flex items-center gap-2">
-                    <svg class="w-5 h-5 text-[#FCD34D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-[#D8B761]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
                     </svg>
                     <h3 class="text-base font-black text-white">Keranjang Belanja (<span x-text="$store.cart.totalCount()"></span>)</h3>
@@ -241,9 +241,9 @@
                             <h4 class="text-xs font-bold text-white truncate" x-text="item.name"></h4>
                             <span class="text-[10px] text-gray-400 block font-mono">
                                 <span x-show="item.color" x-text="item.color + ' • '"></span>
-                                Ukuran: <span class="text-[#FCD34D]" x-text="item.size"></span>
+                                Ukuran: <span class="text-[#D8B761]" x-text="item.size"></span>
                             </span>
-                            <span class="text-xs font-mono font-bold text-[#FCD34D]" x-text="$store.cart.formatRupiah(item.price)"></span>
+                            <span class="text-xs font-mono font-bold text-[#D8B761]" x-text="$store.cart.formatRupiah(item.price)"></span>
                         </div>
                         <div class="flex flex-col items-end gap-1.5 shrink-0">
                             <button type="button" @click="$store.cart.remove(idx)" class="text-gray-400 hover:text-red-400 text-xs">✕</button>
@@ -261,7 +261,7 @@
             <div class="pt-4 border-t border-white/10 space-y-3">
                 <div class="flex justify-between items-center text-xs">
                     <span class="text-gray-400 font-medium">Total Belanja:</span>
-                    <span class="text-lg font-black text-[#FCD34D] font-mono" x-text="$store.cart.formatRupiah($store.cart.totalPrice())"></span>
+                    <span class="text-lg font-black text-[#D8B761] font-mono" x-text="$store.cart.formatRupiah($store.cart.totalPrice())"></span>
                 </div>
                 <button type="button"
                         @click="$store.cart.checkoutWa()"
@@ -283,27 +283,27 @@
 
     {{-- MOBILE FLOATING BOTTOM NAV --}}
     <div class="md:hidden fixed bottom-4 inset-x-4 z-50 bg-[#133129]/95 backdrop-blur-lg border border-white/15 rounded-2xl shadow-2xl p-2 flex items-center justify-around text-xs font-bold">
-        <a href="{{ url('/') }}" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition {{ request()->is('/') ? 'text-[#FCD34D] bg-[#081F1C]' : 'text-gray-300 hover:text-white' }}">
+        <a href="{{ url('/') }}" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition {{ request()->is('/') ? 'text-[#D8B761] bg-[#081F1C]' : 'text-gray-300 hover:text-white' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
             </svg>
             <span class="text-[10px]">Beranda</span>
         </a>
 
-        <a href="{{ url('/catalog') }}" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition {{ request()->is('catalog*') ? 'text-[#FCD34D] bg-[#081F1C]' : 'text-gray-300 hover:text-white' }}">
+        <a href="{{ url('/catalog') }}" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl transition {{ request()->is('catalog*') ? 'text-[#D8B761] bg-[#081F1C]' : 'text-gray-300 hover:text-white' }}">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
             </svg>
             <span class="text-[10px]">Katalog</span>
         </a>
 
-        <button type="button" @click="$store.cart.isOpen = true" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-white hover:text-[#FCD34D] transition relative">
+        <button type="button" @click="$store.cart.isOpen = true" class="flex flex-col items-center gap-1 py-1 px-3 rounded-xl text-white hover:text-[#D8B761] transition relative">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
             <span class="text-[10px]">Keranjang</span>
             <span x-show="$store.cart.totalCount() > 0" x-text="$store.cart.totalCount()"
-                  class="absolute top-0 right-2 bg-[#FCD34D] text-[#081F1C] text-[9px] font-black px-1 rounded-full"></span>
+                  class="absolute top-0 right-2 bg-[#D8B761] text-[#081F1C] text-[9px] font-black px-1 rounded-full"></span>
         </button>
 
         <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20konsultasi%20pesanan" target="_blank"
@@ -333,40 +333,65 @@
 
                 {{-- Col 2: Kategori --}}
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#FCD34D]">Koleksi Produk</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#D8B761]">Koleksi Produk</h4>
                     <ul class="space-y-2 text-xs text-gray-400">
-                        <li><a href="{{ url('/catalog?category=polo-shirt') }}" class="hover:text-[#FCD34D] transition">Kaos Polo Pique</a></li>
-                        <li><a href="{{ url('/catalog?category=cotton-combed-24s') }}" class="hover:text-[#FCD34D] transition">Kaos Polos Combed 24s</a></li>
-                        <li><a href="{{ url('/catalog?category=longsleeve') }}" class="hover:text-[#FCD34D] transition">Kaos Lengan Panjang</a></li>
-                        <li><a href="{{ url('/catalog') }}" class="hover:text-[#FCD34D] transition">Semua Produk</a></li>
+                        <li><a href="{{ url('/catalog?category=polo-shirt') }}" class="hover:text-[#D8B761] transition">Kaos Polo Pique</a></li>
+                        <li><a href="{{ url('/catalog?category=cotton-combed-24s') }}" class="hover:text-[#D8B761] transition">Kaos Polos Combed 24s</a></li>
+                        <li><a href="{{ url('/catalog?category=longsleeve') }}" class="hover:text-[#D8B761] transition">Kaos Lengan Panjang</a></li>
+                        <li><a href="{{ url('/catalog') }}" class="hover:text-[#D8B761] transition">Semua Produk</a></li>
                     </ul>
                 </div>
 
                 {{-- Col 3: Official Marketplace & Social Media Links --}}
-                <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#FCD34D]">Official Store & Sosmed</h4>
-                    <ul class="space-y-2 text-xs text-gray-300">
-                        <li>
-                            <a href="https://id.shp.ee/HJUio6qQ" target="_blank" rel="noopener noreferrer" class="hover:text-[#FCD34D] transition flex items-center gap-2">
-                                <span>🛒 Shopee:</span> <span class="underline text-gray-400 hover:text-white">Shopee Official</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://vt.tiktok.com/ZSseXR2kY/?page=Mall" target="_blank" rel="noopener noreferrer" class="hover:text-[#FCD34D] transition flex items-center gap-2">
-                                <span>🛍️ TikTok Shop:</span> <span class="underline text-gray-400 hover:text-white">TikTok Mall</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://www.tiktok.com/@oepro.official?_r=1&_t=ZS-9BbqmThyTgu" target="_blank" rel="noopener noreferrer" class="hover:text-[#FCD34D] transition flex items-center gap-2">
-                                <span>📱 TikTok Akun:</span> <span class="underline text-gray-400 hover:text-white">@oepro.official</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="https://wa.me/6281313888927" target="_blank" class="hover:text-[#FCD34D] transition flex items-center gap-2">
-                                <span>💬 CS WhatsApp:</span> <span class="underline text-gray-400 hover:text-white">+62 813-1388-8927</span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="space-y-4">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#D8B761]">Official Store & Sosmed</h4>
+                    <div class="flex items-center gap-3">
+                        {{-- Shopee Logo Button --}}
+                        <a href="https://id.shp.ee/HJUio6qQ" target="_blank" rel="noopener noreferrer"
+                           title="Shopee Official Store"
+                           class="w-11 h-11 rounded-2xl bg-[#EE4D2D] hover:bg-[#d43f20] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M19.467 6.467A3.2 3.2 0 0 0 16.7 5.2H7.3a3.2 3.2 0 0 0-2.767 1.267C3.593 7.96 3 10.38 3 13.067c0 4.987 3.933 9.733 9 9.733s9-4.747 9-9.733c0-2.687-.593-5.107-1.533-6.6zm-7.467 14.4c-3.84 0-6.933-3.893-6.933-7.8 0-2.093.427-4.04 1.147-5.267.333-.56.84-.933 1.487-.933h8.6c.647 0 1.153.373 1.487.933.72 1.227 1.147 3.173 1.147 5.267 0 3.907-3.093 7.8-6.935 7.8zm.533-17.6a3.733 3.733 0 0 0-3.733 3.733.8.8 0 0 0 1.6 0 2.133 2.133 0 0 1 4.267 0 .8.8 0 0 0 1.6 0 3.733 3.733 0 0 0-3.734-3.733z"/>
+                            </svg>
+                        </a>
+
+                        {{-- Tokopedia Logo Button --}}
+                        <a href="https://www.tiktok.com/@oepro.official?_r=1&_t=ZS-9BbqmThyTgu" target="_blank" rel="noopener noreferrer"
+                           title="Tokopedia Official"
+                           class="w-11 h-11 rounded-2xl bg-[#03AC0E] hover:bg-[#02920c] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 4c2.21 0 4 1.79 4 4 0 .55-.45 1-1 1s-1-.45-1-1a2 2 0 0 0-4 0c0 .55-.45 1-1 1s-1-.45-1-1c0-2.21 1.79-4 4-4zm-4 7c0-2.21 1.79-4 4-4s4 1.79 4 4v2c0 2.21-1.79 4-4 4s-4-1.79-4-4v-2z"/>
+                            </svg>
+                        </a>
+
+                        {{-- TikTok Shop / TikTok Mall Logo Button --}}
+                        <a href="https://vt.tiktok.com/ZSseXR2kY/?page=Mall" target="_blank" rel="noopener noreferrer"
+                           title="TikTok Shop Mall"
+                           class="w-11 h-11 rounded-2xl bg-black hover:bg-neutral-900 border border-white/20 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.46 6.28 6.28 0 0 0 1.87-4.46V8.75a8.2 8.2 0 0 0 4.9 1.63V6.93a4.84 4.84 0 0 1-1-.24z"/>
+                            </svg>
+                        </a>
+
+                        {{-- TikTok Sosmed Logo Button --}}
+                        <a href="https://www.tiktok.com/@oepro.official?_r=1&_t=ZS-9BbqmThyTgu" target="_blank" rel="noopener noreferrer"
+                           title="TikTok @oepro.official"
+                           class="w-11 h-11 rounded-2xl bg-[#010101] hover:bg-neutral-800 border border-[#D8B761]/40 text-[#D8B761] flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+                            </svg>
+                        </a>
+
+                        {{-- WhatsApp CS Logo Button --}}
+                        <a href="https://wa.me/6281313888927" target="_blank" rel="noopener noreferrer"
+                           title="WhatsApp Official CS"
+                           class="w-11 h-11 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.152.569 4.17 1.564 5.917l-1.664 6.083 6.223-1.633c1.7 1.002 3.69 1.573 5.823 1.573 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <p class="text-[11px] text-gray-400">Klik ikon untuk belanja langsung di platform favorit Anda.</p>
                 </div>
             </div>
 

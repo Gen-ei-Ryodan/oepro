@@ -21,7 +21,6 @@
                 {{-- Banner Background / Image (Full Opacity 100%, No heavy dark blur) --}}
                 @if($b->image_url)
                 <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="absolute inset-0 w-full h-full object-cover">
-                {{-- Subtle gradient overlay to keep text readable on left side --}}
                 <div class="absolute inset-0 bg-gradient-to-r from-[#081F1C]/90 via-[#081F1C]/50 to-transparent"></div>
                 @else
                 <div class="absolute inset-0 bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
@@ -30,11 +29,11 @@
                 <div class="relative z-10 px-6 sm:px-12 lg:px-16 py-12 sm:py-16 w-full">
                     <div class="max-w-xl space-y-4">
                         @if($b->tag)
-                        <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#FCD34D] bg-[#081F1C]/70 border border-[#FCD34D]/30 px-3.5 py-1 rounded-full backdrop-blur-md">
+                        <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-3.5 py-1 rounded-full backdrop-blur-md">
                             {{ $b->tag }}
                         </span>
                         @endif
-                        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#FCD34D]">
+                        <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#D8B761]">
                             {{ $b->title ?? $b->headline }}
                         </h1>
                         @if($b->subheadline)
@@ -43,8 +42,8 @@
                         </p>
                         @endif
                         <div class="pt-3 flex flex-wrap gap-3">
-                            <a href="{{ url($b->cta_link ?? '/catalog') }}"
-                               class="px-7 py-3 bg-[#FCD34D] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                            <a href="{{ url($b->cta_link ?? '/#katalog') }}"
+                               class="px-7 py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
                                 {{ $b->cta_text ?? 'Lihat Katalog' }} →
                             </a>
                             <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20tanya%20produk%20dan%20harga"
@@ -61,17 +60,17 @@
             {{-- Default Hero Fallback --}}
             <div class="relative min-h-[380px] sm:min-h-[460px] flex items-center bg-[#0E2824] px-6 sm:px-12 py-12">
                 <div class="max-w-2xl space-y-4">
-                    <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#FCD34D] bg-[#081F1C]/70 px-3.5 py-1 rounded-full border border-[#FCD34D]/30">
+                    <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 px-3.5 py-1 rounded-full border border-[#D8B761]/30">
                         OEPRO OFFICIAL STORE
                     </span>
-                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#FCD34D]">
+                    <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-[#D8B761]">
                         100% Full Cotton Murni.<br><span class="text-white">Kenyamanan Berkelas.</span>
                     </h1>
                     <p class="text-white text-sm sm:text-base leading-relaxed">
                         Koleksi Kaos Polos Combed 24s Super Soft, Polo Pique Hexagon Premium, dan Longsleeve dengan standar jahitan rantai ekspor.
                     </p>
                     <div class="pt-3 flex gap-3">
-                        <a href="{{ url('/catalog') }}" class="px-7 py-3.5 bg-[#FCD34D] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                        <a href="#katalog" class="px-7 py-3.5 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
                             Belanja Sekarang →
                         </a>
                     </div>
@@ -81,157 +80,163 @@
     </div>
 </section>
 
-{{-- SECTION: STANDAR MUTU OEPRO --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-    <div class="bg-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-xl border border-gray-100">
-        <div class="text-center max-w-xl mx-auto mb-8 space-y-1">
-            <span class="text-[11px] font-extrabold uppercase tracking-widest text-[#133129]/60">STANDAR MUTU OEPRO</span>
-            <h2 class="text-2xl sm:text-3xl font-black text-[#081F1C] tracking-tight">Dua Pilihan Material Katun Esensial</h2>
+{{-- KATALOG PRODUK OEPRO (LANGSUNG GABUNG SEMUA PRODUK DENGAN FILTER PILL KECIL SEPERTI REFERENSI) --}}
+<section id="katalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    {{-- Header & Subhead --}}
+    <div class="space-y-4 mb-8">
+        {{-- Filter Pills Kecil Seperti Gambar Referensi --}}
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <a href="{{ url('/') }}#katalog"
+               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 {{ empty($selectedCategory) ? 'bg-[#133129] border border-[#D8B761] text-[#D8B761] shadow-sm' : 'bg-[#0E2824] border border-white/10 text-gray-300 hover:border-white/30' }}">
+                <span>Semua</span>
+                <span class="text-[10px] opacity-80">({{ $totalProductsCount }})</span>
+            </a>
+            @foreach($categories as $cat)
+            <a href="{{ url('/?category=' . $cat->slug) }}#katalog"
+               class="px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-1.5 {{ $selectedCategory == $cat->slug ? 'bg-[#133129] border border-[#D8B761] text-[#D8B761] shadow-sm' : 'bg-[#0E2824] border border-white/10 text-gray-300 hover:border-white/30' }}">
+                <span>{{ $cat->name }}</span>
+                <span class="text-[10px] opacity-80">({{ $cat->products_count }})</span>
+            </a>
+            @endforeach
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {{-- Card 1: 100% Katun Combed 24s --}}
-            <div class="bg-[#1A2E2B] rounded-2xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5 border border-white/10 shadow-md">
-                <div class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-[#081F1C] rounded-xl overflow-hidden flex items-center justify-center border border-white/10">
-                    <img src="/assets/brand/oepro-logo.webp" alt="100% Katun Combed 24s" class="w-full h-full object-cover">
+        <div class="flex items-center justify-between border-t border-white/5 pt-4">
+            <div>
+                <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight flex items-center gap-2">
+                    <span>Katalog Produk OEPRO</span>
+                    <span class="text-xs sm:text-sm font-normal text-gray-400">({{ $allProducts->count() }} varian)</span>
+                </h2>
+            </div>
+            <a href="{{ url('/catalog') }}" class="text-xs font-bold text-[#D8B761] hover:underline flex items-center gap-1">
+                <span>Semua Katalog</span>
+                <span>→</span>
+            </a>
+        </div>
+    </div>
+
+    {{-- Grid Produk All --}}
+    @if($allProducts->count() > 0)
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6">
+        @foreach($allProducts as $prod)
+            @include('partials.product-card', ['product' => $prod])
+        @endforeach
+    </div>
+    @else
+    <div class="p-16 text-center bg-[#0E2824] rounded-3xl border border-white/10 space-y-3">
+        <p class="text-sm text-gray-300">Belum ada produk untuk kategori ini.</p>
+        <a href="{{ url('/') }}#katalog" class="inline-block px-5 py-2 bg-[#D8B761] text-[#081F1C] text-xs font-bold rounded-xl">Lihat Semua Produk</a>
+    </div>
+    @endif
+</section>
+
+{{-- FITUR KEUNGGULAN (DENGAN LOGO / IKON YANG SESUAI) --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <div class="bg-[#0E2824] border border-[#D8B761]/30 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden shadow-2xl">
+        <div class="max-w-3xl space-y-4 relative z-10">
+            <span class="text-xs font-black uppercase tracking-widest text-[#D8B761]">KUALITAS TANPA KOMPROMI</span>
+            <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-snug text-[#D8B761]">
+                Kenapa Memilih OEPRO?
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
+                {{-- Item 1 --}}
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#081F1C]/70 border border-white/10">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm font-bold block">100% Full Cotton Murni</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Tanpa campuran polyester sintesis. Bahan bernapas bebas dan menyerap keringat seketika.</p>
+                    </div>
                 </div>
-                <div class="flex-1 text-center sm:text-left space-y-2">
-                    <h3 class="text-lg font-black text-[#FCD34D]">1. 100% Katun Combed 24s</h3>
+
+                {{-- Item 2 --}}
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#081F1C]/70 border border-white/10">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm font-bold block">Kerah Anti-Melar 4 Lapis</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Rib kerah tebal dengan konstruksi double-knit tahan cuci berkali-kali tanpa melipat.</p>
+                    </div>
+                </div>
+
+                {{-- Item 3 --}}
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#081F1C]/70 border border-white/10">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm font-bold block">Jahitan Rantai Standar Ekspor</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Pundak dan sambungan dijahit rantai rapi dengan benang katun kuat standar ekspor.</p>
+                    </div>
+                </div>
+
+                {{-- Item 4 --}}
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#081F1C]/70 border border-white/10">
+                    <div class="w-12 h-12 rounded-2xl bg-[#133129] border border-[#D8B761]/30 text-[#D8B761] flex items-center justify-center shrink-0 shadow-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <div class="space-y-1">
+                        <strong class="text-white text-sm font-bold block">Pewarnaan Reaktif Tidak Luntur</strong>
+                        <p class="text-gray-300 text-xs leading-relaxed font-light">Warna pekat, tajam, dan tidak mudah pudar meskipun dicuci rutin dalam jangka panjang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- SECTION: STANDAR MUTU OEPRO (LET嚥 DI ATAS FOOTER DENGAN BACKGROUND #133129 & FOTO MODEL CEWE + COWO) --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+    <div class="bg-[#133129] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border border-[#D8B761]/30 text-white">
+        <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
+            <span class="text-xs font-extrabold uppercase tracking-widest text-[#D8B761]">STANDAR MUTU OEPRO</span>
+            <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Dua Pilihan Material Katun Esensial</h2>
+            <p class="text-xs text-gray-300">Komitmen kualitas OEPRO untuk setiap jahitan dan serat kain yang Anda kenakan.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {{-- Card 1: 100% Katun Combed 24s (Foto Cewek) --}}
+            <div class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761]/50 transition-all">
+                <div class="w-32 h-40 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
+                    <img src="/assets/images/mutu-combed24s-cewe.jpg" alt="100% Katun Combed 24s" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="flex-1 text-center sm:text-left space-y-2.5">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 01</span>
+                    <h3 class="text-xl font-black text-[#D8B761]">1. 100% Katun Combed 24s</h3>
                     <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-light">
                         Terbuat dari 100% serat katun berkualitas, memiliki tekstur lembut, adem, nyaman menyerap keringat, dan cocok untuk penggunaan sehari-hari.
                     </p>
-                    <a href="{{ url('/catalog?category=basic-t-shirt-24s') }}" class="inline-flex items-center gap-1 text-xs font-bold text-[#FCD34D] hover:underline pt-1">
+                    <a href="{{ url('/catalog?category=basic-t-shirt-24s') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] hover:text-white pt-2 transition">
                         <span>Lihat Kaos Combed 24s</span>
                         <span>→</span>
                     </a>
                 </div>
             </div>
 
-            {{-- Card 2: Pique Hexagon Premium --}}
-            <div class="bg-[#1A2E2B] rounded-2xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5 border border-white/10 shadow-md">
-                <div class="w-24 h-24 sm:w-28 sm:h-28 shrink-0 bg-[#081F1C] rounded-xl overflow-hidden flex items-center justify-center border border-white/10">
-                    <img src="/assets/brand/oepro-logo.webp" alt="Pique Hexagon Premium" class="w-full h-full object-cover">
+            {{-- Card 2: Pique Hexagon Premium (Foto Cowok) --}}
+            <div class="bg-[#0E2824] rounded-3xl p-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761]/50 transition-all">
+                <div class="w-32 h-40 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
+                    <img src="/assets/images/mutu-pique-cowo.jpg" alt="Pique Hexagon Premium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <div class="flex-1 text-center sm:text-left space-y-2">
-                    <h3 class="text-lg font-black text-[#FCD34D]">2. Pique Hexagon Premium</h3>
+                <div class="flex-1 text-center sm:text-left space-y-2.5">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 02</span>
+                    <h3 class="text-xl font-black text-[#D8B761]">2. Pique Hexagon Premium</h3>
                     <p class="text-xs sm:text-sm text-gray-200 leading-relaxed font-light">
                         Kain bertekstur motif hexagon dengan tampilan elegan dan eksklusif. Memiliki karakteristik kuat, nyaman, serta memberikan kesan premium saat dikenakan.
                     </p>
-                    <a href="{{ url('/catalog?category=kaos-polo') }}" class="inline-flex items-center gap-1 text-xs font-bold text-[#FCD34D] hover:underline pt-1">
+                    <a href="{{ url('/catalog?category=kaos-polo') }}" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D8B761] hover:text-white pt-2 transition">
                         <span>Lihat Kaos Polo Pique</span>
                         <span>→</span>
                     </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-{{-- 1. KOLEKSI PILIHAN (SLIDE KE SAMPING) --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-xl sm:text-2xl font-black text-[#FCD34D] tracking-tight">Koleksi Pilihan</h2>
-            <p class="text-xs text-white/80 mt-1">Geser untuk melihat semua kategori katun murni OEPRO</p>
-        </div>
-        <a href="{{ url('/catalog') }}" class="text-xs font-bold text-[#FCD34D] hover:underline">Semua Kategori →</a>
-    </div>
-
-    {{-- Horizontal Scroll / Slider --}}
-    <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory">
-        @foreach($categories as $cat)
-        <a href="{{ url('/catalog?category=' . $cat->slug) }}" class="snap-start shrink-0 w-[240px] sm:w-[280px] group relative rounded-3xl p-6 sm:p-7 bg-[#0E2824] border border-[#A8C4B5]/15 hover:border-[#FCD34D]/60 hover:shadow-2xl transition-all flex flex-col justify-between">
-            <div>
-                <span class="text-[10px] font-bold uppercase tracking-wider text-[#FCD34D] bg-[#133129] px-2.5 py-1 rounded-full border border-[#FCD34D]/20">
-                    {{ $cat->products_count }} Produk
-                </span>
-                <h3 class="text-lg font-black text-white mt-4 group-hover:text-[#FCD34D] transition-colors">
-                    {{ $cat->name }}
-                </h3>
-                <p class="text-xs text-gray-300 mt-1 line-clamp-2 leading-relaxed">
-                    {{ $cat->description ?? 'Bahan 100% katun murni dengan sentuhan premium.' }}
-                </p>
-            </div>
-            <div class="mt-6 text-xs font-bold text-[#FCD34D] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                <span>Jelajahi Produk</span>
-                <span>→</span>
-            </div>
-        </a>
-        @endforeach
-    </div>
-</section>
-
-{{-- 2. PRODUK TERLARIS (SLIDE KE SAMPING) --}}
-@if($bestSellers->count() > 0)
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-t border-[#A8C4B5]/10">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <div class="flex items-center gap-2">
-                <span class="text-[#FCD34D] font-bold text-base">⭐</span>
-                <h2 class="text-xl sm:text-2xl font-black text-[#FCD34D] tracking-tight">Produk Terlaris (Best Seller)</h2>
-            </div>
-            <p class="text-xs text-white/80 mt-1">Geser ke samping untuk melihat produk paling banyak dipesan</p>
-        </div>
-        <a href="{{ url('/catalog') }}" class="text-xs font-bold text-[#FCD34D] hover:underline">Lihat Semua →</a>
-    </div>
-
-    {{-- Horizontal Scroll / Slider --}}
-    <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory">
-        @foreach($bestSellers as $prod)
-        <div class="snap-start shrink-0 w-[170px] sm:w-[240px] md:w-[260px]">
-            @include('partials.product-card', ['product' => $prod])
-        </div>
-        @endforeach
-    </div>
-</section>
-@endif
-
-{{-- 3. KOLEKSI TERBARU (SLIDE KE SAMPING) --}}
-@if($newArrivals->count() > 0)
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 border-t border-[#A8C4B5]/10">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#081F1C] bg-[#FCD34D] px-2.5 py-0.5 rounded-full font-mono">NEW RELEASES</span>
-            <h2 class="text-xl sm:text-2xl font-black text-[#FCD34D] tracking-tight mt-2">Koleksi Terbaru</h2>
-        </div>
-        <a href="{{ url('/catalog') }}" class="text-xs font-bold text-[#FCD34D] hover:underline">Lihat Semua →</a>
-    </div>
-
-    {{-- Horizontal Scroll / Slider --}}
-    <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 no-scrollbar snap-x snap-mandatory">
-        @foreach($newArrivals as $prod)
-        <div class="snap-start shrink-0 w-[170px] sm:w-[240px] md:w-[260px]">
-            @include('partials.product-card', ['product' => $prod])
-        </div>
-        @endforeach
-    </div>
-</section>
-@endif
-
-{{-- FITUR KEUNGGULAN --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-    <div class="bg-[#0E2824] border border-[#A8C4B5]/20 text-white rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-        <div class="max-w-2xl space-y-4 relative z-10">
-            <span class="text-xs font-black uppercase tracking-widest text-[#FCD34D]">KUALITAS TANPA KOMPROMI</span>
-            <h2 class="text-2xl sm:text-4xl font-black tracking-tight leading-snug text-[#FCD34D]">
-                Kenapa Memilih OEPRO?
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 text-xs">
-                <div class="space-y-1">
-                    <strong class="text-white text-sm block">100% Full Cotton Murni</strong>
-                    <p class="text-gray-300 leading-relaxed">Tanpa campuran polyester sintesis. Bahan bernapas bebas dan menyerap keringat seketika.</p>
-                </div>
-                <div class="space-y-1">
-                    <strong class="text-white text-sm block">Kerah Anti-Melar 4 Lapis</strong>
-                    <p class="text-gray-300 leading-relaxed">Rib kerah tebal dengan konstruksi double-knit tahan cuci berkali-kali tanpa melipat.</p>
-                </div>
-                <div class="space-y-1">
-                    <strong class="text-white text-sm block">Jahitan Rantai Standar Ekspor</strong>
-                    <p class="text-gray-300 leading-relaxed">Pundak dan sambungan dijahit rantai rapi dengan benang katun kuat standar ekspor.</p>
-                </div>
-                <div class="space-y-1">
-                    <strong class="text-white text-sm block">Pewarnaan Reaktif Tidak Luntur</strong>
-                    <p class="text-gray-300 leading-relaxed">Warna pekat, tajam, dan tidak mudah pudar meskipun dicuci rutin dalam jangka panjang.</p>
                 </div>
             </div>
         </div>

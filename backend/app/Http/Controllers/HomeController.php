@@ -13,24 +13,18 @@ class HomeController extends Controller
         $banners = Banner::where('is_active', true)->orderBy('order')->get();
         $categories = Category::withCount('products')->orderBy('name')->get();
         
-        $featuredProducts = Product::with(['images', 'category'])
-            ->where('is_featured', true)
-            ->latest()
-            ->take(8)
-            ->get();
-            
-        $bestSellers = Product::with(['images', 'category'])
-            ->where('is_best_seller', true)
-            ->latest()
-            ->take(8)
-            ->get();
-            
-        $newArrivals = Product::with(['images', 'category'])
-            ->where('is_new_arrival', true)
-            ->latest()
-            ->take(8)
-            ->get();
+        $selectedCategory = request('category');
+        $productsQuery = Product::with(['images', 'category'])->latest();
 
-        return view('home.index', compact('banners', 'categories', 'featuredProducts', 'bestSellers', 'newArrivals'));
+        if ($selectedCategory) {
+            $productsQuery->whereHas('category', function ($q) use ($selectedCategory) {
+                $q->where('slug', $selectedCategory);
+            });
+        }
+
+        $allProducts = $productsQuery->get();
+        $totalProductsCount = Product::count();
+
+        return view('home.index', compact('banners', 'categories', 'allProducts', 'selectedCategory', 'totalProductsCount'));
     }
 }
