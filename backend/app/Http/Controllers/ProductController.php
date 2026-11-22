@@ -20,6 +20,20 @@ class ProductController extends Controller
             ->take(4)
             ->get();
 
-        return view('product.show', compact('product', 'relatedProducts'));
+        // Ambil mapping warna -> slug produk lain di kategori yang sama
+        $categoryProducts = Product::select('id', 'name', 'slug', 'category_id')
+            ->where('category_id', $product->category_id)
+            ->get();
+
+        $colorSlugMap = [];
+        foreach ($categoryProducts as $cp) {
+            $parts = explode(' - ', $cp->name);
+            if (isset($parts[1])) {
+                $colorName = trim($parts[1]);
+                $colorSlugMap[strtolower($colorName)] = $cp->slug;
+            }
+        }
+
+        return view('product.show', compact('product', 'relatedProducts', 'colorSlugMap'));
     }
 }

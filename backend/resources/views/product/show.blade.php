@@ -13,6 +13,7 @@
          waNumber: '6281313888927',
          sizes: {{ json_encode($product->sizes ?? ['S', 'M', 'L', 'XL', '2XL']) }},
          colors: {{ json_encode($product->colors ?? []) }},
+         colorSlugMap: {{ json_encode($colorSlugMap ?? []) }},
          variants: {{ json_encode($product->variants_data ?? []) }}
      })">
 
@@ -85,7 +86,7 @@
                 </template>
             </div>
 
-            {{-- PILIHAN WARNA (Jika ada) --}}
+            {{-- PILIHAN WARNA (Jika ada) - Klik langsung pindah ke produk dengan warna terpilih --}}
             <template x-if="colors && colors.length > 0">
                 <div class="space-y-3">
                     <label class="block text-xs font-bold uppercase tracking-wider text-gray-300">
@@ -94,9 +95,9 @@
                     <div class="flex flex-wrap gap-2 max-h-48 overflow-y-auto no-scrollbar">
                         <template x-for="c in colors" :key="c.name">
                             <button type="button"
-                                    @click="selectedColor = c.name"
-                                    :class="selectedColor === c.name ? 'border-[#A8C4B5] bg-[#A8C4B5] text-[#081F1C] shadow-md' : 'border-[#A8C4B5]/20 bg-[#0E2824] text-gray-300 hover:border-[#A8C4B5]/50'"
-                                    class="px-3.5 py-1.5 rounded-xl border text-xs font-semibold transition flex items-center gap-2">
+                                    @click="selectColor(c)"
+                                    :class="selectedColor === c.name ? 'border-[#A8C4B5] bg-[#A8C4B5] text-[#081F1C] shadow-md font-bold' : 'border-[#A8C4B5]/20 bg-[#0E2824] text-gray-300 hover:border-[#A8C4B5]/50'"
+                                    class="px-3.5 py-1.5 rounded-xl border text-xs font-semibold transition flex items-center gap-2 cursor-pointer">
                                 <span class="w-3.5 h-3.5 rounded-full border border-white/20 shrink-0" :style="'background-color: ' + (c.hex || '#1D1D1D')"></span>
                                 <span x-text="c.name"></span>
                             </button>
@@ -304,15 +305,34 @@ function productDetail(config) {
         waNumber: config.waNumber,
         sizes: config.sizes,
         colors: config.colors,
+        colorSlugMap: config.colorSlugMap || {},
         variants: config.variants || [],
         selectedSize: config.sizes && config.sizes.length > 0 ? config.sizes[0] : 'L',
-        selectedColor: config.colors && config.colors.length > 0 ? config.colors[0].name : '',
+        selectedColor: (function() {
+            // Ambil warna default dari nama produk
+            const parts = (config.name || '').split(' - ');
+            if (parts.length > 1) return parts[1].trim();
+            return config.colors && config.colors.length > 0 ? config.colors[0].name : '';
+        })(),
         qty: 1,
         currentUnitPrice: config.basePrice,
         currentOrigPrice: config.origPrice,
 
         init() {
             this.recalcPrice();
+        },
+
+        selectColor(c) {
+            const cName = c.name || '';
+            const key = cName.trim().toLowerCase();
+            const targetSlug = this.colorSlugMap[key];
+
+            if (targetSlug) {
+                // Navigasi ke halaman produk warna tersebut
+                window.location.href = '/product/' + targetSlug;
+            } else {
+                this.selectedColor = cName;
+            }
         },
 
         selectSize(sz) {
