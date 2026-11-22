@@ -225,29 +225,29 @@
     </div>
 </section>
 
-{{-- SECTION: STANDAR MUTU OEPRO (LET嚥 DI ATAS FOOTER DENGAN BACKGROUND #133129 & FOTO MODEL CEWE + COWO) --}}
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-    <div class="bg-[#133129] rounded-3xl p-6 sm:p-8 md:p-12 shadow-2xl border border-[#D8B761]/30 text-white">
-        <div class="text-center max-w-xl mx-auto mb-10 space-y-2">
-            <span class="text-xs font-extrabold uppercase tracking-widest text-[#D8B761]">STANDAR MUTU OEPRO</span>
-            <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">Dua Pilihan Material Katun Esensial</h2>
-            <p class="text-xs text-gray-300">Komitmen kualitas OEPRO untuk setiap jahitan dan serat kain yang Anda kenakan.</p>
+{{-- SECTION: STANDAR MUTU OEPRO (LETAK DI ATAS FOOTER DENGAN BACKGROUND #133129 & FOTO MODEL CEWE + COWO) --}}
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
+    <div class="bg-[#133129] rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 shadow-2xl border border-[#D8B761]/30 text-white">
+        <div class="text-center max-w-xl mx-auto mb-6 sm:mb-10 space-y-1.5 sm:space-y-2">
+            <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-widest text-[#D8B761]">STANDAR MUTU OEPRO</span>
+            <h2 class="text-lg sm:text-3xl font-black text-white tracking-tight">Dua Pilihan Material Katun Esensial</h2>
+            <p class="text-[11px] sm:text-xs text-gray-300">Komitmen kualitas OEPRO untuk setiap jahitan dan serat kain yang Anda kenakan.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-8">
             {{-- Card 1: 100% Katun Combed 24s (Foto Cewek) -> Klik masuk ke Kategori Kaos --}}
             <a href="{{ url('/catalog?category=basic-tshirt') }}"
-               class="bg-[#0E2824] rounded-3xl p-4 sm:p-6 flex flex-row items-center sm:items-start gap-4 sm:gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
-                <div class="w-24 h-32 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
+               class="bg-[#0E2824] rounded-2xl sm:rounded-3xl p-3 sm:p-6 flex flex-row items-center sm:items-start gap-3.5 sm:gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
+                <div class="w-20 h-28 sm:w-36 sm:h-44 shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
                     <img src="/assets/images/mutu-combed24s-cewe.jpg" alt="100% Katun Combed 24s" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <div class="flex-1 text-left space-y-1.5 sm:space-y-2.5">
-                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 01</span>
-                    <h3 class="text-base sm:text-xl font-black text-[#D8B761] group-hover:text-white transition leading-snug">1. 100% Katun Combed 24s</h3>
-                    <p class="text-[11px] sm:text-sm text-gray-200 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+                <div class="flex-1 text-left space-y-1 sm:space-y-2.5 min-w-0">
+                    <span class="inline-block px-2 py-0.5 rounded-full text-[8px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 01</span>
+                    <h3 class="text-sm sm:text-xl font-black text-[#D8B761] group-hover:text-white transition leading-snug truncate sm:whitespace-normal">1. 100% Katun Combed 24s</h3>
+                    <p class="text-[10px] sm:text-sm text-gray-200 leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                         Terbuat dari 100% serat katun berkualitas, memiliki tekstur lembut, adem, nyaman menyerap keringat, dan cocok untuk penggunaan sehari-hari.
                     </p>
-                    <div class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#D8B761] group-hover:text-white pt-1 sm:pt-2 transition">
+                    <div class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold text-[#D8B761] group-hover:text-white pt-0.5 sm:pt-2 transition">
                         <span>Lihat Kaos Combed 24s</span>
                         <span>→</span>
                     </div>
@@ -256,17 +256,17 @@
 
             {{-- Card 2: Pique Hexagon Premium (Foto Cowok) -> Klik masuk ke Kategori Polo --}}
             <a href="{{ url('/catalog?category=polo-shirt') }}"
-               class="bg-[#0E2824] rounded-3xl p-4 sm:p-6 flex flex-row items-center sm:items-start gap-4 sm:gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
-                <div class="w-24 h-32 sm:w-36 sm:h-44 shrink-0 rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
+               class="bg-[#0E2824] rounded-2xl sm:rounded-3xl p-3 sm:p-6 flex flex-row items-center sm:items-start gap-3.5 sm:gap-6 border border-white/10 shadow-lg group hover:border-[#D8B761] hover:scale-[1.01] transition-all block cursor-pointer">
+                <div class="w-20 h-28 sm:w-36 sm:h-44 shrink-0 rounded-xl sm:rounded-2xl overflow-hidden bg-[#081F1C] border border-[#D8B761]/30 shadow-md">
                     <img src="/assets/images/mutu-pique-cowo.jpg" alt="Pique Hexagon Premium" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 </div>
-                <div class="flex-1 text-left space-y-1.5 sm:space-y-2.5">
-                    <span class="inline-block px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 02</span>
-                    <h3 class="text-base sm:text-xl font-black text-[#D8B761] group-hover:text-white transition leading-snug">2. Pique Hexagon Premium</h3>
-                    <p class="text-[11px] sm:text-sm text-gray-200 leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+                <div class="flex-1 text-left space-y-1 sm:space-y-2.5 min-w-0">
+                    <span class="inline-block px-2 py-0.5 rounded-full text-[8px] sm:text-[10px] font-bold uppercase tracking-wider bg-[#133129] text-[#D8B761] border border-[#D8B761]/30">Material 02</span>
+                    <h3 class="text-sm sm:text-xl font-black text-[#D8B761] group-hover:text-white transition leading-snug truncate sm:whitespace-normal">2. Pique Hexagon Premium</h3>
+                    <p class="text-[10px] sm:text-sm text-gray-200 leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                         Kain bertekstur motif hexagon dengan tampilan elegan dan eksklusif. Memiliki karakteristik kuat, nyaman, serta memberikan kesan premium saat dikenakan.
                     </p>
-                    <div class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-[#D8B761] group-hover:text-white pt-1 sm:pt-2 transition">
+                    <div class="inline-flex items-center gap-1 text-[10px] sm:text-xs font-bold text-[#D8B761] group-hover:text-white pt-0.5 sm:pt-2 transition">
                         <span>Lihat Kaos Polo Pique</span>
                         <span>→</span>
                     </div>
