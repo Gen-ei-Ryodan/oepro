@@ -44,6 +44,19 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         body { background-color: #081F1C; color: #FFFFFF; }
+
+        @keyframes promoMarquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: promoMarquee 28s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
     </style>
     
     {{-- Alpine.js Cart Store --}}
@@ -178,9 +191,31 @@
 </head>
 <body class="bg-[#081F1C] text-white font-sans antialiased selection:bg-[#D8B761] selection:text-[#081F1C] flex flex-col min-h-screen pb-20 md:pb-0" x-data>
 
-    {{-- TOP PROMO BAR --}}
-    <div class="bg-[#133129] border-b border-white/10 text-gray-300 text-[11px] py-1.5 px-4 text-center font-medium tracking-wide">
-        ✨ 100% Cotton Murni Combed 24s & Pique Hexagon • Garansi Nyaman & Tidak Panas
+    {{-- TOP PROMO BAR (MARQUEE AUTO-RUN & LOOPING RUNNING TEXT) --}}
+    <div class="bg-[#133129] border-b border-white/10 text-gray-200 text-[11px] sm:text-xs py-1.5 overflow-hidden font-medium tracking-wide">
+        <div class="animate-marquee items-center gap-10">
+            <span class="inline-flex items-center gap-2">
+                <span class="text-[#D8B761]">🚚</span>
+                <span>Nikmati promo Gratis Ongkir ke seluruh Indonesia, karena sekarang pesanan Anda bisa sampai ke mana saja tanpa biaya pengiriman. Syarat & ketentuan berlaku.</span>
+            </span>
+            <span class="text-[#D8B761]/60">•</span>
+            <span class="inline-flex items-center gap-2">
+                <span class="text-[#D8B761]">✨</span>
+                <span>100% Cotton Murni Combed 24s & Pique Hexagon • Garansi Nyaman & Tidak Panas</span>
+            </span>
+            <span class="text-[#D8B761]/60">•</span>
+            {{-- Duplikasi untuk efek looping mulus tanpa patah (seamless infinite loop) --}}
+            <span class="inline-flex items-center gap-2">
+                <span class="text-[#D8B761]">🚚</span>
+                <span>Nikmati promo Gratis Ongkir ke seluruh Indonesia, karena sekarang pesanan Anda bisa sampai ke mana saja tanpa biaya pengiriman. Syarat & ketentuan berlaku.</span>
+            </span>
+            <span class="text-[#D8B761]/60">•</span>
+            <span class="inline-flex items-center gap-2">
+                <span class="text-[#D8B761]">✨</span>
+                <span>100% Cotton Murni Combed 24s & Pique Hexagon • Garansi Nyaman & Tidak Panas</span>
+            </span>
+            <span class="text-[#D8B761]/60">•</span>
+        </div>
     </div>
 
     {{-- NAVBAR (Sesuai request: Kiri logo & text, search product, WhatsApp, Keranjang Putih) --}}
