@@ -40,18 +40,6 @@
             {{-- Main Image Viewer --}}
             <div class="relative aspect-square rounded-3xl overflow-hidden bg-[#0E2824] border border-[#A8C4B5]/20 shadow-2xl">
                 <img src="{{ $defaultImg }}" :src="currentImage" alt="{{ $product->name }}" class="w-full h-full object-cover transition-all duration-300">
-                
-                @if($product->discount_percent > 0)
-                <span class="absolute top-4 left-4 bg-red-600 text-white text-xs font-black px-3 py-1.5 rounded-full shadow-lg">
-                    HEMAT {{ $product->discount_percent }}%
-                </span>
-                @endif
-                
-                @if($product->is_best_seller)
-                <span class="absolute top-4 right-4 bg-[#133129] border border-[#A8C4B5]/40 text-[#A8C4B5] text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
-                    ⭐ BEST SELLER
-                </span>
-                @endif
             </div>
 
             {{-- Thumbnail Selector --}}
@@ -86,7 +74,7 @@
 
             {{-- Price Display --}}
             <div class="p-5 bg-[#0E2824] rounded-2xl border border-[#A8C4B5]/20 flex items-baseline gap-3 shadow-inner">
-                <span class="text-3xl font-black text-[#A8C4B5] font-mono tracking-tight" x-text="formatRupiah(currentUnitPrice)">
+                <span class="text-3xl font-black text-[#FCD34D] font-mono tracking-tight" x-text="formatRupiah(currentUnitPrice)">
                     Rp {{ number_format($product->price, 0, ',', '.') }}
                 </span>
                 <template x-if="currentOrigPrice > currentUnitPrice">
@@ -153,18 +141,35 @@
                 </div>
             </div>
 
-            {{-- TOMBOL UTAMA PESAN VIA WHATSAPP --}}
-            <div class="pt-2">
+            {{-- TOMBOL AKSI: TAMBAH KE KERANJANG & PESAN WA --}}
+            <div class="pt-2 space-y-3">
+                <button type="button"
+                        @click="$store.cart.add({
+                            id: {{ $product->id }},
+                            name: name,
+                            price: currentUnitPrice,
+                            image: currentImage,
+                            size: selectedSize,
+                            color: selectedColor,
+                            qty: qty
+                        })"
+                        class="w-full py-4 px-6 bg-white hover:bg-gray-100 text-[#081F1C] font-extrabold rounded-2xl shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3 text-base">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                    <span>+ Tambah ke Keranjang</span>
+                </button>
+
                 <a :href="getWaLink()"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="w-full py-4 px-6 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold rounded-2xl shadow-xl shadow-[#25D366]/20 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3 text-base">
-                    <svg class="w-6 h-6 fill-current shrink-0" viewBox="0 0 24 24">
+                   class="w-full py-3.5 px-6 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold rounded-2xl shadow-lg shadow-[#25D366]/20 transition-all flex items-center justify-center gap-3 text-sm">
+                    <svg class="w-5 h-5 fill-current shrink-0" viewBox="0 0 24 24">
                         <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.274.072.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.152.569 4.17 1.564 5.917l-1.664 6.083 6.223-1.633c1.7 1.002 3.69 1.573 5.823 1.573 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
                     </svg>
                     <span>Beli Sekarang via WhatsApp</span>
                 </a>
-                <p class="text-center text-[11px] text-gray-400 mt-2">
+                <p class="text-center text-[11px] text-gray-400">
                     Fast response langsung terhubung dengan Customer Service OEPRO
                 </p>
             </div>

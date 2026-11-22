@@ -2,42 +2,53 @@
     $thumb = $product->images->first()?->image_url ?? '/assets/brand/oepro-logo.webp';
 @endphp
 
-<a href="{{ url('/product/' . $product->slug) }}" class="group bg-[#0E2824] rounded-2xl overflow-hidden border border-[#A8C4B5]/15 hover:border-[#A8C4B5]/60 hover:shadow-2xl transition-all block flex flex-col h-full">
-    <div class="relative overflow-hidden aspect-square bg-[#081F1C]">
+<div class="group bg-[#0E2824] rounded-2xl overflow-hidden border border-[#A8C4B5]/15 hover:border-[#FCD34D]/60 hover:shadow-2xl transition-all flex flex-col h-full relative">
+    <a href="{{ url('/product/' . $product->slug) }}" class="relative overflow-hidden aspect-square bg-[#081F1C] block">
         <img src="{{ $thumb }}" alt="{{ $product->name }}" loading="lazy"
              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    </a>
 
-        {{-- Badges --}}
-        <div class="absolute top-2 left-2 flex flex-col gap-1">
-            @if($product->is_best_seller)
-            <span class="bg-[#133129] border border-[#A8C4B5]/30 text-[#A8C4B5] text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">Best Seller</span>
-            @endif
-            @if($product->is_new_arrival)
-            <span class="bg-[#A8C4B5] text-[#081F1C] text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md">New</span>
-            @endif
-            @if(!empty($product->discount_percent) && $product->discount_percent > 0)
-            <span class="bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-md">-{{ $product->discount_percent }}%</span>
-            @endif
-        </div>
-    </div>
     <div class="p-3 sm:p-4 flex-1 flex flex-col justify-between">
         <div>
             <span class="text-[10px] font-bold uppercase tracking-wider text-[#A8C4B5]/70 block mb-1">
                 {{ $product->category->name ?? 'Kaos OEPRO' }}
             </span>
-            <h3 class="font-bold text-white text-xs sm:text-sm line-clamp-2 group-hover:text-[#A8C4B5] transition-colors leading-snug">
-                {{ $product->name }}
-            </h3>
+            <a href="{{ url('/product/' . $product->slug) }}" class="block">
+                <h3 class="font-bold text-white text-xs sm:text-sm line-clamp-2 group-hover:text-[#FCD34D] transition-colors leading-snug">
+                    {{ $product->name }}
+                </h3>
+            </a>
         </div>
-        <div class="mt-2.5 flex items-baseline gap-2">
-            <span class="font-black text-[#A8C4B5] font-mono text-xs sm:text-sm">
-                Rp {{ number_format($product->price, 0, ',', '.') }}
-            </span>
-            @if(!empty($product->original_price) && $product->original_price > $product->price)
-            <span class="text-[10px] text-gray-500 line-through font-mono">
-                Rp {{ number_format($product->original_price, 0, ',', '.') }}
-            </span>
-            @endif
+
+        <div class="mt-3 pt-2 border-t border-[#A8C4B5]/10 flex flex-col gap-2">
+            <div class="flex items-baseline justify-between gap-1">
+                <span class="font-black text-[#FCD34D] font-mono text-xs sm:text-sm">
+                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                </span>
+                @if(!empty($product->original_price) && $product->original_price > $product->price)
+                <span class="text-[10px] text-gray-500 line-through font-mono">
+                    Rp {{ number_format($product->original_price, 0, ',', '.') }}
+                </span>
+                @endif
+            </div>
+
+            {{-- Tombol Tambah ke Keranjang --}}
+            <button type="button"
+                    @click.prevent.stop="$store.cart.add({
+                        id: {{ $product->id }},
+                        name: {{ json_encode($product->name) }},
+                        price: {{ (float) $product->price }},
+                        image: {{ json_encode($thumb) }},
+                        size: '{{ $product->sizes[0] ?? 'L' }}',
+                        color: '{{ $product->colors[0]['name'] ?? '' }}',
+                        qty: 1
+                    })"
+                    class="w-full py-2 px-3 bg-[#133129] hover:bg-[#FCD34D] text-[#FCD34D] hover:text-[#081F1C] border border-[#FCD34D]/30 hover:border-[#FCD34D] rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                </svg>
+                <span>+ Keranjang</span>
+            </button>
         </div>
     </div>
-</a>
+</div>
