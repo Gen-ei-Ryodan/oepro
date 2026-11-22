@@ -35,20 +35,25 @@ Route::prefix('admin')->middleware('auth.admin')->name('admin.')->group(function
     Route::get('/produk', [AdminProductController::class, 'index'])->name('produk.index');
     Route::get('/produk/create', [AdminProductController::class, 'create'])->name('produk.create');
     Route::post('/produk', [AdminProductController::class, 'store'])->name('produk.store');
+    
+    // Support GET /admin/produk/{id} -> redirect ke form edit agar tidak muncul 405 Method Not Allowed
+    Route::get('/produk/{id}', function ($id) {
+        return redirect()->route('admin.produk.edit', $id);
+    });
     Route::get('/produk/{id}/edit', [AdminProductController::class, 'edit'])->name('produk.edit');
-    Route::put('/produk/{id}', [AdminProductController::class, 'update'])->name('produk.update');
+    Route::match(['put', 'post'], '/produk/{id}', [AdminProductController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{id}', [AdminProductController::class, 'destroy'])->name('produk.destroy');
     Route::delete('/produk/{productId}/images/{imageId}', [AdminProductController::class, 'deleteImage'])->name('produk.images.destroy');
 
     // Kategori CRUD
     Route::get('/kategori', [AdminCategoryController::class, 'index'])->name('kategori.index');
     Route::post('/kategori', [AdminCategoryController::class, 'store'])->name('kategori.store');
-    Route::put('/kategori/{id}', [AdminCategoryController::class, 'update'])->name('kategori.update');
+    Route::match(['put', 'post'], '/kategori/{id}', [AdminCategoryController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/{id}', [AdminCategoryController::class, 'destroy'])->name('kategori.destroy');
 
     // Banner CRUD
     Route::get('/banner', [AdminBannerController::class, 'index'])->name('banner.index');
     Route::post('/banner', [AdminBannerController::class, 'store'])->name('banner.store');
-    Route::put('/banner/{id}', [AdminBannerController::class, 'update'])->name('banner.update');
+    Route::match(['put', 'post'], '/banner/{id}', [AdminBannerController::class, 'update'])->name('banner.update');
     Route::delete('/banner/{id}', [AdminBannerController::class, 'destroy'])->name('banner.destroy');
 });
