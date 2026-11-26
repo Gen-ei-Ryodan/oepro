@@ -23,32 +23,32 @@
 
                 <div class="relative z-10 w-full h-full flex items-center justify-between gap-4 sm:gap-8 px-5 sm:px-12 lg:px-16 py-4 sm:py-6">
                     {{-- ISI TEKS: CENTER SECARA VERTIKAL --}}
-                    <div class="flex-1 max-w-[55%] sm:max-w-[50%] min-w-0 space-y-1.5 sm:space-y-4">
+                    <div class="flex-1 max-w-[58%] sm:max-w-[55%] min-w-0 space-y-2 sm:space-y-4">
                         @if($b->tag)
-                        <span class="inline-block text-[8px] sm:text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3 py-0.5 rounded-full drop-shadow-md">
+                        <span class="inline-block text-[9px] sm:text-xs font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3.5 py-0.5 sm:py-1 rounded-full drop-shadow-md">
                             {{ $b->tag }}
                         </span>
                         @endif
 
                         {{-- HEADLINE --}}
-                        <h1 class="text-xs sm:text-2xl lg:text-3xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md line-clamp-2 sm:line-clamp-none">
+                        <h1 class="text-sm sm:text-3xl lg:text-5xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->title ?? $b->headline }}
                         </h1>
 
                         {{-- SUB HEADLINE --}}
                         @if($b->subheadline)
-                        <p class="text-white text-[9px] sm:text-xs lg:text-sm leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
+                        <p class="text-white text-[10px] sm:text-sm lg:text-lg leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->subheadline }}
                         </p>
                         @endif
 
                         {{-- TOMBOL HANYA WHATSAPP --}}
-                        <div class="pt-0.5 sm:pt-2 flex">
+                        <div class="pt-1 sm:pt-3 flex">
                             <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-5 sm:py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                                <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-3 h-3 sm:w-4 sm:h-4 object-contain">
+                               class="inline-flex items-center gap-1.5 sm:gap-2.5 px-3 py-1.5 sm:px-6 sm:py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-[10px] sm:text-sm uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                                <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-3.5 h-3.5 sm:w-5 sm:h-5 object-contain">
                                 <span>Chat WhatsApp</span>
                             </a>
                         </div>
