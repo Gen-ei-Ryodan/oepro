@@ -16,14 +16,14 @@
                  x-transition:enter="transition ease-out duration-700"
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
-                 class="relative aspect-[2.4/1] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
+                 class="relative aspect-[2.6/1] sm:aspect-[21/9] md:aspect-[24/9] lg:aspect-[26/9] flex items-center overflow-hidden">
 
                 {{-- BACKGROUND HIJAU (FOTO TIDAK LAGI MEMENUHI SELURUH BANNER) --}}
                 <div class="absolute inset-0 bg-gradient-to-r from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
 
-                <div class="relative z-10 w-full h-full grid grid-cols-12 items-center gap-2 sm:gap-6 lg:gap-8 px-3.5 sm:px-10 lg:px-14 py-3 sm:py-8">
+                <div class="relative z-10 w-full h-full grid grid-cols-12 items-center gap-2 sm:gap-6 lg:gap-8 px-3.5 sm:px-10 lg:px-14 py-2 sm:py-5">
                     {{-- ISI TEKS: DIBATASI SEPARUH BANNER AGAR TIDAK MENJOROK KE KANAN --}}
-                    <div class="{{ $b->image_url ? 'col-span-7 sm:col-span-6' : 'col-span-12 sm:col-span-9' }} min-w-0 space-y-1 sm:space-y-4">
+                    <div class="{{ $b->image_url ? 'col-span-7 sm:col-span-6' : 'col-span-12 sm:col-span-9' }} min-w-0 space-y-1 sm:space-y-3">
                         @if($b->tag)
                         <span class="inline-block text-[8px] sm:text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3 py-0.5 rounded-full drop-shadow-md">
                             {{ $b->tag }}
@@ -31,7 +31,7 @@
                         @endif
 
                         {{-- HEADLINE --}}
-                        <h1 class="text-xs sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md line-clamp-2 sm:line-clamp-none">
+                        <h1 class="text-xs sm:text-2xl lg:text-3xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->title ?? $b->headline }}
                         </h1>
 
@@ -43,11 +43,11 @@
                         @endif
 
                         {{-- TOMBOL HANYA WHATSAPP --}}
-                        <div class="pt-1 sm:pt-3 flex">
+                        <div class="pt-0.5 sm:pt-2 flex">
                             <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
                                target="_blank"
                                rel="noopener noreferrer"
-                               class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-6 sm:py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                               class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-5 sm:py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
                                 <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-3 h-3 sm:w-4 sm:h-4 object-contain">
                                 <span>Chat WhatsApp</span>
                             </a>
@@ -56,8 +56,8 @@
 
                     {{-- FOTO BENTUK KOTAK (SQUARE) MENGIKUTI CONTOH BANNER WEBSITE OEPRO --}}
                     @if($b->image_url)
-                    <div class="col-span-5 sm:col-span-6 self-stretch flex items-center justify-center">
-                        <div class="w-[70%] max-w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden border border-[#A8C4B5]/25 bg-[#081F1C] shadow-xl">
+                    <div class="col-span-5 sm:col-span-6 self-stretch flex items-center justify-center p-1 sm:p-2">
+                        <div class="h-full max-h-[85%] aspect-square rounded-xl sm:rounded-2xl overflow-hidden border border-[#A8C4B5]/25 bg-[#081F1C] shadow-xl">
                             <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover object-center">
                         </div>
                     </div>
