@@ -4,12 +4,12 @@
 
 @section('content')
 
-{{-- HERO SECTION / BANNER SLIDER (BOXED, 100% OPACITY FOTO TERANG, TEKS LANGSUNG DI ATAS FOTO TANPA CARD) --}}
+{{-- HERO SECTION / BANNER SLIDER (BACKGROUND HIJAU, FOTO BENTUK KOTAK/SQUARE DI KANAN, TEKS MENEMPATI SEPARUH BANNER, TOMBOL HANYA WHATSAPP) --}}
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-6">
-    <div class="relative bg-[#0E2824] border border-[#A8C4B5]/20 rounded-3xl overflow-hidden shadow-2xl"
+    <div class="relative bg-[#133129] border border-[#A8C4B5]/20 rounded-3xl overflow-hidden shadow-2xl"
          x-data="{ active: 0, total: {{ count($banners) > 0 ? count($banners) : 1 }} }"
          x-init="if (total > 1) setInterval(() => active = (active + 1) % total, 6000)">
-        
+
         @if(count($banners) > 0)
             @foreach($banners as $idx => $b)
             <div x-show="active === {{ $idx }}"
@@ -17,17 +17,13 @@
                  x-transition:enter-start="opacity-0"
                  x-transition:enter-end="opacity-100"
                  class="relative aspect-[2.4/1] sm:aspect-[16/7] md:aspect-[21/9] flex items-center overflow-hidden">
-                
-                {{-- Foto Banner 100% Opacity Penuh & Terang Tetap Landscape --}}
-                @if($b->image_url)
-                <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="absolute inset-0 w-full h-full object-cover object-center opacity-100">
-                @else
-                <div class="absolute inset-0 bg-gradient-to-br from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
-                @endif
 
-                {{-- Teks di Atas Banner (Responsif, Proporsional di Layar Mobile) --}}
-                <div class="relative z-10 px-3.5 sm:px-12 lg:px-16 py-3 sm:py-14 w-full">
-                    <div class="max-w-[65%] sm:max-w-md lg:max-w-lg space-y-1 sm:space-y-4">
+                {{-- BACKGROUND HIJAU (FOTO TIDAK LAGI MEMENUHI SELURUH BANNER) --}}
+                <div class="absolute inset-0 bg-gradient-to-r from-[#133129] via-[#0E2824] to-[#081F1C]"></div>
+
+                <div class="relative z-10 w-full h-full grid grid-cols-12 items-center gap-2 sm:gap-6 lg:gap-8 px-3.5 sm:px-10 lg:px-14 py-3 sm:py-8">
+                    {{-- ISI TEKS: DIBATASI SEPARUH BANNER AGAR TIDAK MENJOROK KE KANAN --}}
+                    <div class="{{ $b->image_url ? 'col-span-7 sm:col-span-6' : 'col-span-12 sm:col-span-9' }} min-w-0 space-y-1 sm:space-y-4">
                         @if($b->tag)
                         <span class="inline-block text-[8px] sm:text-[11px] font-bold uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 border border-[#D8B761]/30 px-2 sm:px-3 py-0.5 rounded-full drop-shadow-md">
                             {{ $b->tag }}
@@ -35,36 +31,43 @@
                         @endif
 
                         {{-- HEADLINE --}}
-                        <h1 class="text-xs sm:text-3xl lg:text-5xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md">
+                        <h1 class="text-xs sm:text-3xl lg:text-4xl font-black tracking-tight leading-tight text-[#D8B761] drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->title ?? $b->headline }}
                         </h1>
 
                         {{-- SUB HEADLINE --}}
                         @if($b->subheadline)
-                        <p class="text-white text-[9px] sm:text-xs lg:text-base leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
+                        <p class="text-white text-[9px] sm:text-xs lg:text-sm leading-tight sm:leading-relaxed font-normal drop-shadow-md line-clamp-2 sm:line-clamp-none">
                             {{ $b->subheadline }}
                         </p>
                         @endif
 
-                        {{-- TOMBOL-TOMBOL --}}
-                        <div class="pt-1 sm:pt-3 flex flex-wrap gap-1.5 sm:gap-3">
-                            <a href="{{ url($b->cta_link ?? '/catalog') }}"
-                               class="px-2.5 py-1 sm:px-7 sm:py-3 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                                {{ $b->cta_text ?? 'Katalog' }} →
-                            </a>
+                        {{-- TOMBOL HANYA WHATSAPP --}}
+                        <div class="pt-1 sm:pt-3 flex">
                             <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
                                target="_blank"
-                               class="px-2 py-1 sm:px-6 sm:py-3 bg-[#081F1C]/80 hover:bg-[#133129] border border-white/40 text-white font-bold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition shadow-lg">
-                                Chat WA
+                               rel="noopener noreferrer"
+                               class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-6 sm:py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-[9px] sm:text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                                <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-3 h-3 sm:w-4 sm:h-4 object-contain">
+                                <span>Chat WhatsApp</span>
                             </a>
                         </div>
                     </div>
+
+                    {{-- FOTO BENTUK KOTAK (SQUARE) MENGIKUTI CONTOH BANNER WEBSITE OEPRO --}}
+                    @if($b->image_url)
+                    <div class="col-span-5 sm:col-span-6 self-stretch flex items-center justify-center">
+                        <div class="w-[70%] max-w-full aspect-square rounded-xl sm:rounded-2xl overflow-hidden border border-[#A8C4B5]/25 bg-[#081F1C] shadow-xl">
+                            <img src="{{ $b->image_url }}" alt="{{ $b->title }}" class="w-full h-full object-cover object-center">
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
             @endforeach
         @else
             {{-- Default Hero Fallback --}}
-            <div class="relative min-h-[380px] sm:min-h-[460px] flex items-center bg-[#0E2824] px-6 sm:px-12 py-12">
+            <div class="relative min-h-[380px] sm:min-h-[460px] flex items-center bg-[#133129] px-6 sm:px-12 py-12">
                 <div class="max-w-2xl space-y-4">
                     <span class="inline-block text-[11px] font-black uppercase tracking-widest text-[#D8B761] bg-[#081F1C]/70 px-3.5 py-1 rounded-full border border-[#D8B761]/30">
                         OEPRO OFFICIAL STORE
@@ -75,9 +78,14 @@
                     <p class="text-white text-sm sm:text-base leading-relaxed">
                         Koleksi Kaos Polos Combed 24s Super Soft, Polo Pique Hexagon Premium, dan Longsleeve dengan standar jahitan rantai ekspor.
                     </p>
-                    <div class="pt-3 flex gap-3">
-                        <a href="{{ url('/catalog') }}" class="px-7 py-3.5 bg-[#D8B761] hover:bg-white text-[#081F1C] font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
-                            Belanja Sekarang →
+                    {{-- TOMBOL HANYA WHATSAPP --}}
+                    <div class="pt-3 flex">
+                        <a href="https://wa.me/6281313888927?text=Halo%20Admin%20OEPRO,%20saya%20ingin%20bertanya%20mengenai%20produk%20OEPRO.%20Boleh%20minta%20informasi%20lebih%20lanjut%20mengenai%20pilihan%20produk,%20ketersediaan%20stok,%20serta%20promo%20GRATIS%20ONGKIR%20yang%20sedang%20berlaku%3F%20Terima%20kasih!"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold rounded-full text-xs uppercase tracking-wider transition transform hover:scale-105 shadow-xl">
+                            <img src="/assets/icons/whatsapp.svg" alt="WhatsApp" class="w-4 h-4 object-contain">
+                            <span>Chat WhatsApp</span>
                         </a>
                     </div>
                 </div>
